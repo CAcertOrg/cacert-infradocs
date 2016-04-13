@@ -6,11 +6,17 @@
 Welcome to CAcert infrastructure's documentation!
 =================================================
 
+This documentation aims to describe the current status of CAcert's
+infrastructure systems. The goal is to provide a more practical way to publish
+the documentation.
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   network
+   infra02
 
 
 Indices and tables
