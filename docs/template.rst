@@ -2,13 +2,13 @@
 Systems - TEMPLATE
 ==================
 
-Basics
-======
-
 Purpose
--------
+=======
 
 .. <SHORT DESCRIPTION>
+
+Basics
+======
 
 Physical Location
 -----------------
@@ -59,12 +59,17 @@ Applicable Documentation
 This is it :-)
 
 Administration
---------------
+==============
 
-System Admin:
- * <SYSADMIN's NAME>
+System Administration
+---------------------
 
-Contact:
+* Primary: <SYSADMIN's NAME>
+* Secondary: <secondary name>
+
+Contact
+-------
+
  * <system>-admin@cacert.org
 
 Services
@@ -74,18 +79,17 @@ Listening services
 ------------------
 
 +----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Users     | Purpose                                 |
+| Port     | Service   | Origin    | Purpose                                 |
 +==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | sysadmins | admin console access                    |
+| 22/tcp   | ssh       | ANY       | admin console access                    |
 +----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | local mail pickup in order to send out  |
-|          |           |           | notifications                           |
+| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
 +----------+-----------+-----------+-----------------------------------------+
-| 80/tcp   | http      | all       | application                             |
+| 80/tcp   | http      | ANY       | application                             |
 +----------+-----------+-----------+-----------------------------------------+
-| 443/tcp  | https     | all       | application                             |
+| 443/tcp  | https     | ANY       | application                             |
 +----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | sysadmins | remote monitoring service               |
+| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
 +----------+-----------+-----------+-----------------------------------------+
 
 .. below are some definitions of commonly open ports, choose those that are applicable and order the table by port number
@@ -96,39 +100,40 @@ Listening services
 Running services
 ----------------
 
-+--------------------+--------------------+----------------------------------+
-| Service            | Usage              | Start mechanism                  |
-+====================+====================+==================================+
-| openssh server     | ssh daemon for     | init script `/etc/init.d/ssh`    |
-|                    | remote             |                                  |
-|                    | administration     |                                  |
-+--------------------+--------------------+----------------------------------+
-| Apache httpd       | Webserver for ...  | init script                      |
-|                    |                    | `/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------+
-| cron               | job scheduler      | init script `/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------+
-| rsyslog            | syslog daemon      | init script `/etc/init.d/syslog` |
-+--------------------+--------------------+----------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                      |
-|                    | database server    | `/etc/init.d/postgresql`         |
-|                    | for ...            |                                  |
-+--------------------+--------------------+----------------------------------+
-| MySQL              | MySQL database     | init script `/etc/init.d/mysql`  |
-|                    | server for ...     |                                  |
-+--------------------+--------------------+----------------------------------+
-| Postfix            | SMTP server for    | init script                      |
-|                    | local mail         |  `/etc/init.d/postfix`           |
-|                    | submission, ...    |                                  |
-+--------------------+--------------------+----------------------------------+
-| Exim               | SMTP server for    | init script `/etc/init.d/exim4`  |
-|                    | local mail         |                                  |
-|                    | submission, ...    |                                  |
-+--------------------+--------------------+----------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                      |
-|                    | service queried by | `/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                  |
-+--------------------+--------------------+----------------------------------+
++--------------------+--------------------+----------------------------------------+
+| Service            | Usage              | Start mechanism                        |
++====================+====================+========================================+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
++--------------------+--------------------+----------------------------------------+
+| Apache httpd       | Webserver for ...  | init script                            |
+|                    |                    | :file:`/etc/init.d/apache2`            |
++--------------------+--------------------+----------------------------------------+
+| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
++--------------------+--------------------+----------------------------------------+
+| PostgreSQL         | PostgreSQL         | init script                            |
+|                    | database server    | :file:`/etc/init.d/postgresql`         |
+|                    | for ...            |                                        |
++--------------------+--------------------+----------------------------------------+
+| MySQL              | MySQL database     | init script                            |
+|                    | server for ...     | :file:`/etc/init.d/mysql`              |
++--------------------+--------------------+----------------------------------------+
+| Postfix            | SMTP server for    | init script                            |
+|                    | local mail         | :file:`/etc/init.d/postfix`            |
+|                    | submission, ...    |                                        |
++--------------------+--------------------+----------------------------------------+
+| Exim               | SMTP server for    | init script                            |
+|                    | local mail         | :file:`/etc/init.d/exim4`              |
+|                    | submission, ...    |                                        |
++--------------------+--------------------+----------------------------------------+
+| Nagios NRPE server | remote monitoring  | init script                            |
+|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
+|                    | :doc:`monitor`     |                                        |
++--------------------+--------------------+----------------------------------------+
 
 Databases
 ---------
@@ -156,7 +161,7 @@ Connected Systems
 * :doc:`monitor`
 
 Outbound network connections
-............................
+----------------------------
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
@@ -170,15 +175,17 @@ Security
 SSH host keys
 -------------
 
-+-----------+-------------+
-| Algorithm | Fingerprint |
-+===========+=============+
-| RSA       |             |
-+-----------+-------------+
-| DSA       |             |
-+-----------+-------------+
-| ECDSA     |             |
-+-----------+-------------+
++-----------+-----------------------------------------------------+
+| Algorithm | Fingerprint                                         |
++===========+=====================================================+
+| RSA       |                                                     |
++-----------+-----------------------------------------------------+
+| DSA       |                                                     |
++-----------+-----------------------------------------------------+
+| ECDSA     |                                                     |
++-----------+-----------------------------------------------------+
+| ED25519   |                                                     |
++-----------+-----------------------------------------------------+
 
 .. seealso::
 
