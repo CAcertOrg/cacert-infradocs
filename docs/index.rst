@@ -17,12 +17,12 @@ Contents:
 
    network
    infra02
+   iplist
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
