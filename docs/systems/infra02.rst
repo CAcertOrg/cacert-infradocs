@@ -220,7 +220,7 @@ SSH host keys
 
 .. seealso::
 
-   See :doc:`sshkeys`
+   See :doc:`../sshkeys`
 
 Dedictated user roles
 ---------------------
