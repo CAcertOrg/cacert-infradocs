@@ -1,3 +1,6 @@
+.. index::
+   single: Systems; Infra02
+
 =======
 Infra02
 =======
@@ -5,8 +8,12 @@ Infra02
 Purpose
 =======
 
-The infrastructure host system Infra02 is a dedicated machine for the CAcert
-infrastructure.
+The infrastructure host system Infra02 is a dedicated physical machine for the
+CAcert infrastructure.
+
+.. index::
+   single: LXC
+   single: Ferm
 
 Infra02 is the host system for all infrastructure containers. The containers
 are setup using the Linux kernel's LXC_ system. The firewall for infrastructure
@@ -14,6 +21,23 @@ is maintained on this machine using Ferm_.
 
 .. _LXC: https://linuxcontainers.org/
 .. _Ferm: http://ferm.foo-projects.org/
+
+Administration
+==============
+
+System Administration
+---------------------
+
+* Primary: `Jan Dittberner`_
+* Secondary: `Mario Lipinski`_
+
+.. _Jan Dittberner: jandd@cacert.org
+.. _Mario Lipinski: mario@cacert.org
+
+Contact
+-------
+
+* infrastructure-admin@cacert.org
 
 Basics
 ======
@@ -38,7 +62,7 @@ parameters:
   * eth0 Intel Corporation 82579LM Gigabit Network Connection
   * eth1 Intel Corporation 82574L Gigabit Network Connection
 
-There is a 2 TB USB backup disk attached to the system
+There is a 2 TB USB backup disk attached to the system.
 
 .. seealso::
 
@@ -86,23 +110,6 @@ Applicable Documentation
 ------------------------
 
 This is it :-)
-
-Administration
-==============
-
-System Administration
----------------------
-
-* Primary: `Jan Dittberner`_
-* Secondary: `Mario Lipinski`_
-
-.. _Jan Dittberner: jandd@cacert.org
-.. _Mario Lipinski: mario@cacert.org
-
-Contact
--------
-
-* infrastructure-admin@cacert.org
 
 Services
 ========
@@ -191,3 +198,48 @@ SSH host keys
 
    See :doc:`sshkeys`
 
+Dedictated user roles
+---------------------
+
+* None
+
+Non-distribution packages and modifications
+-------------------------------------------
+
+* None
+
+Risk assessments and critical packages
+--------------------------------------
+
+The system is the basis for all other infrastructure systems. Access to this
+system has to be tightly controlled.
+
+Tasks
+=====
+
+.. todo:: find out why the system logs are messed up
+.. todo:: upgrade to Debian Jessie
+.. todo:: document whether it is safe to reboot this system
+.. todo:: document how to setup a new container
+.. todo:: document how to setup firewall rules/forwarding
+.. todo:: document how the backup system works
+
+Planned
+-------
+
+* None
+
+Changes
+=======
+
+System Future
+-------------
+
+* No plans
+
+Additional documentation
+========================
+
+.. seealso::
+
+   * https://wiki.cacert.org/PostfixConfiguration

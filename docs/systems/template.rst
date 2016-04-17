@@ -7,6 +7,25 @@ Purpose
 
 .. <SHORT DESCRIPTION>
 
+Administration
+==============
+
+System Administration
+---------------------
+
+* Primary: <SYSADMIN's NAME>
+* Secondary: <secondary name>
+
+Application Administration
+--------------------------
+
+* <application>: <sysadmin's name>
+
+Contact
+-------
+
+ * <system>-admin@cacert.org
+
 Basics
 ======
 
@@ -36,7 +55,7 @@ Logical location
 
 .. seealso::
 
-   See :doc:`network`
+   See :doc:`../network`
 
 DNS
 ---
@@ -57,20 +76,6 @@ Applicable Documentation
 ------------------------
 
 This is it :-)
-
-Administration
-==============
-
-System Administration
----------------------
-
-* Primary: <SYSADMIN's NAME>
-* Secondary: <secondary name>
-
-Contact
--------
-
- * <system>-admin@cacert.org
 
 Services
 ========
@@ -189,7 +194,7 @@ SSH host keys
 
 .. seealso::
 
-   See :doc:`sshkeys`
+   See :doc:`../sshkeys`
 
 Dedicated user roles
 --------------------
@@ -227,51 +232,45 @@ Keys and X.509 certificates
 
 .. seealso::
 
-   See :doc:`certlist`
+   * :doc:`../certlist`
+   * https://wiki.cacert.org/SystemAdministration/CertificateList
 
-Changes
-=======
+Tasks
+=====
 
 Planned
 -------
-
-System Future
-.............
-
-.. * No plans
-
-Document Stuff
-..............
 
 .. add a paragraph for each larger planned task that seems to be worth
    mentioning. You may want to link to specific issues if you use some issue
    tracker.
 
-Potential Similiar Configurations
-.................................
+Changes
+=======
 
-* https://wiki.cacert.org/Exim4Configuration
-* https://wiki.cacert.org/PostfixConfiguration
-* https://wiki.cacert.org/QmailConfiguration
-* https://wiki.cacert.org/SendmailConfiguration
-* https://wiki.cacert.org/StunnelConfiguration
+System Future
+-------------
 
-Potential System Procedures
-...........................
+.. * No plans
 
-* https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
-* https://wiki.cacert.org/SystemAdministration/CertificateList
+Additional documentation
+========================
+
+.. add inline documentation
+
+.. remove unneeded links from the list below, add other links that apply
+
+.. seealso:
+
+   * https://wiki.cacert.org/Exim4Configuration
+   * https://wiki.cacert.org/PostfixConfiguration
+   * https://wiki.cacert.org/QmailConfiguration
+   * https://wiki.cacert.org/SendmailConfiguration
+   * https://wiki.cacert.org/StunnelConfiguration
 
 References
-==========
+----------
 
 .. can be used to provide links to reference documentation
    * http://product.site.com/docs/
    * [[http://product.site.com/whitepaper/document.pdf|Paper on how to setup...]]
-
-Links
-=====
-
-.. || [[https://<system>.cacert.org/]] || <System> URL ||
-   may contain more URLs if there are multiple useful entry points
-

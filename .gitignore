@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 .*.swp
+.swp
 venv/
 _build/
 .ropeproject/

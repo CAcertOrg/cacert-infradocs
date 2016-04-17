@@ -15,8 +15,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   systems
    network
-   infra02
    iplist
 
 
@@ -26,3 +26,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`search`
 
+.. todolist::
