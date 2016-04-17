@@ -88,14 +88,21 @@ Logical Location
 DNS
 ---
 
-* infrastructure.cacert.org. IN A 213.154.225.230
-* infrastructure.cacert.org. IN SSHFP 1 1 5A82D3C150AF002C05784F73250A067053AEED63
-* infrastructure.cacert.org. IN SSHFP 1 2 63B0D74A3F1CE61865A5EB0497EF05243BC4067EC983C69AB8E62F3CB940CC82
-* infrastructure.cacert.org. IN SSHFP 2 1 AF8D8E3386EAA72997709632ADF2B457E6FEF0DC
-* infrastructure.cacert.org. IN SSHFP 2 2 3A0188FC47D1FDD14D70A2FB78F51792D06BA11EAE6AB16E73CB7BB8DD6A0DC8
-* infrastructure.cacert.org. IN SSHFP 3 1 3E1B9EBF85B726CF831C76ECB8C17786AEDF40E8
-* infrastructure.cacert.org. IN SSHFP 3 2 3AE7F0035C2172977E99BFE312C7A8299650DEA16A975EA13EECE8FDA426062A
-* infra02.intra.cacert.org. IN A 172.16.2.10
+.. index::
+   single: DNS records; Infra02
+
+========================== ======== ====================================================================
+Name                       Type     Content
+========================== ======== ====================================================================
+infrastructure.cacert.org. IN A     213.154.225.230
+infrastructure.cacert.org. IN SSHFP 1 1 5A82D3C150AF002C05784F73250A067053AEED63
+infrastructure.cacert.org. IN SSHFP 1 2 63B0D74A3F1CE61865A5EB0497EF05243BC4067EC983C69AB8E62F3CB940CC82
+infrastructure.cacert.org. IN SSHFP 2 1 AF8D8E3386EAA72997709632ADF2B457E6FEF0DC
+infrastructure.cacert.org. IN SSHFP 2 2 3A0188FC47D1FDD14D70A2FB78F51792D06BA11EAE6AB16E73CB7BB8DD6A0DC8
+infrastructure.cacert.org. IN SSHFP 3 1 3E1B9EBF85B726CF831C76ECB8C17786AEDF40E8
+infrastructure.cacert.org. IN SSHFP 3 2 3AE7F0035C2172977E99BFE312C7A8299650DEA16A975EA13EECE8FDA426062A
+infra02.intra.cacert.org.  IN A     172.16.2.10
+========================== ======== ====================================================================
 
 .. seealso::
 
@@ -103,6 +110,10 @@ DNS
 
 Operating System
 ----------------
+
+.. index::
+   single: Debian GNU/Linux; Wheezy
+   single: Debian GNU/Linux; 7.10
 
 * Debian GNU/Linux 7.10
 
@@ -175,12 +186,16 @@ Outbound network connections
 * :doc:`emailout` as SMTP relay
 * ftp.nl.debian.org as Debian mirror
 * security.debian.org for Debian security updates
+* all traffic of non-critical infrastructure systems
 
 Security
 ========
 
 SSH host keys
 -------------
+
+.. index::
+   single: SSH host keys; Infra02
 
 +-----------+-----------------------------------------------------+
 | Algorithm | Fingerprint                                         |
@@ -223,6 +238,7 @@ Tasks
 .. todo:: document how to setup a new container
 .. todo:: document how to setup firewall rules/forwarding
 .. todo:: document how the backup system works
+.. todo:: add DNS setup for IPv6 address
 
 Planned
 -------
