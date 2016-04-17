@@ -18,6 +18,8 @@ Contents:
    systems
    network
    iplist
+   sshkeys
+   certlist
 
 
 Indices and tables

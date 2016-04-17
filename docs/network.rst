@@ -34,10 +34,11 @@ accessible from other CAcert systems. The Intranet IPv4 addresses are in the
 Internal
 --------
 
-The infrastructure host :doc:`infra02` has a local bridge interface *br0* that
-is used to connect the containers on that machine and allows explicit routing
-as well as services that are purely internal and are not reachable from the
-Internet or Intranet machines in the IP range mentioned above.
+The infrastructure host :doc:`systems/infra02` has a local bridge interface
+*br0* that is used to connect the containers on that machine and allows
+explicit routing as well as services that are purely internal and are not
+reachable from the Internet or Intranet machines in the IP range mentioned
+above.
 
 The local bridge uses IPv4 addresses from the :ip:v4range:`10.0.0.0/24` range.
 IPv6 addresses are directly assigned to containers from the
