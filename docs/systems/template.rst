@@ -1,3 +1,6 @@
+.. index::
+   single: Systems; <host>
+
 ==================
 Systems - TEMPLATE
 ==================
@@ -13,8 +16,11 @@ Administration
 System Administration
 ---------------------
 
-* Primary: <SYSADMIN's NAME>
-* Secondary: <secondary name>
+* Primary: `Primary Name`_
+* Secondary: `Secondary Name`_
+
+.. _Primary Name: primary@cacert.org
+.. _Secondary Name: secondary@cacert.org
 
 Application Administration
 --------------------------
@@ -24,7 +30,15 @@ Application Administration
 Contact
 -------
 
- * <system>-admin@cacert.org
+* <system>-admin@cacert.org
+
+Additional People
+-----------------
+
+`Person A`_ and `Person B`_ have sudo access on that machine too.
+
+.. _Person A: persona@cacert.org
+.. _Person B: personb@cacert.org
 
 Basics
 ======
@@ -38,6 +52,8 @@ Physical Location
 
 This system is located in an LXC_ container on physical machine :doc:`infra02`.
 
+.. _LXC: https://linuxcontainers.org/
+
 Physical Configuration
 ----------------------
 
@@ -45,13 +61,13 @@ Physical Configuration
 
    See https://wiki.cacert.org/SystemAdministration/EquipmentList
 
-Logical location
+Logical Location
 ----------------
 
- * IP Internet: <IP>
- * IP Intranet: <IP>
- * IP Internal: <IP>
- * MAC address: <MAC> (interfacename)
+:IP Internet: :ip:v4:`<IP>`
+:IP Intranet: :ip:v4:`<IP>`
+:IP Internal: :ip:v4:`<IP>`
+:MAC address: :mac:`<MAC>` (interfacename)
 
 .. seealso::
 
@@ -60,8 +76,15 @@ Logical location
 DNS
 ---
 
- * <HOSTNAME>.cacert.org. IN A <IP>
- * <HOSTNAME>.intra.cacert.org. IN A <IP>
+.. index::
+   single: DNS records; <machine>
+
+========================== ======== ====================================================================
+Name                       Type     Content
+========================== ======== ====================================================================
+<HOST>.cacert.org.         IN A     <IP>
+<HOST>.intra.cacert.org.   IN A     <IP>
+========================== ======== ====================================================================
 
 .. seealso::
 
@@ -70,7 +93,11 @@ DNS
 Operating System
 ----------------
 
- * Debian GNU/Linux x.y
+.. index::
+   single: Debian GNU/Linux; Codename
+   single: Debian GNU/Linux; x.y
+
+* Debian GNU/Linux x.y
 
 Applicable Documentation
 ------------------------
@@ -82,6 +109,8 @@ Services
 
 Listening services
 ------------------
+
+.. use the values from this table or add new lines if applicable
 
 +----------+-----------+-----------+-----------------------------------------+
 | Port     | Service   | Origin    | Purpose                                 |
@@ -96,11 +125,12 @@ Listening services
 +----------+-----------+-----------+-----------------------------------------+
 | 5666/tcp | nrpe      | monitor   | remote monitoring service               |
 +----------+-----------+-----------+-----------------------------------------+
-
-.. below are some definitions of commonly open ports, choose those that are applicable and order the table by port number
-   || 3306/tcp || mysql || local || MySQL database for ... ||
-   || 5432/tcp || pgsql || local || PostgreSQL database for ... ||
-   || 465/udp || syslog || local || syslog port ||
+| 3306/tcp | mysql     | local     | MySQL database for ...                  |
++----------+-----------+-----------+-----------------------------------------+
+| 5432/tcp | pgsql     | local     | PostgreSQL database for ...             |
++----------+-----------+-----------+-----------------------------------------+
+| 465/udp  | syslog    | local     | syslog port                             |
++----------+-----------+-----------+-----------------------------------------+
 
 Running services
 ----------------
