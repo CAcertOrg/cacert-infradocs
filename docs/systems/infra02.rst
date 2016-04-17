@@ -39,6 +39,15 @@ Contact
 
 * infrastructure-admin@cacert.org
 
+Additional People
+-----------------
+
+`Wytze van der Raay`_ and `Mendel Mobach`_ have sudo access on that machine
+too.
+
+.. _Wytze van der Raay: wytze@cacert.org
+.. _Mendel Mobach: mendel@cacert.org
+
 Basics
 ======
 
@@ -83,7 +92,7 @@ Logical Location
 
 .. seealso::
 
-   :doc:`network`.
+   See :doc:`../network`
 
 DNS
 ---
