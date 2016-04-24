@@ -12,14 +12,13 @@ The infrastructure host system Infra02 is a dedicated physical machine for the
 CAcert infrastructure.
 
 .. index::
-   single: LXC
    single: Ferm
 
-Infra02 is the host system for all infrastructure containers. The containers
-are setup using the Linux kernel's LXC_ system. The firewall for infrastructure
-is maintained on this machine using Ferm_.
+Infra02 is the host system for all infrastructure :term:`containers
+<container>`. The containers are setup using the Linux kernel's :term:`LXC`
+system. The firewall for infrastructure is maintained on this machine using
+Ferm_.
 
-.. _LXC: https://linuxcontainers.org/
 .. _Ferm: http://ferm.foo-projects.org/
 
 Administration
@@ -42,8 +41,8 @@ Contact
 Additional People
 -----------------
 
-`Wytze van der Raay`_ and `Mendel Mobach`_ have sudo access on that machine
-too.
+`Wytze van der Raay`_ and `Mendel Mobach`_ have :program:`sudo` access on that
+machine too.
 
 .. _Wytze van der Raay: wytze@cacert.org
 .. _Mendel Mobach: mendel@cacert.org
@@ -59,7 +58,7 @@ The machine is located in a server rack at BIT B.V. in the Netherlands.
 Physical Configuration
 ----------------------
 
-The machine has been sponsored by Thomas Krenn and has the following hardware
+The machine has been sponsored by `Thomas Krenn`_ and has the following hardware
 parameters:
 
 :Mainboard: Supermicro X9SCL/X9SCM Version 1.11A
@@ -76,6 +75,8 @@ There is a 2 TB USB backup disk attached to the system.
 .. seealso::
 
    See https://wiki.cacert.org/SystemAdministration/EquipmentList
+
+.. _Thomas Krenn: https://www.thomas-krenn.com/
 
 Logical Location
 ----------------

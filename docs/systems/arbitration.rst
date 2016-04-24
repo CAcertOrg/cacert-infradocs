@@ -40,7 +40,8 @@ Contact
 Additional People
 -----------------
 
-`Jan Dittberner`_ and `Mario Lipinski`_ have sudo access on that machine too.
+`Jan Dittberner`_ and `Mario Lipinski`_ have :program:`sudo` access on that
+machine too.
 
 .. _Jan Dittberner: jandd@cacert.org
 .. _Mario Lipinski: mario@cacert.org
@@ -51,9 +52,8 @@ Basics
 Physical Location
 -----------------
 
-This system is located in an LXC_ container on physical machine :doc:`infra02`.
-
-.. _LXC: https://linuxcontainers.org/
+This system is located in an :term:`LXC` container on physical machine
+:doc:`infra02`.
 
 Logical Location
 ----------------

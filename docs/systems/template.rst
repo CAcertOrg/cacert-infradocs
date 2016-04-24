@@ -35,7 +35,7 @@ Contact
 Additional People
 -----------------
 
-`Person A`_ and `Person B`_ have sudo access on that machine too.
+`Person A`_ and `Person B`_ have :program:`sudo` access on that machine too.
 
 .. _Person A: persona@cacert.org
 .. _Person B: personb@cacert.org
@@ -50,9 +50,8 @@ Physical Location
 
 .. ## Use the following for containers on Infra02:
 
-This system is located in an LXC_ container on physical machine :doc:`infra02`.
-
-.. _LXC: https://linuxcontainers.org/
+This system is located in an :term:`LXC` container on physical machine
+:doc:`infra02`.
 
 Physical Configuration
 ----------------------
