@@ -155,6 +155,14 @@ Listening services
 Running services
 ----------------
 
+.. index::
+   single: openssh
+   single: cron
+   single: rsyslog
+   single: ntpd
+   single: Postfix
+   single: nrpe
+
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
@@ -262,6 +270,26 @@ System Future
 -------------
 
 * No plans
+
+Critical Configuration items
+============================
+
+.. index:: Ferm
+
+Ferm firewall configuration
+---------------------------
+
+The `Ferm`_ based firewall setup is located in :file:`/etc/ferm` and its
+subdirectories.
+
+Container configuration
+-----------------------
+
+The container configuration is contained in files named
+:file:`/var/lib/lxc/<container>/config`.
+
+The root filesystems of the containers are stored on :term:`LVM` volumes that
+are mounted in :file:`/var/lib/lxc/<container>/rootfs` for each container.
 
 Additional documentation
 ========================

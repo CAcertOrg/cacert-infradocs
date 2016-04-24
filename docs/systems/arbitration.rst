@@ -128,6 +128,15 @@ Listening services
 Running services
 ----------------
 
+.. index::
+   single: openssh
+   single: nginx
+   single: cron
+   single: PostgreSQL
+   single: MySQL
+   single: Exim
+   single: nrpe
+
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
@@ -167,6 +176,10 @@ Databases
 
 .. todo:: setup databases
 
+.. note::
+   There is a PostgreSQL server setup in this container but it contains
+   no database yet.
+
 Connected Systems
 -----------------
 
@@ -198,7 +211,7 @@ SSH host keys
 | ED25519   | -                                                   |
 +-----------+-----------------------------------------------------+
 
-.. todo:: setup ED255519 host key
+.. todo:: setup ED25519 host key
 
 .. seealso::
 
@@ -216,15 +229,17 @@ Dedicated user roles
 Non-distribution packages and modifications
 -------------------------------------------
 
-.. * None
+* some experimental nmp/nodejs/etherpad things in :file:`/home/magu` not
+  running yet
+
+..
    or
    * List of non-distribution packages and modifications
 
 Risk assessments on critical packages
 -------------------------------------
 
-Tasks
-=====
+* No exposed services yet.
 
 Critical Configuration items
 ============================
@@ -232,16 +247,23 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-* :file:`/etc/apache2/ssl/<path to certificate>` server certificate (valid until <datetime>)
-* :file:`/etc/apache2/ssl/<path to server key>` server key
+* No keys or certificates setup yet
 
-.. * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
-   * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate (certificate chain for server certificate)
+..
+    * :file:`/etc/apache2/ssl/<path to certificate>` server certificate (valid until <datetime>)
+    * :file:`/etc/apache2/ssl/<path to server key>` server key
+    * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
+    * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate (certificate chain for server certificate)
 
 .. seealso::
 
    * :doc:`../certlist`
    * https://wiki.cacert.org/SystemAdministration/CertificateList
+
+Nginx configuration
+-------------------
+
+* :file:`/etc/nginx/sites/available/default` default nginx configuration
 
 Tasks
 =====
@@ -249,7 +271,7 @@ Tasks
 Planned
 -------
 
-.. todo:: install application
+.. todo:: Evaluate and setup a collaboration system for arbitrators.
 .. todo:: setup IPv6
 
 Changes
@@ -266,19 +288,12 @@ Additional documentation
 
 .. add inline documentation
 
-.. remove unneeded links from the list below, add other links that apply
-
-.. seealso:
+.. seealso::
 
    * https://wiki.cacert.org/Exim4Configuration
-   * https://wiki.cacert.org/PostfixConfiguration
-   * https://wiki.cacert.org/QmailConfiguration
-   * https://wiki.cacert.org/SendmailConfiguration
-   * https://wiki.cacert.org/StunnelConfiguration
 
 References
 ----------
 
-.. can be used to provide links to reference documentation
-   * http://product.site.com/docs/
-   * [[http://product.site.com/whitepaper/document.pdf|Paper on how to setup...]]
+Arbitration nginx welcome page
+   http://arbitration.cacert.org/

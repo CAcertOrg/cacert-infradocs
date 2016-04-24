@@ -26,6 +26,10 @@ General
 Checklist
 ---------
 
+.. index::
+   single: etckeeper
+   single: nrpe
+
 * All containers should be monitored by :doc:`systems/monitor` and should
   therefore have :program:`nagios-nrpe-server` installed
 * All containers should use :program:`etckeeper` to put their local setup into
@@ -34,6 +38,12 @@ Checklist
 * All infrastructure systems must send their mail via :doc:`systems/emailout`
 * All infrastructure systems should have an system-admin@cacert.org alias to
   reach their admins
+* The installation of :index:`systemd-sysv` in containers can be blocked by
+  putting the following lines in :file:`/etc/apt/preferences.d/systemd-sysv`::
+
+    Package: systemd-sysv
+    Pin: release a=stable
+    Pin-Priority: -1
 
 .. todo:: think about replacing nrpe with Icinga2 satellites
 .. todo:: document how to setup the system-admin alias on the email system
