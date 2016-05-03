@@ -244,8 +244,8 @@ Non-distribution packages and modifications
 Risk assessments on critical packages
 -------------------------------------
 
-Tasks
-=====
+.. add a paragraph for each known risk. The risk has to be described.
+   Mitigation or risk acceptance has to be documented.
 
 Critical Configuration items
 ============================
