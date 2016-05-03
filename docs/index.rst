@@ -21,6 +21,7 @@ Contents:
    sshkeys
    certlist
    glossary
+   building
 
 
 Indices and tables
