@@ -1,0 +1,27 @@
+--- /usr/lib/python2.7/dist-packages/openerp/addons/account/account.py  2015-01-25 22:56:20.528382003 +0000
++++ /usr/lib/python2.7/dist-packages/openerp/addons/account/account.py  2015-01-25 23:32:37.088302059 +0000
+@@ -234,7 +234,7 @@
+         pos = 0
+         while pos < len(domain):
+             if domain[pos][0] == 'code' and domain[pos][1] in ('like', 'ilike') and domain[pos][2]:
+-                domain[pos] = ('code', '=like', tools.ustr(domain[pos][2].replace('%', '')) + '%')
++                domain[pos] = ('code', '=ilike', tools.ustr(domain[pos][2].replace('%', '')) + '%')
+             if domain[pos][0] == 'journal_id':
+                 if not domain[pos][2]:
+                     del domain[pos]
+@@ -583,13 +583,13 @@
+             pass
+         if name:
+             if operator not in expression.NEGATIVE_TERM_OPERATORS:
+-                ids = self.search(cr, user, ['|', ('code', '=like', name+"%"), '|',  ('shortcut', '=', name), ('name', operator, name)]+args, limit=limit)
++                ids = self.search(cr, user, ['|', ('code', '=ilike', name+"%"), '|',  ('shortcut', '=', name), ('name', operator, name)]+args, limit=limit)
+                 if not ids and len(name.split()) >= 2:
+                     #Separating code and name of account for searching
+                     operand1,operand2 = name.split(' ',1) #name can contain spaces e.g. OpenERP S.A.
+                     ids = self.search(cr, user, [('code', operator, operand1), ('name', operator, operand2)]+ args, limit=limit)
+             else:
+-                ids = self.search(cr, user, ['&','!', ('code', '=like', name+"%"), ('name', operator, name)]+args, limit=limit)
++                ids = self.search(cr, user, ['&','!', ('code', '=ilike', name+"%"), ('name', operator, name)]+args, limit=limit)
+                 # as negation want to restric, do if already have results
+                 if ids and len(name.split()) >= 2:
+                     operand1,operand2 = name.split(' ',1) #name can contain spaces e.g. OpenERP S.A.

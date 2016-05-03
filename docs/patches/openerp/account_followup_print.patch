@@ -1,0 +1,10 @@
+--- /usr/lib/python2.7/dist-packages/openerp/addons/account_followup/report/account_followup_print.py   2015-04-20 01:07:31.357995387 +0000
++++ /usr/lib/python2.7/dist-packages/openerp/addons/account_followup/report/account_followup_print.py   2015-04-20 01:09:21.314693739 +0000
+@@ -58,7 +58,6 @@
+                             ('reconcile_id', '=', False),
+                             ('state', '!=', 'draft'),
+                             ('company_id', '=', company_id),
+-                            ('date_maturity', '<=', fields.date.context_today(self,self.cr,self.uid)),
+                         ])
+ 
+         # lines_per_currency = {currency: [line data, ...], ...}

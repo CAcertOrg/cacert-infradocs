@@ -1,0 +1,10 @@
+--- /usr/lib/python2.7/dist-packages/openerp/addons/account/edi/invoice.py      2014-07-19 14:44:57.389199363 +0000
++++ /usr/lib/python2.7/dist-packages/openerp/addons/account/edi/invoice.py      2014-07-19 14:45:21.745410574 +0000
+@@ -271,7 +271,6 @@
+                     "amount": inv.residual,
+                     "currency_code": inv.currency_id.name,
+                     "button_subtype": "services",
+-                    "no_note": "1",
+                     "bn": "OpenERP_Invoice_PayNow_" + inv.currency_id.name,
+                 }
+                 res[inv.id] = "https://www.paypal.com/cgi-bin/webscr?" + url_encode(params)

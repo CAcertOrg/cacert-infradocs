@@ -1,0 +1,15 @@
+--- /usr/lib/python2.7/dist-packages/openerp/addons/web/static/src/js/view_form.js      2013-01-29 15:03:35.053098527 +0000
++++ /usr/lib/python2.7/dist-packages/openerp/addons/web/static/src/js/view_form.js      2013-01-29 15:08:27.372588389 +0000
+@@ -3176,7 +3176,11 @@
+         if (! no_recurse) {
+             var dataset = new instance.web.DataSetStatic(this, this.field.relation, self.build_context());
+             dataset.name_get([self.get("value")]).done(function(data) {
+-                self.display_value["" + self.get("value")] = data[0][1];
++                var value = "";
++                if (data.length > 0 && data[0].length > 1) {
++                    value = data[0][1];
++                }
++                self.display_value["" + self.get("value")] = value;
+                 self.render_value(true);
+             });
+         }

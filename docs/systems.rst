@@ -7,6 +7,7 @@ Systems
    systems/infra02
    systems/arbitration
    systems/blog
+   systems/board
    systems/emailout
    systems/monitor
 
