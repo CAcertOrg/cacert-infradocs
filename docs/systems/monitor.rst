@@ -168,6 +168,12 @@ Running services
 | rsyslog            | syslog daemon      | init script                            |
 |                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
+| Icinga             | Icinga monitoring  | init script                            |
+|                    | daemon             | :file:`/etc/init.d/icinga`             |
++--------------------+--------------------+----------------------------------------+
+| IDO2DB             | IDO database       | init script                            |
+|                    | writer daemon      | :file:`/etc/init.d/ido2db`             |
++--------------------+--------------------+----------------------------------------+
 | PostgreSQL         | PostgreSQL         | init script                            |
 |                    | database server    | :file:`/etc/init.d/postgresql`         |
 |                    | for IDO            |                                        |
