@@ -134,6 +134,18 @@ Listening services
 Running services
 ----------------
 
+.. index::
+   single: Apache
+   single: Icinga2
+   single: MySQL
+   single: OpenERP
+   single: Postfix
+   single: PostgreSQL
+   single: cron
+   single: nginx
+   single: nrpe
+   single: openssh
+
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+

@@ -145,6 +145,13 @@ Listening services
 Running services
 ----------------
 
+.. index::
+   single: openssh
+   single: Apache
+   single: cron
+   single: Postfix
+   single: nrpe
+
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+

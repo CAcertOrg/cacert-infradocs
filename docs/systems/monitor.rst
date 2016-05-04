@@ -82,7 +82,7 @@ DNS
 ---
 
 .. index::
-   single: DNS records; <machine>
+   single: DNS records; Monitor
 
 =================== ======== =========================
 Name                Type     Content
@@ -142,6 +142,16 @@ Listening services
 
 Running services
 ----------------
+
+.. index::
+   single: Apache
+   single: Icinga
+   single: IDO2DB
+   single: Postfix
+   single: PostgreSQL
+   single: cron
+   single: nrpe
+   single: openssh
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
