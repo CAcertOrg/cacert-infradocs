@@ -326,7 +326,7 @@ System Future
 Additional documentation
 ========================
 
-.. seealso:
+.. seealso::
 
    * https://wiki.cacert.org/PostfixConfiguration
 
