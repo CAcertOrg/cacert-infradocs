@@ -2,7 +2,7 @@ Systems
 =======
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    systems/infra02
    systems/arbitration
