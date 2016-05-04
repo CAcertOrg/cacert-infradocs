@@ -17,38 +17,33 @@ Administration
 System Administration
 ---------------------
 
-* Primary: `Martin Gummi`_
+* Primary: :ref:`people_martin`
 * Secondary: None
 
 .. todo:: find an additional admin
 
-.. _Martin Gummi: martin.gummi@cacert.org
-
 Application Administration
 --------------------------
 
-+-----------------------+---------------------------------------------------+
-| Role                  | Users                                             |
-+=======================+===================================================+
-| Wordpress Admin       | * `Alexander Bahlo`_                              |
-|                       | * `Marcus Mängel`_                                |
-|                       | * `Mario Lipinski`_                               |
-|                       | * `Martin Gummi`_                                 |
-+-----------------------+---------------------------------------------------+
-| Wordpress Editor      | * PR Team                                         |
-|                       | * `Support`_                                      |
-+-----------------------+---------------------------------------------------+
-| Wordpress Author      | * Anyone with a certificate                       |
-+-----------------------+---------------------------------------------------+
-| Wordpress Contributor | * Anyone with contributor privileges              |
-+-----------------------+---------------------------------------------------+
-| Wordpress Subscriber  | * Any Spammer or person who has not posted or has |
-|                       |   not logged in                                   |
-+-----------------------+---------------------------------------------------+
++-----------------------+-------------------------------------------------+
+| Role                  | Users                                           |
++=======================+=================================================+
+| Wordpress Admin       | :ref:`people_abahlo`,                           |
+|                       | :ref:`people_marcus`,                           |
+|                       | :ref:`people_mario`,                            |
+|                       | :ref:`people_martin`                            |
++-----------------------+-------------------------------------------------+
+| Wordpress Editor      | PR Team,                                        |
+|                       | `Support`_                                      |
++-----------------------+-------------------------------------------------+
+| Wordpress Author      | Anyone with a certificate                       |
++-----------------------+-------------------------------------------------+
+| Wordpress Contributor | Anyone with contributor privileges              |
++-----------------------+-------------------------------------------------+
+| Wordpress Subscriber  | Any Spammer or person who has not posted or has |
+|                       | not logged in                                   |
++-----------------------+-------------------------------------------------+
 
-.. _Alexander Bahlo: alexander.bahlo@cacert.org
-.. _Marcus Mängel: markus.maengel@cacert.org
-.. _Mario Lipinski: mario@cacert.org
 .. _Support: support@cacert.org
 
 Contact
@@ -59,11 +54,8 @@ Contact
 Additional People
 -----------------
 
-`Jan Dittberner`_ and `Mario Lipinski`_ have :program:`sudo` access on that
-machine too.
-
-.. _Jan Dittberner: jandd@cacert.org
-.. _Mario Lipinski: mario@cacert.org
+:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>`
+have :program:`sudo` access on that machine too.
 
 Basics
 ======

@@ -16,12 +16,10 @@ Administration
 System Administration
 ---------------------
 
-* Primary: `Martin Gummi`_
+* Primary: :ref:`people_martin`
 * Secondary: None
 
 .. todo:: find an additional admin
-
-.. _Martin Gummi: martin.gummi@cacert.org
 
 Application Administration
 --------------------------
@@ -40,11 +38,8 @@ Contact
 Additional People
 -----------------
 
-`Jan Dittberner`_ and `Mario Lipinski`_ have :program:`sudo` access on that
+:ref:`people_jandd` and :ref:`people_mario` have :program:`sudo` access on that
 machine too.
-
-.. _Jan Dittberner: jandd@cacert.org
-.. _Mario Lipinski: mario@cacert.org
 
 Basics
 ======

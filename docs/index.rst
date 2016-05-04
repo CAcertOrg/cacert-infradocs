@@ -20,6 +20,7 @@ Contents:
    iplist
    sshkeys
    certlist
+   people
    glossary
    building
 

@@ -16,17 +16,15 @@ Administration
 System Administration
 ---------------------
 
-* Primary: `Gero Treuner`_
+* Primary: :ref:`people_gero`
 * Secondary: None
 
 .. todo:: find an additional admin
 
-.. _Gero Treuner: gero.treuner@cacert.org
-
 Application Administration
 --------------------------
 
-* OpenERP: `Gero Treuner`_, `Michael Tänzer`_, Treasurer
+* OpenERP: :ref:`people_gero`, :ref:`people_neo`, Treasurer
 
 .. note:: use personalized accounts only
 
@@ -38,12 +36,8 @@ Contact
 Additional People
 -----------------
 
-`Jan Dittberner`_, `Mario Lipinski`_ and `Michael Tänzer`_ have :program:`sudo`
-access on that machine too.
-
-.. _Jan Dittberner: jandd@cacert.org
-.. _Mario Lipinski: mario@cacert.org
-.. _Michael Tänzer: michael.taenzer@cacert.org
+:ref:`people_jandd`, :ref:`people_mario` and :ref:`people_neo` have
+:program:`sudo` access on that machine too.
 
 Basics
 ======

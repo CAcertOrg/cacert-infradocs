@@ -2,6 +2,7 @@ Glossary
 ========
 
 .. glossary::
+   :sorted:
 
    LXC
       `Linux Containers <https://linuxcontainers.org/>`_
@@ -20,3 +21,25 @@ Glossary
       reboot. LVM provides snapshot functionality that is useful for backup and
       upgrade procedures.
 
+   Infrastructure Team Lead
+      This person is appointed to coordinate the non-critical infrastructure
+      team by a board motion. The Infrastructure Team Lead works with
+      :term:`Infrastructure Administrators <Infrastructure Administrator>` and
+      the :term:`Critical System Administrators <Critical System
+      Administrator>`.
+
+   Infrastructure Administrator
+      Infrastructure Administrators have :program:`sudo` access to one or
+      multiple infrastructure systems. Most of them are :term:`Application
+      Administrators <Application Administrator>` too.
+
+   Critical System Administrator
+      The Critical System Administrators take care of the critical systems
+      required for the CA and RA operation, they have access to the Internet
+      firewall and DNS setup.
+
+   Application Administrator
+      An Application Administrator takes care of the functionality of one or
+      more server applications. Application Administrators do not necessarily
+      need system level access if the managed application has other means of
+      administration, for example a web based administration frontend.

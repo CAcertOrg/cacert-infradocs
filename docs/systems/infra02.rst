@@ -27,11 +27,8 @@ Administration
 System Administration
 ---------------------
 
-* Primary: `Jan Dittberner`_
-* Secondary: `Mario Lipinski`_
-
-.. _Jan Dittberner: jandd@cacert.org
-.. _Mario Lipinski: mario@cacert.org
+* Primary: :ref:`people_jandd`
+* Secondary: :ref:`people_mario`
 
 Contact
 -------
@@ -41,11 +38,8 @@ Contact
 Additional People
 -----------------
 
-`Wytze van der Raay`_ and `Mendel Mobach`_ have :program:`sudo` access on that
+:ref:`people_wytze` and :ref:`people_mendel` have :program:`sudo` access on that
 machine too.
-
-.. _Wytze van der Raay: wytze@cacert.org
-.. _Mendel Mobach: mendel@cacert.org
 
 Basics
 ======
