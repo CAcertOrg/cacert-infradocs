@@ -10,6 +10,7 @@ Systems
    systems/board
    systems/emailout
    systems/monitor
+   systems/webmail
 
 General
 -------
