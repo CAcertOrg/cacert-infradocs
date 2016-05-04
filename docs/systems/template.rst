@@ -231,7 +231,8 @@ Dedicated user roles
 .. If the system has some dedicated user groups besides the sudo group used for administration it should be documented here
    Regular operating system groups should not be documented
 
-.. || '''Group''' || '''Purpose''' ||
+..
+   || '''Group''' || '''Purpose''' ||
    || goodguys || Shell access for the good guys ||
 
 Non-distribution packages and modifications
@@ -289,7 +290,7 @@ Additional documentation
 
 .. remove unneeded links from the list below, add other links that apply
 
-.. seealso:
+.. seealso::
 
    * https://wiki.cacert.org/Exim4Configuration
    * https://wiki.cacert.org/PostfixConfiguration
