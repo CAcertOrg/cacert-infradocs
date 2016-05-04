@@ -70,7 +70,7 @@ DNS
 ---
 
 .. index::
-   single: DNS records; <machine>
+   single: DNS records; Board
 
 ====================== ======== ============================================
 Name                   Type     Content
