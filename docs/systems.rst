@@ -26,6 +26,8 @@ General
 
    setup a central syslog service and install syslog clients in each container
 
+.. _setup_apt_checking:
+
 .. topic:: Setup package update monitoring for a new container
 
    For Icinga to be able to check the update status of packages on you server
