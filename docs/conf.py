@@ -116,21 +116,25 @@ html_theme = 'classic'
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+    'sidebarbgcolor': '#f5f7f7',
+    'sidebartextcolor': '#334d55',
+    'sidebarlinkcolor': '#005fa9',
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = project + " documentation v" + release
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = os.path.join('images', 'CAcert-logo-colour.svg')
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
