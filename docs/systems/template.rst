@@ -10,22 +10,35 @@ Purpose
 
 .. <SHORT DESCRIPTION>
 
+Application Links
+-----------------
+
+.. link1
+     https://<hostname>/<path>
+
+   link2
+     https://<hostname>/<path2>
+
+
 Administration
 ==============
 
 System Administration
 ---------------------
 
-* Primary: `Primary Name`_
-* Secondary: `Secondary Name`_
+.. people_<name> are defined in people.rst
 
-.. _Primary Name: primary@cacert.org
-.. _Secondary Name: secondary@cacert.org
+* Primary: :ref:`people_primary`
+* Secondary: :ref:`people_secondary`
 
 Application Administration
 --------------------------
 
-* <application>: <sysadmin's name>
++---------------+---------------------+
+| Application   | Administrator(s)    |
++===============+=====================+
+| <application> | :ref:`people_admin` |
++---------------+---------------------+
 
 Contact
 -------
@@ -35,10 +48,7 @@ Contact
 Additional People
 -----------------
 
-`Person A`_ and `Person B`_ have :program:`sudo` access on that machine too.
-
-.. _Person A: persona@cacert.org
-.. _Person B: personb@cacert.org
+:ref:`people_a` and :ref:`people_b` have :program:`sudo` access on that machine too.
 
 Basics
 ======
@@ -78,12 +88,12 @@ DNS
 .. index::
    single: DNS records; <machine>
 
-========================== ======== ====================================================================
+========================== ======== ==========================================
 Name                       Type     Content
-========================== ======== ====================================================================
+========================== ======== ==========================================
 <HOST>.cacert.org.         IN A     <IP>
 <HOST>.intra.cacert.org.   IN A     <IP>
-========================== ======== ====================================================================
+========================== ======== ==========================================
 
 .. seealso::
 
@@ -240,19 +250,23 @@ SSH host keys
 Dedicated user roles
 --------------------
 
-.. If the system has some dedicated user groups besides the sudo group used for administration it should be documented here
-   Regular operating system groups should not be documented
+.. If the system has some dedicated user groups besides the sudo group used for
+   administration it should be documented here Regular operating system groups
+   should not be documented
 
-..
-   || '''Group''' || '''Purpose''' ||
-   || goodguys || Shell access for the good guys ||
++-------------+-----------------------------+
+| Group       | Purpose                     |
++=============+=============================+
+| <groupname> | <short purpose description> |
++-------------+-----------------------------+
 
 Non-distribution packages and modifications
 -------------------------------------------
 
 .. * None
    or
-   * List of non-distribution packages and modifications
+   * List of non-distribution packages and modifications (with some
+     explaination why no distribution package could be used)
 
 Risk assessments on critical packages
 -------------------------------------
@@ -277,21 +291,30 @@ Keys and X.509 certificates
    * :doc:`../certlist`
    * https://wiki.cacert.org/SystemAdministration/CertificateList
 
+<service_x> configuration
+-------------------------
+
+.. add a section for the configuration of each service where configuration
+   deviates from OS package defaults
+
 Tasks
 =====
 
 Planned
 -------
 
-.. add a paragraph for each larger planned task that seems to be worth
-   mentioning. You may want to link to specific issues if you use some issue
-   tracker.
+.. add a paragraph or todo directive for each larger planned task. You may want
+   to link to specific issues if you use some issue tracker.
 
 Changes
 =======
 
 System Future
 -------------
+
+.. use this section to describe any plans for the system future. These are
+   larger plans like moving to another host, abandoning the system or replacing
+   its funtionality with something else.
 
 .. * No plans
 
