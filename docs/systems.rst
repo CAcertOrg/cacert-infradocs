@@ -1,5 +1,9 @@
-Systems
-=======
+====================
+Non-Critical Systems
+====================
+
+Non-critical systems are those that are managed by the infrastructure
+administrator team.
 
 .. toctree::
    :maxdepth: 1
@@ -12,8 +16,9 @@ Systems
    systems/monitor
    systems/webmail
 
+
 General
--------
+=======
 
 .. todo:: consider whether a central MySQL service should be setup
 
@@ -67,7 +72,7 @@ General
 .. todo:: think about replacing nrpe with Icinga2 satellites
 
 Checklist
----------
+=========
 
 .. index::
    single: etckeeper
