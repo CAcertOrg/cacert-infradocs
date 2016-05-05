@@ -12,6 +12,7 @@ administrator team.
    systems/arbitration
    systems/blog
    systems/board
+   systems/email
    systems/emailout
    systems/monitor
    systems/webmail
