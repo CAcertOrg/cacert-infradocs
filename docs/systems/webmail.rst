@@ -143,8 +143,6 @@ Services
 Listening services
 ------------------
 
-.. use the values from this table or add new lines if applicable
-
 +----------+---------+---------+---------------------------+
 | Port     | Service | Origin  | Purpose                   |
 +==========+=========+=========+===========================+
