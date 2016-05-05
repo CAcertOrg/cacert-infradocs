@@ -14,6 +14,8 @@
 
 import sys
 import os
+from urllib.parse import urljoin
+from docutils import nodes, utils
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -359,3 +361,32 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+
+def cacert_bug(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    try:
+        bugnum = int(text)
+        if bugnum <= 0:
+            raise ValueError
+    except ValueError:
+        msg = inliner.reporter.error(
+            'Bug number must be a number greater than or equal to 1; '
+            '"%s" is invalid.' % text, line=lineno)
+        prb = inliner.problematic(rawtext, rawtext, msg)
+        return [prb], [msg]
+    ref = 'https://bugs.cacert.org/view.php?id=%d' % bugnum
+    node = nodes.reference(rawtext, '#' + utils.unescape(text), refuri=ref,
+                           **options)
+    return [node], []
+
+
+def cacert_wiki(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    ref = urljoin('https://wiki.cacert.org/', text)
+    node = nodes.reference(rawtext, "Wiki " + utils.unescape(text),
+                           refuri=ref, **options)
+    return [node], []
+
+
+def setup(app):
+    app.add_role('bug', cacert_bug)
+    app.add_role('wiki', cacert_wiki)
