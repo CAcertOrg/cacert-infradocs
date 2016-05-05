@@ -25,6 +25,23 @@ password reset`_.
 .. _staff list: https://community.cacert.org/staff.php
 .. _email password reset: https://community.cacert.org/password.php
 
+Application Links
+-----------------
+
+Webmail URL
+   https://community.cacert.org/ (redirects to
+   https://community.cacert.org/roundcubemail/)
+
+Board Voting System URL
+   https://community.cacert.org/board/
+
+Password reset
+   https://community.cacert.org/password.php
+
+Staff list
+   https://community.cacert.org/staff.php
+
+
 Administration
 ==============
 
@@ -99,7 +116,7 @@ community.cacert.org. IN CNAME email.cacert.org
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -117,8 +134,8 @@ This is it :-)
 
 .. seealso::
 
-   * `Community Email Wiki Page <https://wiki.cacert.org/CommunityEmail>`_
-   * `Email Account Policy <https://wiki.cacert.org/EmailAccountPolicy>`_
+   * :wiki:`CommunityEmail`
+   * :wiki:`EmailAccountPolicy`
 
 Services
 ========
@@ -256,7 +273,7 @@ Keys and X.509 certificates
 .. seealso::
 
    * :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
 Apache configuration
 --------------------
@@ -335,23 +352,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/PostfixConfiguration
+   * :wiki:`PostfixConfiguration`
 
 References
 ----------
 
-Webmail URL
-   https://community.cacert.org/ (redirects to
-   https://community.cacert.org/roundcubemail/)
-
-Board Voting System URL
-   https://community.cacert.org/board/
-
-Password reset
-   https://community.cacert.org/password.php
-
-Staff list
-   https://community.cacert.org/staff.php
-
 Wiki page for this system
-   https://wiki.cacert.org/SystemAdministration/Systems/Community
+   :wiki:`SystemAdministration/Systems/Community`

@@ -2,11 +2,11 @@ Network
 =======
 
 .. this page contains information from the IP address list at
-   https://wiki.cacert.org/SystemAdministration/IPList
+   :wiki:`SystemAdministration/IPList`
 
 .. seealso::
 
-   https://wiki.cacert.org/SystemAdministration/IPList
+   :wiki:`SystemAdministration/IPList`
 
 
 Internet

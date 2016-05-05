@@ -11,6 +11,15 @@ Purpose
 This system hosts the blog, blog.cacert.org. The blog meets the needs of public
 relations and the CAcert community to publish CAcert's activities.
 
+Application Links
+-----------------
+
+Blog URL
+   https://blog.cacert.org/
+
+Adding a category
+   https://blog.cacert.org/wp-admin/categories.php
+
 Administration
 ==============
 
@@ -95,7 +104,7 @@ blog.intra.cacert.org. IN A     172.16.2.13
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -109,8 +118,7 @@ Operating System
 Applicable Documentation
 ------------------------
 
-A small (work in progress) guide can be found in the `Wiki
-<https://wiki.cacert.org/BlogDoc>`_.
+A small (work in progress) guide can be found in the :wiki:`BlogDoc`.
 
 Services
 ========
@@ -140,13 +148,13 @@ Running services
 ----------------
 
 .. index::
-   single: openssh
    single: Apache
-   single: cron
    single: MySQL
    single: PHP FPM
    single: Postfix
+   single: cron
    single: nrpe
+   single: openssh
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
@@ -286,10 +294,10 @@ Keys and X.509 certificates
 .. seealso::
 
    * :ref:`cert_blog_cacert_org` in :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
-Apache configuration files
---------------------------
+Apache configuration
+--------------------
 
 * :file:`/etc/apache2/cacert/blog.inc.conf`
 
@@ -347,15 +355,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/PostfixConfiguration
-
-Adding a category
------------------
-
-* https://blog.cacert.org/wp-admin/categories.php
+   * :wiki:`PostfixConfiguration`
 
 References
 ----------
 
-Blog URL
-   https::/blog.cacert.org/
+Wiki page for this system
+   :wiki:`SystemAdministration/Systems/Blog`

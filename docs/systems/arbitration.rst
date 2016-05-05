@@ -10,6 +10,12 @@ Purpose
 
 This system is planned to host a future collaboration platform for arbitrators.
 
+Application Links
+-----------------
+
+Arbitration nginx welcome page
+   http://arbitration.cacert.org/
+
 Administration
 ==============
 
@@ -27,8 +33,6 @@ Application Administration
 There is no application yet.
 
 .. todo:: setup application(s) and document admins
-
-.. * <application>: <sysadmin's name>
 
 Contact
 -------
@@ -79,7 +83,7 @@ arbitration.intra.cacert.org. IN A     172.16.2.241
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -253,7 +257,7 @@ Keys and X.509 certificates
 .. seealso::
 
    * :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
 Nginx configuration
 -------------------
@@ -285,10 +289,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/Exim4Configuration
+   * :wiki:`Exim4Configuration`
 
 References
 ----------
 
-Arbitration nginx welcome page
-   http://arbitration.cacert.org/
+Wiki page for this system
+   :wiki:`SystemAdministration/Systems/Arbitration`

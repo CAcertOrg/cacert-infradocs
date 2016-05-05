@@ -8,7 +8,13 @@ Board
 Purpose
 =======
 
-This systems hosts an OpenERP instance available at board.cacert.org.
+This system hosts an OpenERP instance available at board.cacert.org.
+
+Application Links
+-----------------
+
+OpenERP URL
+   https://board.cacert.org/
 
 Administration
 ==============
@@ -24,7 +30,11 @@ System Administration
 Application Administration
 --------------------------
 
-* OpenERP: :ref:`people_gero`, :ref:`people_neo`, Treasurer
++-------------+--------------------------------------------------+
+| Application | Administrator(s)                                 |
++=============+==================================================+
+| OpenERP     | :ref:`people_gero`, :ref:`people_neo`, Treasurer |
++-------------+--------------------------------------------------+
 
 .. note:: use personalized accounts only
 
@@ -77,7 +87,7 @@ board.intra.cacert.org IN A     172.16.2.34
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -294,7 +304,7 @@ Keys and X.509 certificates
 .. seealso::
 
    * :ref:`cert_board_cacert_org` in :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
 Apache configuration files
 --------------------------
@@ -353,10 +363,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/PostfixConfiguration
+   * :wiki:`PostfixConfiguration`
 
 References
 ----------
 
-OpenERP URL
-   https://board.cacert.org/
+Wiki page for this system
+   :wiki:`SystemAdministration/Systems/Board`

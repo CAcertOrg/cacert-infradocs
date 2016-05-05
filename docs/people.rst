@@ -17,7 +17,7 @@ Jan Dittberner
 
 :roles: :term:`Infrastructure Team Lead`, :term:`Infrastructure Administrator`
 :contact: jandd@cacert.org
-:wiki: https://wiki.cacert.org/JanDittberner
+:wiki: :wiki:`JanDittberner`
 :irc: jandd
 
 .. _people_martin:

@@ -26,6 +26,12 @@ expiry).
 
 .. _Icinga: https://www.icinga.org/
 
+Application Links
+-----------------
+
+The Icinga classic frontend
+   https://monitor.cacert.org/
+
 Administration
 ==============
 
@@ -92,7 +98,7 @@ monitor.cacert.org. IN CNAME infrastructure.cacert.org
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -268,7 +274,7 @@ Keys and X.509 certificates
 .. seealso::
 
    * :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
 CRL fetch job
 -------------
@@ -314,10 +320,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/PostfixConfiguration
+   * :wiki:`PostfixConfiguration`
 
 References
 ----------
 
-The Icinga classic frontend
-   https://monitor.cacert.org/
+Wiki page for this system
+   :wiki:`SystemAdministration/Systems/Monitor`

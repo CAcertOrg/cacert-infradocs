@@ -68,7 +68,7 @@ There is a 2 TB USB backup disk attached to the system.
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/EquipmentList
+   See :wiki:`SystemAdministration/EquipmentList`
 
 .. _Thomas Krenn: https://www.thomas-krenn.com/
 
@@ -110,7 +110,7 @@ infra02.intra.cacert.org.  IN A     172.16.2.10
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -290,4 +290,10 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/PostfixConfiguration
+   * :wiki:`PostfixConfiguration`
+
+References
+----------
+
+Wiki page for this system
+   :wiki:`SystemAdministration/Systems/Infra02`

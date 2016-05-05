@@ -68,7 +68,7 @@ Physical Configuration
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/EquipmentList
+   See :wiki:`SystemAdministration/EquipmentList`
 
 Logical Location
 ----------------
@@ -97,7 +97,7 @@ Name                       Type     Content
 
 .. seealso::
 
-   See https://wiki.cacert.org/SystemAdministration/Procedures/DNSChanges
+   See :wiki:`SystemAdministration/Procedures/DNSChanges`
 
 Operating System
 ----------------
@@ -289,7 +289,7 @@ Keys and X.509 certificates
 .. seealso::
 
    * :doc:`../certlist`
-   * https://wiki.cacert.org/SystemAdministration/CertificateList
+   * :wiki:`SystemAdministration/CertificateList`
 
 <service_x> configuration
 -------------------------
@@ -327,11 +327,11 @@ Additional documentation
 
 .. seealso::
 
-   * https://wiki.cacert.org/Exim4Configuration
-   * https://wiki.cacert.org/PostfixConfiguration
-   * https://wiki.cacert.org/QmailConfiguration
-   * https://wiki.cacert.org/SendmailConfiguration
-   * https://wiki.cacert.org/StunnelConfiguration
+   * :wiki:`Exim4Configuration`
+   * :wiki:`PostfixConfiguration`
+   * :wiki:`QmailConfiguration`
+   * :wiki:`SendmailConfiguration`
+   * :wiki:`StunnelConfiguration`
 
 References
 ----------
