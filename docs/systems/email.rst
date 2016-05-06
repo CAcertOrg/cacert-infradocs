@@ -279,10 +279,11 @@ Server certificate for SMTP communication from the Internet and PHPMyAdmin.
 Server certificate for community email services (SMTPS, SMTP submission in
 Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 
-* :file:`/etc/ssl/certs/ssl-cert-community-cacert.pem` server certificate for
-  community email services (SMTPS, SMTP submission in Postfix and IMAP with
-  STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
-* :file:`/etc/ssl/private/ssl-cert-community-cacert.key` server key
+.. sslcert:: community.cacert.org
+   :certfile:  /etc/ssl/certs/ssl-cert-community-cacert.pem
+   :keyfile:   /etc/ssl/private/ssl-cert-community-cacert.key
+   :serial:    11e846
+   :secondary:
 
 * :file:`/etc/postfix/dh_1024.pem` and :file:`/etc/postfix/dh_512.pem`
   Diffie-Hellman parameter files for Postfix
