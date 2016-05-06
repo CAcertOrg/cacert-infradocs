@@ -99,8 +99,6 @@ Services
 Listening services
 ------------------
 
-.. use the values from this table or add new lines if applicable
-
 +----------+---------+----------------+-----------------------------------------------+
 | Port     | Service | Origin         | Purpose                                       |
 +==========+=========+================+===============================================+
@@ -268,9 +266,18 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-* :file:`/etc/ssl/certs/ssl-cert-email-cacert.pem` server certificate for SMTP
-  and phpmyadmin
-* :file:`/etc/ssl/private/ssl-cert-email-cacert.key` server key
+Server certificate for SMTP communication from the Internet and PHPMyAdmin.
+
+.. sslcert:: email.cacert.org
+   :certfile:   /etc/ssl/certs/ssl-cert-email-cacert.pem
+   :keyfile:    /etc/ssl/private/ssl-cert-email-cacert.key
+   :serial:     11e84a
+   :expiration: Mar 31 19:50:03 2018 GMT
+   :sha1fp:     49:5E:55:35:F4:D5:69:B1:BD:92:14:94:38:CD:40:6D:97:A7:2A:0A
+   :issuer:     CAcert.org Class 1 Root CA
+
+Server certificate for community email services (SMTPS, SMTP submission in
+Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 
 * :file:`/etc/ssl/certs/ssl-cert-community-cacert.pem` server certificate for
   community email services (SMTPS, SMTP submission in Postfix and IMAP with
