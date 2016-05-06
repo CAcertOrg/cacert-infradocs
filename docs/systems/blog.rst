@@ -280,11 +280,14 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-.. index::
-   single: Certificate; Blog
+.. sslcert:: blog.cacert.org
+   :certfile:   /etc/ssl/public/blog.cacert.org.crt
+   :keyfile:    /etc/ssl/private/blog.cacert.org.key
+   :serial:     11e837
+   :expiration: Mar 31 16:34:28 2018 GMT
+   :sha1fp:     69:A5:5F:3E:1B:D8:2E:CB:B3:AB:0B:E9:81:A6:CF:31:DF:C8:A4:5F
+   :issuer:     CAcert.org Class 1 Root CA
 
-* :file:`/etc/ssl/public/blog.cacert.org.crt` server certificate
-* :file:`/etc/ssl/private/blog.cacert.org.key` server key
 * :file:`/etc/ssl/certs/cacert.org/` directory containing CAcert.org Class 1
   and Class 3 certificates (allowed CA certificates for client certificates)
   and symlinks with hashed names as expected by OpenSSL

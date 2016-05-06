@@ -293,17 +293,19 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-.. index::
-   single: Certificate; Board
+.. sslcert:: board.cacert.org
+   :certfile:   /etc/ssl/certs/board.crt
+   :keyfile:    /etc/ssl/private/board.key
+   :serial:     11e839
+   :expiration: Mar 31 16:47:11 2018 GMT
+   :sha1fp:     2C:AC:8C:F8:D6:4A:9E:1D:B0:35:B8:E4:5E:24:B1:43:E3:69:98:46
+   :issuer:     CAcert.org Class 1 Root CA
 
-* :file:`/etc/ssl/certs/board.crt` server certificate
-* :file:`/etc/ssl/private/board.key` server key
 * :file:`/etc/ssl/certs/cacert.org.pem` CAcert.org Class 1 and Class 3 CA
   certificates (allowed CA certificates for client certificates)
 
 .. seealso::
 
-   * :ref:`cert_board_cacert_org` in :doc:`../certlist`
    * :wiki:`SystemAdministration/CertificateList`
 
 Apache configuration files
