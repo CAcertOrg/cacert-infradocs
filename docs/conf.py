@@ -32,6 +32,7 @@ sys.path.insert(0, os.path.abspath('.'))
 # ones.
 extensions = [
     'sphinx.ext.todo',
+    'sphinx.ext.extlinks',
     'jandd.sphinxext.ip',
     'jandd.sphinxext.mac',
 ]
@@ -363,6 +364,11 @@ epub_exclude_files = ['search.html']
 #epub_use_index = True
 
 
+extlinks = {
+    'wiki': ('https://wiki.cacert.org/%s', 'Wiki '),
+}
+
+
 def cacert_bug(name, rawtext, text, lineno, inliner, options={}, content=[]):
     try:
         bugnum = int(text)
@@ -380,13 +386,5 @@ def cacert_bug(name, rawtext, text, lineno, inliner, options={}, content=[]):
     return [node], []
 
 
-def cacert_wiki(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    ref = urljoin('https://wiki.cacert.org/', text)
-    node = nodes.reference(rawtext, "Wiki " + utils.unescape(text),
-                           refuri=ref, **options)
-    return [node], []
-
-
 def setup(app):
     app.add_role('bug', cacert_bug)
-    app.add_role('wiki', cacert_wiki)
