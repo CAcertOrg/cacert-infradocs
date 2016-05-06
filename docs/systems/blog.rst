@@ -296,7 +296,6 @@ Keys and X.509 certificates
 
 .. seealso::
 
-   * :ref:`cert_blog_cacert_org` in :doc:`../certlist`
    * :wiki:`SystemAdministration/CertificateList`
 
 Apache configuration
