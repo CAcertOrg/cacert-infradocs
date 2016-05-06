@@ -15,6 +15,8 @@ from docutils.parsers.rst import Directive
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import roles
 
+from sphinx import addnodes
+from sphinx.errors import SphinxError
 from sphinx.util.nodes import set_source_info
 
 
@@ -147,22 +149,49 @@ def process_sslcerts(app, doctree):
                 raise IndexError
         except IndexError:
             targetnode = None
-        newnode = node.deepcopy()
-        del newnode['ids']
-        certdata = node.attributes['certdata']
-        env.cacert_sslcerts.append({
+        certdata = node.attributes['certdata'].copy()
+        existing = [
+            cert_info for cert_info in env.cacert_sslcerts
+            if (cert_info['cn'], cert_info['serial']) ==
+               (certdata['cn'], certdata['serial'])
+        ]
+        place_info = {
             'docname': env.docname,
-            'source': node.source or env.doc2path(env.docname),
             'lineno': node.line,
-            'sslcert': certdata,
+            'certfile': certdata['certfile'],
+            'keyfile': certdata['keyfile'],
+            'primary': 'secondary' not in certdata,
             'target': targetnode,
-        })
+        }
+        if existing:
+            info = existing[0]
+        else:
+            info = {
+                'cn': certdata['cn'],
+                'serial': certdata['serial'],
+                'places': [],
+            }
+            env.cacert_sslcerts.append(info)
+        info['places'].append(place_info)
+        if 'sha1fp' in certdata:
+            info['sha1fp'] = certdata['sha1fp']
+        if 'issuer' in certdata:
+            info['issuer'] = certdata['issuer']
+        if 'expiration' in certdata:
+            info['expiration'] = certdata['expiration']
+        if 'altnames' in certdata:
+            info['altnames'] = certdata['altnames'].copy()
+        indexnode = addnodes.index(entries=[
+            ('single', _get_cert_index_text(info), targetnode['ids'][0],
+             '', None)
+        ])
 
         bullets = nodes.bullet_list()
         certitem = nodes.list_item()
         bullets += certitem
         certpara = nodes.paragraph()
         certpara += nodes.Text('Certificate for CN %s' % certdata['cn'])
+        # TODO add details link leading to certlist
         certitem += certpara
 
         subbullets = nodes.bullet_list()
@@ -180,14 +209,12 @@ def process_sslcerts(app, doctree):
             certdata['keyfile'], node.line)
         item += keyfile
 
-        # TODO add reference to item in certificate list
-        # TODO add index entry
-
-        node.parent.replace_self([targetnode, bullets])
+        node.parent.replace_self([targetnode, indexnode, bullets])
+        env.note_indexentries_from(env.docname, doctree)
 
 
 def _sslcert_item_key(item):
-    return item['sslcert']['cn']
+    return "%s-%d" % (item['cn'], item['serial'])
 
 
 def _build_cert_anchor_name(cn, serial):
@@ -198,17 +225,33 @@ def _format_subject_alternative_names(altnames):
     return nodes.paragraph(text = ", ".join(altnames))
 
 
+def _place_sort_key(place):
+    return "%s-%d" % (place['docname'], place['lineno'])
+
+
 def _file_ref_paragraph(cert_info, filekey, app, env, docname):
     para = nodes.paragraph()
-    title = env.titles[cert_info['docname']].astext().lower()
-    refnode = nodes.reference('', '', internal=True)
-    # TODO add support for multiple key/certificate locations
-    refnode['refuri'] = app.builder.get_relative_uri(
-        docname, cert_info['docname']) + '#' + cert_info['target']['ids'][0]
-    refnode += nodes.Text(title)
-    para += refnode
-    para += nodes.Text(":")
-    para += _create_interpreted_file_node(cert_info['sslcert'][filekey])
+
+    places = [place for place in cert_info['places'] if place['primary']]
+    places.extend(sorted([
+        place for place in cert_info['places'] if not place['primary']],
+        key=_place_sort_key))
+
+    for pos in range(len(places)):
+        place = places[pos]
+        title = env.titles[place['docname']].astext().lower()
+        refnode = nodes.reference('', '', internal=True)
+        refnode['refuri'] = app.builder.get_relative_uri(
+            docname, place['docname']) + '#' + place['target']['ids'][0]
+        if place['primary'] and len(places) > 1:
+            refnode += nodes.strong(text=title)
+        else:
+            refnode += nodes.Text(title)
+        para += refnode
+        para += nodes.Text(":")
+        para += _create_interpreted_file_node(place[filekey])
+        if pos + 1 < len(places):
+            para += nodes.Text(", ")
     return para
 
 
@@ -227,22 +270,41 @@ def _format_fingerprint(fingerprint):
     return para
 
 
+def _get_cert_index_text(cert_info):
+    return "Certificate; %s" % cert_info['cn']
+
+
 def process_sslcert_nodes(app, doctree, docname):
     env = app.builder.env
 
     if not hasattr(env, 'cacert_sslcerts'):
-        env.cacert_all_certs = []
+        env.cacert_sslcerts = []
 
     for node in doctree.traverse(sslcertlist_node):
         content = []
 
         for cert_info in sorted(env.cacert_sslcerts, key=_sslcert_item_key):
+            primarycount = len([
+                place for place in cert_info['places'] if place['primary']
+            ])
+            if primarycount != 1:
+                raise SphinxError(
+                    "There must be exactly one primary place for a "
+                    "certificate, but the certificate for CN %s with "
+                    "serial number %d has %d" %
+                    (cert_info['cn'], cert_info['serial'], primarycount)
+                )
             cert_sec = nodes.section()
             cert_sec['ids'].append(
-                _build_cert_anchor_name(cert_info['sslcert']['cn'],
-                                        cert_info['sslcert']['serial'])
+                _build_cert_anchor_name(cert_info['cn'],
+                                        cert_info['serial'])
             )
-            cert_sec += nodes.title(text=cert_info['sslcert']['cn'])
+            cert_sec += nodes.title(text=cert_info['cn'])
+            indexnode = addnodes.index(entries=[
+                ('single', _get_cert_index_text(cert_info),
+                 cert_sec['ids'][0], '', None),
+            ])
+            content.append(indexnode)
             table = nodes.table()
             cert_sec += table
             tgroup = nodes.tgroup(cols=2)
@@ -253,13 +315,13 @@ def process_sslcert_nodes(app, doctree, docname):
             tgroup += tbody
             tbody += create_table_row([
                 nodes.paragraph(text='Common Name'),
-                nodes.paragraph(text=cert_info['sslcert']['cn'])
+                nodes.paragraph(text=cert_info['cn'])
             ])
-            if 'altnames' in cert_info['sslcert']:
+            if 'altnames' in cert_info:
                 tbody += create_table_row([
                     nodes.paragraph(text='Subject Alternative Names'),
                     _format_subject_alternative_names(
-                        cert_info['sslcert']['altnames'])
+                        cert_info['altnames'])
                 ])
             tbody += create_table_row([
                 nodes.paragraph(text='Key kept at'),
@@ -271,31 +333,34 @@ def process_sslcert_nodes(app, doctree, docname):
             ])
             tbody += create_table_row([
                 nodes.paragraph(text='Serial number'),
-                _format_serial_number(cert_info['sslcert']['serial'])
+                _format_serial_number(cert_info['serial'])
             ])
             tbody += create_table_row([
                 nodes.paragraph(text='Expiration date'),
-                _format_expiration_date(cert_info['sslcert']['expiration'])
+                _format_expiration_date(cert_info['expiration'])
             ])
             tbody += create_table_row([
                 nodes.paragraph(text='Issuer'),
-                nodes.paragraph(text=cert_info['sslcert']['issuer'])
+                nodes.paragraph(text=cert_info['issuer'])
             ])
             tbody += create_table_row([
                 nodes.paragraph(text='SHA1 fingerprint'),
-                _format_fingerprint(cert_info['sslcert']['sha1fp'])
+                _format_fingerprint(cert_info['sha1fp'])
             ])
             content.append(cert_sec)
 
         node.replace_self(content)
-
-
-def merge_info(env, docnames, other):
-    pass
+        env.note_indexentries_from(docname, doctree)
 
 
 def purge_sslcerts(app, env, docname):
-    pass
+    if not hasattr(env, 'cacert_sslcerts'):
+        return
+    for cert_info in env.cacert_sslcerts:
+        cert_info['places'] = [
+            place for place in cert_info['places']
+            if place['docname'] != docname
+        ]
 
 
 def setup(app):
@@ -310,5 +375,4 @@ def setup(app):
     app.connect('doctree-read', process_sslcerts)
     app.connect('doctree-resolved', process_sslcert_nodes)
     app.connect('env-purge-doc', purge_sslcerts)
-    app.connect('env-merge-info', merge_info)
     return {'version': __version__}
