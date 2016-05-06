@@ -48,8 +48,7 @@ def create_table_row(rowdata):
 
 
 def subject_alternative_names(argument):
-    import pdb; pdb.set_trace()
-    value = [san.strip() for san in argument.strip()]
+    value = [san.strip() for san in argument.split(',')]
     # TODO: sanity checks for SANs
     return value
 
@@ -80,7 +79,7 @@ class CAcertSSLCert(Directive):
     }
 
     def run(self):
-        if self.options.get('secondary'):
+        if 'secondary' in self.options:
             missing = [
                 required for required in ('certfile', 'keyfile', 'serial')
                 if required not in self.options
@@ -249,7 +248,7 @@ def process_sslcert_nodes(app, doctree, docname):
             tgroup = nodes.tgroup(cols=2)
             table += tgroup
             tgroup += nodes.colspec(colwidth=1)
-            tgroup += nodes.colspec(colwidth=3)
+            tgroup += nodes.colspec(colwidth=5)
             tbody = nodes.tbody()
             tgroup += tbody
             tbody += create_table_row([
