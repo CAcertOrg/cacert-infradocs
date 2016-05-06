@@ -261,8 +261,17 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-* :file:`/etc/ssl/certs/ssl-cert-community-cacert.crt` server certificate
-* :file:`/etc/ssl/private/ssl-cert-community-cacert.key` server key
+.. sslcert:: community.cacert.org
+   :certfile:   /etc/ssl/certs/ssl-cert-community-cacert.crt
+   :keyfile:    /etc/ssl/private/ssl-cert-community-cacert.key
+   :serial:     11e846
+   :expiration: Mar 31 18:50:26 2018 GMT
+   :sha1fp:     F1:BC:77:BD:12:EA:69:CF:5E:5F:74:C2:6B:AD:3E:43:94:9A:7F:B4
+   :altnames:   DNS:community.cacert.org, DNS:nocert.community.cacert.org,
+                DNS:cert.community.cacert.org, DNS:email.cacert.org,
+                DNS:nocert.email.cacert.org, DNS:cert.email.cacert.org
+   :issuer:     CAcert.org Class 1 Root CA
+
 * :file:`/usr/share/ca-certificates/cacert.org/` directory containing the
   CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for
   client authentication and certificate chain for server certificate) with
