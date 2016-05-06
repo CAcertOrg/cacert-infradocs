@@ -73,6 +73,9 @@ viewed in the `docs/_build/html directory of the Job's workspace
 <https://jenkins.cacert.org/job/cacert-infradocs/ws/docs/_build/html/>`_. You may
 open `index.html
 <https://jenkins.cacert.org/job/cacert-infradocs/ws/docs/_build/html/index.html>`_
-to browse the documentation.
+to browse the documentation (there are some JavaScript and SVG glitches due to
+Content-Security-Policy settings).
 
-.. todo:: publish the generated documentation to some canonical place
+If the documentation build is successful the result is pushed to a webserver
+document root on :doc:`webstatic` and is publicly available at
+https://infradocs.cacert.org/.
