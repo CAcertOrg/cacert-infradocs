@@ -9,6 +9,7 @@
 __version__ = '0.1.0'
 
 import re
+from ipaddress import ip_address
 
 from docutils import nodes
 from docutils.parsers.rst import Directive
@@ -20,6 +21,7 @@ from sphinx.errors import SphinxError
 from sphinx.util.nodes import set_source_info, make_refnode
 
 from dateutil.parser import parse as date_parse
+from validate_email import validate_email
 
 
 class sslcert_node(nodes.General, nodes.Element):
@@ -51,9 +53,39 @@ def create_table_row(rowdata):
     return row
 
 
+def is_valid_hostname(hostname):
+    if len(hostname) > 255:
+        return False
+    if hostname[-1] == ".":  # strip exactly one dot from the right, if present
+        hostname = hostname[:-1]
+    allowed = re.compile("(?!-)[A-Z\d-]{1,63}(?<!-)$", re.IGNORECASE)
+    return all(allowed.match(x) for x in hostname.split("."))
+
+
+def is_valid_ipaddress(content):
+    try:
+        ip_address(content)
+    except ValueError:
+        return False
+    return True
+
+
 def subject_alternative_names(argument):
-    value = [san.strip() for san in argument.split(',')]
-    # TODO: sanity checks for SANs
+    value = [san.strip().split(':', 1) for san in argument.split(',')]
+    for typ, content in value:
+        if typ == 'DNS':
+            if not is_valid_hostname(content):
+                raise ValueError("%s is no valid DNS name" % content)
+        elif typ == 'EMAIL':
+            if not validate_email(content):
+                raise ValueError("%s is not a valid email address" % content)
+        elif typ == 'IP':
+            if not is_valid_ipaddress(content):
+                raise ValueError("%s is not a valid IP address" % content)
+        else:
+            raise ValueError(
+                "handling of %s subject alternative names (%s) has not been "
+                "implemented" % (typ, content))
     return value
 
 
@@ -237,7 +269,9 @@ def _build_cert_anchor_name(cn, serial):
 
 
 def _format_subject_alternative_names(altnames):
-    return nodes.paragraph(text = ", ".join(altnames))
+    return nodes.paragraph(text = ", ".join([
+        content for _, content in altnames
+    ]))
 
 
 def _place_sort_key(place):

@@ -12,3 +12,4 @@ snowballstemmer==1.2.1
 jandd.sphinxext.ip==0.2.4
 jandd.sphinxext.mac==0.1.0
 py-dateutil==2.2
+validate-email==1.3
