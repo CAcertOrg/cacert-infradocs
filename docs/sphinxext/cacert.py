@@ -7,6 +7,7 @@
 # sshkeylist
 
 import re
+import os.path
 from ipaddress import ip_address
 
 from docutils import nodes
@@ -16,12 +17,14 @@ from docutils.parsers.rst import roles
 
 from sphinx import addnodes
 from sphinx.errors import SphinxError
-from sphinx.util.nodes import set_source_info, make_refnode
+from sphinx.util.nodes import set_source_info, make_refnode, traverse_parent
 
 from dateutil.parser import parse as date_parse
 from validate_email import validate_email
 
 __version__ = '0.1.0'
+
+SUPPORTED_SSH_KEYTYPES = ('RSA', 'DSA', 'ECDSA', 'ED25519')
 
 
 class sslcert_node(nodes.General, nodes.Element):
@@ -32,10 +35,25 @@ class sslcertlist_node(nodes.General, nodes.Element):
     pass
 
 
+class sshkeys_node(nodes.General, nodes.Element):
+    pass
+
+
+class sshkeylist_node(nodes.General, nodes.Element):
+    pass
+
+
 # mapping and validation functions for directive options
 
 def hex_int(argument):
     value = int(argument, base=16)
+    return value
+
+
+def md5_fingerprint(argument):
+    value = argument.strip().lower()
+    if not re.match(r'^([0-9a-f]{2}:){15}[0-9a-f]{2}$', value):
+        raise ValueError('no correctly formatted SHA1 fingerprint')
     return value
 
 
@@ -150,8 +168,26 @@ class CAcertSSHKeys(Directive):
     The sshkeys directive implementation that can be used to specify the ssh
     host keys for a host.
     """
+    option_spec = {
+        keytype.lower(): md5_fingerprint for keytype in SUPPORTED_SSH_KEYTYPES
+    }
     def run(self):
-        return []
+        if len(self.options) == 0:
+            raise self.error(
+                "at least one ssh key fingerprint must be specified. The "
+                "following formats are supported: %s" % ", ".join(
+                    SUPPORTED_SSH_KEYTYPES))
+        sshkeys = sshkeys_node()
+        sshkeys.attributes['keys'] = self.options.copy()
+        set_source_info(self, sshkeys)
+
+        env = self.state.document.settings.env
+        secid = 'sshkeys-%s' % env.new_serialno('sshkeys')
+
+        section = nodes.section(ids=[secid])
+        section += nodes.title(text='SSH host keys')
+        section += sshkeys
+        return [section]
 
 
 class CAcertSSHKeyList(Directive):
@@ -159,7 +195,7 @@ class CAcertSSHKeyList(Directive):
     The sshkeylist directive implementation
     """
     def run(self):
-        return []
+        return [sshkeylist_node()]
 
 
 def create_table_row(rowdata):
@@ -178,6 +214,10 @@ def _create_interpreted_file_node(text, line=0):
 
 def _sslcert_item_key(item):
     return "%s-%d" % (item['cn'], item['serial'])
+
+
+def _sshkeys_item_key(item):
+    return "%s" % os.path.basename(item['docname'])
 
 
 def _build_cert_anchor_name(cn, serial):
@@ -235,6 +275,19 @@ def _format_fingerprint(fingerprint):
 
 def _get_cert_index_text(cert_info):
     return "Certificate; %s" % cert_info['cn']
+
+
+def _get_formatted_keyentry(keys_info, algorithm):
+    entry = nodes.entry()
+    algkey = algorithm.lower()
+    if algkey in keys_info:
+        para = nodes.paragraph()
+        keyfp = nodes.literal(text=keys_info[algkey])
+        para += keyfp
+    else:
+        para = nodes.paragraph(text="-")
+    entry += para
+    return entry
 
 
 def process_sslcerts(app, doctree):
@@ -326,6 +379,79 @@ def process_sslcerts(app, doctree):
         env.note_indexentries_from(env.docname, doctree)
 
 
+def process_sshkeys(app, doctree):
+    env = app.builder.env
+    if not hasattr(env, 'cacert_sshkeys'):
+        env.cacert_sshkeys = []
+
+    for node in doctree.traverse(sshkeylist_node):
+        if hasattr(env, 'cacert_sshkeylistdoc'):
+            raise SphinxError(
+                "There must be one sshkeylist directive present in "
+                "the document tree only.")
+        env.cacert_sshkeylistdoc = env.docname
+
+    for node in doctree.traverse(sshkeys_node):
+        # find section
+        section = [s for s in traverse_parent(node, nodes.section)][0]
+        dockeys = {'docname': env.docname, 'secid': section['ids'][0]}
+        dockeys.update(node['keys'])
+        env.cacert_sshkeys.append(dockeys)
+
+        secparent = section.parent
+        pos = secparent.index(section)
+        # add index node for section
+        indextitle = 'SSH host key; %s' % (
+            env.docname in env.titles and env.titles[env.docname].astext()
+            or os.path.basename(env.docname)
+        )
+        secparent.insert(pos, addnodes.index(entries=[
+            ('pair', indextitle, section['ids'][0], '', None),
+        ]))
+
+        # add table
+        content = []
+        table = nodes.table()
+        content.append(table)
+        cols = (1, 4)
+        tgroup = nodes.tgroup(cols=len(cols))
+        table += tgroup
+        for col in cols:
+            tgroup += nodes.colspec(colwidth=col)
+        thead = nodes.thead()
+        tgroup += thead
+        thead += create_table_row([
+            nodes.paragraph(text='Algorithm'),
+            nodes.paragraph(text='Fingerprint'),
+        ])
+        tbody = nodes.tbody()
+        tgroup += tbody
+        for alg in SUPPORTED_SSH_KEYTYPES:
+            if alg.lower() in dockeys:
+                fpparagraph = nodes.paragraph()
+                fpparagraph += nodes.literal(text=dockeys[alg.lower()])
+            else:
+                fpparagraph = nodes.paragraph(text='-')
+            tbody += create_table_row([
+                nodes.paragraph(text=alg),
+                fpparagraph,
+            ])
+        # add pending_xref for link to ssh key list
+        seealso = addnodes.seealso()
+        content.append(seealso)
+        detailref = addnodes.pending_xref(
+            reftype='sshkeyref', refdoc=env.docname, refid='sshkeylist',
+            reftarget='sshkeylist'
+        )
+        detailref += nodes.Text("SSH host key list")
+        seepara = nodes.paragraph()
+        seepara += detailref
+        seealso += seepara
+
+        node.replace_self(content)
+        env.note_indexentries_from(env.docname, doctree)
+
+
 def process_sslcert_nodes(app, doctree, docname):
     env = app.builder.env
 
@@ -405,13 +531,90 @@ def process_sslcert_nodes(app, doctree, docname):
         env.note_indexentries_from(docname, doctree)
 
 
+def process_sshkeys_nodes(app, doctree, docname):
+    env = app.builder.env
+
+    if not hasattr(env, 'cacert_sshkeys'):
+        env.cacert_sslcerts = []
+
+    for node in doctree.traverse(sshkeylist_node):
+        content = []
+        content.append(nodes.target(ids=['sshkeylist']))
+
+        if len(env.cacert_sshkeys) > 0:
+            table = nodes.table()
+            content.append(table)
+            tgroup = nodes.tgroup(cols=3)
+            tgroup += nodes.colspec(colwidth=1)
+            tgroup += nodes.colspec(colwidth=1)
+            tgroup += nodes.colspec(colwidth=4)
+            table += tgroup
+
+            thead = nodes.thead()
+            row = nodes.row()
+            entry = nodes.entry()
+            entry += nodes.paragraph(text="Host")
+            row += entry
+            entry = nodes.entry(morecols=1)
+            entry += nodes.paragraph(text="SSH Host Keys")
+            row += entry
+            thead += row
+            tgroup += thead
+
+            tbody = nodes.tbody()
+            tgroup += tbody
+
+            for keys_info in sorted(env.cacert_sshkeys, key=_sshkeys_item_key):
+                trow = nodes.row()
+                entry = nodes.entry(morerows=len(SUPPORTED_SSH_KEYTYPES) - 1)
+                para = nodes.paragraph()
+                para += make_refnode(
+                    app.builder, docname, keys_info['docname'],
+                    keys_info['secid'],
+                    nodes.Text(env.titles[keys_info['docname']].astext())
+                )
+                entry += para
+                trow += entry
+
+                entry = nodes.entry()
+                entry += nodes.paragraph(text=SUPPORTED_SSH_KEYTYPES[0])
+                trow += entry
+
+                trow += _get_formatted_keyentry(
+                    keys_info, SUPPORTED_SSH_KEYTYPES[0])
+
+                tbody += trow
+
+                for algorithm in SUPPORTED_SSH_KEYTYPES[1:]:
+                    trow = nodes.row()
+
+                    entry = nodes.entry()
+                    entry += nodes.paragraph(text=algorithm)
+                    trow += entry
+
+                    trow += _get_formatted_keyentry(keys_info, algorithm)
+                    tbody += trow
+        else:
+            content.append(nodes.paragraph(
+                text="No ssh keys have been documented.")
+            )
+
+        node.replace_self(content)
+
+
 def resolve_missing_reference(app, env, node, contnode):
-    if not hasattr(env, 'cacert_certlistdoc'):
-        return
     if node['reftype'] == 'certlistref':
-        return make_refnode(
-            app.builder, node['refdoc'], env.cacert_certlistdoc,
-            node['refid'], contnode)
+        if hasattr(env, 'cacert_certlistdoc'):
+            return make_refnode(
+                app.builder, node['refdoc'], env.cacert_certlistdoc,
+                node['refid'], contnode)
+        raise SphinxError('No certlist directive found in the document tree')
+    if node['reftype'] == 'sshkeyref' :
+        if hasattr(env, 'cacert_sshkeylistdoc'):
+            return make_refnode(
+                app.builder, node['refdoc'], env.cacert_sshkeylistdoc,
+                node['refid'], contnode)
+        raise SphinxError('No sshkeylist directive found in the document tree')
 
 
 def purge_sslcerts(app, env, docname):
@@ -429,9 +632,24 @@ def purge_sslcerts(app, env, docname):
         ]
 
 
+def purge_sshkeys(app, env, docname):
+    if (
+        hasattr(env, 'cacert_sshkeylistdoc') and
+        env.cacert_sshkeylistdoc == docname
+    ):
+        delattr(env, 'cacert_sshkeylistdoc')
+    if not hasattr(env, 'cacert_sshkeys'):
+        return
+    env.cacert_sshkeys = [
+        keys for keys in env.cacert_sshkeys if keys['docname'] != docname
+    ]
+
+
 def setup(app):
     app.add_node(sslcertlist_node)
     app.add_node(sslcert_node)
+    app.add_node(sshkeylist_node)
+    app.add_node(sshkeys_node)
 
     app.add_directive('sslcert', CAcertSSLCert)
     app.add_directive('sslcertlist', CAcertSSLCertList)
@@ -439,7 +657,10 @@ def setup(app):
     app.add_directive('sshkeylist', CAcertSSHKeyList)
 
     app.connect('doctree-read', process_sslcerts)
+    app.connect('doctree-read', process_sshkeys)
     app.connect('doctree-resolved', process_sslcert_nodes)
+    app.connect('doctree-resolved', process_sshkeys_nodes)
     app.connect('missing-reference', resolve_missing_reference)
     app.connect('env-purge-doc', purge_sslcerts)
+    app.connect('env-purge-doc', purge_sshkeys)
     return {'version': __version__}
