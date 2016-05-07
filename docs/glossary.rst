@@ -5,7 +5,10 @@ Glossary
    :sorted:
 
    LXC
-      `Linux Containers <https://linuxcontainers.org/>`_
+      LXC is a userspace interface to the Linux kernel containment features.
+      See `The LXC introduction
+      <https://linuxcontainers.org/lxc/introduction/>`_ on the Linux containers
+      website for more information
 
    Container
       A container is an isolated system with a separate root file system and
