@@ -228,24 +228,13 @@ Outbound network connections
 Security
 ========
 
-SSH host keys
--------------
+.. add the MD5 fingerprints of the SSH host keys
 
-+-----------+-----------------------------------------------------+
-| Algorithm | Fingerprint                                         |
-+===========+=====================================================+
-| RSA       |                                                     |
-+-----------+-----------------------------------------------------+
-| DSA       |                                                     |
-+-----------+-----------------------------------------------------+
-| ECDSA     |                                                     |
-+-----------+-----------------------------------------------------+
-| ED25519   |                                                     |
-+-----------+-----------------------------------------------------+
-
-.. seealso::
-
-   See :doc:`../sshkeys`
+.. sshkeys::
+   :RSA:
+   :DSA:
+   :ECDSA:
+   :ED25519:
 
 Dedicated user roles
 --------------------
@@ -280,15 +269,31 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-* :file:`/etc/apache2/ssl/<path to certificate>` server certificate (valid until <datetime>)
-* :file:`/etc/apache2/ssl/<path to server key>` server key
+.. use the sslcert directive to have certificates added to the certificate list
+   automatically
+
+.. sslcert:: template.cacert.org
+   :altnames:
+   :certfile:
+   :keyfile:
+   :serial:
+   :expiration:
+   :sha1fp:
+   :issuer:
+
+.. for certificates that are orginally created on another host use
+
+.. sslcert:: other.cacert.org
+   :certfile:
+   :keyfile:
+   :serial:
+   :secondary:
 
 .. * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
    * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate (certificate chain for server certificate)
 
 .. seealso::
 
-   * :doc:`../certlist`
    * :wiki:`SystemAdministration/CertificateList`
 
 <service_x> configuration

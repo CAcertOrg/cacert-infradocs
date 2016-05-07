@@ -214,28 +214,13 @@ Outbound network connections
 Security
 ========
 
-SSH host keys
--------------
-
-+-----------+-----------------------------------------------------+
-| Algorithm | Fingerprint                                         |
-+===========+=====================================================+
-| RSA       | ``a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23`` |
-+-----------+-----------------------------------------------------+
-| DSA       | ``f4:eb:0a:36:40:1c:55:6b:75:a2:26:34:ea:18:7e:91`` |
-+-----------+-----------------------------------------------------+
-| ECDSA     | \-                                                  |
-+-----------+-----------------------------------------------------+
-| ED25519   | \-                                                  |
-+-----------+-----------------------------------------------------+
+.. sshkeys::
+   :RSA: a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23
+   :DSA: f4:eb:0a:36:40:1c:55:6b:75:a2:26:34:ea:18:7e:91
 
 .. warning::
 
    The system is too old to support ECDSA or ED25519 keys.
-
-.. seealso::
-
-   See :doc:`../sshkeys`
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -290,7 +275,6 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 
 .. seealso::
 
-   * :doc:`../certlist`
    * :wiki:`SystemAdministration/CertificateList`
 
 Apache configuration
