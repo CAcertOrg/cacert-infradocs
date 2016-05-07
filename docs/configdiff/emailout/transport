@@ -1,0 +1,3 @@
+lists.cacert.org    smtp:[lists.intra.cacert.org]
+issue.cacert.org    smtp:[issue.intra.cacert.org]
+cacert.org          smtp:[email.intra.cacert.org]

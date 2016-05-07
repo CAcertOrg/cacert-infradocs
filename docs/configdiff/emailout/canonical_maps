@@ -1,0 +1,2 @@
+/@(.*).intra.cacert.org$/       $1-admin@cacert.org
+/@(.*).infra.cacert.org$/       $1-admin@cacert.org
