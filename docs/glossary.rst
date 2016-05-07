@@ -46,3 +46,17 @@ Glossary
       more server applications. Application Administrators do not necessarily
       need system level access if the managed application has other means of
       administration, for example a web based administration frontend.
+
+   DKIM
+   Domain Key Identified Mail
+      A mechanism where legitimate mail for a domain is verifiable by a
+      signature in a mail header and a corresponding public key in a specific
+      :term:`DNS` record. Outgoing mail servers for the domain have to be
+      configured to add the necessary signature to mails for their domains.
+
+   DNS
+   Domain Name System
+      DNS maps names to other information, the most well known use case is
+      mapping human readable names to IP addresses, but their are more
+      applications for DNS like service discovery, storage of public keys and
+      other public information.
