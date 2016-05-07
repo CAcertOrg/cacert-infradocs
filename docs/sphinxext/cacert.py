@@ -17,7 +17,7 @@ from docutils.parsers.rst import roles
 
 from sphinx import addnodes
 from sphinx.errors import SphinxError
-from sphinx.util.nodes import set_source_info
+from sphinx.util.nodes import set_source_info, make_refnode
 
 
 class sslcert_node(nodes.General, nodes.Element):
@@ -142,6 +142,14 @@ def process_sslcerts(app, doctree):
     env = app.builder.env
     if not hasattr(env, 'cacert_sslcerts'):
         env.cacert_sslcerts = []
+
+    for node in doctree.traverse(sslcertlist_node):
+        if hasattr(env, 'cacert_certlistdoc'):
+            raise SphinxError(
+                "There must only be one sslcertlist directive present in "
+                "the document tree.")
+        env.cacert_certlistdoc = env.docname
+
     for node in doctree.traverse(sslcert_node):
         try:
             targetnode = node.parent[node.parent.index(node) - 1]
@@ -190,8 +198,14 @@ def process_sslcerts(app, doctree):
         certitem = nodes.list_item()
         bullets += certitem
         certpara = nodes.paragraph()
-        certpara += nodes.Text('Certificate for CN %s' % certdata['cn'])
-        # TODO add details link leading to certlist
+        certpara += nodes.Text('Certificate for CN %s, see ' % certdata['cn'])
+        refid = _build_cert_anchor_name(certdata['cn'], certdata['serial'])
+        detailref = addnodes.pending_xref(
+            reftype='certlistref', refdoc=env.docname, refid=refid,
+            reftarget='certlist'
+        )
+        detailref += nodes.Text("details in the certificate list")
+        certpara += detailref
         certitem += certpara
 
         subbullets = nodes.bullet_list()
@@ -240,14 +254,13 @@ def _file_ref_paragraph(cert_info, filekey, app, env, docname):
     for pos in range(len(places)):
         place = places[pos]
         title = env.titles[place['docname']].astext().lower()
-        refnode = nodes.reference('', '', internal=True)
-        refnode['refuri'] = app.builder.get_relative_uri(
-            docname, place['docname']) + '#' + place['target']['ids'][0]
         if place['primary'] and len(places) > 1:
-            refnode += nodes.strong(text=title)
+            reftext = nodes.strong(text=title)
         else:
-            refnode += nodes.Text(title)
-        para += refnode
+            reftext = nodes.Text(title)
+        para += make_refnode(
+            app.builder, docname, place['docname'], place['target']['ids'][0],
+            reftext)
         para += nodes.Text(":")
         para += _create_interpreted_file_node(place[filekey])
         if pos + 1 < len(places):
@@ -353,7 +366,21 @@ def process_sslcert_nodes(app, doctree, docname):
         env.note_indexentries_from(docname, doctree)
 
 
+def resolve_missing_reference(app, env, node, contnode):
+    if not hasattr(env, 'cacert_certlistdoc'):
+        return
+    if node['reftype'] == 'certlistref':
+        return make_refnode(
+            app.builder, node['refdoc'], env.cacert_certlistdoc,
+            node['refid'], contnode)
+
+
 def purge_sslcerts(app, env, docname):
+    if (
+        hasattr(env, 'cacert_certlistdoc') and
+        env.cacert_certlistdoc == docname
+    ):
+        delattr(env, 'cacert_certlistdoc')
     if not hasattr(env, 'cacert_sslcerts'):
         return
     for cert_info in env.cacert_sslcerts:
@@ -374,5 +401,6 @@ def setup(app):
 
     app.connect('doctree-read', process_sslcerts)
     app.connect('doctree-resolved', process_sslcert_nodes)
+    app.connect('missing-reference', resolve_missing_reference)
     app.connect('env-purge-doc', purge_sslcerts)
     return {'version': __version__}
