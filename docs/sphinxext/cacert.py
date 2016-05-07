@@ -298,8 +298,8 @@ def process_sslcerts(app, doctree):
     for node in doctree.traverse(sslcertlist_node):
         if hasattr(env, 'cacert_certlistdoc'):
             raise SphinxError(
-                "There must only be one sslcertlist directive present in "
-                "the document tree.")
+                "There must be one sslcertlist directive present in "
+                "the document tree only.")
         env.cacert_certlistdoc = env.docname
 
     for node in doctree.traverse(sslcert_node):
@@ -342,7 +342,7 @@ def process_sslcerts(app, doctree):
         if 'altnames' in certdata:
             info['altnames'] = certdata['altnames'].copy()
         indexnode = addnodes.index(entries=[
-            ('single', _get_cert_index_text(info), targetnode['ids'][0],
+            ('pair', _get_cert_index_text(info), targetnode['ids'][0],
              '', None)
         ])
 
@@ -479,7 +479,7 @@ def process_sslcert_nodes(app, doctree, docname):
             )
             cert_sec += nodes.title(text=cert_info['cn'])
             indexnode = addnodes.index(entries=[
-                ('single', _get_cert_index_text(cert_info),
+                ('pair', _get_cert_index_text(cert_info),
                  cert_sec['ids'][0], '', None),
             ])
             content.append(indexnode)
