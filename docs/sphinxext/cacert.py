@@ -46,15 +46,6 @@ def sha1_fingerprint(argument):
     return value
 
 
-def create_table_row(rowdata):
-    row = nodes.row()
-    for cell in rowdata:
-        entry = nodes.entry()
-        row += entry
-        entry += cell
-    return row
-
-
 def is_valid_hostname(hostname):
     if len(hostname) > 255:
         return False
@@ -171,9 +162,79 @@ class CAcertSSHKeyList(Directive):
         return []
 
 
+def create_table_row(rowdata):
+    row = nodes.row()
+    for cell in rowdata:
+        entry = nodes.entry()
+        row += entry
+        entry += cell
+    return row
+
+
 def _create_interpreted_file_node(text, line=0):
     return roles._roles['file']('', ':file:`%s`' % text,
                                 text, line, None)[0][0]
+
+
+def _sslcert_item_key(item):
+    return "%s-%d" % (item['cn'], item['serial'])
+
+
+def _build_cert_anchor_name(cn, serial):
+    return 'cert_%s_%d' % (cn.replace('.', '_'), serial)
+
+
+def _format_subject_alternative_names(altnames):
+    return nodes.paragraph(text=", ".join(
+        [content for _, content in altnames]
+    ))
+
+
+def _place_sort_key(place):
+    return "%s-%d" % (place['docname'], place['lineno'])
+
+
+def _file_ref_paragraph(cert_info, filekey, app, env, docname):
+    para = nodes.paragraph()
+
+    places = [place for place in cert_info['places'] if place['primary']]
+    places.extend(sorted([
+        place for place in cert_info['places'] if not place['primary']],
+        key=_place_sort_key))
+
+    for pos in range(len(places)):
+        place = places[pos]
+        title = env.titles[place['docname']].astext().lower()
+        if place['primary'] and len(places) > 1:
+            reftext = nodes.strong(text=title)
+        else:
+            reftext = nodes.Text(title)
+        para += make_refnode(
+            app.builder, docname, place['docname'], place['target']['ids'][0],
+            reftext)
+        para += nodes.Text(":")
+        para += _create_interpreted_file_node(place[filekey])
+        if pos + 1 < len(places):
+            para += nodes.Text(", ")
+    return para
+
+
+def _format_serial_number(serial):
+    return nodes.paragraph(text="%d (0x%0x)" % (serial, serial))
+
+
+def _format_expiration_date(expiration):
+    return nodes.paragraph(text=expiration)
+
+
+def _format_fingerprint(fingerprint):
+    para = nodes.paragraph()
+    para += nodes.literal(text=fingerprint, classes=['fingerprint'])
+    return para
+
+
+def _get_cert_index_text(cert_info):
+    return "Certificate; %s" % cert_info['cn']
 
 
 def process_sslcerts(app, doctree):
@@ -263,67 +324,6 @@ def process_sslcerts(app, doctree):
 
         node.parent.replace_self([targetnode, indexnode, bullets])
         env.note_indexentries_from(env.docname, doctree)
-
-
-def _sslcert_item_key(item):
-    return "%s-%d" % (item['cn'], item['serial'])
-
-
-def _build_cert_anchor_name(cn, serial):
-    return 'cert_%s_%d' % (cn.replace('.', '_'), serial)
-
-
-def _format_subject_alternative_names(altnames):
-    return nodes.paragraph(text=", ".join(
-        [content for _, content in altnames]
-    ))
-
-
-def _place_sort_key(place):
-    return "%s-%d" % (place['docname'], place['lineno'])
-
-
-def _file_ref_paragraph(cert_info, filekey, app, env, docname):
-    para = nodes.paragraph()
-
-    places = [place for place in cert_info['places'] if place['primary']]
-    places.extend(sorted([
-        place for place in cert_info['places'] if not place['primary']],
-        key=_place_sort_key))
-
-    for pos in range(len(places)):
-        place = places[pos]
-        title = env.titles[place['docname']].astext().lower()
-        if place['primary'] and len(places) > 1:
-            reftext = nodes.strong(text=title)
-        else:
-            reftext = nodes.Text(title)
-        para += make_refnode(
-            app.builder, docname, place['docname'], place['target']['ids'][0],
-            reftext)
-        para += nodes.Text(":")
-        para += _create_interpreted_file_node(place[filekey])
-        if pos + 1 < len(places):
-            para += nodes.Text(", ")
-    return para
-
-
-def _format_serial_number(serial):
-    return nodes.paragraph(text="%d (0x%0x)" % (serial, serial))
-
-
-def _format_expiration_date(expiration):
-    return nodes.paragraph(text=expiration)
-
-
-def _format_fingerprint(fingerprint):
-    para = nodes.paragraph()
-    para += nodes.literal(text=fingerprint, classes=['fingerprint'])
-    return para
-
-
-def _get_cert_index_text(cert_info):
-    return "Certificate; %s" % cert_info['cn']
 
 
 def process_sslcert_nodes(app, doctree, docname):
