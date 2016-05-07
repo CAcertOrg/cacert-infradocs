@@ -19,6 +19,8 @@ from sphinx import addnodes
 from sphinx.errors import SphinxError
 from sphinx.util.nodes import set_source_info, make_refnode
 
+from dateutil.parser import parse as date_parse
+
 
 class sslcert_node(nodes.General, nodes.Element):
     pass
@@ -56,8 +58,7 @@ def subject_alternative_names(argument):
 
 
 def expiration_date(argument):
-    # TODO: normalize to internal format
-    return directives.unchanged_required(argument)
+    return date_parse(directives.unchanged_required(argument))
 
 
 class CAcertSSLCert(Directive):
@@ -273,7 +274,6 @@ def _format_serial_number(serial):
 
 
 def _format_expiration_date(expiration):
-    # TODO use a normalized date format
     return nodes.paragraph(text=expiration)
 
 
