@@ -6,8 +6,6 @@
 # sshkeys
 # sshkeylist
 
-__version__ = '0.1.0'
-
 import re
 from ipaddress import ip_address
 
@@ -23,6 +21,8 @@ from sphinx.util.nodes import set_source_info, make_refnode
 from dateutil.parser import parse as date_parse
 from validate_email import validate_email
 
+__version__ = '0.1.0'
+
 
 class sslcert_node(nodes.General, nodes.Element):
     pass
@@ -31,6 +31,8 @@ class sslcert_node(nodes.General, nodes.Element):
 class sslcertlist_node(nodes.General, nodes.Element):
     pass
 
+
+# mapping and validation functions for directive options
 
 def hex_int(argument):
     value = int(argument, base=16)
@@ -143,12 +145,14 @@ class CAcertSSLCert(Directive):
         para.append(sslcert)
         return [para]
 
+
 class CAcertSSLCertList(Directive):
     """
     The sslcertlist directive implementation
     """
     def run(self):
         return [sslcertlist_node()]
+
 
 class CAcertSSHKeys(Directive):
     """
@@ -157,6 +161,7 @@ class CAcertSSHKeys(Directive):
     """
     def run(self):
         return []
+
 
 class CAcertSSHKeyList(Directive):
     """
@@ -269,9 +274,9 @@ def _build_cert_anchor_name(cn, serial):
 
 
 def _format_subject_alternative_names(altnames):
-    return nodes.paragraph(text = ", ".join([
-        content for _, content in altnames
-    ]))
+    return nodes.paragraph(text=", ".join(
+        [content for _, content in altnames]
+    ))
 
 
 def _place_sort_key(place):
