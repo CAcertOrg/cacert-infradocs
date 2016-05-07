@@ -566,7 +566,7 @@ def process_sshkeys_nodes(app, doctree, docname):
 
             for keys_info in sorted(env.cacert_sshkeys, key=_sshkeys_item_key):
                 trow = nodes.row()
-                entry = nodes.entry(morerows=len(SUPPORTED_SSH_KEYTYPES) - 1)
+                entry = nodes.entry(morerows=len(SUPPORTED_SSH_KEYTYPES))
                 para = nodes.paragraph()
                 para += make_refnode(
                     app.builder, docname, keys_info['docname'],
@@ -577,15 +577,20 @@ def process_sshkeys_nodes(app, doctree, docname):
                 trow += entry
 
                 entry = nodes.entry()
-                entry += nodes.paragraph(text=SUPPORTED_SSH_KEYTYPES[0])
+                para = nodes.paragraph()
+                para += nodes.strong(text='Algorithm')
+                entry += para
                 trow += entry
 
-                trow += _get_formatted_keyentry(
-                    keys_info, SUPPORTED_SSH_KEYTYPES[0])
+                entry = nodes.entry()
+                para = nodes.paragraph()
+                para += nodes.strong(text='SSH host key MD5 fingerprint')
+                entry += para
+                trow += entry
 
                 tbody += trow
 
-                for algorithm in SUPPORTED_SSH_KEYTYPES[1:]:
+                for algorithm in SUPPORTED_SSH_KEYTYPES:
                     trow = nodes.row()
 
                     entry = nodes.entry()
