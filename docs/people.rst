@@ -2,6 +2,18 @@
 People list
 ===========
 
+The following list shows information for people in charge of some systems or
+applications. The list of roles is known to not be complete.
+
+.. maybe this can be improved by some automation later
+
+.. _people_dirk:
+
+Dirk Astrath
+============
+
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`
+
 .. _people_abahlo:
 
 Alexander Bahlo
@@ -9,6 +21,14 @@ Alexander Bahlo
 
 :roles: :term:`Application Administrator` on :doc:`systems/blog`
 :contact: alexander.bahlo@cacert.org
+
+.. _people_benbe:
+
+Benny Baumann
+=============
+
+:roles: :term:`Infrastructure Administrator`, :term:`Application Administrator`
+        on :doc:`systems/bugs`
 
 .. _people_jandd:
 
@@ -20,6 +40,13 @@ Jan Dittberner
 :wiki: :wiki:`JanDittberner`
 :irc: jandd
 
+.. _people_ted:
+
+Bernhard Fröhlich
+=================
+
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`
+
 .. _people_martin:
 
 Martin Gummi
@@ -27,6 +54,13 @@ Martin Gummi
 
 :roles: :term:`Infrastructure Administrator`
 :contact: martin.gummi@cacert.org
+
+.. _people_philipp:
+
+Philipp Gühring
+===============
+
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`
 
 .. _people_mario:
 
@@ -57,8 +91,9 @@ Mendel Mobach
 Michael Tänzer
 ==============
 
-:roles: :term:`Infrastructure Administrator`
+:roles:   :term:`Infrastructure Administrator`
 :contact: michael.taenzer@cacert.org
+:wiki:    :wiki:`MichaelTänzer`
 
 .. _people_gero:
 
