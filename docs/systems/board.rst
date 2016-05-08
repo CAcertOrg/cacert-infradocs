@@ -294,7 +294,10 @@ Keys and X.509 certificates
 
    * :wiki:`SystemAdministration/CertificateList`
 
-Apache configuration files
+.. index::
+   pair: Apache httpd; configuration
+
+Apache httpd configuration
 --------------------------
 
 * :file:`/etc/apache2/conf.d/openerp-httpd.conf`
@@ -313,10 +316,17 @@ Apache configuration files
 
   Defines the authorized users based on the DN in their client certificate
 
+.. index::
+   single: cron; CRL
+   single: CRL
+
 CRL update job
 --------------
 
 :file:`/etc/cron.hourly/update-crls`
+
+.. index::
+   pair: OpenERP; configuration
 
 OpenERP configuration
 ---------------------
@@ -356,5 +366,5 @@ Additional documentation
 References
 ----------
 
-Wiki page for this system
-   :wiki:`SystemAdministration/Systems/Board`
+OpenERP 7.0 documentation
+   https://doc.odoo.com/

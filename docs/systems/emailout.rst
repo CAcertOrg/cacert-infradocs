@@ -116,6 +116,7 @@ Running services
    single: cron
    single: nrpe
    single: openssh
+   single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
@@ -335,5 +336,9 @@ Additional documentation
 References
 ----------
 
-* http://www.postfix.org/documentation.html
-* http://www.opendkim.org/docs.html
+Postfix documentation
+  http://www.postfix.org/documentation.html
+Postfix Debian wiki page
+  https://wiki.debian.org/Postfix
+OpenDKIM documentation
+  http://www.opendkim.org/docs.html

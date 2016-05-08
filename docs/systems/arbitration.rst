@@ -217,10 +217,6 @@ Non-distribution packages and modifications
 * some experimental nmp/nodejs/etherpad things in :file:`/home/magu` not
   running yet
 
-..
-   or
-   * List of non-distribution packages and modifications
-
 Risk assessments on critical packages
 -------------------------------------
 
@@ -235,14 +231,20 @@ Keys and X.509 certificates
 * No keys or certificates setup yet
 
 ..
-    * :file:`/etc/apache2/ssl/<path to certificate>` server certificate (valid until <datetime>)
-    * :file:`/etc/apache2/ssl/<path to server key>` server key
-    * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
-    * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate (certificate chain for server certificate)
+   * :file:`/etc/apache2/ssl/<path to certificate>` server certificate (valid
+     until <datetime>)
+   * :file:`/etc/apache2/ssl/<path to server key>` server key
+   * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA
+     certificates (allowed CA certificates for client certificates)
+   * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate
+     (certificate chain for server certificate)
 
 .. seealso::
 
    * :wiki:`SystemAdministration/CertificateList`
+
+.. index::
+   pair: Nginx; configuration
 
 Nginx configuration
 -------------------
@@ -279,5 +281,5 @@ Additional documentation
 References
 ----------
 
-Wiki page for this system
-   :wiki:`SystemAdministration/Systems/Arbitration`
+nginx Documentation
+   http://nginx.org/en/docs/

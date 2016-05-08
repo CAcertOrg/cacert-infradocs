@@ -252,13 +252,17 @@ System Future
 Critical Configuration items
 ============================
 
-.. index:: Ferm
+.. index::
+   pair: Ferm; configuration
 
 Ferm firewall configuration
 ---------------------------
 
 The `Ferm`_ based firewall setup is located in :file:`/etc/ferm` and its
 subdirectories.
+
+.. index::
+   pair: LXC; configuration
 
 Container configuration
 -----------------------
@@ -279,5 +283,9 @@ Additional documentation
 References
 ----------
 
-Wiki page for this system
-   :wiki:`SystemAdministration/Systems/Infra02`
+Ferm documentation
+   http://ferm.foo-projects.org/download/2.3/ferm.html
+Ferm Debian Wiki page
+   https://wiki.debian.org/ferm
+LXC Debian Wiki page
+   https://wiki.debian.org/LXC

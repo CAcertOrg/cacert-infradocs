@@ -1,0 +1,19 @@
+Subject: Your new cacert.org address
+Reply-To: email-admin@cacert.org
+
+Hello,
+
+your new address <firstname.lastname>@cacert.org has just been setup in the
+cacert email system.
+
+The initial password is <password>.
+
+Please get a client certificate for this address and reset your password via
+[1] as documented in the wiki [2].
+
+[1] https://community.cacert.org/password.php as documented in
+[2] https://wiki.cacert.org/Technology/TechnicalSupport/EndUserSupport/CommunityE-Mail
+
+
+Best regards
+<mail admin name>

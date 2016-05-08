@@ -266,8 +266,11 @@ Keys and X.509 certificates
 
    * :wiki:`SystemAdministration/CertificateList`
 
-Apache configuration
---------------------
+.. index::
+   pair: Apache httpd; configuration
+
+Apache httpd configuration
+--------------------------
 
 The Apache httpd configuration is stored in
 :file:`/etc/apache2/sites-available/webmail`.
@@ -277,6 +280,9 @@ The Apache httpd configuration is stored in
 
 Defines some aliases for :doc:`email` that are used by Roundcube, the password
 reset script and the staff list script.
+
+.. index::
+   pair: Roundcube; configuration
 
 Roundcube configuration
 -----------------------

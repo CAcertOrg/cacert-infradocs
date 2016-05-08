@@ -99,37 +99,54 @@ Services
 Listening services
 ------------------
 
-+----------+---------+----------------+-----------------------------------------------+
-| Port     | Service | Origin         | Purpose                                       |
-+==========+=========+================+===============================================+
-| 22/tcp   | ssh     | ANY            | admin console access                          |
-+----------+---------+----------------+-----------------------------------------------+
-| 25/tcp   | smtp    | ANY            | mail receiver for cacert.org                  |
-+----------+---------+----------------+-----------------------------------------------+
-| 110/tcp  | pop3    | ANY            | POP3 access for cacert.org mail addresses     |
-+----------+---------+----------------+-----------------------------------------------+
-| 143/tcp  | imap    | ANY            | IMAP access for cacert.org mail addresses     |
-+----------+---------+----------------+-----------------------------------------------+
-| 465/tcp  | smtps   | ANY            | SMTPS for cacert.org mail addresses           |
-+----------+---------+----------------+-----------------------------------------------+
-| 587/tcp  | smtp    | ANY            | mail submission for cacert.org mail addresses |
-+----------+---------+----------------+-----------------------------------------------+
-| 993/tcp  | imaps   | ANY            | IMAPS access for cacert.org mail addresses    |
-+----------+---------+----------------+-----------------------------------------------+
-| 995/tcp  | pop3s   | ANY            | POP3S access for cacert.org mail addresses    |
-+----------+---------+----------------+-----------------------------------------------+
-| 2000/tcp | sieve   | ANY            | Sieve access for cacert.org mail addresses    |
-+----------+---------+----------------+-----------------------------------------------+
-| 2001/tcp | sieve   | :doc:`webmail` | Sieve access for cacert.org mail              |
-|          |         |                | addresses without TLS, accessible from        |
-|          |         |                | ``172.16.2.20`` only                          |
-+----------+---------+----------------+-----------------------------------------------+
-| 3306/tcp | mysql   | local          | MySQL database server                         |
-+----------+---------+----------------+-----------------------------------------------+
-| 4433/tcp | http    | internal       | Apache httpd with phpmyadmin                  |
-+----------+---------+----------------+-----------------------------------------------+
-| 5666/tcp | nrpe    | monitor        | remote monitoring service                     |
-+----------+---------+----------------+-----------------------------------------------+
++----------+---------+----------------+----------------------------------------+
+| Port     | Service | Origin         | Purpose                                |
++==========+=========+================+========================================+
+| 22/tcp   | ssh     | ANY            | admin console access                   |
++----------+---------+----------------+----------------------------------------+
+| 25/tcp   | smtp    | ANY            | mail receiver for cacert.org           |
++----------+---------+----------------+----------------------------------------+
+| 110/tcp  | pop3    | ANY            | POP3 access for cacert.org mail        |
+|          |         |                | addresses                              |
++----------+---------+----------------+----------------------------------------+
+| 143/tcp  | imap    | ANY            | IMAP access for cacert.org mail        |
+|          |         |                | addresses                              |
++----------+---------+----------------+----------------------------------------+
+| 465/tcp  | smtps   | ANY            | SMTPS for cacert.org mail addresses    |
++----------+---------+----------------+----------------------------------------+
+| 587/tcp  | smtp    | ANY            | mail submission for cacert.org mail    |
+|          |         |                | addresses                              |
++----------+---------+----------------+----------------------------------------+
+| 993/tcp  | imaps   | ANY            | IMAPS access for cacert.org mail       |
+|          |         |                | addresses                              |
++----------+---------+----------------+----------------------------------------+
+| 995/tcp  | pop3s   | ANY            | POP3S access for cacert.org mail       |
+|          |         |                | addresses                              |
++----------+---------+----------------+----------------------------------------+
+| 2000/tcp | sieve   | ANY            | Manage sieve access for cacert.org     |
+|          |         |                | mail addresses                         |
++----------+---------+----------------+----------------------------------------+
+| 2001/tcp | sieve   | :doc:`webmail` | Manage sieve access for cacert.org     |
+|          |         |                | mail addresses without TLS, accessible |
+|          |         |                | from ``172.16.2.20`` only              |
++----------+---------+----------------+----------------------------------------+
+| 3306/tcp | mysql   | local          | MySQL database server                  |
++----------+---------+----------------+----------------------------------------+
+| 4433/tcp | http    | internal       | Apache httpd with phpmyadmin           |
++----------+---------+----------------+----------------------------------------+
+| 5666/tcp | nrpe    | monitor        | remote monitoring service              |
++----------+---------+----------------+----------------------------------------+
+
+.. topic:: PHPMyAdmin access
+
+   Administrators can use ssh to forward the Apache httpd HTTPS port to their
+   own machine:
+
+   .. code-block:: bash
+
+      ssh -L 4433:localhost:4433 -l username email.cacert.org
+
+   and access PHPMyAdmin at https://localhost:4443/phpmyadmin
 
 Running services
 ----------------
@@ -201,6 +218,8 @@ Connected Systems
 
 * :doc:`monitor`
 * :doc:`webmail`
+* all @cacert.org address owners have access to POP3 (STARTTLS and POP3S), IMAP
+  (STARTTLS and IMAPS), SMTPS, SMTP submission (STARTTLS) and manage sieve
 
 Outbound network connections
 ----------------------------
@@ -273,12 +292,24 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 * :file:`/etc/postfix/dh_1024.pem` and :file:`/etc/postfix/dh_512.pem`
   Diffie-Hellman parameter files for Postfix
 
+.. note::
+
+   Postfix uses the email.cacert.org certificate for client authentication if
+   requested by a target server.
+
+   .. todo::
+      check whether it makes sense to use a separate certificate for that
+      purpose
+
 .. seealso::
 
    * :wiki:`SystemAdministration/CertificateList`
 
-Apache configuration
---------------------
+.. index::
+   pair: Apache httpd; configuration
+
+Apache httpd configuration
+--------------------------
 
 :file:`/etc/apache2/sites-available/adminssl` configures a VirtualHost that
 allows dedicated users to access a PHPMyAdmin instance. The allowed users are
@@ -304,10 +335,19 @@ authenticated by client certificates and are authorized by an entry in
    <https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#ssloptions>`_
    directive in the mod_ssl reference documentation.
 
+.. index::
+   pair: MySQL; configuration
+
 MySQL configuration
 -------------------
 
 MySQL configuration is stored in the :file:`/etc/mysql/` directory.
+
+.. index::
+   pair: MySQL; NSS
+   single: libnss-mysql
+
+.. _nss:
 
 NSS configuration
 -----------------
@@ -317,10 +357,16 @@ group and shadow via :file:`/etc/nsswitch.conf`. The queries are configured in
 :file:`/etc/libnss-mysql.cfg` and the root user for reading shadow information
 is configured in :file:`/etc/libnss-mysql-root.cfg`.
 
+.. index::
+   pair: PHPMyAdmin; configuration
+
 PHPMyAdmin configuration
 ------------------------
 
 PHPMyAdmin configuration is stored in the :file:`/etc/phpmyadmin/` directory.
+
+.. index::
+   pair: dovecot; configuration
 
 Dovecot configuration
 ---------------------
@@ -328,6 +374,24 @@ Dovecot configuration
 Dovecot configuration is stored in the :file:`/etc/dovecot/` directory. The
 database settings are stored in
 :file:`dovecot-sql-masterpassword-webmail.conf`.
+
+.. index::
+   pair: dovecot; authentication
+
+.. topic:: Dovecot authentication
+
+   :file:`/etc/dovecot/dovecot.conf` refers to PAM mail. PAM mail is defined
+   :file:`/etc/pam.d/mail`. System users are defined by NSS which is a
+   combination of :file:`/etc/passwd` (for root and non-imap/pop users) and
+   :file:`/etc/libnss-mysql*` (see `nss`_).
+
+   There is a special master password so that webmail can do the authentication
+   for dovecot using certificates. This is defined in
+   :file:`/etc/dovecot/dovecot-sql-masterpassword-webmail.conf`. This special
+   password is restricted to the IP address of Community.
+
+.. index::
+   pair: Postfix; configuration
 
 Postfix configuration
 ---------------------
@@ -361,12 +425,18 @@ following files are special for this setup:
 
 .. todo:: remove unused transports from :file:`master.cf`
 
+.. index::
+   pair: pysieved; configuration
+
 PySieved configuration
 ----------------------
 
-:file:`/usr/local/etc/pysieved.ini` and
-:file:`/usr/local/etc/pysieved-notls.ini`. Pysieved uses dovecot for
-authentication.
+:file:`/usr/local/etc/pysieved.ini` for regular manage sieve access and
+:file:`/usr/local/etc/pysieved-notls.ini` for use with Roundcube webmail.
+Pysieved uses dovecot for authentication.
+
+.. index::
+   pair: rsyslog; configuration
 
 Rsyslog configuration
 ---------------------
@@ -380,6 +450,9 @@ non-existant remote syslog server.
 
 .. todo:: setup remote logging when a central logging container is available
 
+.. index::
+   pair: xinetd; configuration
+
 Xinetd configuration
 --------------------
 
@@ -387,8 +460,73 @@ Xinetd listens on tcp ports 2000 and 2001 and spawn pysieved. Configuration for
 these listeners is stored in :file:`/etc/xinetd.d/pysieved` and
 :file:`/etc/xinetd.d/pysieved-notls`.
 
+Email storage
+-------------
+
+Mail for :samp:`{user}` is stored in :samp:`/home/{user}/Maildir`.
+
+.. todo::
+   move mail storage to a separate data volume to allow easier backup and OS
+   upgrades
+
 Tasks
 =====
+
+.. index::
+   single: add email users
+
+Adding email users
+------------------
+
+1. create user in the database table ``cacertusers.user``:
+
+   .. code-block:: bash
+
+      mysql -p cacertusers
+
+   .. code-block:: sql
+
+      INSERT INTO user (username, fullnamealias, realname, password)
+      VALUES ('user', 'user.name', 'User Name', '$1$salt$passwordhash')
+
+2. create the user's home directory and Maildir:
+
+   :samp:`install -o {user} -g {user} -m 0755 -d /home/{user}/Maildir`
+
+.. note::
+
+   * a valid password hash for the password ``secret`` is
+     ``$1$caea3837$gPafod/Do/8Jj5M9HehhM.``
+   * users can reset their password via
+     https://community.cacert.org/password.php on :doc:`webmail`
+   * use the :download:`mail template
+     <../downloads/template_new_community_mailaddress.rfc822>` to send out to a
+     user's non-cacert.org mail account and make sure to encrypt the mail to a
+     known public key of that user
+
+.. todo::
+   implement tooling to automate password salt generation and user creation
+
+Setting up mail aliases
+-----------------------
+
+There are two types of aliases.
+
+1. The first type are those that are never sent from. e.g.
+   postmaster@cacert.org.  All these aliases are defined in
+   :file:`/etc/aliases`.  Don't forget to run
+
+   .. code-block:: bash
+
+      postalias /etc/aliases
+
+   after any changes. Aliases for issue tracking are installed here as
+   :samp:`{issuetrackingaddress} : {issuetrackingaddress}@issue.cacert.org`.
+
+2. The second type are those aliases that are used to send email too, e.g
+   pr@cacert.org. These aliases are recorded in the aliases table on the
+   cacertusers database. The reason for this implementation is to only allow
+   the designated person to send email from this email address.
 
 Planned
 -------
@@ -396,6 +534,15 @@ Planned
 .. todo:: implement CRL checking
 
 .. todo:: setup IPv6
+
+.. todo::
+   throttle brute force attack attempts using fail2ban or similar mechanism
+
+.. todo::
+   consider to use LDAP to consolidate user, password and email information
+
+* there were plans for X.509 certificate authentication for mail services, but
+  there is no progress so far
 
 Changes
 =======
@@ -413,9 +560,17 @@ Additional documentation
 .. seealso::
 
    * :wiki:`PostfixConfiguration`
+   * :wiki:`SystemAdministration/Systems/Email` for some discussion on legal
+     implications related to mail archiving
 
 References
 ----------
 
-Wiki page for this system
-   :wiki:`SystemAdministration/Systems/Email`
+Postfix documentation
+   http://www.postfix.org/documentation.html
+Postfix Debian wiki page
+   https://wiki.debian.org/Postfix
+Dovecot 1.x wiki
+   http://wiki1.dovecot.org/FrontPage
+Postfix documentation
+   http://www.postfix.org/documentation.html

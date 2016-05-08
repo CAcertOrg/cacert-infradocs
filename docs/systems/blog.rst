@@ -284,8 +284,11 @@ Keys and X.509 certificates
 
    * :wiki:`SystemAdministration/CertificateList`
 
-Apache configuration
---------------------
+.. index::
+   pair: Apache httpd; configuration
+
+Apache httpd configuration
+--------------------------
 
 * :file:`/etc/apache2/cacert/blog.inc.conf`
 
@@ -311,6 +314,9 @@ Apache configuration
 The following RewriteRule is used to redirect old blog URLs::
 
   RewriteRule ^/[0-9]{4}/[0-9]{2}/([0-9]+)\.html$ ?p=$1 [R=302,L]
+
+.. index::
+   pair: Wordpress; configuration
 
 Wordpress configuration
 -----------------------
@@ -348,5 +354,5 @@ Additional documentation
 References
 ----------
 
-Wiki page for this system
-   :wiki:`SystemAdministration/Systems/Blog`
+Wordpress website
+   https://wordpress.org/
