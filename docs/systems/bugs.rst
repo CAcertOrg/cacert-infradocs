@@ -223,6 +223,10 @@ Mantis as a PHP application is vulnerable to common PHP problems. The system
 has to be kept up-to-date with OS patches. The custom built mantis package has
 to be updated when new releases are provided upstream.
 
+Administrators for this system should subscribe to the
+mantisbt-announce@lists.sourceforge.net list to get notified when updates are
+released.
+
 Critical Configuration items
 ============================
 
