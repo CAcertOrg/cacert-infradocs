@@ -319,7 +319,7 @@ System Future
 
 .. use this section to describe any plans for the system future. These are
    larger plans like moving to another host, abandoning the system or replacing
-   its funtionality with something else.
+   its functionality with something else.
 
 .. * No plans
 
