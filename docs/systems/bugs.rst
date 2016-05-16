@@ -174,6 +174,9 @@ Running services
 Databases
 ---------
 
+.. index::
+   pair: MySQL database; mantis
+
 +-------+--------+--------------------+
 | RDBMS | Name   | Used for           |
 +=======+========+====================+
@@ -267,7 +270,7 @@ The Mantis bug tracker configuration is stored in the directory
 Apache httpd configuration
 --------------------------
 
-The Apache configuration in the directory :file:`/etc/apache2/` has been
+The Apache httpd configuration in the directory :file:`/etc/apache2/` has been
 changed to add some additional headers to improve client security:
 
 .. literalinclude:: ../configdiff/bugs/apache/bugs-apache-config.diff
