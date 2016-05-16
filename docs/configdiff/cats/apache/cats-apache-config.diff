@@ -1,0 +1,63 @@
+diff -urwN -X diffignore-apache2 orig/etc/apache2/mods-available/ssl.conf cats/etc/apache2/mods-available/ssl.conf
+--- orig/etc/apache2/mods-available/ssl.conf	2015-08-18 09:35:40.000000000 +0200
++++ cats/etc/apache2/mods-available/ssl.conf	2014-10-21 15:38:01.894358956 +0200
+@@ -53,7 +53,7 @@
+ #   ciphers(1) man page from the openssl package for list of all available
+ #   options.
+ #   Enable only secure ciphers:
+-SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
++#SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5
+ 
+ #   Speed-optimized SSL Cipher configuration:
+ #   If speed is your main concern (on busy HTTPS servers e.g.),
+@@ -66,10 +66,11 @@
+ #   compromised, captures of past or future traffic must be
+ #   considered compromised, too.
+ #SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:MEDIUM:!aNULL:!MD5
+-#SSLHonorCipherOrder on
++SSLCipherSuite kEECDH:kEDH:AESGCM:ALL:!3DES:!RC4:!LOW:!EXP:!MD5:!aNULL:!eNULL
++SSLHonorCipherOrder on
+ 
+ # enable only secure protocols: SSLv3 and TLSv1, but not SSLv2
+-SSLProtocol all -SSLv2
++SSLProtocol all -SSLv2 -SSLv3
+ 
+ # Allow insecure renegotiation with clients which do not yet support the
+ # secure renegotiation protocol. Default: Off
+diff -urwN -X diffignore-apache2 orig/etc/apache2/ports.conf cats/etc/apache2/ports.conf
+--- orig/etc/apache2/ports.conf	2015-08-18 09:35:40.000000000 +0200
++++ cats/etc/apache2/ports.conf	2016-05-16 16:53:43.551587545 +0200
+@@ -14,6 +14,7 @@
+     # to <VirtualHost *:443>
+     # Server Name Indication for SSL named virtual hosts is currently not
+     # supported by MSIE on Windows XP.
++    NameVirtualHost *:443
+     Listen 443
+ </IfModule>
+ 
+diff -urwN -X diffignore-apache2 orig/etc/apache2/sites-available/cats cats/etc/apache2/sites-available/cats
+--- orig/etc/apache2/sites-available/cats	1970-01-01 01:00:00.000000000 +0100
++++ cats/etc/apache2/sites-available/cats	2016-05-16 16:56:53.220765336 +0200
+@@ -0,0 +1,22 @@
++<VirtualHost *:80>
++    ServerAdmin support@cacert.org
++    DocumentRoot /home/cats/public_html
++    ServerName cats.cacert.org
++    ErrorLog /home/cats/logs/error.log
++    CustomLog /home/cats/logs/access.log combined
++</VirtualHost>
++<VirtualHost *:443>
++    SSLEngine On
++    SSLCertificateFile /home/cats/ssl/certs/cats_cert.pem
++    SSLCertificateKeyFile /home/cats/ssl/private/cats_privatekey.pem
++    SSLCACertificateFile /usr/share/ca-certificates/cacert.org/cacert.org.crt
++    SSLVerifyDepth  10
++    SSLOptions +StdEnvVars +ExportCertData +StrictRequire
++    SSLVerifyClient require
++
++    ServerAdmin support@cacert.org
++    DocumentRoot /home/cats/public_html
++    ServerName cats.cacert.org
++    ErrorLog /home/cats/logs/error.log
++    CustomLog /home/cats/logs/access.log "%h %l %{SSL_CLIENT_S_DN_Email}x %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""
++</VirtualHost>

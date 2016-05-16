@@ -13,6 +13,7 @@ administrator team.
    systems/blog
    systems/board
    systems/bugs
+   systems/cats
    systems/email
    systems/emailout
    systems/monitor
