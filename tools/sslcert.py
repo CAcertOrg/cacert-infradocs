@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 from __future__ import print_function
 
@@ -47,7 +47,7 @@ def get_serial(cert):
 def get_expiration(cert):
     return datetime.strptime(
         cert.tbsCertificate.validity.valid_to, '%Y%m%d%H%M%SZ'
-    ).strftime('%b %d %Y %H:%M:%S GMT')
+    ).strftime('%b %d %H:%M:%S %y GMT')
 
 
 def get_sha1fp(certdata):
@@ -75,14 +75,22 @@ if __name__ == '__main__':
     parser.add_argument(
         '--key', metavar='KEY', type=open,
         help='PEM encoded RSA private key', default=None)
+    parser.add_argument(
+        '--root', metavar='ROOT', type=str,
+        help='Relative root directory for key and cert')
+
     args = parser.parse_args()
 
     certpem = pem.readPemFromFile(args.cert)
     certpath = os.path.abspath(args.cert.name)
+    if args.root:
+        certpath = '/' + os.path.relpath(certpath, args.root)
     if args.key:
         haskey = True
         keypem = pem.readPemFromFile(args.key)
         keypath = os.path.abspath(args.key.name)
+        if args.root:
+            keypath = '/' + os.path.relpath(keypath, args.root)
     else:
         keypath = 'TODO: define key path'
 
