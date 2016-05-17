@@ -1,7 +1,8 @@
 *.pyc
 *.pyo
 .*.swp
-.swp
-venv/
-_build/
 .ropeproject/
+.swp
+_build/
+py2venv/
+venv/
