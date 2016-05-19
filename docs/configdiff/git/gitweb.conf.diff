@@ -1,0 +1,40 @@
+--- orig/etc/gitweb.conf	2016-03-19 14:22:50.000000000 +0100
++++ git/etc/gitweb.conf	2014-02-17 02:25:18.281157394 +0100
+@@ -1,5 +1,8 @@
+ # path to git projects (<project>.git)
+-$projectroot = "/var/lib/git";
++$projectroot = "/var/cache/git";
++
++# only show repos that are also served via git-daemon
++$export_ok = "git-daemon-export-ok";
+ 
+ # directory to use for temp files
+ $git_temp = "/tmp";
+@@ -13,6 +16,9 @@
+ # file with project list; by default, simply scan the projectroot dir.
+ #$projects_list = $projectroot;
+ 
++# Enable categories
++$projects_list_group_categories = 1;
++
+ # stylesheet to use
+ #@stylesheets = ("static/gitweb.css");
+ 
+@@ -28,3 +34,17 @@
+ # git-diff-tree(1) options to use for generated patches
+ #@diff_opts = ("-M");
+ @diff_opts = ();
++
++# auto generate fetch URLs
++@git_base_url_list = (
++	"git://git.cacert.org",
++	"ssh://git.cacert.org/var/cache/git");
++
++# Prevent XSS attacks
++$prevent_xss = 1;
++
++# enable gravatar support
++$feature{'avatar'}{'default'} = ['gravatar'];
++
++# enable syntax highlighting
++$feature{'highlight'}{'default'} = [1];

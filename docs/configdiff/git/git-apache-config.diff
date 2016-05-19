@@ -1,0 +1,121 @@
+diff -urwN -X diffignore-apache2 orig/etc/apache2/conf-available/security.conf git/etc/apache2/conf-available/security.conf
+--- orig/etc/apache2/conf-available/security.conf	2015-11-28 13:59:22.000000000 +0100
++++ git/etc/apache2/conf-available/security.conf	2016-05-20 00:15:49.874994024 +0200
+@@ -10,6 +10,17 @@
+ #   Order Deny,Allow
+ #   Deny from all
+ #</Directory>
++<Directory />
++	Options FollowSymLinks
++	AllowOverride None
++</Directory>
++
++<Directory /var/www/>
++	Options Indexes FollowSymLinks MultiViews
++	AllowOverride None
++	Order allow,deny
++	allow from all
++</Directory>
+ 
+ 
+ # Changing the following options will not really affect the security of the
+diff -urwN -X diffignore-apache2 orig/etc/apache2/mods-available/ssl.conf git/etc/apache2/mods-available/ssl.conf
+--- orig/etc/apache2/mods-available/ssl.conf	2015-10-24 10:37:19.000000000 +0200
++++ git/etc/apache2/mods-available/ssl.conf	2016-01-02 16:13:42.695785273 +0100
+@@ -56,7 +56,8 @@
+ 	#   ciphers(1) man page from the openssl package for list of all available
+ 	#   options.
+ 	#   Enable only secure ciphers:
+-	SSLCipherSuite HIGH:!aNULL
++	#SSLCipherSuite HIGH:+CAMELLIA256:!eNull:!aNULL:!ADH:!MD5:!AES+SHA1:!RC4:!DES:!3DES:!SEED:!EXP:!AES128:!CAMELLIA128
++	SSLCipherSuite HIGH:+CAMELLIA256:!eNull:!aNULL:!ADH:!MD5:!AES+SHA1:!RC4:!DES:!3DES:!SEED:!EXP
+ 
+ 	# SSL server cipher order preference:
+ 	# Use server priorities for cipher algorithm choice.
+@@ -65,7 +66,7 @@
+ 	# the CPU cost, and did not override SSLCipherSuite in a way that puts
+ 	# insecure ciphers first.
+ 	# Default: Off
+-	#SSLHonorCipherOrder on
++	SSLHonorCipherOrder on
+ 
+ 	#   The protocols to enable.
+ 	#   Available values: all, SSLv3, TLSv1, TLSv1.1, TLSv1.2
+diff -urwN -X diffignore-apache2 orig/etc/apache2/sites-available/000-default.conf git/etc/apache2/sites-available/000-default.conf
+--- orig/etc/apache2/sites-available/000-default.conf	2015-10-24 10:37:19.000000000 +0200
++++ git/etc/apache2/sites-available/000-default.conf	2016-05-20 00:21:02.697250540 +0200
+@@ -11,11 +11,19 @@
+ 	ServerAdmin webmaster@localhost
+ 	DocumentRoot /var/www/html
+ 
++	RewriteEngine on
++	RewriteCond %{HTTP_HOST} !^git\.cacert\.org [NC]
++	RewriteCond %{HTTP_HOST} !^$
++	RewriteRule ^/?(.*) http://git.cacert.org/$1 [L,R,NE] 
++
++	Redirect / https://git.cacert.org/gitweb
++
+ 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+ 	# error, crit, alert, emerg.
+ 	# It is also possible to configure the loglevel for particular
+ 	# modules, e.g.
+ 	#LogLevel info ssl:warn
++	LogLevel warn
+ 
+ 	ErrorLog ${APACHE_LOG_DIR}/error.log
+ 	CustomLog ${APACHE_LOG_DIR}/access.log combined
+diff -urwN -X diffignore-apache2 orig/etc/apache2/sites-available/default-ssl.conf git/etc/apache2/sites-available/default-ssl.conf
+--- orig/etc/apache2/sites-available/default-ssl.conf	2016-05-20 00:05:51.022493172 +0200
++++ git/etc/apache2/sites-available/default-ssl.conf	2016-05-20 00:14:50.350565644 +0200
+@@ -2,13 +2,27 @@
+ 	<VirtualHost _default_:443>
+ 		ServerAdmin webmaster@localhost
+ 
++		Redirect /index.html /gitweb/
++
+ 		DocumentRoot /var/www/html
+ 
++		<Directory />
++			Options FollowSymLinks
++			AllowOverride None
++		</Directory>
++		<Directory /var/www/>
++			Options Indexes FollowSymLinks MultiViews
++			AllowOverride None
++			Order allow,deny
++			allow from all
++		</Directory>
++	
+ 		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+ 		# error, crit, alert, emerg.
+ 		# It is also possible to configure the loglevel for particular
+ 		# modules, e.g.
+ 		#LogLevel info ssl:warn
++		LogLevel warn
+ 
+ 		ErrorLog ${APACHE_LOG_DIR}/error.log
+ 		CustomLog ${APACHE_LOG_DIR}/access.log combined
+@@ -29,8 +43,8 @@
+ 		#   /usr/share/doc/apache2/README.Debian.gz for more info.
+ 		#   If both key and certificate are stored in the same file, only the
+ 		#   SSLCertificateFile directive is needed.
+-		SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem
+-		SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
++		SSLCertificateFile    /etc/ssl/public/git.c.o.chain.crt
++		SSLCertificateKeyFile /etc/ssl/private/git.c.o.key
+ 
+ 		#   Server Certificate Chain:
+ 		#   Point SSLCertificateChainFile at a file containing the
+@@ -130,6 +144,12 @@
+ 		# MSIE 7 and newer should be able to use keepalive
+ 		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+ 
++		# HSTS
++		Header always set Strict-Transport-Security "max-age=31536000"
++		Header always set Content-Security-Policy "default-src 'none'; script-src 'self' 'sha256-dacEZQWGxky95ybZadcNI26RDghVLeVdbdRC/Q3spJQ='; img-src 'self'; style-src 'self';"
++		Header always set X-Frame-Options "DENY"
++		Header always set X-XSS-Protection "1; mode=block"
++		Header always set X-Content-Type-Options "nosniff"
+ 	</VirtualHost>
+ </IfModule>
+ 

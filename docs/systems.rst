@@ -17,6 +17,7 @@ administrator team.
    systems/cats
    systems/email
    systems/emailout
+   systems/git
    systems/monitor
    systems/webmail
 
