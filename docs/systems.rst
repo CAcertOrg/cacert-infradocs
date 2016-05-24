@@ -18,6 +18,7 @@ administrator team.
    systems/email
    systems/emailout
    systems/git
+   systems/irc
    systems/monitor
    systems/webmail
 
