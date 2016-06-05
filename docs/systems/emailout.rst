@@ -78,9 +78,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.10
+   single: Debian GNU/Linux; 7.11
 
-* Debian GNU/Linux 7.10
+* Debian GNU/Linux 7.11
 
 Applicable Documentation
 ------------------------
