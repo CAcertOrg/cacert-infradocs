@@ -1,0 +1,8 @@
+--- orig/etc/sv/git-daemon/run	2016-03-19 14:22:50.000000000 +0100
++++ git/etc/sv/git-daemon/run	2014-02-06 01:46:55.424870926 +0100
+@@ -3,4 +3,4 @@
+ echo 'git-daemon starting.'
+ exec chpst -ugitdaemon \
+   "$(git --exec-path)"/git-daemon --verbose --reuseaddr \
+-    --base-path=/var/lib /var/lib/git
++    --base-path=/var/cache/git /var/cache/git

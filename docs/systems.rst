@@ -12,10 +12,13 @@ administrator team.
    systems/arbitration
    systems/blog
    systems/board
+   systems/coaudit
    systems/bugs
    systems/cats
    systems/email
    systems/emailout
+   systems/git
+   systems/irc
    systems/monitor
    systems/webmail
 
