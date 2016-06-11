@@ -4,7 +4,7 @@ IP address list
 Internet IP addresses
 ---------------------
 
-.. ip:v4range:: 213.154.225.0/24
+.. ip:v4range:: 213.154.225.224/27
 
    This is the public CAcert IPv4 address range
 

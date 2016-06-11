@@ -16,7 +16,7 @@ CAcert has a public Internet IPv4 address range and some of the Internet IP
 addresses are mapped to the infrastructure systems.
 
 The infrastructure systems use IPv4 addresses from the
-:ip:v4range:`213.154.225.0/24` subnet.
+:ip:v4range:`213.154.225.224/27` subnet.
 
 IPv6 connectivity is also available. The infrastructure IPv6 addresses are
 taken from the :ip:v6range:`2001:7b8:616:162:1::/80` and
