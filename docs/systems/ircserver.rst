@@ -17,30 +17,25 @@ System Administration
 ---------------------
 
 * Primary: :ref:`people_martin`
-* Secondary: None
+* Secondary: :ref:`people_jandd`
 
 Application Administration
 --------------------------
 
-+--------------+----------------------+
-| Application  | Administrator(s)     |
-+==============+======================+
-| IRC server   | :ref:`people_martin` |
-+--------------+----------------------+
-| IRC services | :ref:`people_martin` |
-+--------------+----------------------+
-| Votebot      | :ref:`people_martin` |
-+--------------+----------------------+
++--------------+-------------------------------------------+
+| Application  | Administrator(s)                          |
++==============+===========================================+
+| IRC server   | :ref:`people_martin`, :ref:`people_jandd` |
++--------------+-------------------------------------------+
+| IRC services | :ref:`people_martin`, :ref:`people_jandd` |
++--------------+-------------------------------------------+
+| Votebot      | :ref:`people_martin`, :ref:`people_jandd` |
++--------------+-------------------------------------------+
 
 Contact
 -------
 
-* ircserver-admin@cacert.org
-
-Additional People
------------------
-
-:ref:`people_jandd` has :program:`sudo` access on that machine too.
+* irc-admin@cacert.org
 
 Basics
 ======
@@ -70,10 +65,18 @@ DNS
 
 .. index::
    single: DNS records; Ircserver
+   single: DNS records; Irc
 
-Ircserver has no DNS records assigned yet.
+======================= ======== ==========================================
+Name                    Type     Content
+======================= ======== ==========================================
+irc.cacert.org.         IN A     213.154.225.233
+irc.cacert.org.         IN SSHFP 1 1 C123F73001682277DE5346923518D17CC94E298E
+irc.cacert.org.         IN SSHFP 2 1 B85941C077732F78BE290B8F0B44B0A5E8A0E51D
+irc.intra.cacert.org.   IN A     172.16.2.14
+======================= ======== ==========================================
 
-.. todo:: setup DNS records
+.. todo:: setup new SSHFP records
 
 .. seealso::
 
@@ -99,25 +102,29 @@ Services
 Listening services
 ------------------
 
-+---------------+--------------+---------+----------------------------+
-| Port          | Service      | Origin  | Purpose                    |
-+===============+==============+=========+============================+
-| 22/tcp        | ssh          | ANY     | admin console access       |
-+---------------+--------------+---------+----------------------------+
-| 25/tcp        | smtp         | local   | mail delivery to local MTA |
-+---------------+--------------+---------+----------------------------+
-| 5666/tcp      | nrpe         | monitor | remote monitoring service  |
-+---------------+--------------+---------+----------------------------+
-| 6660-6669/tcp | ircd         | ANY     | IRC                        |
-+---------------+--------------+---------+----------------------------+
-| 6697/tcp      | ircd         | ANY     | IRC (SSL)                  |
-+---------------+--------------+---------+----------------------------+
-| 7000/tcp      | ircd         | ANY     | IRC (SSL)                  |
-+---------------+--------------+---------+----------------------------+
-| 7001/tcp      | ircd         | local   | IRC (servers)              |
-+---------------+--------------+---------+----------------------------+
-| 8080/tcp      | irc-services | ANY     | IRC services               |
-+---------------+--------------+---------+----------------------------+
++----------+--------------+---------+----------------------------+
+| Port     | Service      | Origin  | Purpose                    |
++==========+==============+=========+============================+
+| 22/tcp   | ssh          | ANY     | admin console access       |
++----------+--------------+---------+----------------------------+
+| 25/tcp   | smtp         | local   | mail delivery to local MTA |
++----------+--------------+---------+----------------------------+
+| 80/tcp   | http         | ANY     | redirect to https          |
++----------+--------------+---------+----------------------------+
+| 443/tcp  | https        | ANY     | reverse proxy for kiwiirc  |
++----------+--------------+---------+----------------------------+
+| 5666/tcp | nrpe         | monitor | remote monitoring service  |
++----------+--------------+---------+----------------------------+
+| 6667/tcp | ircd         | ANY     | IRC                        |
++----------+--------------+---------+----------------------------+
+| 7000/tcp | ircd         | ANY     | IRC (SSL)                  |
++----------+--------------+---------+----------------------------+
+| 7001/tcp | ircd         | local   | IRC (services)             |
++----------+--------------+---------+----------------------------+
+| 7778/tcp | kiwiirc      | local   | kiwiirc process            |
++----------+--------------+---------+----------------------------+
+| 8080/tcp | irc-services | ANY     | IRC services               |
++----------+--------------+---------+----------------------------+
 
 irc opens a random UDP port.
 
@@ -136,8 +143,6 @@ The following port forwarding is setup on :doc:`infra02`
 +-------------+-------+-----------------+
 | 172.16.2.14 | 13700 | 10.0.0.130:7000 |
 +-------------+-------+-----------------+
-
-Ports 80 and 443 are not used yet but are planned for an IRC web chat system.
 
 .. todo:: implement final forwarding to required ports from :doc:`infra02`
 
@@ -176,24 +181,13 @@ Running services
 | atheme-services    | IRC services       | init script                            |
 |                    |                    | :file:`/etc/init.d/atheme-services`    |
 +--------------------+--------------------+----------------------------------------+
-| votebot            | CAcert vote bot    | started from a screen session via      |
-|                    |                    | java command line                      |
+| kiwiirc            | IRC web client     | start script                           |
+|                    |                    | :file:`/home/kiwiirc/KiwiIRC/kiwi`     |
+|                    |                    | started by user kiwiirc                |
 +--------------------+--------------------+----------------------------------------+
-
-.. _votebot:
-
-.. topic:: Votebot
-
-   The vote bot is a Java based IRC bot developed at
-   https://github.com/CAcertOrg/cacert-votebot. The bot is started manually by
-   running
-
-   .. code-block:: bash
-
-      java -DvoteBot.meetingChn=SGM -cp VoteBot.jar \
-        de.dogcraft.irc.CAcertVoteBot -u -h 10.0.0.14 -p 6667 --nick VoteBot
-
-.. todo:: use a CAcert git repository for votebot
+| nginx              | Reverse proxy for  | init script                            |
+|                    | kiwiirc            | :file:`/etc/init.d/nginx               |
++--------------------+--------------------+----------------------------------------+
 
 Connected Systems
 -----------------
@@ -220,29 +214,67 @@ Security
 Dedicated user roles
 --------------------
 
-+---------+-------------------------+
-| User    | Purpose                 |
-+=========+=========================+
-| votebot | used to run the votebot |
-+---------+-------------------------+
++---------+-------------------------------------+
+| User    | Purpose                             |
++=========+=====================================+
+| votebot | used to run the votebot             |
++---------+-------------------------------------+
+| kiwiirc | used to run the Kiwi IRC web client |
++---------+-------------------------------------+
 
 Non-distribution packages and modifications
 -------------------------------------------
+
+Votebot
+~~~~~~~
 
 The :ref:`Votebot <votebot>` is a custom developed IRC daemon that is packaged
 as a self contained Java jar archive. The bot is started manually as described
 above. For improved maintainability it should be packaged and provide a start
 mechanism that is better integrated with the system.
 
+.. _votebot:
+
+.. topic:: Votebot
+
+   The vote bot is a Java based IRC bot developed at
+   https://github.com/CAcertOrg/cacert-votebot. The bot is started manually by
+   running
+
+   .. code-block:: bash
+
+      java -DvoteBot.meetingChn=SGM -cp VoteBot.jar \
+        de.dogcraft.irc.CAcertVoteBot -u -h 10.0.0.14 -p 6667 --nick VoteBot
+
+.. todo:: use a CAcert git repository for votebot
+
 .. todo:: package votebot for Debian
 
 .. todo:: provide a proper init script/and or systemd unit for votebot
+
+
+Kiwi IRC
+~~~~~~~~
+
+Kiwi IRC is a nodejs based IRC web client. The software has been installed via
+`Github <https://github.com/prawnsalad/KiwiIRC.git>` and npm as described in
+https://kiwiirc.com/docs/installing and
+https://kiwiirc.com/docs/installing/proxies. The software is running on the
+local loopback interface and Internet access is provided by an nginx reverse
+proxy that also provides https connectivity. NodeJS and npm have been installed
+from Debian packages.
 
 Risk assessments on critical packages
 -------------------------------------
 
 Votebot is a Java based application and therefore Java security patches should
 be applied as soon as they become available.
+
+Kiwi IRC is nodejs based and uses some third party npm packages. The
+application is kept behind a reverse proxy but it is advisable to make sure
+that available updates are applied.
+
+.. todo:: implement some update monitoring for Kiwi IRC
 
 
 Critical Configuration items
@@ -279,15 +311,31 @@ atheme-services configuration
 Atheme-services is installed from a Debian package. It is configured via
 :file:`/etc/atheme/atheme.conf`.
 
+Kiwi IRC configuration
+----------------------
+
+Kiwi IRC configuration is kept in :file:`/home/kiwiirc/KiwiIRC/config.js`. When
+the configuration is changed it can be applied by running:
+
+.. code-block:: bash
+
+   sudo -s -u kiwi
+   cd ~/KiwiIRC
+   ./kiwi reconfig
+
+nginx configuration
+-------------------
+
+The nginx configuration for reverse proxying Kiwi IRC is stored in
+:file:`/etc/nginx/sites-available/default`. The same certificate and private
+key are used for inspirced and nginx.
+
+
 Tasks
 =====
 
 Planned
 -------
-
-.. todo:: finish setup of inspircd and atheme-services (at least nickserv and chanserv).
-
-.. todo:: setup replacement for CGI::IRC that is available on :doc:`irc`
 
 - setup IPv6
 - setup DNS records
@@ -316,3 +364,9 @@ Atheme services website
 
 Inspircd wiki
    https://wiki.inspircd.org/
+
+Kiwi IRC documentation
+   https://kiwiirc.com/docs/
+
+nginx documentation
+   http://nginx.org/en/docs/
