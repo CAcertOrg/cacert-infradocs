@@ -257,7 +257,7 @@ Kiwi IRC
 ~~~~~~~~
 
 Kiwi IRC is a nodejs based IRC web client. The software has been installed via
-`Github <https://github.com/prawnsalad/KiwiIRC.git>` and npm as described in
+`Github <https://github.com/prawnsalad/KiwiIRC.git>`_ and npm as described in
 https://kiwiirc.com/docs/installing and
 https://kiwiirc.com/docs/installing/proxies. The software is running on the
 local loopback interface and Internet access is provided by an nginx reverse
