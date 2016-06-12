@@ -186,7 +186,7 @@ Running services
 |                    |                    | started by user kiwiirc                |
 +--------------------+--------------------+----------------------------------------+
 | nginx              | Reverse proxy for  | init script                            |
-|                    | kiwiirc            | :file:`/etc/init.d/nginx               |
+|                    | kiwiirc            | :file:`/etc/init.d/nginx`              |
 +--------------------+--------------------+----------------------------------------+
 
 Connected Systems
