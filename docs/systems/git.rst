@@ -84,7 +84,11 @@ Name                  Type     Content
 ===================== ======== ============================================
 git.cacert.org.       IN A     213.154.225.250
 git.cacert.org.       IN SSHFP 1 1 23C7622D6DB5822C809152C1C0FD9EA7838F76C6
+git.cacert.org.       IN SSHFP 1 2 DABBE1766C7933071C4E6942A1DFC72C26D9D867D8DEE84BEDA210C8EF9EA2C5
 git.cacert.org.       IN SSHFP 2 1 8509DB491902FE10AB84C8F24B02F10C1ADF0E7F
+git.cacert.org.       IN SSHFP 2 2 00C20C26B6B9A026BBB11B5C45CBEC5D3AB44A039DC0F097CAD88374D3567D01
+git.cacert.org.       IN SSHFP 3 1 60DE5788BD83ABC7F315B667F634BDA5DA8502ED
+git.cacert.org.       IN SSHFP 3 2 132BD98483440124F6B8117148B02A66645477F53C18F974E4DECB32A7495644
 git.intra.cacert.org. IN A     172.16.2.250
 ===================== ======== ============================================
 
