@@ -86,6 +86,14 @@ Mendel Mobach
 :roles: :term:`Critical System Administrator`
 :contact: mendel@cacert.org
 
+.. _people_msimons:
+
+Martin Simons
+=============
+
+:roles: :term:`Critical System Administrator`
+:contact: msimons@cacert.org
+
 .. _people_neo:
 
 Michael Tänzer
