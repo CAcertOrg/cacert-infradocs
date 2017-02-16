@@ -26,7 +26,7 @@ Administration
 System Administration
 ---------------------
 
-* Primary: :ref:`people_martin`
+* Primary: :ref:`people_dirk`
 * Secondary: None
 
 .. todo:: find an additional admin
@@ -37,10 +37,8 @@ Application Administration
 +-----------------------+-------------------------------------------------+
 | Role                  | Users                                           |
 +=======================+=================================================+
-| Wordpress Admin       | :ref:`people_abahlo`,                           |
-|                       | :ref:`people_marcus`,                           |
+| Wordpress Admin       | :ref:`people_dirk`,                             |
 |                       | :ref:`people_mario`,                            |
-|                       | :ref:`people_martin`                            |
 +-----------------------+-------------------------------------------------+
 | Wordpress Editor      | PR Team,                                        |
 |                       | `Support`_                                      |
@@ -63,7 +61,7 @@ Contact
 Additional People
 -----------------
 
-:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>`
+:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>` and :ref:`Dirk Astrath <people_dirk>`
 have :program:`sudo` access on that machine too.
 
 Basics
@@ -111,9 +109,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.4
+   single: Debian GNU/Linux; 8.7
 
-* Debian GNU/Linux 8.4
+* Debian GNU/Linux 8.7
 
 Applicable Documentation
 ------------------------
@@ -213,9 +211,9 @@ Outbound network connections
 
 .. _Ping-o-matic: http://rpc.pingomatic.com/
 .. [#f1] http://blog.cacert.org/wp-admin/options-writing.php
-.. [#f2]
-   http://blog.cacert.org/wp-admin/plugins.php?page=akismet-key-config - check
-   network status
+.. [#f2] http://blog.cacert.org/wp-admin/plugins.php?page=akismet-key-config
+
+.. - check network status
 
 Security
 ========
