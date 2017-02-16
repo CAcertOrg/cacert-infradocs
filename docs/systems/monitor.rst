@@ -38,8 +38,8 @@ Administration
 System Administration
 ---------------------
 
-* Primary: :ref:`people_martin`
-* Secondary: :ref:`people_neo`
+* Primary: :ref:`people_jandd`
+* Secondary: None
 
 Application Administration
 --------------------------
