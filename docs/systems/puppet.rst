@@ -262,7 +262,7 @@ All puppet configuration is stored in :file:`/etc/puppetlabs/`. The CAcert
 specific puppet code is taken from the `CAcert puppet Git repository
 <ssh://git.cacert.org/var/cache/git/cacert-puppet.git>`_ and cloned to
 :file:`/etc/puppetlabs/code/environments/production/` directory. Required
-Puppet modules are installed by :cmd:`/opt/puppetlabs/puppet/bin/r10k`.
+Puppet modules are installed by :program:`/opt/puppetlabs/puppet/bin/r10k`.
 
 The puppet code should follow best practices like the Roles and profiles
 pattern (see references below) and code/data separation via Hiera.
