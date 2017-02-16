@@ -21,6 +21,7 @@ administrator team.
    systems/irc
    systems/ircserver
    systems/monitor
+   systems/puppet
    systems/svn
    systems/webmail
 

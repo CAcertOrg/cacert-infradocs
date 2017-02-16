@@ -37,7 +37,7 @@ System Administration
 ---------------------
 
 * Primary: :ref:`people_jandd`
-* Secondary: :ref:`people_neo`
+* Secondary: None
 
 .. todo:: find an additional admin
 
@@ -146,10 +146,10 @@ Running services
 .. index::
    single: Apache
    single: Exim
+   single: Puppet agent
    single: cron
    single: nrpe
    single: openssh
-   single: puppet
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
@@ -206,13 +206,20 @@ Security
 Non-distribution packages and modifications
 -------------------------------------------
 
-* None
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Risk assessments on critical packages
 -------------------------------------
 
 Apache httpd is configured with a minimum of enabled modules to allow TLS and
 Subversion but nothing else to reduce potential security risks.
+
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
 
 Critical Configuration items
 ============================
