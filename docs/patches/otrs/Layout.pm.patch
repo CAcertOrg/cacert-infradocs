@@ -1,0 +1,54 @@
+--- otrs_orig/Layout.pm	2015-01-11 03:13:29.049626928 +0000
++++ /usr/share/otrs/Kernel/Output/HTML/Layout.pm	2015-01-11 03:18:55.736035997 +0000
+@@ -369,7 +369,21 @@
+     }
+ 
+     # locate template files
+-    $Self->{TemplateDir} = $Self->{ConfigObject}->Get('TemplateDir') . '/HTML/' . $Theme;
++    $Self->{TemplateDir}
++        = $Self->{ConfigObject}->Get('TemplateDir') . '/HTML/' . $Theme;
++    $Self->{StandardTemplateDir}
++        = $Self->{ConfigObject}->Get('TemplateDir') . '/HTML/' . 'Standard';
++
++    # Check if 'Standard' fallback exists
++    if ( !-e $Self->{StandardTemplateDir} ) {
++        $Self->{LogObject}->Log(
++            Priority => 'error',
++            Message =>
++                "No existing template directory found ('$Self->{TemplateDir}')! Check your Home in Kernel/Config.pm",
++        );
++        $Self->FatalDie();
++    }
++
+     if ( !-e $Self->{TemplateDir} ) {
+         $Self->{LogObject}->Log(
+             Priority => 'error',
+@@ -378,17 +392,9 @@
+                 Default theme used instead.",
+         );
+ 
+-        # Set TemplateDir to 'Standard' as a fallback and check if it exists.
++        # Set TemplateDir to 'Standard' as a fallback.
+         $Theme = 'Standard';
+-        $Self->{TemplateDir} = $Self->{ConfigObject}->Get('TemplateDir') . '/HTML/' . $Theme;
+-        if ( !-e $Self->{TemplateDir} ) {
+-            $Self->{LogObject}->Log(
+-                Priority => 'error',
+-                Message =>
+-                    "No existing template directory found ('$Self->{TemplateDir}')! Check your Home in Kernel/Config.pm",
+-            );
+-            $Self->FatalDie();
+-        }
++        $Self->{TemplateDir} = $Self->{StandardTemplateDir};
+     }
+ 
+     # load sub layout files
+@@ -531,7 +537,7 @@
+             $File = "$Self->{TemplateDir}/$Param{TemplateFile}.dtl";
+         }
+         else {
+-            $File = "$Self->{TemplateDir}/../Standard/$Param{TemplateFile}.dtl";
++            $File = "$Self->{StandardTemplateDir}/$Param{TemplateFile}.dtl";
+         }
+         if ( open my $TEMPLATEIN, '<', $File ) {
+             $TemplateString = do { local $/; <$TEMPLATEIN> };

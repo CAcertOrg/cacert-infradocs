@@ -12,7 +12,8 @@ applications. The list of roles is known to not be complete.
 Dirk Astrath
 ============
 
-:roles: :term:`Application Administrator` on :doc:`systems/bugs`
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`,
+        :term:`Infrastructure Administrator`
 
 .. _people_abahlo:
 
@@ -29,6 +30,13 @@ Benny Baumann
 
 :roles: :term:`Infrastructure Administrator`, :term:`Application Administrator`
         on :doc:`systems/bugs`
+
+.. _people_ian:
+
+Ian Grigg
+=========
+
+:contact: ian.grigg@cacert.org
 
 .. _people_jandd:
 
@@ -102,6 +110,14 @@ Michael Tänzer
 :roles:   :term:`Infrastructure Administrator`
 :contact: michael.taenzer@cacert.org
 :wiki:    :wiki:`MichaelTänzer`
+
+
+.. _people_nick:
+
+Nicolas Bebout
+==============
+
+:contact: nick.bebout@cacert.org
 
 .. _people_gero:
 

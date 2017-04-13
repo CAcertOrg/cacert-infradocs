@@ -20,6 +20,7 @@ administrator team.
    systems/git
    systems/irc
    systems/ircserver
+   systems/issue
    systems/monitor
    systems/puppet
    systems/svn
