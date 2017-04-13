@@ -33,14 +33,14 @@ System Administration
 Application Administration
 --------------------------
 
-+-------------+---------------------+
-| Application | Administrator(s)    |
-+=============+=====================+
-| OTRS        | :ref:`people_mario` |
-|             | :ref:`people_nick`  |
-|             | :ref:`people_ian`   |
-|             | :ref:`people_neo`   |
-+-------------+---------------------+
++-------------+----------------------+
+| Application | Administrator(s)     |
++=============+======================+
+| OTRS        | :ref:`people_mario`, |
+|             | :ref:`people_nick`,  |
+|             | :ref:`people_ian`,   |
+|             | :ref:`people_neo`    |
++-------------+----------------------+
 
 Contact
 -------
