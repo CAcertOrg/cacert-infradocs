@@ -52,7 +52,7 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_benbe` and :ref:`people_mario` have :program:`sudo` access on that
+:ref:`people_mario` and :ref:`people_dirk` have :program:`sudo` access on that
 machine too.
 
 Basics
