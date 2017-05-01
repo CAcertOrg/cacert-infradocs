@@ -12,6 +12,7 @@ Table of Contents
 
    critical
    systems
+   lxcsetup
    network
    iplist
    sshkeys
