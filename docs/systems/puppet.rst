@@ -89,9 +89,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.7
+   single: Debian GNU/Linux; 8.8
 
-* Debian GNU/Linux 8.7
+* Debian GNU/Linux 8.8
 
 Applicable Documentation
 ------------------------
