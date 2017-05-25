@@ -29,6 +29,7 @@ System Administration
 
 * Primary: :ref:`people_neo`
 * Secondary: :ref:`people_jandd`
+* Secondary: :ref:`people_dirk`
 
 Application Administration
 --------------------------
@@ -36,12 +37,11 @@ Application Administration
 +----------------------+--------------------------------------------+
 | Application          | Administrator(s)                           |
 +======================+============================================+
-| Mantis Administrator | :ref:`people_benbe`, :ref:`people_neo`,    |
+| Mantis Administrator | :ref:`people_neo`, :ref:`people_mario`,    |
 |                      | :ref:`people_dirk`, :ref:`people_jandd`,   |
-|                      | :ref:`people_ted`, :ref:`people_mario`,    |
-|                      | :ref:`people_philipp`                      |
+|                      | :ref:`people_ted`, :ref:`people_philipp`   |
 +----------------------+--------------------------------------------+
-| Mantis Manager       | :ref:`people_marcus`, :ref:`people_ulrich` |
+| Mantis Manager       |                                            |
 +----------------------+--------------------------------------------+
 
 Contact
@@ -212,7 +212,8 @@ Non-distribution packages and modifications
 .. index::
    pair: non-distribution package; Mantis
 
-* custom built `mantis`_ package by :ref:`people_benbe`
+* custom built `certificate authentication`-plugin by :ref:`people_dirk` https://github.com/dastrath/CertificateAuthentication_Mantis (not yet active)
+* Mantis installed in /srv/mantis (linked to /srv/mantisbt-2.4.0)
 
 .. _mantis: https://www.mantisbt.org/
 
@@ -327,10 +328,8 @@ Tasks
 Planned
 -------
 
-.. todo:: provide the custom mantis package from a infrastructure Debian
-   package repository
 .. todo:: setup IPv6
-.. todo:: setup X.509 authentication if possible :bug:`678`
+.. todo:: acivate X.509 authentication if possible :bug:`678`
 
 Changes
 =======
