@@ -10,11 +10,6 @@ Purpose
 
 This system provides the public bug tracker for the CAcert community.
 
-.. note:: There currently seems to be a problem for users signing up themselves
-   for new accounts. Unless this is fixed by Debian, new accounts must be
-   created by administrators. For more details ask the `support mailing list
-   <cacert-support@lists.cacert.org>`_.
-
 Application Links
 -----------------
 
