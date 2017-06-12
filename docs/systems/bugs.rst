@@ -107,7 +107,7 @@ Operating System
 Applicable Documentation
 ------------------------
 
-This is it :-)
+For client certificate authentication a Class-3 client certificate issues by CAcert is needed, 1st email-adress in certificate has to match your account email-adress
 
 Services
 ========
@@ -212,8 +212,8 @@ Non-distribution packages and modifications
 .. index::
    pair: non-distribution package; Mantis
 
-* custom built `certificate authentication`-plugin by :ref:`people_dirk` https://github.com/dastrath/CertificateAuthentication_Mantis (not yet active)
-* Mantis installed in /srv/mantis (linked to /srv/mantisbt-2.4.0)
+* custom built `certificate authentication`-plugin by :ref:`people_dirk` https://github.com/dastrath/CertificateAuthentication_Mantis
+* Mantis installed in /srv/mantis (linked to /srv/mantisbt-2.4.2)
 
 .. _mantis: https://www.mantisbt.org/
 
@@ -329,7 +329,6 @@ Planned
 -------
 
 .. todo:: setup IPv6
-.. todo:: acivate X.509 authentication if possible :bug:`678`
 
 Changes
 =======
