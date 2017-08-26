@@ -62,7 +62,7 @@ Logical Location
 
 :IP Internet: None
 :IP Intranet: None
-:IP Internal: :ip:v4:`10.0.0.200`
+:IP Internal: :ip:v4:`10.0.0.201`
 :MAC address: :mac:`00:16:3e:15:b8:8c` (eth0)
 
 .. seealso::
