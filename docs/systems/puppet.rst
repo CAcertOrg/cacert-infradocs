@@ -185,9 +185,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
-* apt.puppetlabs.com as Debian repository for puppet packages
+* :doc:`proxyout` as HTTP proxy for APT
 * forgeapi.puppet.com for Puppet forge access
 * rubygems.org for Puppet specific Ruby gems
 
@@ -195,11 +193,9 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:     5b:50:09:cf:e8:46:a4:a7:d8:00:85:3d:ec:85:b0:9d
-   :DSA:     fb:6f:e4:96:62:09:8c:08:a8:d6:9b:d5:08:d2:e9:ad
-   :ECDSA:   71:44:f9:39:ef:0c:f8:1c:ae:05:8d:a1:07:05:69:f7
-   :ED25519: c5:84:7a:dd:40:a9:2d:67:57:a0:0b:dc:60:3d:cc:22
-
+   :ECDSA:   29:06:f1:71:8d:65:3e:39:7c:49:69:16:8d:99:97:15
+   :ED25519: 53:dc:e7:4d:25:89:a8:d5:5a:24:0b:06:3f:41:cd:4d
+   :RSA:     54:57:b0:09:46:ba:56:95:5e:e3:35:df:28:27:ed:c5
 
 Non-distribution packages and modifications
 -------------------------------------------

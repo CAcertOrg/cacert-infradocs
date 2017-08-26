@@ -189,9 +189,7 @@ Outbound network connections
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
-* apt.puppetlabs.com as Debian repository for puppet packages
+* :doc:`proxyout` as HTTP proxy for APT
 
 Security
 ========

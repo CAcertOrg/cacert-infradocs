@@ -23,6 +23,7 @@ administrator team.
    systems/issue
    systems/monitor
    systems/puppet
+   systems/proxyout
    systems/svn
    systems/webmail
 
