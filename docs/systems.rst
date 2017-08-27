@@ -22,6 +22,7 @@ administrator team.
    systems/ircserver
    systems/issue
    systems/monitor
+   systems/proxyout
    systems/puppet
    systems/proxyout
    systems/svn

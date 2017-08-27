@@ -8,14 +8,15 @@ Proxyout
 Purpose
 =======
 
-This system acts as outgoing HTTP and HTTPS proxy for access to APT
-repositories.
+This system provides an outgoing http/https proxy for controlled access to
+external resources like APT repositories and code repositories. The decision
+to setup this system has been made due to often changing IP addresses of
+external repositories that lead to update problems on several other machines.
 
 Application Links
 -----------------
 
-This system has no publicly visible URLs.
-
+This machine has no externaly exposed URLs.
 
 Administration
 ==============
@@ -27,7 +28,6 @@ System Administration
 * Secondary: None
 
 .. todo:: find an additional admin
-.. people_<name> are defined in people.rst
 
 Application Administration
 --------------------------
@@ -63,6 +63,7 @@ Logical Location
 :IP Internet: None
 :IP Intranet: None
 :IP Internal: :ip:v4:`10.0.0.201`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::201`
 :MAC address: :mac:`00:16:3e:15:b8:8c` (eth0)
 
 .. seealso::
@@ -160,6 +161,7 @@ Outbound network connections
 * :doc:`puppet` (tcp/8140) as Puppet master
 * .debian.org Debian mirrors
 * apt.puppetlabs.com as Debian repository for puppet packages
+* HTTP and HTTPS servers specified in the squid configuration
 
 Security
 ========
@@ -168,6 +170,13 @@ Security
    :ECDSA:   74:70:63:b9:3e:6b:9f:a2:34:0e:9a:92:77:dd:93:73
    :ED25519: 43:0d:1e:ec:1b:5f:c3:84:38:c7:75:b7:be:3c:1b:d4
    :RSA:     1e:8e:1d:06:a5:fa:d6:08:95:e9:68:fb:ae:16:24:8f
+
+Non-distribution packages and modifications
+-------------------------------------------
+
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Risk assessments on critical packages
 -------------------------------------
@@ -178,8 +187,8 @@ with low risk.
 Critical Configuration items
 ============================
 
-All configuration is managed in Puppet. There are no certificates or private
-keys used on this machine.
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
 
 Tasks
 =====
@@ -187,8 +196,10 @@ Tasks
 Planned
 -------
 
-Change all infrastructure hosts to use this machine as APT proxy to avoid flaky
-firewall configurations on :doc:`infra02`.
+.. todo:: Change all infrastructure hosts to use this machine as APT proxy to
+          avoid flaky firewall configurations on :doc:`infra02`.
+
+.. todo:: Add more APT repositories and ACLs if needed
 
 Additional documentation
 ========================

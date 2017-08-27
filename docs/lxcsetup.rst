@@ -54,6 +54,13 @@ Setup puppet-agent
 
 .. todo:: describe puppet setup
 
+.. code-block:: bash
+
+   sudo apt-get install wget
+   wget -4 -T 2 http://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb
+   sudo dpkg -i puppetlabs-release-pc1-jessie.deb
+   sudo apt-get install puppet-agent
+
 - Define puppet configuration for the new container in Hiera.
 
 Post-Setup task
@@ -62,3 +69,4 @@ Post-Setup task
 - Document the new container in a file of the :file:`docs/systems` directory of
   the `Infrastructure documentation
   <https://git.cacert.org/gitweb/?p=cacert-infradocs.git;a=tree;f=docs/systems>`_.
+- Setup machine-admin alias on :doc:`systems/email`.
