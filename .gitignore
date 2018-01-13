@@ -6,3 +6,4 @@
 _build/
 py2venv/
 venv/
+.idea/

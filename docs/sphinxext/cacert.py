@@ -13,7 +13,6 @@ from ipaddress import ip_address
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.parsers.rst import directives
-from docutils.parsers.rst import roles
 
 from sphinx import addnodes
 from sphinx.errors import SphinxError
@@ -207,11 +206,6 @@ def create_table_row(rowdata):
     return row
 
 
-def _create_interpreted_file_node(text, line=0):
-    return roles._roles['file']('', ':file:`%s`' % text,
-                                text, line, None)[0][0]
-
-
 def _sslcert_item_key(item):
     return "%s-%d" % (item['cn'], item['serial'])
 
@@ -253,7 +247,7 @@ def _file_ref_paragraph(cert_info, filekey, app, env, docname):
             app.builder, docname, place['docname'], place['target']['ids'][0],
             reftext)
         para += nodes.Text(":")
-        para += _create_interpreted_file_node(place[filekey])
+        para += addnodes.literal_emphasis(text=place[filekey])
         if pos + 1 < len(places):
             para += nodes.Text(", ")
     return para
@@ -365,18 +359,18 @@ def process_sslcerts(app, doctree):
         item = nodes.list_item()
         subbullets += item
         certfile = nodes.paragraph(text="certificate in file ")
-        certfile += _create_interpreted_file_node(
-            certdata['certfile'], node.line)
+        certfile += addnodes.literal_emphasis(text=certdata['certfile']) #, node.line)
         item += certfile
         item = nodes.list_item()
         subbullets += item
         keyfile = nodes.paragraph(text="private key in file ")
-        keyfile += _create_interpreted_file_node(
-            certdata['keyfile'], node.line)
+        keyfile += addnodes.literal_emphasis(text=certdata['keyfile'])
+        #keyfile += _create_interpreted_file_node(
+        #    certdata['keyfile'], node.line)
         item += keyfile
 
         node.parent.replace_self([targetnode, indexnode, bullets])
-        env.note_indexentries_from(env.docname, doctree)
+        #env.note_indexentries_from(env.docname, doctree)
 
 
 def process_sshkeys(app, doctree):
@@ -384,7 +378,7 @@ def process_sshkeys(app, doctree):
     if not hasattr(env, 'cacert_sshkeys'):
         env.cacert_sshkeys = []
 
-    for node in doctree.traverse(sshkeylist_node):
+    for _ in doctree.traverse(sshkeylist_node):
         if hasattr(env, 'cacert_sshkeylistdoc'):
             raise SphinxError(
                 "There must be one sshkeylist directive present in "
@@ -449,7 +443,6 @@ def process_sshkeys(app, doctree):
         seealso += seepara
 
         node.replace_self(content)
-        env.note_indexentries_from(env.docname, doctree)
 
 
 def process_sslcert_nodes(app, doctree, docname):
@@ -528,7 +521,7 @@ def process_sslcert_nodes(app, doctree, docname):
             content.append(cert_sec)
 
         node.replace_self(content)
-        env.note_indexentries_from(docname, doctree)
+        #env.note_indexentries_from(docname, doctree)
 
 
 def process_sshkeys_nodes(app, doctree, docname):
