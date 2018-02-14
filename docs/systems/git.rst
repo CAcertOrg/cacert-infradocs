@@ -49,8 +49,8 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_mario`, :ref:`people_benbe` and :ref:`people_neo` have
-:program:`sudo` access on that machine too.
+:ref:`people_mario` and :ref:`people_neo` have :program:`sudo` access on that
+machine too.
 
 Basics
 ======
@@ -100,10 +100,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -188,22 +188,20 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
+* crl.cacert.org (rsync) for getting CRLs
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
-* crl.cacert.org (rsync) for getting CRLs
+* :doc:`proxyout` as HTTP proxy for APT
 * :doc:`jenkins` for triggering web hooks
 
 Security
 ========
 
 .. sshkeys::
-   :RSA:   b6:85:16:ad:57:a1:45:3c:33:e5:f1:64:04:0d:7a:ab
-   :DSA:   27:e5:f3:95:b8:4e:73:48:b5:f2:28:8f:32:5a:96:70
-   :ECDSA: b2:f4:80:77:98:95:46:17:7a:9e:7d:73:65:6e:f4:9c
-
-.. todo:: setup ED25519 host key
+   :RSA:     SHA256:2rvhdmx5MwccTmlCod/HLCbZ2GfY3uhL7aIQyO+eosU MD5:b6:85:16:ad:57:a1:45:3c:33:e5:f1:64:04:0d:7a:ab
+   :DSA:     SHA256:AMIMJra5oCa7sRtcRcvsXTq0SgOdwPCXytiDdNNWfQE MD5:27:e5:f3:95:b8:4e:73:48:b5:f2:28:8f:32:5a:96:70
+   :ECDSA:   SHA256:EyvZhINEAST2uBFxSLAqZmRUd/U8GPl05N7LMqdJVkQ MD5:b2:f4:80:77:98:95:46:17:7a:9e:7d:73:65:6e:f4:9c
+   :ED25519: SHA256:QKYaJUiP4BwFbqr/cD7w/5xrAb7gBYCpG5V0Hfqll1E MD5:38:6b:90:f7:8b:c7:b2:cf:cd:86:29:5c:e4:03:fa:35
 
 Dedicated user roles
 --------------------
@@ -224,7 +222,7 @@ Dedicated user roles
 +-----------------+----------------------------------------------------+
 
 .. todo:: think about regulating git access by a proper git repository manager
-   like gitolite
+   like gitolite or gitea
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -320,6 +318,8 @@ contained in the distribution package git-daemon-run:
 
 .. literalinclude:: ../configdiff/git/git-daemon-run.diff
    :language: diff
+
+The runit service handling is triggered through :file:`/etc/inittab`.
 
 Tasks
 =====
