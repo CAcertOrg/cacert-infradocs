@@ -61,8 +61,9 @@ Contact
 Additional People
 -----------------
 
-:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>` and :ref:`Dirk Astrath <people_dirk>`
-have :program:`sudo` access on that machine too.
+:ref:`Jan Dittberner <people_jandd>`, :ref:`Mario Lipinski <people_mario>` and
+:ref:`Dirk Astrath <people_dirk>` have :program:`sudo` access on that machine
+too.
 
 Basics
 ======
@@ -109,9 +110,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; 8.10
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 8.10
 
 Applicable Documentation
 ------------------------
@@ -205,8 +206,7 @@ Outbound network connections
 * HTTP (80/tcp) and HTTPS (443/tcp) to wordpress.org
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 
 .. _Ping-o-matic: http://rpc.pingomatic.com/
@@ -219,11 +219,10 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:   ec:cb:b5:13:7c:17:c4:c3:23:3d:ee:01:58:75:b5:8d
-   :DSA:   c6:a7:52:f6:63:ce:73:95:41:35:90:45:9e:e0:06:a5
-   :ECDSA: 00:d7:4b:3c:da:1b:24:76:74:1c:dd:2c:64:50:5f:81
-
-.. todo:: setup ED25519 host key
+   :RSA:     MD5:ec:cb:b5:13:7c:17:c4:c3:23:3d:ee:01:58:75:b5:8d
+   :DSA:     MD5:c6:a7:52:f6:63:ce:73:95:41:35:90:45:9e:e0:06:a5
+   :ECDSA:   MD5:00:d7:4b:3c:da:1b:24:76:74:1c:dd:2c:64:50:5f:81
+   :ED25519: MD5:0c:fe:c7:a1:bd:e6:43:e6:70:5a:be:5a:15:4d:08:9d
 
 Dedicated user roles
 --------------------
@@ -340,7 +339,7 @@ Changes
 System Future
 -------------
 
-.. * No plans
+.. todo:: system should be upgraded to Debian 9
 
 Additional documentation
 ========================
