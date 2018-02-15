@@ -9,7 +9,6 @@ administrator team.
    :maxdepth: 1
 
    systems/infra02
-   systems/arbitration
    systems/blog
    systems/board
    systems/coaudit
