@@ -94,10 +94,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -188,8 +188,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 * HTTP (80/tcp) to :doc:`git`
 
@@ -197,9 +196,10 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:   59:41:a6:da:9f:64:87:85:76:6f:ad:d5:5f:a8:50:45
-   :DSA:   17:ef:36:49:60:6e:bb:36:fd:ef:d9:77:90:59:00:a9
-   :ECDSA: a2:ee:46:14:c0:31:53:2a:b3:d1:34:82:02:df:ab:bc
+   :RSA:     SHA256:UfECWISdEZTygt6w2pcAkBZCPV8LKKAFalUcTzjChwo MD5:59:41:a6:da:9f:64:87:85:76:6f:ad:d5:5f:a8:50:45
+   :DSA:     SHA256:djKopA8VNKOvo8Yw0GIGLdI8ex/ST8UYM02Cz6SXeJI MD5:17:ef:36:49:60:6e:bb:36:fd:ef:d9:77:90:59:00:a9
+   :ECDSA:   SHA256:FS/J+NfXKXmEZ1fbf6QzvT9jQM0NzrzOXWgeYNxGykQ MD5:a2:ee:46:14:c0:31:53:2a:b3:d1:34:82:02:df:ab:bc
+   :ED25519: SHA256:yqUuTF3ezF7hRKoraWUQGWH/fnUYBjtDkI0TPxzfbhU MD5:54:67:22:bf:2d:ae:35:1f:fd:13:98:ee:af:3a:f3:07
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -208,8 +208,11 @@ Non-distribution packages and modifications
    pair: non-distribution package; Mantis
 
 * Mantis installed in /srv/mantis (linked to /srv/mantisbt-2.4.2)
-* custom built `certificate authentication`-plugin by :ref:`people_dirk` https://github.com/dastrath/CertificateAuthentication_Mantis
-* For client certificate authentication a Class-3 client certificate issued by CAcert is needed, 1st email-adress in certificate has to match email-adress in account
+* custom built `certificate authentication`-plugin by :ref:`people_dirk`
+  https://github.com/dastrath/CertificateAuthentication_Mantis
+* For client certificate authentication a Class-3 client certificate issued by
+  CAcert is needed, 1st email-adress in certificate has to match email-adress in
+  account
 
 .. _mantis: https://www.mantisbt.org/
 
