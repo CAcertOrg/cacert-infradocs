@@ -46,8 +46,8 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_jandd`, :ref:`people_mario` and :ref:`people_neo` have
-:program:`sudo` access on that machine too.
+:ref:`people_jandd` and :ref:`people_mario` have :program:`sudo` access on that
+machine too.
 
 Basics
 ======
@@ -190,8 +190,7 @@ Outbound network connections
 * HTTP (80/tcp) to nightly.openerp.com
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 
 Security
@@ -202,7 +201,7 @@ Security
    :DSA:   f6:b7:e5:52:24:27:1e:ea:32:c8:f1:2e:45:f7:24:d3
    :ECDSA: 0f:fc:76:f8:24:99:95:f7:d2:28:59:6e:f0:1e:39:ac
 
-.. todo:: setup ED25519 host key
+.. todo:: setup ED25519 host key (needs update to Jessie)
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -211,6 +210,8 @@ Non-distribution packages and modifications
 http://nightly.openerp.com/7.0/nightly/deb/. The package source is disabled in
 :file:`/etc/apt/sources.lists.d/openerp.list` to avoid accidential updates that
 cause damage to the customization.
+
+.. todo:: update to Odoo (OpenERP successor)
 
 Local modifications to OpenERP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -354,7 +355,7 @@ Changes
 System Future
 -------------
 
-.. todo:: system should be updated to Debian 8
+.. todo:: system should be updated to Debian 8/9
 
 Additional documentation
 ========================
