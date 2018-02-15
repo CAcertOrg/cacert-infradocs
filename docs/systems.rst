@@ -11,9 +11,9 @@ administrator team.
    systems/infra02
    systems/blog
    systems/board
-   systems/coaudit
    systems/bugs
    systems/cats
+   systems/coaudit
    systems/email
    systems/emailout
    systems/git

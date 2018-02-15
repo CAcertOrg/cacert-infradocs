@@ -183,8 +183,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 * HTTPS (443/tcp) to :doc:`secure.cacert.org <../critical/webdb>` for pushing
   test results
@@ -200,6 +199,8 @@ Security
    :RSA:   d4:1f:0a:c9:a6:18:7a:a4:72:6b:42:5d:8e:63:44:1f
    :DSA:   0c:0a:94:fc:99:b2:49:a2:41:3a:59:3f:dd:3d:e4:33
    :ECDSA: bc:28:fb:72:b9:e3:cb:0f:a0:ff:d2:38:8a:ac:6d:93
+
+.. todo:: setup ED25519 host key (needs update to Jessie)
 
 Dedicated user roles
 --------------------
@@ -363,7 +364,7 @@ Changes
 System Future
 -------------
 
-* No plans
+.. todo:: system should be updated to Debian 8/9
 
 Additional documentation
 ========================
