@@ -125,8 +125,6 @@ Listening services
 +----------+---------+---------+--------------------------------------+
 | 5666/tcp | nrpe    | monitor | remote monitoring service            |
 +----------+---------+---------+--------------------------------------+
-| 5432/tcp | pgsql   | local   | PostgreSQL database for IRC services |
-+----------+---------+---------+--------------------------------------+
 | 6667/tcp | ircd    | ANY     | IRC                                  |
 +----------+---------+---------+--------------------------------------+
 | 6668/tcp | ircd    | ANY     | IRC [#f1]_                           |
@@ -145,7 +143,6 @@ Running services
 
 .. index::
    single: Postfix
-   single: PostgreSQL
    single: cron
    single: lighttpd
    single: nrpe
@@ -164,10 +161,6 @@ Running services
 +--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
 +--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for IRC services   |                                        |
-+--------------------+--------------------+----------------------------------------+
 | Postfix            | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/postfix`            |
 |                    | submission         |                                        |
@@ -181,15 +174,6 @@ Running services
 |                    | :doc:`monitor`     |                                        |
 +--------------------+--------------------+----------------------------------------+
 
-Databases
----------
-
-+------------+-------------+--------------+
-| RDBMS      | Name        | Used for     |
-+============+=============+==============+
-| PostgreSQL | ircservices | IRC services |
-+------------+-------------+--------------+
-
 Connected Systems
 -----------------
 
@@ -200,8 +184,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 
 Security
 ========
@@ -271,7 +254,9 @@ OFTC IRC services
 
 .. warning::
    There are no services running currently because loading the PostgreSQL
-   driver leads to a segmentation fault in the compiled binaries.
+   driver leads to a segmentation fault in the compiled binaries. PostgreSQL
+   has been uninstalled and the ircservices database has been backed up to
+   :file:`/home/ircserver/archive/pg_ircservices_dump-20180216-143937.sql.gz`.
 
 IRC Webchat
 ...........
@@ -317,10 +302,13 @@ for lighttpd.
 lighttpd configuration
 ----------------------
 
+* :file:`/etc/lighttpd/lighttpd.conf` main configuration file
 * :file:`/etc/lighttpd/conf-enabled/10-cgi.conf` CGI path configuration
 * :file:`/etc/lighttpd/conf-enabled/10-ssl.conf` TLS configuration
 
-.. todo:: add more details
+Configure CGI and TLS support for lighttpd. CGI requests go to /var/cgi
+containing the CGI IRC client. Request to configuration and source code is
+restricted.
 
 .. index::
    pair: oftc-hybrid-ircd; configuration
@@ -333,6 +321,7 @@ oftc-hybrid-ircd configuration
   defining settings, ports and TLS settings
 
 .. todo:: add more details
+
 .. todo::
    there are a lot of ops users defined in :file:`ircd.conf` check whether
    these are still valid
@@ -345,20 +334,8 @@ IRC webchat configuration
 
 * :file:`/var/cgi/cgiirc.config`
 
-.. todo:: add more details
-
-Potentially obsolete configuration
-----------------------------------
-
-There are some directories in :file:`/etc/` that contain seemingly unused
-configuration files:
-
-* :file:`/etc/irc/`
-* :file:`/etc/oftc-hybrid/`
-
-There is also a half-uninstalled package :program:`ircd-hybrid` whose config
-files are partially still available (:file:`/etc/default/ircd-hybrid` and
-:file:`/etc/logrotate.d/ircd-hybrid`)
+The configuration defines the connection to the ircd and some defaults for the
+client like default user names and channel.
 
 Changes
 =======
