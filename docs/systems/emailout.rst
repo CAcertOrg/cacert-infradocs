@@ -77,10 +77,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.11
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 7.11
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -156,19 +156,17 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * SMTP (25/tcp) to :doc:`email`, :doc:`issue` and :doc:`lists`
 
 Security
 ========
 
 .. sshkeys::
-   :RSA:   56:09:89:92:af:3c:15:e4:a3:06:11:63:0e:be:b6:a2
-   :DSA:   6c:8d:31:c4:92:de:f0:a8:95:eb:fe:20:83:91:ca:07
-   :ECDSA: cb:3c:69:c5:a1:90:c6:8e:55:40:83:6c:10:3f:09:b4
-
-.. todo:: setup ED25519 ssh host key
+   :RSA:     SHA256:blDVsgNABraet7oZ0/P9LEgBW+ors9XioPjPJf8DAFU MD5:56:09:89:92:af:3c:15:e4:a3:06:11:63:0e:be:b6:a2
+   :DSA:     SHA256:p0AvAUtHuAVmPJBNq7yVkNt9jQ81DOptn2PhK8J7rAw MD5:6c:8d:31:c4:92:de:f0:a8:95:eb:fe:20:83:91:ca:07
+   :ECDSA:   SHA256:kJTc+IYFI6g1QuxMxG+8/tOW9VJbwgLP7PQtGnBEE20 MD5:cb:3c:69:c5:a1:90:c6:8e:55:40:83:6c:10:3f:09:b4
+   :ED25519: SHA256:TOtIitF+p8jbFh/fM1fic9LqH+W+GDeUqs18S/36qKU MD5:04:ca:72:d0:21:0a:4a:8b:a5:f7:a2:2f:10:e5:3f:92
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -187,23 +185,6 @@ Keys and X.509 certificates
 ---------------------------
 
 .. todo:: setup a proper certificate for incoming STARTTLS
-
-.. use the sslcert directive to have certificates added to the certificate list
-   automatically
-
-.. .. sslcert:: template.cacert.org
-      :altnames:
-      :certfile:
-      :keyfile:
-      :serial:
-      :expiration:
-      :sha1fp:
-      :issuer:
-
-.. * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA
-     certificates (allowed CA certificates for client certificates)
-   * `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate
-     (certificate chain for server certificate)
 
 .. index::
    pair: DKIM; Private Key
@@ -238,12 +219,12 @@ Postfix configuration file:`/etc/postfix/main.cf` and :file:`/etc/postfix/dynami
 
 * set infrastructure related host and network parameters
 * allow regular expressions in maps
-* activate oportunistic TLS
+* activate opportunistic TLS
 * prepare for DKIM support
 * disable local delivery
 
-.. literalinclude:: ../configdiff/emailout/postfix.diff
-   :language: diff
+.. literalinclude:: ../configdiff/emailout/postfix-main.cf
+   :language: text
 
 Emails sent to specific intranet hostnames are rewritten to their respective
 admin addresses in :file:`/etc/postfix/canonical_maps`:
@@ -280,21 +261,29 @@ following lines have been added:
 
 .. code:: diff
 
-   --- wheezy-chroot/etc/opendkim.conf        2013-01-09 04:10:46.000000000 +0100
-   +++ vm-emailout/rootfs/etc/opendkim.conf   2015-02-02 15:47:58.161884259 +0100
-   @@ -13,6 +13,12 @@
+   --- opendkim.conf.dpkg-dist     2017-09-04 00:17:50.000000000 +0000
+   +++ opendkim.conf       2018-02-16 13:38:55.545110292 +0000
+   @@ -13,6 +13,11 @@
     #Domain                        example.com
-    #KeyFile               /etc/mail/dkim.key
+    #KeyFile               /etc/dkimkeys/dkim.key
     #Selector              2007
    +Domain                  cacert.org
    +KeyFile                 /etc/dkim/2015.private
    +Selector                2015
    +
-   +Socket                  /var/spool/postfix/opendkim/opendkim.sock
    +InternalHosts           /etc/dkim/internalhosts
 
     # Commonly-used options; the commented-out versions show the defaults.
     #Canonicalization      simple
+   @@ -31,7 +36,7 @@
+    # ##  local:/path/to/socket       to listen on a UNIX domain socket
+    #
+    #Socket                  inet:8892@localhost
+   -Socket                 local:/var/run/opendkim/opendkim.sock
+   +Socket                  local:/var/spool/postfix/opendkim/opendkim.sock
+
+    ##  PidFile filename
+    ###      default (none)
 
 The key has been generated with::
 
@@ -315,7 +304,6 @@ Tasks
 Planned
 -------
 
-.. todo:: update the system to Debian Jessie
 .. todo:: setup IPv6
 
 Changes

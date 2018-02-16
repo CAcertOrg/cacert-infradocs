@@ -1,0 +1,52 @@
+# Global Postfix configuration file. This file lists only a subset
+# of all parameters. For the syntax, and for a complete parameter
+# list, see the postconf(5) manual page (command: "man 5 postconf").
+#
+
+compatibility_level = 2
+
+mydomain = emailout.intra.cacert.org
+myorigin = /etc/mailname
+
+mydestination = emailout.cacert.org, emailout, localhost.localdomain, localhost
+myhostname = emailout.intra.cacert.org
+
+mynetworks = 172.16.2.0/24 10.0.0.0/24 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
+smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+
+biff = no
+
+smtp_helo_name = infrastructure.cacert.org
+
+# TLS parameters
+#
+# See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
+# information on enabling SSL in the smtp client.
+
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_tls_security_level=may
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+# map internal host names to their corresponding admin addresses
+canonical_maps = pcre:/etc/postfix/canonical_maps
+
+mailbox_size_limit = 0
+recipient_delimiter = +
+
+# DKIM milter
+# http://www.postfix.org/MILTER_README.html
+# TODO: enable DKIM once the DNS record is in place
+#smtpd_milters = unix:/opendkim/opendkim.sock
+#non_smtpd_milters = $smtpd_milters
+
+# what to do if the dkim filter fails
+#milter_default_action = accept
+#milter_command_timeout = 5s
+#milter_connect_timeout = $milter_command_timeout
+#milter_content_timeout = 45s
+
+transport_maps = hash:/etc/postfix/transport
+local_transport = error:local delivery is disabled
