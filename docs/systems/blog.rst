@@ -92,14 +92,20 @@ DNS
 .. index::
    single: DNS records; Blog
 
-====================== ======== ============================================
+====================== ======== ====================================================================
 Name                   Type     Content
-====================== ======== ============================================
+====================== ======== ====================================================================
 blog.cacert.org.       IN A     213.154.225.234
 blog.cacert.org.       IN SSHFP 1 1 32CA6E4BA3275AAB0D65F0F46969B11A4C4B36E8
+blog.cacert.org.       IN SSHFP 1 2 3afb452ac3690cf7cd9a3332813bf7b13dbd288c7a4efbd9ab9dd4b4649ff2b6
 blog.cacert.org.       IN SSHFP 2 1 AAFBA94EBE5C5C45CDF5EF10D0BC31BEA4D9ECEC
+blog.cacert.org.       IN SSHFP 2 2 4d4384ebd1906125ae26d2fa976596af914b4b3587f2204a0e01368a3640f680
+blog.cacert.org.       IN SSHFP 3 1 8fa85a31215f10ea78fd0126d1c705c9a3662c86
+blog.cacert.org.       IN SSHFP 3 2 86d330b900db9bf0a8bc9ec34b126aa8261fec9e02b123ab61c2aee0b56ae047
+blog.cacert.org.       IN SSHFP 4 1 90903e8f4b35457bf41235f070adf592d7f724dd
+blog.cacert.org.       IN SSHFP 4 2 f24b770c16dcb91afc9461e62e6fe63a63d413efa4794751c039ed6d5213127b
 blog.intra.cacert.org. IN A     172.16.2.13
-====================== ======== ============================================
+====================== ======== ====================================================================
 
 .. seealso::
 

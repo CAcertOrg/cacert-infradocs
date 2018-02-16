@@ -77,14 +77,20 @@ DNS
 .. index::
    single: DNS records; Bugs
 
-======================== ======== ============================================
+======================== ======== ====================================================================
 Name                     Type     Content
-======================== ======== ============================================
+======================== ======== ====================================================================
 bugs.cacert.org.         IN A     213.154.225.232
 bugs.cacert.org.         IN SSHFP 1 1 4B4BC32C4E655559B43A370B77CAD4983E8C24F8
+bugs.cacert.org          IN SSHFP 1 2 51f10258849d1194f282deb0da97009016423d5f0b28a0056a551c4f38c2870a
 bugs.cacert.org.         IN SSHFP 2 1 7916E317983D8BC85D719BB793E5E46A6B4976B2
+bugs.cacert.org          IN SSHFP 2 2 7632a8a40f1534a3afa3c630d062062dd23c7b1fd24fc518334d82cfa4977892
+bugs.cacert.org          IN SSHFP 3 1 72737bd1240b446c2b8e0aad0acff889e3b72ec7
+bugs.cacert.org          IN SSHFP 3 2 152fc9f8d7d72979846757db7fa433bd3f6340cd0dcebcce5d681e60dc46ca44
+bugs.cacert.org          IN SSHFP 4 1 bb6b5f8599c3a93383392b80cc029a0d65ffc7f1
+bugs.cacert.org          IN SSHFP 4 2 caa52e4c5ddecc5ee144aa2b6965101961ff7e7518063b43908d133f1cdf6e15
 bugs.intra.cacert.org.   IN A     172.16.2.16
-======================== ======== ============================================
+======================== ======== ====================================================================
 
 .. seealso::
 
