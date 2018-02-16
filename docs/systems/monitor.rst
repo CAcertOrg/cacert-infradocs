@@ -47,9 +47,7 @@ Application Administration
 +-------------+-----------------------+
 | Application | Administrator(s)      |
 +=============+=======================+
-| Icinga      | :ref:`people_martin`, |
-|             | :ref:`people_neo`,    |
-|             | :ref:`people_jandd`   |
+| Icinga      | :ref:`people_jandd`   |
 +-------------+-----------------------+
 
 Contact
@@ -78,7 +76,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.230`
 :IP Intranet: :ip:v4:`172.16.2.18`
 :IP Internal: :ip:v4:`10.0.0.18`
-:MAC address: :mac:`10.0.0.18` (eth0)
+:MAC address: :mac:`00:ff:73:b3:17:43` (eth0)
 
 .. seealso::
 
@@ -104,10 +102,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.11
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 7.11
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -212,8 +210,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 * all :ip:v4range:`10.0.0.0/24` and :ip:v4range:`172.16.2.0/24` systems for
   monitoring their services
@@ -224,9 +221,11 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:   df:98:f5:ea:05:c1:47:52:97:58:8f:42:55:d6:d9:b6
-   :DSA:   07:2b:10:b1:6d:79:35:0f:83:aa:fc:ba:d6:2f:51:dc
-   :ECDSA: 48:46:b1:5a:4e:05:64:8a:c3:76:33:77:20:91:14:70
+   :RSA:     SHA256:8iOQQGmuqi4OrF2Qkqt9665w8G7Dwl6U9J8bFfYz7V0 MD5:df:98:f5:ea:05:c1:47:52:97:58:8f:42:55:d6:d9:b6
+   :DSA:     SHA256:Sh/3OWrodFWc8ZbVTV1/aJDbpt5ztGrwSSWLECTNrOI MD5:07:2b:10:b1:6d:79:35:0f:83:aa:fc:ba:d6:2f:51:dc
+   :ECDSA:   SHA256:GWvYqhQUt9INh/7VRVu6Z2YORoy/YzgBxNBmX+ZvMsk MD5:48:46:b1:5a:4e:05:64:8a:c3:76:33:77:20:91:14:70
+   :ED25519: SHA256:L5roC867bvxDJ0ckbhIQOt2A9Nh1RQBVuIJFWwrPLG0 MD5:10:94:56:09:5b:a2:28:ab:11:e0:0f:6e:e4:0c:38:bb
+
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -289,7 +288,6 @@ Tasks
 Planned
 -------
 
-.. todo:: upgrade to Debian Jessie
 .. todo:: switch to Icinga2 and Icingaweb2
 
 Changes
