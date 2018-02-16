@@ -132,7 +132,7 @@ Listening services
 +----------+---------+----------------+----------------------------------------+
 | 3306/tcp | mysql   | local          | MySQL database server                  |
 +----------+---------+----------------+----------------------------------------+
-| 4433/tcp | http    | internal       | Apache httpd with phpmyadmin           |
+| 4433/tcp | http    | local          | Apache httpd with phpmyadmin           |
 +----------+---------+----------------+----------------------------------------+
 | 5666/tcp | nrpe    | monitor        | remote monitoring service              |
 +----------+---------+----------------+----------------------------------------+
@@ -146,7 +146,7 @@ Listening services
 
       ssh -L 4433:localhost:4433 -l username email.cacert.org
 
-   and access PHPMyAdmin at https://localhost:4443/phpmyadmin
+   and access PHPMyAdmin at https://localhost:4433/
 
 Running services
 ----------------
