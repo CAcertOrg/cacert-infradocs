@@ -8,7 +8,7 @@ Ircserver
 Purpose
 =======
 
-This system is the planned replacement for :doc:`irc`
+This system is the planned replacement for :doc:`irc`.
 
 Administration
 ==============
@@ -16,21 +16,23 @@ Administration
 System Administration
 ---------------------
 
-* Primary: :ref:`people_martin`
-* Secondary: :ref:`people_jandd`
+* Primary: :ref:`people_jandd`
+* Secondary: None
+
+.. todo:: find an additional admin
 
 Application Administration
 --------------------------
 
-+--------------+-------------------------------------------+
-| Application  | Administrator(s)                          |
-+==============+===========================================+
-| IRC server   | :ref:`people_martin`, :ref:`people_jandd` |
-+--------------+-------------------------------------------+
-| IRC services | :ref:`people_martin`, :ref:`people_jandd` |
-+--------------+-------------------------------------------+
-| Votebot      | :ref:`people_martin`, :ref:`people_jandd` |
-+--------------+-------------------------------------------+
++--------------+---------------------+
+| Application  | Administrator(s)    |
++==============+=====================+
+| IRC server   | :ref:`people_jandd` |
++--------------+---------------------+
+| IRC services | :ref:`people_jandd` |
++--------------+---------------------+
+| Votebot      | :ref:`people_jandd` |
++--------------+---------------------+
 
 Contact
 -------
@@ -86,10 +88,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -167,6 +169,9 @@ Running services
 +--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
 +--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
++--------------------+--------------------+----------------------------------------+
 | Exim               | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/exim4`              |
 |                    | submission         |                                        |
@@ -199,17 +204,16 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
-* ftp.nl.debian.org as Debian mirror
-* security.debian.org for Debian security updates
-* crl.cacert.org (rsync) for getting CRLs
+* :doc:`proxyout` as HTTP proxy for APT
 
 Security
 ========
 
 .. sshkeys::
-   :RSA:   dc:8f:c3:d7:38:72:39:13:6f:97:db:3d:06:c6:83:db
-   :DSA:   52:73:d9:76:38:df:bd:18:37:4a:e3:9d:65:14:ac:39
-   :ECDSA: 61:9f:ca:c7:05:0e:46:a1:8f:6d:7f:3a:68:ce:5a:21
+   :RSA:     SHA256:MMH85BKVW7SUe7yyWjldjlggQD7dtXRuzO1XjZf0ZWc MD5:dc:8f:c3:d7:38:72:39:13:6f:97:db:3d:06:c6:83:db
+   :DSA:     SHA256:c0pnKaB313x5rw6PRRh/iMJdfNECw0ruHnU9lkTJZbw MD5:52:73:d9:76:38:df:bd:18:37:4a:e3:9d:65:14:ac:39
+   :ECDSA:   SHA256:uI+JjNUlGytuMVouJmhzdHt80jfA+SRYkWr5OORpT5Y MD5:61:9f:ca:c7:05:0e:46:a1:8f:6d:7f:3a:68:ce:5a:21
+   :ED25519: SHA256:aNRLwh0FVQyKq2IWO5JXyFubzwpMqxyWrSymdLgDYBw MD5:79:2a:a2:ca:99:23:50:2c:1c:48:cf:8c:fe:b9:51:e5
 
 Dedicated user roles
 --------------------

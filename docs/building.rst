@@ -77,5 +77,5 @@ to browse the documentation (there are some JavaScript and SVG glitches due to
 Content-Security-Policy settings).
 
 If the documentation build is successful the result is pushed to a webserver
-document root on :doc:`webstatic` and is publicly available at
+document root on :doc:`systems/webstatic` and is publicly available at
 https://infradocs.cacert.org/.
