@@ -25,6 +25,7 @@ administrator team.
    systems/proxyout
    systems/svn
    systems/webmail
+   systems/webstatic
 
 
 General
