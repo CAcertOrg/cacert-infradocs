@@ -228,7 +228,7 @@ Outbound network connections
 * archive.debian.org as Debian mirror
 * :doc:`issue` for OTRS mail
 * :doc:`lists` for mailing lists
-* arbitrary internet smtp servers for outgoing mail
+* arbitrary Internet SMTP servers for outgoing mail
 
 Security
 ========
