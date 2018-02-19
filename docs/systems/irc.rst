@@ -280,17 +280,17 @@ Keys and X.509 certificates
 
 .. sslcert:: irc.cacert.org
    :altnames:   DNS:cert.irc.cacert.org, DNS:irc.cacert.org, DNS:nocert.irc.cacert.org
-   :certfile:   /home/ircserver/ssl/cert.pem
-   :keyfile:    /home/ircserver/ssl/rsa.key
-   :serial:     11E863
-   :expiration: Mar 31 20:31:00 18 GMT
-   :sha1fp:     04:EF:FE:61:44:9F:74:AB:C0:D3:5E:F4:D9:48:59:B5:B0:23:27:B2
+   :certfile:   /home/ircserver/ssl/cert2048.pem
+   :keyfile:    /home/ircserver/ssl/rsa2048.key
+   :serial:     1375A2
+   :expiration: Feb 19 12:06:05 20 GMT
+   :sha1fp:     92:CA:56:74:C5:3B:C9:1E:A9:61:08:59:BE:B4:04:3D:AC:A0:F1:6A
    :issuer:     CA Cert Signing Authority
 
 .. sslcert:: irc.cacert.org
    :certfile:   /etc/lighttpd/ssl/server.pem
    :keyfile:    /etc/lighttpd/ssl/server.pem
-   :serial:     11E863
+   :serial:     1375A2
    :secondary:
 
 The :file:`/etc/lighttpd/ssl/server.pem` is a combined key and certificate file
@@ -305,6 +305,8 @@ lighttpd configuration
 * :file:`/etc/lighttpd/lighttpd.conf` main configuration file
 * :file:`/etc/lighttpd/conf-enabled/10-cgi.conf` CGI path configuration
 * :file:`/etc/lighttpd/conf-enabled/10-ssl.conf` TLS configuration
+* :file:`/etc/lighttpd/conf-enabled/10-redirect-http.conf` redirect from http to
+  https
 
 Configure CGI and TLS support for lighttpd. CGI requests go to /var/cgi
 containing the CGI IRC client. Request to configuration and source code is
