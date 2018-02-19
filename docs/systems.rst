@@ -19,11 +19,13 @@ administrator team.
    systems/irc
    systems/ircserver
    systems/issue
+   systems/jenkins
    systems/monitor
    systems/puppet
    systems/proxyin
    systems/proxyout
    systems/svn
+   systems/web
    systems/webmail
    systems/webstatic
 

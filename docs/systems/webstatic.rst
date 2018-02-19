@@ -141,6 +141,7 @@ Running services
    single: nginx
    single: nrpe
    single: openssh
+   single: rsyslog
 
 +--------------------+----------------------+----------------------------------------+
 | Service            | Usage                | Start mechanism                        |
@@ -258,7 +259,7 @@ Tasks
 Planned
 -------
 
-* Manage the system using Puppet
+.. todo:: manage the webstatic system using Puppet
 
 Changes
 =======
