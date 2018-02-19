@@ -78,7 +78,7 @@ DNS
 ---
 
 .. index::
-   single: DNS records; <machine>
+   single: DNS records; Webstatic
 
 =========================== ======== ====================================================================
 Name                        Type     Content
