@@ -572,5 +572,3 @@ Postfix Debian wiki page
    https://wiki.debian.org/Postfix
 Dovecot 1.x wiki
    http://wiki1.dovecot.org/FrontPage
-Postfix documentation
-   http://www.postfix.org/documentation.html
