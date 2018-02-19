@@ -19,6 +19,7 @@ administrator team.
    systems/irc
    systems/ircserver
    systems/issue
+   systems/lists
    systems/jenkins
    systems/monitor
    systems/puppet
