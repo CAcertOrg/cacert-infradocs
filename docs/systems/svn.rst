@@ -109,10 +109,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -195,10 +195,10 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:     df:98:f5:ea:05:c1:47:52:97:58:8f:42:55:d6:d9:b6
-   :DSA:     07:2b:10:b1:6d:79:35:0f:83:aa:fc:ba:d6:2f:51:dc
-   :ECDSA:   f9:10:2c:bb:1d:2f:d4:c4:b3:74:b6:f9:26:4c:64:54
-   :ED25519: 56:88:68:0d:3a:32:13:6b:da:bd:ae:d7:cc:9b:b8:f5
+   :RSA:     SHA256:8iOQQGmuqi4OrF2Qkqt9665w8G7Dwl6U9J8bFfYz7V0 MD5:df:98:f5:ea:05:c1:47:52:97:58:8f:42:55:d6:d9:b6
+   :DSA:     SHA256:Sh/3OWrodFWc8ZbVTV1/aJDbpt5ztGrwSSWLECTNrOI MD5:07:2b:10:b1:6d:79:35:0f:83:aa:fc:ba:d6:2f:51:dc
+   :ECDSA:   SHA256:VvsTuiTYiz3P194MM9bwteZcKwyLi/RMWHd0a3TEmYY MD5:f9:10:2c:bb:1d:2f:d4:c4:b3:74:b6:f9:26:4c:64:54
+   :ED25519: SHA256:Oga06gc4LasN/lTb6SZzlYfg6HFeMn5Rgnm+G9hHtzw MD5:56:88:68:0d:3a:32:13:6b:da:bd:ae:d7:cc:9b:b8:f5
 
 
 Non-distribution packages and modifications
@@ -345,4 +345,4 @@ Additional documentation
 References
 ----------
 
-* http://svnbook.red-bean.com/en/1.5/svn.reposadmin.html
+* http://svnbook.red-bean.com/en/1.8/svn.reposadmin.html
