@@ -52,16 +52,61 @@ Setup
 Setup puppet-agent
 ------------------
 
-.. todo:: describe puppet setup
+- define puppet configuration for the new container in Hiera / sitemodules in
+  the `cacert-puppet Repository`_ on :doc:`systems/git`
+- see `Puppet agent installation`_ for agent setup (install the agent from
+  official Puppet repositories)
+- define the puppet master IP address in :file:`/etc/hosts`:
 
-.. code-block:: bash
+  .. code-block:: text
 
-   sudo apt-get install wget
-   wget -4 -T 2 http://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb
-   sudo dpkg -i puppetlabs-release-pc1-jessie.deb
-   sudo apt-get install puppet-agent
+     10.0.0.200	puppet
 
-- Define puppet configuration for the new container in Hiera.
+- set the certname in :file:`/etc/puppetlabs/puppet/puppet.conf` to match
+  the name of the file in :file:`hieradata/nodes/` for the system:
+
+  .. code-block:: ini
+
+     [main]
+     certname = <system>
+
+- run:
+
+  .. code-block:: sh
+
+     root@system:  puppet agent --test --noop
+
+  to create a new certificate for the system and send a signing request to the
+  :doc:`puppet master <systems/puppet>`
+- sign the system certificate on the :doc:`puppet master <systems/puppet>`
+  using:
+
+  .. code-block:: sh
+
+     root@puppet:  puppet cert sign <system>
+
+- run:
+
+  .. code-block:: sh
+
+     root@system:  puppet agent --test --noop
+
+  on the system to see whether the catalog for the machine compiles and what it
+  would change
+- apply the catalog with:
+
+  .. code-block:: sh
+
+     root@system:  puppet agent --test
+
+- start the puppet agent using:
+
+  .. code-block:: sh
+
+     root@system:  /etc/init.d/puppet start
+
+.. _Puppet agent installation: https://puppet.com/docs/puppet/5.4/install_linux.html
+.. _cacert-puppet Repository: https://git.cacert.org/gitweb/?p=cacert-puppet.git
 
 Post-Setup task
 ===============
