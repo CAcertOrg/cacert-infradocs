@@ -88,10 +88,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.8
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.3
 
-* Debian GNU/Linux 8.8
+* Debian GNU/Linux 9.3
 
 Applicable Documentation
 ------------------------
@@ -131,7 +131,7 @@ Running services
    single: Puppetdb
    single: cron
    single: openssh
-   single: rsyslogd
+   single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
@@ -193,9 +193,9 @@ Security
 ========
 
 .. sshkeys::
-   :ECDSA:   29:06:f1:71:8d:65:3e:39:7c:49:69:16:8d:99:97:15
-   :ED25519: 53:dc:e7:4d:25:89:a8:d5:5a:24:0b:06:3f:41:cd:4d
-   :RSA:     54:57:b0:09:46:ba:56:95:5e:e3:35:df:28:27:ed:c5
+   :RSA:     SHA256:PPEZkD7ezGStENYmE9/RftHqJyy6cC9IN6zw63OvJTM MD5:54:57:b0:09:46:ba:56:95:5e:e3:35:df:28:27:ed:c5
+   :ECDSA:   SHA256:3U1CVC9YAKmF9W5SDLibwP1A9MVSb5ltVN7nYNOE15o MD5:29:06:f1:71:8d:65:3e:39:7c:49:69:16:8d:99:97:15
+   :ED25519: SHA256:AkqMLLEtMbAEuxniRRDgd7TItD+pb9hsbpn5Ab81+IM MD5:53:dc:e7:4d:25:89:a8:d5:5a:24:0b:06:3f:41:cd:4d
 
 Non-distribution packages and modifications
 -------------------------------------------
