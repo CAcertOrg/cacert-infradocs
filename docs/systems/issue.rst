@@ -195,7 +195,7 @@ Outbound network connections
 * :doc:`emailout` as SMTP relay
 * :doc:`email` as SMTP submission relay (587, tcp) for specific addresses (see
   :ref:`postfix_configuration` below)
-* ftp.nl.debian.org as Debian mirror* security.debian.org for Debian security updates
+* :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 
 Security

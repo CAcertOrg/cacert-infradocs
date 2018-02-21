@@ -225,7 +225,7 @@ Outbound network connections
 ----------------------------
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
-* archive.debian.org as Debian mirror
+* :doc:`proxyout` as HTTP proxy for APT
 * :doc:`issue` for OTRS mail
 * :doc:`lists` for mailing lists
 * arbitrary Internet SMTP servers for outgoing mail
