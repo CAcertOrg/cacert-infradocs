@@ -148,10 +148,24 @@ Running services
 Connected Systems
 -----------------
 
+* :doc:`blog`
+* :doc:`board`
+* :doc:`bugs`
+* :doc:`cats`
+* :doc:`email`
+* :doc:`emailout`
+* :doc:`git`
+* :doc:`irc`
+* :doc:`ircserver`
+* :doc:`jenkins`
+* :doc:`lists`
+* :doc:`monitor`
 * :doc:`motion`
 * :doc:`proxyin`
 * :doc:`puppet`
 * :doc:`svn`
+* :doc:`web`
+* :doc:`webstatic`
 
 Outbound network connections
 ----------------------------
