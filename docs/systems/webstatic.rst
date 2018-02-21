@@ -174,6 +174,8 @@ Connected Systems
 * :doc:`jenkins` for publishing infrastructure documentation to
   infradocs.cacert.org
 * :doc:`monitor`
+* :doc:`web` as reverse proxy for hostnames funding.cacert.org and
+  infradocs.cacert.org
 
 Outbound network connections
 ----------------------------
