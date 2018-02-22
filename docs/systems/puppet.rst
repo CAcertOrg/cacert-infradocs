@@ -178,6 +178,10 @@ Databases
 Connected Systems
 -----------------
 
+* :doc:`jenkins`
+* :doc:`motion`
+* :doc:`proxyin`
+* :doc:`proxyout`
 * :doc:`svn`
 
 Outbound network connections
