@@ -26,6 +26,7 @@ administrator team.
    systems/proxyin
    systems/proxyout
    systems/svn
+   systems/translations
    systems/web
    systems/webmail
    systems/webstatic

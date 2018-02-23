@@ -164,6 +164,7 @@ Connected Systems
 * :doc:`proxyin`
 * :doc:`puppet`
 * :doc:`svn`
+* :doc:`translations`
 * :doc:`web`
 * :doc:`webstatic`
 

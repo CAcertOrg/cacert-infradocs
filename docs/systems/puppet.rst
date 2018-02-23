@@ -183,6 +183,7 @@ Connected Systems
 * :doc:`proxyin`
 * :doc:`proxyout`
 * :doc:`svn`
+* :doc:`translations`
 
 Outbound network connections
 ----------------------------
