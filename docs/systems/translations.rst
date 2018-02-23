@@ -213,11 +213,11 @@ Security
 Dedicated user roles
 --------------------
 
-+-------------+-----------------------------+
-| Group       | Purpose                     |
-+=============+=============================+
-| <groupname> | <short purpose description> |
-+-------------+-----------------------------+
++---------------+----------------------------------+
+| Group         | Purpose                          |
++===============+==================================+
+| pootle-update | Planned translation update group |
++---------------+----------------------------------+
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -257,6 +257,57 @@ a minimal set of modules.
 Pootle is based on Django 1.10 and should be updated to a newer version when it
 becomes available. Pootle is run as a dedicated system user `pootle` that is
 restricted via filesystem permissions.
+
+The following change has been made to the translation toolkit filters that are
+used by Pootle in :file:`/var/www/pootle/pootle-2.8.2/lib/python2.7/site-packages/translate/filters/checks.py`
+to add CAcert specific translation checks:
+
+   .. code-block:: diff
+
+      commit 4d107e5019f4794b4581cadaf4e9a8339868f6a4
+      Author: Jan Dittberner <jandd@cacert.org>
+      Date:   Fri Feb 23 20:39:03 2018 +0000
+
+          Add CAcert checkers
+
+          Signed-off-by: Jan Dittberner <jandd@cacert.org>
+
+      diff --git a/filters/checks.py b/filters/checks.py
+      index db10937..45b464c 100644
+      --- a/filters/checks.py
+      +++ b/filters/checks.py
+      @@ -2475,6 +2475,24 @@ class IOSChecker(StandardChecker):
+               StandardChecker.__init__(self, **kwargs)
+
+
+      +cacertconfig = CheckerConfig(
+      +    notranslatewords = ["CAcert", "Assurer"],
+      +    criticaltests = ["printf"],
+      +)
+      +
+      +
+      +class CAcertChecker(StandardChecker):
+      +
+      +    def __init__(self, **kwargs):
+      +        checkerconfig = kwargs.get("checkerconfig", None)
+      +        if checkerconfig is None:
+      +            checkerconfig = CheckerConfig()
+      +            kwargs["checkerconfig"] = checkerconfig
+      +
+      +        checkerconfig.update(cacertconfig)
+      +        StandardChecker.__init__(self, **kwargs)
+      +
+      +
+       projectcheckers = {
+           "minimal": MinimalChecker,
+           "standard": StandardChecker,
+      @@ -2490,6 +2508,7 @@ projectcheckers = {
+           "terminology": TermChecker,
+           "l20n": L20nChecker,
+           "ios": IOSChecker,
+      +    "cacert": CAcertChecker,
+       }
+
 
 Critical Configuration items
 ============================
@@ -315,13 +366,30 @@ Pootle version is installed.
 
 .. _WSGI: https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface
 
+There are scripts in :file:`/usr/local/bin` that were implemented for an older
+Pootle version and have to be checked/updated.
+
 Tasks
 =====
 
 Planned
 -------
 
-* None
+.. todo::
+
+   integrate the pootle projects with version control systems. The templates
+   (.pot files) in :file:`/var/www/pootle/po` can be updated and loaded into
+   Pootle by invoking::
+
+      pootle update_stores --project=<project_id> --language=templates
+
+   see the `Pootle documentation <http://docs.translatehouse.org/projects/pootle/en/stable-2.8.x/server/project_setup.html#project-setup-updating-strings>`_
+
+.. todo::
+
+   update and improve the scripts in :file:`/usr/local/bin` and integrate
+   them with the :program:`sudo` system to allow members of the `pootle-update`
+   group to run them in the context of the `pootle` system user
 
 Changes
 =======
@@ -333,8 +401,6 @@ System Future
 
 Additional documentation
 ========================
-
-.. todo:: review/update documentation from :wiki:`SystemAdministration/Systems/Translations`
 
 .. seealso::
 
