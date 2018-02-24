@@ -76,6 +76,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.230`
 :IP Intranet: :ip:v4:`172.16.2.18`
 :IP Internal: :ip:v4:`10.0.0.18`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::18`
 :MAC address: :mac:`00:ff:73:b3:17:43` (eth0)
 
 .. seealso::
