@@ -240,17 +240,13 @@ Keys and X.509 certificates
 ---------------------------
 
 .. sslcert:: bugs.cacert.org
-   :certfile:   /etc/ssl/public/bugs.c.o.20160314.crt
-   :keyfile:    /etc/ssl/private/bugs.c.o.20160314.key
-   :serial:     028A72
-   :expiration: Mar 14 13:12:13 2018 GMT
-   :sha1fp:     4D:1F:14:B2:BB:C8:59:68:D0:CF:86:36:DA:2F:B2:58:A7:90:E5:85
-   :issuer:     CAcert.org Class 3 Root
-
-* :file:`/etc/ssl/public/bugs.c.o.20160314.crt.chain` contains the server
-  certificate and the Class 3 CA certificate
-
-* :file:`/etc/mantis/config_inc.php` contains the database settings for Mantis
+   :altnames:   DNS:bugs.cacert.org
+   :certfile:   /etc/ssl/public/bugs.c.o.crt
+   :keyfile:    /etc/ssl/private/bugs.c.o.key
+   :serial:     02BEFD
+   :expiration: Mar 03 13:08:19 2020 GMT
+   :sha1fp:     DB:16:71:13:60:38:AD:21:A7:36:CA:5A:D2:65:75:4D:C5:3C:C8:15
+   :issuer:     CAcert Class 3 Root
 
 .. index::
    pair: Mantis; configuration
@@ -261,6 +257,7 @@ Mantis configuration
 The Mantis bug tracker configuration is stored in the directory
 :file:`/etc/mantis/`.
 
+* :file:`config_inc.php` contains the database settings for Mantis
 * :file:`config_local.php` the main configuration file, including custom bug states
 * :file:`custom_constants_inc.php` defines custom constants. Required for the
   non-default bug states
