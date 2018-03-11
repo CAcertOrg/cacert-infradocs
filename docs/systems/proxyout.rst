@@ -87,9 +87,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.1
+   single: Debian GNU/Linux; 9.4
 
-* Debian GNU/Linux 9.1
+* Debian GNU/Linux 9.4
 
 Applicable Documentation
 ------------------------
