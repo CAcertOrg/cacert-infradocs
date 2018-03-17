@@ -47,7 +47,7 @@ def get_serial(cert):
 def get_expiration(cert):
     return datetime.strptime(
         cert.tbsCertificate.validity.valid_to, '%Y%m%d%H%M%SZ'
-    ).strftime('%b %d %H:%M:%S %y GMT')
+    ).strftime('%b %d %H:%M:%S %Y GMT')
 
 
 def get_sha1fp(certdata):
