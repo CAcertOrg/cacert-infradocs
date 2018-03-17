@@ -250,8 +250,15 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-* :file:`/etc/ssl/certs/monitor.c.o.pem` server certificate
-* :file:`/etc/ssl/private/monitor.c.o.priv` server key
+.. sslcert:: monitor.cacert.org
+   :altnames:   DNS:monitor.cacert.org, DNS:monitor.intra.cacert.org
+   :certfile:   /etc/ssl/certs/monitor.c.o.pem
+   :keyfile:    /etc/ssl/private/monitor.c.o.priv
+   :serial:     1381FF
+   :expiration: Mar 16 11:41:06 2020 GMT
+   :sha1fp:     64:34:16:0D:2C:1B:38:5D:61:38:17:6E:D5:1B:90:B9:CF:DC:A9:75
+   :issuer:     CA Cert Signing Authority
+
 * :file:`/etc/ssl/certs/cacert.allcerts.pem` CAcert.org Class 1 and Class 3 CA
   certificates (allowed CA certificates for client certificates and the
   certificate chain for the server certificate)
