@@ -283,7 +283,7 @@ Keys and X.509 certificates
    :certfile:   /home/ircserver/ssl/cert2048.pem
    :keyfile:    /home/ircserver/ssl/rsa2048.key
    :serial:     1375A2
-   :expiration: Feb 19 12:06:05 20 GMT
+   :expiration: Feb 19 12:06:05 2020 GMT
    :sha1fp:     92:CA:56:74:C5:3B:C9:1E:A9:61:08:59:BE:B4:04:3D:AC:A0:F1:6A
    :issuer:     CA Cert Signing Authority
 
