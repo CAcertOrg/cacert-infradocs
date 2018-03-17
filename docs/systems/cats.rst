@@ -242,12 +242,13 @@ Keys and X.509 certificates
 The server certificate for the CATS web application.
 
 .. sslcert:: cats.cacert.org
+   :altnames:   DNS:cats.cacert.org
    :certfile:   /home/cats/ssl/certs/cats_cert.pem
    :keyfile:    /home/cats/ssl/private/cats_privatekey.pem
-   :serial:     11E840
-   :expiration: Mar 31 18:11:48 2018 GMT
-   :sha1fp:     9B:9B:C5:8B:26:51:3A:CF:C1:11:7A:27:24:DB:DD:CF:AF:C3:61:C4
-   :issuer:     CAcert.org Class 1 Root
+   :serial:     1381F7
+   :expiration: Mar 16 10:59:35 2020 GMT
+   :sha1fp:     8E:26:FE:E9:EE:86:35:D4:F4:E9:AE:7C:85:78:0A:A9:5B:AD:CE:53
+   :issuer:     CA Cert Signing Authority
 
 .. _cats_client_cert:
 
