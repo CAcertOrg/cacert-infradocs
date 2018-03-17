@@ -273,12 +273,13 @@ Keys and X.509 certificates
 Server certificate for SMTP communication from the Internet and PHPMyAdmin.
 
 .. sslcert:: email.cacert.org
+   :altnames:   DNS:email.cacert.org
    :certfile:   /etc/ssl/certs/ssl-cert-email-cacert.pem
    :keyfile:    /etc/ssl/private/ssl-cert-email-cacert.key
-   :serial:     11e84a
-   :expiration: Mar 31 19:50:03 2018 GMT
-   :sha1fp:     49:5E:55:35:F4:D5:69:B1:BD:92:14:94:38:CD:40:6D:97:A7:2A:0A
-   :issuer:     CAcert.org Class 1 Root CA
+   :serial:     1381FA
+   :expiration: Mar 16 11:23:55 2020 GMT
+   :sha1fp:     3A:EC:11:D0:78:6C:99:34:F2:45:A5:DF:08:90:94:1F:67:2C:6F:47
+   :issuer:     CA Cert Signing Authority
 
 Server certificate for community email services (SMTPS, SMTP submission in
 Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
