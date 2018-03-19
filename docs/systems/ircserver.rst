@@ -80,6 +80,7 @@ irc.intra.cacert.org.   IN A     172.16.2.14
 ======================= ======== ==========================================
 
 .. todo:: setup new SSHFP records
+.. todo:: setup IPv6 AAAA records
 
 .. seealso::
 
@@ -148,6 +149,7 @@ The following port forwarding is setup on :doc:`infra02`
 +-------------+-------+-----------------+
 
 .. todo:: implement final forwarding to required ports from :doc:`infra02`
+.. todo:: allow forwarding of IPv6 ports
 
 Running services
 ----------------
@@ -194,6 +196,9 @@ Running services
 | nginx              | Reverse proxy for  | init script                            |
 |                    | kiwiirc            | :file:`/etc/init.d/nginx`              |
 +--------------------+--------------------+----------------------------------------+
+| votebot            | CAcert vote bot    | init script (spring-boot)              |
+|                    |                    | :file:`/etc/init.d/cacert-votebot`     |
++--------------------+--------------------+----------------------------------------+
 
 Connected Systems
 -----------------
@@ -205,6 +210,7 @@ Outbound network connections
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 
 Security
@@ -234,29 +240,17 @@ Votebot
 ~~~~~~~
 
 The :ref:`Votebot <votebot>` is a custom developed IRC daemon that is packaged
-as a self contained Java jar archive. The bot is started manually as described
-above. For improved maintainability it should be packaged and provide a start
-mechanism that is better integrated with the system.
+as a self contained executable Spring-Boot jar archive. The bot is started via
+init.
 
 .. _votebot:
 
 .. topic:: Votebot
 
    The vote bot is a Java based IRC bot developed at
-   https://github.com/CAcertOrg/cacert-votebot. The bot is started manually by
-   running
-
-   .. code-block:: bash
-
-      java -DvoteBot.meetingChn=SGM -cp VoteBot.jar \
-        de.dogcraft.irc.CAcertVoteBot -u -h 10.0.0.14 -p 6667 --nick VoteBot
-
-.. todo:: use a CAcert git repository for votebot
-
-.. todo:: package votebot for Debian
-
-.. todo:: provide a proper init script/and or systemd unit for votebot
-
+   https://git.cacert.org/gitweb/?p=cacert-votebot.git and built at
+   https://jenkins.cacert.org/job/cacert-votebot/. The bot is started
+   automatically via its init script.
 
 Kiwi IRC
 ~~~~~~~~
@@ -285,6 +279,11 @@ that available updates are applied.
 Critical Configuration items
 ============================
 
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`ircserver` to Puppet code
+
 Keys and X.509 certificates
 ---------------------------
 
@@ -296,7 +295,6 @@ Keys and X.509 certificates
    :expiration: Mar 16 09:35:36 2020 GMT
    :sha1fp:     42:F6:7C:4E:0C:AC:8A:42:7D:9A:94:55:7E:73:7E:E9:40:5C:87:91
    :issuer:     CA Cert Signing Authority
-
 
 .. index::
    pair: inspircd; configuration
@@ -315,6 +313,9 @@ atheme-services configuration
 
 Atheme-services is installed from a Debian package. It is configured via
 :file:`/etc/atheme/atheme.conf`.
+
+.. index::
+   pair: Kiwi IRC; configuration
 
 Kiwi IRC configuration
 ----------------------
@@ -335,6 +336,17 @@ The nginx configuration for reverse proxying Kiwi IRC is stored in
 :file:`/etc/nginx/sites-available/default`. The same certificate and private
 key are used for inspirced and nginx.
 
+votebot configuration
+---------------------
+
+Votebot is configured via spring-boot mechanisms. The current configuration file
+is :file:`/home/votebot/cacert-votebot-0.1.0-SNAPSHOT.conf` and configures
+Votebot to connect to localhost as VoteBot. The bot uses the channels #agm and
+#vote. Channels could be changed in an :file:`application.properties` file in
+:file:`/home/votebot`. The available property names can be found in the `git
+repository`_.
+
+.. _git repository: https://git.cacert.org/gitweb/?p=cacert-votebot.git;a=blob;f=src/main/resources/application.properties
 
 Tasks
 =====
@@ -342,7 +354,6 @@ Tasks
 Planned
 -------
 
-- setup IPv6
 - setup DNS records
 
 Changes

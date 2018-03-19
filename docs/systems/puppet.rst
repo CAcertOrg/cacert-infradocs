@@ -178,6 +178,7 @@ Databases
 Connected Systems
 -----------------
 
+* :doc:`ircserver`
 * :doc:`jenkins`
 * :doc:`motion`
 * :doc:`proxyin`
