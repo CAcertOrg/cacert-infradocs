@@ -54,6 +54,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.233`
 :IP Intranet: :ip:v4:`172.16.2.24`
 :IP Internal: :ip:v4:`10.0.0.130`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::14`
 :MAC address: :mac:`00:ff:9a:79:ca:b1` (eth0)
 
 .. todo:: setup IPv6
