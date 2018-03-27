@@ -17,9 +17,11 @@ CAcert infrastructure.
 Infra02 is the host system for all infrastructure :term:`containers
 <container>`. The containers are setup using the Linux kernel's :term:`LXC`
 system. The firewall for infrastructure is maintained on this machine using
-Ferm_.
+Ferm_. The machine provides a DNS resolver based on dnsmasq_ and gives answers
+for the internal zone infra.cacert.org.
 
 .. _Ferm: http://ferm.foo-projects.org/
+.. _dnsmasq: http://www.thekelleys.org.uk/dnsmasq/doc.html
 
 Administration
 ==============
@@ -139,6 +141,9 @@ Listening services
 +----------+-----------+-----------+-----------------------------------------+
 | 25/tcp   | smtp      | local     | mail delivery to local MTA              |
 +----------+-----------+-----------+-----------------------------------------+
+| 53/tcp   | dns       | internal  | DNS resolver for infra.cacert.org       |
+| 53/udp   |           |           |                                         |
++----------+-----------+-----------+-----------------------------------------+
 | 123/udp  | ntp       | ANY       | network time protocol for host,         |
 |          |           |           | listening on the Internet IPv6 and IPv4 |
 |          |           |           | addresses                               |
@@ -152,33 +157,36 @@ Running services
 .. index::
    single: openssh
    single: cron
+   single: dnsmasq
    single: rsyslog
    single: ntpd
    single: Postfix
    single: nrpe
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| ntpd               | time server        | init script :file:`/etc/init.d/ntp`    |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission, ...    |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
++--------------------+--------------------+-----------------------------------------+
+| Service            | Usage              | Start mechanism                         |
++====================+====================+=========================================+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`     |
+|                    | remote             |                                         |
+|                    | administration     |                                         |
++--------------------+--------------------+-----------------------------------------+
+| dnsmasq            | DNS resolver       | init script :file:`/etc/init.d/dnsmasq` |
++--------------------+--------------------+-----------------------------------------+
+| cron               | job scheduler      | init script :file:`/etc/init.d/cron`    |
++--------------------+--------------------+-----------------------------------------+
+| rsyslog            | syslog daemon      | init script                             |
+|                    |                    | :file:`/etc/init.d/syslog`              |
++--------------------+--------------------+-----------------------------------------+
+| ntpd               | time server        | init script :file:`/etc/init.d/ntp`     |
++--------------------+--------------------+-----------------------------------------+
+| Postfix            | SMTP server for    | init script                             |
+|                    | local mail         | :file:`/etc/init.d/postfix`             |
+|                    | submission, ...    |                                         |
++--------------------+--------------------+-----------------------------------------+
+| Nagios NRPE server | remote monitoring  | init script                             |
+|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server`  |
+|                    | :doc:`monitor`     |                                         |
++--------------------+--------------------+-----------------------------------------+
 
 .. Running Guests
    --------------
@@ -229,12 +237,13 @@ Tasks
 =====
 
 .. todo:: find out why the system logs are messed up
-.. todo:: upgrade to Debian Jessie
+.. todo:: upgrade to Debian Stretch
 .. todo:: document whether it is safe to reboot this system
 .. todo:: document how to setup a new container
 .. todo:: document how to setup firewall rules/forwarding
 .. todo:: document how the backup system works
 .. todo:: add DNS setup for IPv6 address
+.. todo:: switch to Puppet management
 
 Planned
 -------
@@ -254,6 +263,13 @@ Critical Configuration items
 
 .. index::
    pair: Ferm; configuration
+
+Dnsmasq configuration
+---------------------
+
+Dnsmasq serves the local DNS zone infra.cacert.org to the `br0` interface. It
+is configured by :file:`/etc/dnsmasq.d/00infra` and uses :file:`/etc/hosts` as
+source for IP addresses.
 
 Ferm firewall configuration
 ---------------------------
