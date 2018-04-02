@@ -131,30 +131,24 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: MariaDB
-   single: Postfix
-   single: Redis
+   single: apache httpd
    single: cron
+   single: mariadb
    single: nrpe
    single: openssh
+   single: postfix
+   single: puppet agent
+   single: redis
    single: rsyslog
    single: supervisord
 
 +--------------------+------------------------------+-----------------------------------------------------+
 | Service            | Usage                        | Start mechanism                                     |
 +====================+==============================+=====================================================+
-| openssh server     | ssh daemon for               | init script :file:`/etc/init.d/ssh`                 |
-|                    | remote                       |                                                     |
-|                    | administration               |                                                     |
-+--------------------+------------------------------+-----------------------------------------------------+
 | Apache httpd       | Webserver for                | init script                                         |
 |                    | Pootle                       | :file:`/etc/init.d/apache2`                         |
 +--------------------+------------------------------+-----------------------------------------------------+
 | cron               | job scheduler                | init script :file:`/etc/init.d/cron`                |
-+--------------------+------------------------------+-----------------------------------------------------+
-| rsyslog            | syslog daemon                | init script                                         |
-|                    |                              | :file:`/etc/init.d/syslog`                          |
 +--------------------+------------------------------+-----------------------------------------------------+
 | MySQL              | MySQL database               | init script                                         |
 |                    | server for Pootle            | :file:`/etc/init.d/mysql`                           |
@@ -163,11 +157,21 @@ Running services
 |                    | local mail                   | :file:`/etc/init.d/postfix`                         |
 |                    | submission                   |                                                     |
 +--------------------+------------------------------+-----------------------------------------------------+
+| Puppet agent       | local Puppet agent           | init script                                         |
+|                    |                              | :file:`/etc/init.d/puppet`                          |
++--------------------+------------------------------+-----------------------------------------------------+
 | Nagios NRPE server | remote monitoring            | init script                                         |
 |                    | service queried by           | :file:`/etc/init.d/nagios-nrpe-server`              |
 |                    | :doc:`monitor`               |                                                     |
 +--------------------+------------------------------+-----------------------------------------------------+
+| openssh server     | ssh daemon for               | init script :file:`/etc/init.d/ssh`                 |
+|                    | remote                       |                                                     |
+|                    | administration               |                                                     |
++--------------------+------------------------------+-----------------------------------------------------+
 | Redis              | Job queue for Pootle         | init script :file:`/etc/init.d/redis-server`        |
++--------------------+------------------------------+-----------------------------------------------------+
+| rsyslog            | syslog daemon                | init script                                         |
+|                    |                              | :file:`/etc/init.d/syslog`                          |
 +--------------------+------------------------------+-----------------------------------------------------+
 | Supervisord        | Supervisor for background    | init script :file:`/etc/init.d/supervisor`          |
 |                    | tasks                        |                                                     |
@@ -193,7 +197,7 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
@@ -248,11 +252,20 @@ packages.
    consider building the virtualenv on :doc:`jenkins` to avoid development tools
    on this system
 
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
+
 Risk assessments on critical packages
 -------------------------------------
 
 System access is limited to http/https via Apache httpd which is restricted to
 a minimal set of modules.
+
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
 
 Pootle is based on Django 1.10 and should be updated to a newer version when it
 becomes available. Pootle is run as a dedicated system user `pootle` that is

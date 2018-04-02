@@ -155,39 +155,32 @@ Running services
 ----------------
 
 .. index::
+   single: atheme-services
    single: cron
    single: exim
+   single: inspircd
+   single: kiwiirc
+   single: nginx
    single: nrpe
    single: openssh
-   single: inspircd
-   single: atheme-services
+   single: puppet agent
+   single: rsyslog
    single: votebot
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
+| atheme-services    | IRC services       | init script                            |
+|                    |                    | :file:`/etc/init.d/atheme-services`    |
 +--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 | Exim               | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/exim4`              |
 |                    | submission         |                                        |
 +--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
 | inspircd           | IRC daemon         | init script                            |
 |                    |                    | :file:`/etc/init.d/inspircd`           |
-+--------------------+--------------------+----------------------------------------+
-| atheme-services    | IRC services       | init script                            |
-|                    |                    | :file:`/etc/init.d/atheme-services`    |
 +--------------------+--------------------+----------------------------------------+
 | kiwiirc            | IRC web client     | start script                           |
 |                    |                    | :file:`/home/kiwiirc/KiwiIRC/kiwi`     |
@@ -195,6 +188,20 @@ Running services
 +--------------------+--------------------+----------------------------------------+
 | nginx              | Reverse proxy for  | init script                            |
 |                    | kiwiirc            | :file:`/etc/init.d/nginx`              |
++--------------------+--------------------+----------------------------------------+
+| Nagios NRPE server | remote monitoring  | init script                            |
+|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
+|                    | :doc:`monitor`     |                                        |
++--------------------+--------------------+----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
++--------------------+--------------------+----------------------------------------+
+| Puppet agent       | configuration      | init script                            |
+|                    | management agent   | :file:`/etc/init.d/puppet`             |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 | votebot            | CAcert vote bot    | init script (spring-boot)              |
 |                    |                    | :file:`/etc/init.d/cacert-votebot`     |
@@ -208,7 +215,7 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
@@ -235,6 +242,10 @@ Dedicated user roles
 
 Non-distribution packages and modifications
 -------------------------------------------
+
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Votebot
 ~~~~~~~
@@ -275,6 +286,10 @@ that available updates are applied.
 
 .. todo:: implement some update monitoring for Kiwi IRC
 
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
 
 Critical Configuration items
 ============================

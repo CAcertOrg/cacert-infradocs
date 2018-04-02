@@ -144,20 +144,17 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: Exim
-   single: Puppet agent
+   single: apache httpd
    single: cron
+   single: exim
    single: nrpe
    single: openssh
+   single: puppet agent
+   single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
 | Apache httpd       | Webserver for      | init script                            |
 |                    | Subversion         | :file:`/etc/init.d/apache2`            |
 +--------------------+--------------------+----------------------------------------+
@@ -171,8 +168,15 @@ Running services
 |                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
 |                    | :doc:`monitor`     |                                        |
 +--------------------+--------------------+----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
++--------------------+--------------------+----------------------------------------+
 | Puppet agent       | configuration      | init script                            |
 |                    | management agent   | :file:`/etc/init.d/puppet`             |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 
 Connected Systems
@@ -186,7 +190,7 @@ Outbound network connections
 ----------------------------
 
 * crl.cacert.org (rsync) for getting CRLs
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
@@ -221,6 +225,11 @@ the system.
 
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`svn` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------

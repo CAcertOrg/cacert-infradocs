@@ -135,29 +135,21 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: Exim
+   single: apache httpd
    single: cron
-   single: nginx
+   single: exim
    single: nrpe
    single: openssh
+   single: puppet agent
    single: rsyslog
 
 +--------------------+----------------------+----------------------------------------+
 | Service            | Usage                | Start mechanism                        |
 +====================+======================+========================================+
-| openssh server     | ssh daemon for       | init script :file:`/etc/init.d/ssh`    |
-|                    | remote               |                                        |
-|                    | administration       |                                        |
-|                    | and git access       |                                        |
-+--------------------+----------------------+----------------------------------------+
 | Apache httpd       | Webserver for static | init script                            |
 |                    | content              | :file:`/etc/init.d/apache2`            |
 +--------------------+----------------------+----------------------------------------+
 | cron               | job scheduler        | init script :file:`/etc/init.d/cron`   |
-+--------------------+----------------------+----------------------------------------+
-| rsyslog            | syslog daemon        | init script                            |
-|                    |                      | :file:`/etc/init.d/syslog`             |
 +--------------------+----------------------+----------------------------------------+
 | Exim               | SMTP server for      | init script                            |
 |                    | local mail           | :file:`/etc/init.d/exim4`              |
@@ -166,6 +158,17 @@ Running services
 | Nagios NRPE server | remote monitoring    | init script                            |
 |                    | service queried by   | :file:`/etc/init.d/nagios-nrpe-server` |
 |                    | :doc:`monitor`       |                                        |
++--------------------+----------------------+----------------------------------------+
+| openssh server     | ssh daemon for       | init script :file:`/etc/init.d/ssh`    |
+|                    | remote               |                                        |
+|                    | administration       |                                        |
+|                    | and git access       |                                        |
++--------------------+----------------------+----------------------------------------+
+| Puppet agent       | configuration        | init script                            |
+|                    | management agent     | :file:`/etc/init.d/puppet`             |
++--------------------+----------------------+----------------------------------------+
+| rsyslog            | syslog daemon        | init script                            |
+|                    |                      | :file:`/etc/init.d/syslog`             |
 +--------------------+----------------------+----------------------------------------+
 
 Connected Systems
@@ -180,8 +183,9 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 
 Security
@@ -208,6 +212,10 @@ Dedicated user roles
 Non-distribution packages and modifications
 -------------------------------------------
 
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
+
 The used :program:`gitolite` version is from Debian Jessie and should either
 be replaced by :program:`gitolite3` from Debian Stretch or a combination of
 git repositories on :doc:`git` and web hooks for triggering updates.
@@ -225,8 +233,18 @@ defined set of ssh keys.
 
 .. todo:: check access on gitolite repositories
 
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
+
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`webstatic` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------

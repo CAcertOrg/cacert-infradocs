@@ -117,27 +117,31 @@ Running services
 ----------------
 
 .. index::
-   single: puppet agent
    single: cron
-   single: exim4
-   single: squid
+   single: exim
    single: openssh
+   single: puppet agent
+   single: rsyslog
+   single: squid
 
 +----------------+--------------------+--------------------------------------+
 | Service        | Usage              | Start mechanism                      |
 +================+====================+======================================+
-| openssh server | ssh daemon for     | init script :file:`/etc/init.d/ssh`  |
-|                | remote             |                                      |
-|                | administration     |                                      |
-+----------------+--------------------+--------------------------------------+
 | cron           | job scheduler      | init script :file:`/etc/init.d/cron` |
 +----------------+--------------------+--------------------------------------+
 | Exim           | SMTP server for    | init script                          |
 |                | local mail         | :file:`/etc/init.d/exim4`            |
 |                | submission         |                                      |
 +----------------+--------------------+--------------------------------------+
+| openssh server | ssh daemon for     | init script :file:`/etc/init.d/ssh`  |
+|                | remote             |                                      |
+|                | administration     |                                      |
++----------------+--------------------+--------------------------------------+
 | Puppet agent   | local Puppet agent | init script                          |
 |                |                    | :file:`/etc/init.d/puppet`           |
++----------------+--------------------+--------------------------------------+
+| rsyslog        | syslog daemon      | init script                          |
+|                |                    | :file:`/etc/init.d/syslog`           |
 +----------------+--------------------+--------------------------------------+
 | Squid          | Caching and        | init script                          |
 |                | filtering http/    | :file:`/etc/init.d/squid`            |
@@ -171,7 +175,7 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * .debian.org Debian mirrors
@@ -182,9 +186,9 @@ Security
 ========
 
 .. sshkeys::
-   :ECDSA:   74:70:63:b9:3e:6b:9f:a2:34:0e:9a:92:77:dd:93:73
-   :ED25519: 43:0d:1e:ec:1b:5f:c3:84:38:c7:75:b7:be:3c:1b:d4
-   :RSA:     1e:8e:1d:06:a5:fa:d6:08:95:e9:68:fb:ae:16:24:8f
+   :RSA:     SHA256:TfsDuQ2tuWnTlpLnFILxlZa+IOpC97QmxDAlGgCa0/I MD5:1e:8e:1d:06:a5:fa:d6:08:95:e9:68:fb:ae:16:24:8f
+   :ECDSA:   SHA256:d79XAVk0pspIVoI7i4ffohM7PjaBMJdh1J4yv+4Z5ms MD5:74:70:63:b9:3e:6b:9f:a2:34:0e:9a:92:77:dd:93:73
+   :ED25519: SHA256:26yiJUT3NfqpFDLgAgXSsRL7ppMiIpNqKmfDiMxpAqc MD5:43:0d:1e:ec:1b:5f:c3:84:38:c7:75:b7:be:3c:1b:d4
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -198,6 +202,11 @@ Risk assessments on critical packages
 
 Squid is a proven http and https proxy installed from distribution packages
 with low risk.
+
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
 
 Critical Configuration items
 ============================

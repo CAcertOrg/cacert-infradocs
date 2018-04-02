@@ -56,11 +56,13 @@ Setup puppet-agent
   the `cacert-puppet Repository`_ on :doc:`systems/git`
 - see `Puppet agent installation`_ for agent setup (install the agent from
   official Puppet repositories)
-- define the puppet master IP address in :file:`/etc/hosts`:
+- make sure that DNS resolution is performed by :doc:`systems/infra02`. The
+  :file:`/etc/resolv.conf` should contain the following lines:
 
   .. code-block:: text
 
-     10.0.0.200	puppet
+     search infra.cacert.org intra.cacert.org
+     nameserver 10.0.0.1
 
 - set the certname in :file:`/etc/puppetlabs/puppet/puppet.conf` to match
   the name of the file in :file:`hieradata/nodes/` for the system:

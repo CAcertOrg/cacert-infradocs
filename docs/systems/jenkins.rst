@@ -131,34 +131,38 @@ Running services
 ----------------
 
 .. index::
-   single: Exim
-   single: Jenkins
    single: cron
+   single: exim
+   single: jenkins
    single: nrpe
    single: openssh
+   single: puppet agent
    single: rsyslog
 
 +--------------------+--------------------+-----------------------------------------+
 | Service            | Usage              | Start mechanism                         |
 +====================+====================+=========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`     |
-|                    | remote             |                                         |
-|                    | administration     |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| Jenkins            | Jenkins CI server  | init script :file:`/etc/init.d/jenkins` |
-+--------------------+--------------------+-----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`    |
-+--------------------+--------------------+-----------------------------------------+
-| rsyslog            | syslog daemon      | init script                             |
-|                    |                    | :file:`/etc/init.d/syslog`              |
 +--------------------+--------------------+-----------------------------------------+
 | Exim               | SMTP server for    | init script                             |
 |                    | local mail         | :file:`/etc/init.d/exim4`               |
 |                    | submission         |                                         |
 +--------------------+--------------------+-----------------------------------------+
+| Jenkins            | Jenkins CI server  | init script :file:`/etc/init.d/jenkins` |
++--------------------+--------------------+-----------------------------------------+
 | Nagios NRPE server | remote monitoring  | init script                             |
 |                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server`  |
 |                    | :doc:`monitor`     |                                         |
++--------------------+--------------------+-----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`     |
+|                    | remote             |                                         |
+|                    | administration     |                                         |
++--------------------+--------------------+-----------------------------------------+
+| Puppet agent       | configuration      | init script                             |
+|                    | management agent   | :file:`/etc/init.d/puppet`              |
++--------------------+--------------------+-----------------------------------------+
+| rsyslog            | syslog daemon      | init script                             |
+|                    |                    | :file:`/etc/init.d/syslog`              |
 +--------------------+--------------------+-----------------------------------------+
 
 Connected Systems
@@ -173,7 +177,7 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`git` for fetching source code
 * :doc:`proxyout` as HTTP proxy for APT and Jenkins plugin updates
@@ -217,6 +221,8 @@ Critical Configuration items
 
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`jenkins` to Puppet code
 
 Jenkins configuration
 ---------------------

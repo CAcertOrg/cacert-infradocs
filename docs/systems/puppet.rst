@@ -124,34 +124,31 @@ Running services
 ----------------
 
 .. index::
-   single: Exim
-   single: PostgreSQL
-   single: Puppet agent
-   single: Puppet server
-   single: Puppetdb
    single: cron
+   single: exim
    single: openssh
+   single: postgresql
+   single: puppet agent
+   single: puppet server
+   single: puppetdb
    single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for PuppetDB       |                                        |
 +--------------------+--------------------+----------------------------------------+
 | Exim               | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/exim4`              |
 |                    | submission         |                                        |
++--------------------+--------------------+----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
++--------------------+--------------------+----------------------------------------+
+| PostgreSQL         | PostgreSQL         | init script                            |
+|                    | database server    | :file:`/etc/init.d/postgresql`         |
+|                    | for PuppetDB       |                                        |
 +--------------------+--------------------+----------------------------------------+
 | Puppet server      | Puppet master for  | init script                            |
 |                    | infrastructure     | :file:`/etc/init.d/puppetserver`       |
@@ -160,10 +157,13 @@ Running services
 | Puppet agent       | local Puppet agent | init script                            |
 |                    |                    | :file:`/etc/init.d/puppet`             |
 +--------------------+--------------------+----------------------------------------+
-| Puppet DB          | PuppetDB for       | init script                            |
+| PuppetDB           | PuppetDB for       | init script                            |
 |                    | querying Puppet    | :file:`/etc/init.d/puppetdb`           |
 |                    | facts and nodes    |                                        |
 |                    | and resources      |                                        |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 
 Databases
@@ -185,11 +185,13 @@ Connected Systems
 * :doc:`proxyout`
 * :doc:`svn`
 * :doc:`translations`
+* :doc:`web`
+* :doc:`webstatic`
 
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
 * :doc:`proxyout` as HTTP proxy for APT
 * forgeapi.puppet.com for Puppet forge access
@@ -216,14 +218,12 @@ advanced Puppet functionality like hiera-eyaml.
 All puppet related code is installed in the Puppet specific /opt/puppetlabs
 tree.
 
-
 Risk assessments on critical packages
 -------------------------------------
 
 The system uses third party packages with a good security track record and
 regular updates. The attack surface is small due to the tightly restricted
 access to the system.
-
 
 Critical Configuration items
 ============================
