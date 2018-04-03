@@ -159,7 +159,6 @@ Connected Systems
 * :doc:`email`
 * :doc:`emailout`
 * :doc:`git`
-* :doc:`irc`
 * :doc:`ircserver`
 * :doc:`jenkins`
 * :doc:`lists`

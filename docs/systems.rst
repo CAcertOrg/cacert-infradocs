@@ -16,7 +16,6 @@ administrator team.
    systems/email
    systems/emailout
    systems/git
-   systems/irc
    systems/ircserver
    systems/issue
    systems/lists

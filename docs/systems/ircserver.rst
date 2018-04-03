@@ -8,7 +8,15 @@ Ircserver
 Purpose
 =======
 
-This system is the planned replacement for :doc:`irc`.
+This system provides the CAcert IRC service for private communications,
+allowing usage of CAcert-secured SSL-Encrypted IRC traffic for our everyday
+chat, meetings, and general support.
+
+Application Links
+-----------------
+
+https://irc.cacert.org/
+   HTTPS secured Web based IRC access
 
 Administration
 ==============
@@ -52,12 +60,10 @@ Logical Location
 ----------------
 
 :IP Internet: :ip:v4:`213.154.225.233`
-:IP Intranet: :ip:v4:`172.16.2.24`
+:IP Intranet: :ip:v4:`172.16.2.14`
 :IP Internal: :ip:v4:`10.0.0.130`
 :IPv6:        :ip:v6:`2001:7b8:616:162:2::14`
 :MAC address: :mac:`00:ff:9a:79:ca:b1` (eth0)
-
-.. todo:: setup IPv6
 
 .. seealso::
 
@@ -70,17 +76,21 @@ DNS
    single: DNS records; Ircserver
    single: DNS records; Irc
 
-======================= ======== ==========================================
-Name                    Type     Content
-======================= ======== ==========================================
-irc.cacert.org.         IN A     213.154.225.233
-irc.cacert.org.         IN SSHFP 1 1 C123F73001682277DE5346923518D17CC94E298E
-irc.cacert.org.         IN SSHFP 2 1 B85941C077732F78BE290B8F0B44B0A5E8A0E51D
-irc.intra.cacert.org.   IN A     172.16.2.14
-======================= ======== ==========================================
-
-.. todo:: setup new SSHFP records
-.. todo:: setup IPv6 AAAA records
+=========================== ======== ====================================================================
+Name                        Type     Content
+=========================== ======== ====================================================================
+irc.cacert.org.             IN A     213.154.225.233
+irc.cacert.org.             IN AAAA  2001:7b8:616:162:2::14
+irc.cacert.org.             IN SSHFP 1 1 39b6c81b9fe76bd3c112f891ad3198f7a6102f4c
+irc.cacert.org.             IN SSHFP 1 2 30c1fce412955bb4947bbcb25a395d8e5820403eddb5746ecced578d97f46567
+irc.cacert.org.             IN SSHFP 2 1 90fcff63476f93d5e4f5d634ba1407445323d3fe
+irc.cacert.org.             IN SSHFP 2 2 734a6729a077d77c79af0e8f45187f88c25d7cd102c34aee1e753d9644c965bc
+irc.cacert.org.             IN SSHFP 3 1 5b9191613e743082fd4aa64e1f3a4601ed77f366
+irc.cacert.org.             IN SSHFP 3 2 b88f898cd5251b2b6e315a2e266873747b7cd237c0f92458916af938e4694f96
+irc.cacert.org.             IN SSHFP 4 1 866a42ee920b7f38a86ca9f3b07af808aae9768c
+irc.cacert.org.             IN SSHFP 4 2 68d44bc21d05550c8aab62163b9257c85b9bcf0a4cab1c96ad2ca674b803601c
+ircserver.intra.cacert.org. IN A     172.16.2.14
+=========================== ======== ====================================================================
 
 .. seealso::
 
@@ -147,9 +157,6 @@ The following port forwarding is setup on :doc:`infra02`
 +-------------+-------+-----------------+
 | 172.16.2.14 | 13700 | 10.0.0.130:7000 |
 +-------------+-------+-----------------+
-
-.. todo:: implement final forwarding to required ports from :doc:`infra02`
-.. todo:: allow forwarding of IPv6 ports
 
 Running services
 ----------------
@@ -274,6 +281,8 @@ local loopback interface and Internet access is provided by an nginx reverse
 proxy that also provides https connectivity. NodeJS and npm have been installed
 from Debian packages.
 
+.. todo:: setup init script for kiwiirc
+
 Risk assessments on critical packages
 -------------------------------------
 
@@ -369,15 +378,12 @@ Tasks
 Planned
 -------
 
-- setup DNS records
+- None
 
 Changes
 =======
 
-System Future
--------------
-
-- replace :doc:`irc` by this system
+- Nothing planned
 
 Additional documentation
 ========================
