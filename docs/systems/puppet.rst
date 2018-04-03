@@ -180,6 +180,7 @@ Connected Systems
 
 * :doc:`ircserver`
 * :doc:`jenkins`
+* :doc:`monitor`
 * :doc:`motion`
 * :doc:`proxyin`
 * :doc:`proxyout`

@@ -149,29 +149,24 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: Icinga
-   single: IDO2DB
-   single: Postfix
-   single: PostgreSQL
+   single: apache httpd
    single: cron
+   single: icinga
+   single: ido2db
    single: nrpe
    single: openssh
+   single: postfix
+   single: postgresql
+   single: puppet agent
+   single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
 | Apache httpd       | Webserver for      | init script                            |
 |                    | Icinga classic     | :file:`/etc/init.d/apache2`            |
 +--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 | Icinga             | Icinga monitoring  | init script                            |
 |                    | daemon             | :file:`/etc/init.d/icinga`             |
@@ -179,17 +174,27 @@ Running services
 | IDO2DB             | IDO database       | init script                            |
 |                    | writer daemon      | :file:`/etc/init.d/ido2db`             |
 +--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for IDO            |                                        |
+| Nagios NRPE server | remote monitoring  | init script                            |
+|                    | service  by        | :file:`/etc/init.d/nagios-nrpe-server` |
+|                    | this system itself |                                        |
++--------------------+--------------------+----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
 +--------------------+--------------------+----------------------------------------+
 | Postfix            | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/postfix`            |
 |                    | submission         |                                        |
 +--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service  by        | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | this system itself |                                        |
+| PostgreSQL         | PostgreSQL         | init script                            |
+|                    | database server    | :file:`/etc/init.d/postgresql`         |
+|                    | for IDO            |                                        |
++--------------------+--------------------+----------------------------------------+
+| Puppet agent       | configuration      | init script                            |
+|                    | management agent   | :file:`/etc/init.d/puppet`             |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 
 Databases
@@ -209,8 +214,9 @@ None
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 * all :ip:v4range:`10.0.0.0/24` and :ip:v4range:`172.16.2.0/24` systems for
@@ -231,7 +237,9 @@ Security
 Non-distribution packages and modifications
 -------------------------------------------
 
-* None
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Risk assessments on critical packages
 -------------------------------------
@@ -244,8 +252,18 @@ Apache httpd has a good reputation and is a low risk package.
 NRPE is flawed and should be replaced. The risk is somewhat mitigated by
 firewalling on :doc:`the infrastructure host <infra02>`.
 
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
+
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`monitor` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
