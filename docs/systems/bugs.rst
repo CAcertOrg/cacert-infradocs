@@ -65,6 +65,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.232`
 :IP Intranet: :ip:v4:`172.16.2.16`
 :IP Internal: :ip:v4:`10.0.0.16`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::16`
 :MAC address: :mac:`00:ff:fe:13:14:7a` (eth0)
 
 .. seealso::
@@ -81,6 +82,7 @@ DNS
 Name                     Type     Content
 ======================== ======== ====================================================================
 bugs.cacert.org.         IN A     213.154.225.232
+bugs.cacert.org.         IN AAAA  2001:7b8:616:162:2::16
 bugs.cacert.org.         IN SSHFP 1 1 4B4BC32C4E655559B43A370B77CAD4983E8C24F8
 bugs.cacert.org          IN SSHFP 1 2 51f10258849d1194f282deb0da97009016423d5f0b28a0056a551c4f38c2870a
 bugs.cacert.org.         IN SSHFP 2 1 7916E317983D8BC85D719BB793E5E46A6B4976B2
@@ -348,8 +350,6 @@ Tasks
 
 Planned
 -------
-
-.. todo:: setup IPv6
 
 Changes
 =======
