@@ -22,8 +22,7 @@ Administration
 System Administration
 ---------------------
 
-* Primary: :ref:`people_neo`
-* Secondary: :ref:`people_jandd`
+* Primary: :ref:`people_jandd`
 * Secondary: :ref:`people_dirk`
 
 Application Administration
@@ -47,7 +46,7 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_mario` and :ref:`people_dirk` have :program:`sudo` access on that
+:ref:`people_mario` and :ref:`people_wytze` have :program:`sudo` access on that
 machine too.
 
 Basics
