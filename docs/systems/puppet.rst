@@ -178,6 +178,7 @@ Databases
 Connected Systems
 -----------------
 
+* :doc:`bugs`
 * :doc:`ircserver`
 * :doc:`jenkins`
 * :doc:`monitor`

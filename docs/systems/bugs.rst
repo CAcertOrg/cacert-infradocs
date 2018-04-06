@@ -136,40 +136,44 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: MySQL
-   single: Postfix
+   single: apache httpd
    single: cron
+   single: mariadb
    single: nrpe
    single: openssh
+   single: postfix
+   single: puppet agent
    single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
 +====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
 | Apache httpd       | Webserver for bug  | init script                            |
 |                    | tracker            | :file:`/etc/init.d/apache2`            |
 +--------------------+--------------------+----------------------------------------+
 | cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
 +--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| MySQL              | MySQL database     | init script                            |
+| MariaDB            | MariaDB database   | init script                            |
 |                    | server for bug     | :file:`/etc/init.d/mysql`              |
 |                    | tracker            |                                        |
++--------------------+--------------------+----------------------------------------+
+| Nagios NRPE server | remote monitoring  | init script                            |
+|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
+|                    | :doc:`monitor`     |                                        |
++--------------------+--------------------+----------------------------------------+
+| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
+|                    | remote             |                                        |
+|                    | administration     |                                        |
 +--------------------+--------------------+----------------------------------------+
 | Postfix            | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/postfix`            |
 |                    | submission         |                                        |
 +--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
+| Puppet agent       | configuration      | init script                            |
+|                    | management agent   | :file:`/etc/init.d/puppet`             |
++--------------------+--------------------+----------------------------------------+
+| rsyslog            | syslog daemon      | init script                            |
+|                    |                    | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------+----------------------------------------+
 
 Databases
@@ -178,11 +182,11 @@ Databases
 .. index::
    pair: MySQL database; mantis
 
-+-------+--------+--------------------+
-| RDBMS | Name   | Used for           |
-+=======+========+====================+
-| MySQL | mantis | Mantis bug tracker |
-+-------+--------+--------------------+
++---------+--------+--------------------+
+| RDBMS   | Name   | Used for           |
++=========+========+====================+
+| MariaDB | mantis | Mantis bug tracker |
++---------+--------+--------------------+
 
 Connected Systems
 -----------------
@@ -192,8 +196,9 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+* :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 * HTTP (80/tcp) to :doc:`git`
@@ -209,6 +214,10 @@ Security
 
 Non-distribution packages and modifications
 -------------------------------------------
+
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 .. index::
    pair: non-distribution package; Mantis
@@ -233,8 +242,18 @@ Administrators for this system should subscribe to the
 mantisbt-announce@lists.sourceforge.net list to get notified when updates are
 released.
 
+The system uses third party packages with a good security track record and
+regular updates. The attack surface is small due to the tightly restricted
+access to the system. The puppet agent is not exposed for access from outside
+the system.
+
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the Puppet repository.
+
+.. todo:: move configuration of :doc:`bugs` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
