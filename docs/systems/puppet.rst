@@ -113,6 +113,8 @@ Listening services
 +----------+-----------+-----------+------------------------------------------+
 | 5432/tcp | pgsql     | local     | PostgreSQL database for PuppetDB         |
 +----------+-----------+-----------+------------------------------------------+
+| 8000/tcp | git-hook  | internal  | HTTP endpoint for git-pull-hook          |
++----------+-----------+-----------+------------------------------------------+
 | 8140/tcp | puppet    | internal  | Puppet master                            |
 +----------+-----------+-----------+------------------------------------------+
 | 8080/tcp | puppetdb  | local     | HTTP endpoint for local PuppetDB queries |
@@ -126,6 +128,7 @@ Running services
 .. index::
    single: cron
    single: exim
+   single: git-pull-hook
    single: openssh
    single: postgresql
    single: puppet agent
@@ -141,6 +144,12 @@ Running services
 | Exim               | SMTP server for    | init script                            |
 |                    | local mail         | :file:`/etc/init.d/exim4`              |
 |                    | submission         |                                        |
++--------------------+--------------------+----------------------------------------+
+| git-pull-hook      | Custom Python3     | init script                            |
+|                    | hook to pull git   | :file:`/etc/init.d/git-pull-hook`      |
+|                    | changes from the   |                                        |
+|                    | cacert-puppet      |                                        |
+|                    | repository         |                                        |
 +--------------------+--------------------+----------------------------------------+
 | openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
 |                    | remote             |                                        |
@@ -189,12 +198,15 @@ Connected Systems
 * :doc:`translations`
 * :doc:`web`
 * :doc:`webstatic`
+* :doc:`git` for triggering the git-pull-hook on newly pushed commits to the
+  cacert-puppet repository
 
 Outbound network connections
 ----------------------------
 
 * :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
+* :doc:`git` to fetch new commits from the cacert-puppet repository
 * :doc:`proxyout` as HTTP proxy for APT
 * forgeapi.puppet.com for Puppet forge access
 * rubygems.org for Puppet specific Ruby gems
@@ -271,6 +283,9 @@ Puppet modules are installed by :program:`/opt/puppetlabs/puppet/bin/r10k`.
 The puppet code should follow best practices like the Roles and profiles
 pattern (see references below) and code/data separation via Hiera.
 
+Updates to the cacert-puppet repository trigger a web hook listening on tcp
+port 8000 that automatically updates the production environment directory.
+
 
 Tasks
 =====
@@ -282,7 +297,7 @@ Planned
   reproducible/auditable system setup
 * automate updates of the Puppet code from Git
 
-.. todo:: implement Webhook on the puppet machine that triggers git pull and r10k run
+.. todo:: improve Webhook to run r10k after git pull
 
 Changes
 =======
