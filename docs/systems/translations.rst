@@ -64,6 +64,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.240`
 :IP Intranet: :ip:v4:`172.16.2.31`
 :IP Internal: :ip:v4:`10.0.0.31`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::31`
 :MAC address: :mac:`00:ff:6c:7d:5b:c5` (eth0)
 
 .. seealso::
@@ -76,14 +77,22 @@ DNS
 .. index::
    single: DNS records; Translations
 
-============================== ======== ==========================================
+============================== ======== ====================================================================
 Name                           Type     Content
-============================== ======== ==========================================
+============================== ======== ====================================================================
+l10n.cacert.org.               IN CNAME translations.cacert.org.
 translations.cacert.org.       IN A     213.154.225.240
+translations.cacert.org.       IN AAAA  2001:7b8:616:162:2::31
 translations.cacert.org.       IN SSHFP 1 1 1128972FB54F927477A781718E2F9C114E9CA383
+translations.cacert.org.       IN SSHFP 1 2 F223904069AEAA2E0EAC5D9092AB7DEBAE70F06EC3C25E94F49F1B15F633ED5D
 translations.cacert.org.       IN SSHFP 2 1 3A36E5DF06304C481F01FC723FD88A086E82D986
+translations.cacert.org.       IN SSHFP 2 2 4A1FF7396AE874559CF196D54D5D7F6890DBA6DE73B46AF049258B1024CDACE2
+translations.cacert.org.       IN SSHFP 3 1 0F0CBD9C188D619D743859A249238F684D6CCA5F
+translations.cacert.org.       IN SSHFP 3 2 441D76EB651022A8C5810C6946CBDEC47504E97AD669B073EC9D6E27791A7C4D
+translations.cacert.org.       IN SSHFP 4 1 A4102E1FBF1BE1ACD53F2E7653DD8898E567C437
+translations.cacert.org.       IN SSHFP 4 2 6FE3334B51E68F9F650B00D13F504306029B71A76C5AFF54873D72B24ED19DD5
 translations.intra.cacert.org. IN A     172.16.2.31
-============================== ======== ==========================================
+============================== ======== ====================================================================
 
 .. seealso::
 
