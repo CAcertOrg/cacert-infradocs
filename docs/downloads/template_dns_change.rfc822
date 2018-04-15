@@ -1,0 +1,17 @@
+Subject: [DNS-Change] <add more information here>
+To: dns-admin@cacert.org
+Cc: infrastructure-admin@cacert.org
+
+Dear DNS admins,
+
+please add the following DNS records:
+
+<name>.cacert.org. IN <type> <content>
+
+please delete the following DNS records:
+
+<name>.cacert.org. IN <type> <maybe content>
+
+
+Best regards
+<requester name>
