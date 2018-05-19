@@ -230,9 +230,9 @@ Keys and X.509 certificates
    :altnames:   DNS:infradocs.cacert.org
    :certfile:   /etc/ssl/certs/infradocs.cacert.org.crt
    :keyfile:    /etc/ssl/private/infradocs.cacert.org.key
-   :serial:     029159
-   :expiration: May 06 07:46:25 18 GMT
-   :sha1fp:     BA:79:60:5E:8C:21:F0:14:FF:64:6B:44:64:A0:23:F9:C3:A1:F0:C6
+   :serial:     02C448
+   :expiration: May 18 08:21:31 2020 GMT
+   :sha1fp:     87:E7:21:19:24:61:D9:82:60:DB:65:41:7C:6C:0A:4E:63:0E:27:F7
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: jenkins.cacert.org
