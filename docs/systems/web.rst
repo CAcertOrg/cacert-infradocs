@@ -12,7 +12,8 @@ Reverse proxy for different websites that handles http to https redirection and
 TLS handshakes. The following services are currently proxied by this system:
 
 * Jenkins on :doc:`jenkins`
-* funding.cacert.org and infradocs.cacert.org on :doc:`webstatic`
+* codedocs.cacert.org, funding.cacert.org and infradocs.cacert.org on
+  :doc:`webstatic`
 
 The proxy should be used for all web applications that do not need access to the
 TLS parameters (client certificates, other peer information). Applications that
@@ -176,8 +177,8 @@ Outbound network connections
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * :doc:`jenkins` as backend for the jenkins.cacert.org VirtualHost
-* :doc:`webstatic` as backend for the funding.cacert.org and
-  infradocs.cacert.org VirtualHosts
+* :doc:`webstatic` as backend for the codedocs.cacert.org, funding.cacert.org
+  and infradocs.cacert.org VirtualHosts
 
 Security
 ========
@@ -217,12 +218,21 @@ configuration items outside of the Puppet repository.
 Keys and X.509 certificates
 ---------------------------
 
+.. sslcert:: codedocs.cacert.org
+   :altnames:   DNS:codedocs.cacert.org
+   :certfile:   /etc/ssl/certs/codedocs.cacert.org.crt
+   :keyfile:    /etc/ssl/private/codedocs.cacert.org.key
+   :serial:     02CB3D
+   :expiration: Oct 25 22:35:23 2020 GMT
+   :sha1fp:     49:FA:0B:01:C0:9F:74:EF:12:15:8F:CA:8E:D3:2C:FA:0C:7E:3C:F7
+   :issuer:     CAcert Class 3 Root
+
 .. sslcert:: funding.cacert.org
    :altnames:   DNS:funding.cacert.org
    :certfile:   /etc/ssl/certs/funding.cacert.org.crt
    :keyfile:    /etc/ssl/private/funding.cacert.org.key
    :serial:     02A770
-   :expiration: Feb 16 12:07:35 19 GMT
+   :expiration: Feb 16 12:07:35 2019 GMT
    :sha1fp:     36:E0:A1:86:7A:FA:C6:F4:86:9F:CC:9C:61:4D:B9:A4:7C:0F:9F:C9
    :issuer:     CAcert Class 3 Root
 
@@ -240,7 +250,7 @@ Keys and X.509 certificates
    :certfile:   /etc/ssl/certs/jenkins.cacert.org.crt
    :keyfile:    /etc/ssl/private/jenkins.cacert.org.key
    :serial:     02A76F
-   :expiration: Feb 16 12:07:29 19 GMT
+   :expiration: Feb 16 12:07:29 2019 GMT
    :sha1fp:     D1:E3:5B:73:63:28:C6:31:0F:35:4A:2F:0D:12:B5:6C:3F:72:08:3D
    :issuer:     CAcert Class 3 Root
 
@@ -249,7 +259,7 @@ Keys and X.509 certificates
    :certfile:   /etc/ssl/certs/web.cacert.org.crt
    :keyfile:    /etc/ssl/private/web.cacert.org.key
    :serial:     02BE3D
-   :expiration: Feb 19 11:44:47 20 GMT
+   :expiration: Feb 19 11:44:47 2020 GMT
    :sha1fp:     D5:20:E8:4D:C1:FC:6E:DF:7E:D3:5D:03:03:3D:1B:CB:27:4B:3D:85
    :issuer:     CAcert Class 3 Root
 
@@ -268,6 +278,13 @@ Apache httpd configuration
 
   Defines the default VirtualHost for requests reaching this host with no
   specifically handled host name.
+
+* :file:`/etc/apache2/sites-available/codedocs.cacert.org.conf`
+
+  Defines the VirtualHost http://codedocs.cacert.org/ that redirects to
+  https://codedocs.cacert.org/ and the VirtualHost
+  https://codedocs.cacert.org/ that provides reverse proxy functionality for
+  the same host name on :doc:`webstatic`.
 
 * :file:`/etc/apache2/sites-available/funding.cacert.org.conf`
 

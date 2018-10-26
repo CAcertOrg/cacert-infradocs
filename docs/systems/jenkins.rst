@@ -170,8 +170,8 @@ Connected Systems
 
 * :doc:`git` for triggering Jenkins web hooks
 * :doc:`monitor`
-* :doc:`web` as reverse proxy for hostnames funding.cacert.org and
-  infradocs.cacert.org
+* :doc:`web` as reverse proxy for hostnames codedocs.cacert.org,
+  funding.cacert.org and infradocs.cacert.org
 
 
 Outbound network connections
@@ -182,8 +182,8 @@ Outbound network connections
 * :doc:`git` for fetching source code
 * :doc:`proxyout` as HTTP proxy for APT and Jenkins plugin updates
 * :doc:`puppet` for configuration management
-* :doc:`webstatic` for publishing infrastructure documentation to
-  infradocs.cacert.org
+* :doc:`webstatic` for publishing code documentation to codedocs.cacert.org and
+  infrastructure documentation to infradocs.cacert.org
 * arbitrary Internet HTTP, HTTPS, FTP, FTPS, git servers for fetching source
   code and build dependencies (via ``&CONTAINER_OUT_ELEVATED("jenkins");`` in
   :file:`/etc/ferm/ferm.d/jenkins.conf` on :doc:`infra02`).

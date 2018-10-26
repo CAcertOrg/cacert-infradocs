@@ -15,6 +15,9 @@ termination and redirects from http scheme URLs to https.
 Application Links
 -----------------
 
+Code Documentation
+   https://codedocs.cacert.org/
+
 Funding
    https://funding.cacert.org/
 
@@ -83,8 +86,9 @@ DNS
 =========================== ======== ====================================================================
 Name                        Type     Content
 =========================== ======== ====================================================================
-funding.cacert.org.         IN CNAME webstatic.cacert.org.
-infradocs.cacert.org.       IN CNAME webstatic.cacert.org.
+codedocs.cacert.org.        IN CNAME web.cacert.org.
+funding.cacert.org.         IN CNAME web.cacert.org.
+infradocs.cacert.org.       IN CNAME web.cacert.org.
 webstatic.cacert.org.       IN A     213.154.225.242
 webstatic.cacert.org.       IN SSHFP 1 1 30897A7A984D8350495946D54C6374E9331237EF
 webstatic.cacert.org.       IN SSHFP 1 2 32BB10C5CF48532D077066E012230058DDF3CCE731C561F228E310EB7A546E3F
@@ -119,17 +123,17 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console and gitolite access       |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 80/tcp   | http      | ANY       | application                             |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
++----------+-----------+-----------+----------------------------+
+| Port     | Service   | Origin    | Purpose                    |
++==========+===========+===========+============================+
+| 22/tcp   | ssh       | ANY       | admin console access       |
++----------+-----------+-----------+----------------------------+
+| 25/tcp   | smtp      | local     | mail delivery to local MTA |
++----------+-----------+-----------+----------------------------+
+| 80/tcp   | http      | ANY       | application                |
++----------+-----------+-----------+----------------------------+
+| 5666/tcp | nrpe      | monitor   | remote monitoring service  |
++----------+-----------+-----------+----------------------------+
 
 Running services
 ----------------
@@ -174,8 +178,8 @@ Running services
 Connected Systems
 -----------------
 
-* :doc:`jenkins` for publishing infrastructure documentation to
-  infradocs.cacert.org
+* :doc:`jenkins` for publishing code documentation to codedocs.cacert.org and
+  infrastructure documentation to infradocs.cacert.org
 * :doc:`monitor`
 * :doc:`web` as reverse proxy for hostnames funding.cacert.org and
   infradocs.cacert.org
@@ -203,9 +207,8 @@ Dedicated user roles
 +-------------------+---------------------------------------------------+
 | Group             | Purpose                                           |
 +===================+===================================================+
-| git               | User for :program:`gitolite`                      |
-+-------------------+---------------------------------------------------+
 | jenkins-infradocs | Used by :doc:`jenkins` to upload documentation to |
+|                   | :file:`/var/www/codedocs.cacert.org/html/` and    |
 |                   | :file:`/var/www/infradocs.cacert.org/html/`       |
 +-------------------+---------------------------------------------------+
 
@@ -216,22 +219,13 @@ The Puppet agent package and a few dependencies are installed from the official
 Puppet APT repository because the versions in Debian are too old to use modern
 Puppet features.
 
-The used :program:`gitolite` version is from Debian Jessie and should either
-be replaced by :program:`gitolite3` from Debian Stretch or a combination of
-git repositories on :doc:`git` and web hooks for triggering updates.
-
-.. todo:: replace :program:`gitolite` with a maintained service
-
 Risk assessments on critical packages
 -------------------------------------
 
 Apache httpd is configured with a minimum of enabled modules to allow serving
 static content and nothing else to reduce potential security risks.
 
-Access to :program:`gitolite` and the jenkins-infradocs user is gated by a
-defined set of ssh keys.
-
-.. todo:: check access on gitolite repositories
+Access to the jenkins-infradocs user is gated by a defined ssh key.
 
 The system uses third party packages with a good security track record and
 regular updates. The attack surface is small due to the tightly restricted
@@ -263,6 +257,10 @@ The main configuration files for Apache httpd are:
 
   Defines the default VirtualHost for requests reaching this host with no
   specifically handled host name.
+
+* :file:`/etc/apache2/sites-available/codedocs.cacert.org.conf`
+
+  Defines the VirtualHost for https://codedocs.cacert.org/
 
 * :file:`/etc/apache2/sites-available/funding.cacert.org.conf`
 
@@ -300,4 +298,3 @@ References
 ----------
 
 * http://httpd.apache.org/docs/2.4/
-* http://gitolite.com/gitolite/migr/
