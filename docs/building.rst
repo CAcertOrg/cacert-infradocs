@@ -8,7 +8,8 @@ representations of the documents.
 
 To build this documentation you need a Python 3 installation. To isolate the
 documentation build from your system Python 3 packages using a virtual
-environment is recommended.
+environment is recommended. Management of the virtual environment can be done
+with pipenv as described below.
 
 Python 3 installation instructions can be found on the `Python website`_.
 
@@ -22,23 +23,19 @@ Python 3 installation instructions can be found on the `Python website`_.
 
       # Install required operating system packages
       sudo apt-get install python3 python3-venv make
-      # Setup a fresh virtual Python environment in the venv subdirectory
-      pyvenv venv
-      # Activate the virtual environment
-      . venv/bin/activate
-      # Install the documentation build dependencies (Sphinx, extensions and
-      # their dependencies)
-      pip install -r doc-requirements.txt
+      # install pipenv
+      python3 -m pip install -U pip pipenv
+      # use pipenv to install require dependencies into a virtual environment
+      pipenv install
       # Build the documentation in the docs subdirectory
       cd docs
-      make html
+      pipenv run make html
 
    .. note::
 
       The above commands should be run from the root directory of a git clone
       of the cacert-infradocs git repository. The result of the :program:`make`
-      exection will be available in the :file:`_build/html/` directory inside
-      the :file:`docs/` directory.
+      exection will be available in the :file:`docs/_build/html/` directory.
 
 Getting the documentation source
 --------------------------------
