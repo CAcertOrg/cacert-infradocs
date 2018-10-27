@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 
-from glob import glob
 import argparse
 import os.path
 import subprocess
+from glob import glob
 
-
-SUPPORTED_SSH_KEYTYPES = ('RSA', 'DSA', 'ECDSA', 'ED25519')
+SUPPORTED_SSH_KEY_TYPES = ('RSA', 'DSA', 'ECDSA', 'ED25519')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=(
             'Convert a set of ssh host keys to the syntax expected by the '
-            'sshkeys directive of the CAcert infrastructur documentation'))
+            'sshkeys directive of the CAcert infrastructure documentation'))
     parser.add_argument(
         'root', metavar='ROOT', type=str, help='root directory'
     )
@@ -25,13 +24,14 @@ if __name__ == '__main__':
     ):
         fp = subprocess.check_output(
             ['ssh-keygen', '-l', '-f', host_key]).strip().split()
-        keys[fp[3][1:-1]] = fp[1]
+        keys[fp[3][1:-1].decode('ascii')] = fp[1].decode('ascii')
 
-    maxlen = max([len(key) for key in keys.keys() if key in SUPPORTED_SSH_KEYTYPES])
+    max_length = max([len(key) for key in keys.keys()
+                      if key in SUPPORTED_SSH_KEY_TYPES])
 
-    print ".. sshkeys::"
+    print(".. sshkeys::")
     for typ, key in [
-        (typ, keys[typ]) for typ in SUPPORTED_SSH_KEYTYPES
+        (typ, keys[typ]) for typ in SUPPORTED_SSH_KEY_TYPES
         if typ in keys
     ]:
-        print "   :%s:%s %s" % (typ, ' ' * (maxlen - len(typ)), key)
+        print("   :{}:{} {}".format(typ, ' ' * (max_length - len(typ)), key))

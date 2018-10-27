@@ -1,3 +1,0 @@
-pyasn1==0.1.9
-pyasn1-modules==0.0.8
-git+https://github.com/hiviah/pyx509@a35702c3d514c96d75a1c3498307a16991cdd0d3#egg=pyx509
