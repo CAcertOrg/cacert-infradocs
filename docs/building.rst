@@ -22,13 +22,13 @@ Python 3 installation instructions can be found on the `Python website`_.
    .. code-block:: bash
 
       # Install required operating system packages
-      sudo apt-get install python3 python3-venv make
+      sudo apt-get install python3 python3-pip make
       # install pipenv
       python3 -m pip install -U pip pipenv
       # use pipenv to install require dependencies into a virtual environment
+      cd docs
       pipenv install
       # Build the documentation in the docs subdirectory
-      cd docs
       pipenv run make html
 
    .. note::
