@@ -105,7 +105,9 @@ def is_valid_ipaddress(content):
     return True
 
 
-def subject_alternative_names(argument):
+def subject_alternative_names(argument=""):
+    if not argument:
+        return []
     value = [san.strip().split(':', 1) for san in argument.split(',')]
     for typ, content in value:
         if typ == 'DNS':

@@ -25,6 +25,9 @@ administrator team.
    systems/proxyin
    systems/proxyout
    systems/svn
+   systems/test
+   systems/test2
+   systems/testmgr
    systems/translations
    systems/web
    systems/webmail

@@ -143,6 +143,13 @@ Jochim Selzer
 :roles: :term:`Infrastructure Administrator`
 :contact: jselzer@cacert.org
 
+.. _people_gukk:
+
+Karl-Heinz Gödderz
+==================
+
+:contact: GuKKDevel@CAcert.org
+
 .. _people_wytze:
 
 Wytze van der Raay
