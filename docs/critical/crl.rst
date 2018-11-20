@@ -17,6 +17,6 @@ Keys and X.509 certificates
    :keyfile:    /etc/lighttpd/ssl/crl.cacert.org.key
    :serial:     02CC46
    :expiration: Nov 18 19:02:55 2020 GMT
-   :sha1fp:     E8:F5:32:40:33:C5:DE:EF:2E:A7:B6:48:0B:9E:AB:C5:5B:8A:1E:AF
+   :sha1fp:     F3:94:60:A8:B4:5C:F7:0B:21:E0:4D:F0:8D:36:75:A2:FD:04:8B:9C
    :issuer:     CAcert Class 3 Root
 
