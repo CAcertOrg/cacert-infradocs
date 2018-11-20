@@ -188,7 +188,9 @@ Connected Systems
 -----------------
 
 * :doc:`bugs`
+* :doc:`emailout`
 * :doc:`ircserver`
+* :doc:`issue`
 * :doc:`jenkins`
 * :doc:`monitor`
 * :doc:`motion`

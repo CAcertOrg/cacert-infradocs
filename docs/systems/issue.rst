@@ -143,6 +143,7 @@ Running services
    single: cron
    single: nrpe
    single: openssh
+   single: puppet agent
    single: rsyslog
 
 +--------------------+-----------------------------------+----------------------------------------+
@@ -167,6 +168,8 @@ Running services
 |                    | local mail                        | :file:`/etc/init.d/postfix`            |
 |                    | submission and for receiving mail |                                        |
 |                    | directed to OTRS addresses        |                                        |
++--------------------+-----------------------------------+----------------------------------------+
+| Puppet agent       | configuration management agent    | init script :file:`/etc/init.d/puppet` |
 +--------------------+-----------------------------------+----------------------------------------+
 | Nagios NRPE server | remote monitoring                 | init script                            |
 |                    | service queried by                | :file:`/etc/init.d/nagios-nrpe-server` |
@@ -195,6 +198,7 @@ Outbound network connections
 * :doc:`emailout` as SMTP relay
 * :doc:`email` as SMTP submission relay (587, tcp) for specific addresses (see
   :ref:`postfix_configuration` below)
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 

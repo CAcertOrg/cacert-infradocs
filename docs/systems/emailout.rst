@@ -116,6 +116,7 @@ Running services
    single: cron
    single: nrpe
    single: openssh
+   single: puppet agent
    single: rsyslog
 
 +--------------------+--------------------+----------------------------------------+
@@ -144,6 +145,9 @@ Running services
 |                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
 |                    | :doc:`monitor`     |                                        |
 +--------------------+--------------------+----------------------------------------+
+| Puppet agent       | configuration      | init script :file:`/etc/init.d/puppet` |
+|                    | management agent   |                                        |
++--------------------+--------------------+----------------------------------------+
 
 Connected Systems
 -----------------
@@ -157,6 +161,7 @@ Outbound network connections
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
 * :doc:`proxyout` as HTTP proxy for APT
+* :doc:`puppet` (tcp/8140) as Puppet master
 * SMTP (25/tcp) to :doc:`email`, :doc:`issue` and :doc:`lists`
 
 Security
