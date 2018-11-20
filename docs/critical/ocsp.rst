@@ -17,6 +17,47 @@ Keys and X.509 certificates
    :keyfile:    /etc/lighttpd/ssl/ocsp.cacert.org.key
    :serial:     02CC47
    :expiration: Nov 18 19:03:01 2020 GMT
-   :sha1fp:     CD:E1:6A:CB:55:18:C8:AB:31:27:A7:5A:24:A0:0B:AA:BF:69:BB:76
+   :sha1fp:     85:42:E3:DC:42:F2:7C:C2:B2:02:9F:47:16:34:02:55:BE:92:AA:17
    :issuer:     CAcert Class 3 Root
 
+.. sslcert:: ocsp.cacert.org class1 (issued with X509v3 Extended Key Usage: OCSP Signing)
+   :altnames:
+   :certfile:   /usr/local/etc/ocspd/certs/class1.crt
+   :keyfile:    /usr/local/etc/ocspd/private/class1.key
+   :serial:     1320EE
+   :expiration: Aug 25 09:45:00 2019 GMT
+   :sha1fp:     68:08:77:DD:F2:3A:8C:2F:A0:DC:EC:6B:BD:C6:71:80:DD:44:3A:C7
+   :issuer:     CAcert Class 1 Root
+
+.. sslcert:: ocsp.cacert.org class3 (issued with X509v3 Extended Key Usage: OCSP Signing)
+   :altnames:
+   :certfile:   /usr/local/etc/ocspd/certs/class3.crt
+   :keyfile:    /usr/local/etc/ocspd/private/class1.key
+   :serial:     02B395
+   :expiration: Aug 25 09:44:51 2019 GMT
+   :sha1fp:     AA:F0:AE:3D:0A:11:47:6C:9F:1E:EB:23:15:15:38:40:CA:29:0D:45
+   :issuer:     CAcert Class 3 Root
+
+Note: generating a CSR with OCSP Signing flag set can be done with an openssl config file like this:
+
+.. code-block:: text
+
+   [ req ]
+   distinguished_name      = req_distinguished_name
+   prompt                  = no
+   req_extensions          = ocsp_req
+   
+   [ req_distinguished_name ]
+   countryName             = AU
+   stateOrProvinceName     = NSW
+   localityName            = Sydney
+   0.organizationName      = CAcert Inc.
+   organizationalUnitName  = Server Administration
+   commonName              = ocsp.cacert.org
+   emailAddress            = critical-admin@cacert.org
+   
+   [ ocsp_req ]
+   basicConstraints=CA:FALSE
+   extendedKeyUsage=1.3.6.1.5.5.7.3.2, 1.3.6.1.5.5.7.3.1, 1.3.6.1.5.5.7.3.9
+
+To sign such a CSR while retaining the OCSP Signing flag in the generated certificate, there is some dark magic involved: you have to have the admin flag set and check a box deep down on the second page of the new cert process. 
