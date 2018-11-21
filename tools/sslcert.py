@@ -4,12 +4,12 @@ from __future__ import print_function
 
 import argparse
 import os.path
-from datetime import datetime
 from hashlib import sha1
 
+from asn1crypto import pem
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
-from cryptography.x509 import ExtensionOID, NameOID
+from cryptography.x509.oid import ExtensionOID, NameOID
 
 ALTNAME_MAP = (
     (x509.DNSName, 'DNS'),
@@ -39,9 +39,10 @@ def get_expiration(cert):
     return cert.not_valid_after.strftime('%b %d %H:%M:%S %Y GMT')
 
 
-def get_sha1fp(certdata):
-    hexhash = sha1(certdata).hexdigest().upper()
-    return ":".join([hexhash[i:i + 2] for i in range(0, len(hexhash), 2)])
+def get_sha1fp(pem_data):
+    cert_data = pem.unarmor(pem_data)
+    hex_hash = sha1(cert_data[2]).hexdigest().upper()
+    return ":".join([hex_hash[i:i + 2] for i in range(0, len(hex_hash), 2)])
 
 
 def get_issuer(cert):
@@ -60,7 +61,7 @@ if __name__ == '__main__':
             'file.'))
     parser.add_argument(
         'cert', metavar='CERT', type=argparse.FileType('rb'),
-        help='PEM encoded X.509 certficate file')
+        help='PEM encoded X.509 certificate file')
     parser.add_argument(
         '--key', metavar='KEY', type=argparse.FileType('rb'),
         help='PEM encoded RSA private key', default=None)
@@ -70,28 +71,28 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    certpath = os.path.abspath(args.cert.name)
+    cert_path = os.path.abspath(args.cert.name)
     if args.root:
-        certpath = '/' + os.path.relpath(certpath, args.root)
+        cert_path = '/' + os.path.relpath(cert_path, args.root)
     if args.key:
-        haskey = True
-        keypath = os.path.abspath(args.key.name)
+        has_key = True
+        key_path = os.path.abspath(args.key.name)
         if args.root:
-            keypath = '/' + os.path.relpath(keypath, args.root)
+            key_path = '/' + os.path.relpath(key_path, args.root)
     else:
-        keypath = 'TODO: define key path'
+        key_path = 'TODO: define key path'
 
-    certpem = args.cert.read()
-    cert = x509.load_pem_x509_certificate(certpem, default_backend())
+    cert_pem = args.cert.read()
+    certificate = x509.load_pem_x509_certificate(cert_pem, default_backend())
     data = {
-        'altnames': get_altnames(cert),
-        'certfile': certpath,
-        'keyfile': keypath,
-        'serial': get_serial(cert),
-        'expiration': get_expiration(cert),
-        'sha1fp': get_sha1fp(certpem),
-        'issuer': get_issuer(cert),
-        'subject': get_subject(cert),
+        'altnames': get_altnames(certificate),
+        'certfile': cert_path,
+        'keyfile': key_path,
+        'serial': get_serial(certificate),
+        'expiration': get_expiration(certificate),
+        'sha1fp': get_sha1fp(cert_pem),
+        'issuer': get_issuer(certificate),
+        'subject': get_subject(certificate),
     }
     print(""".. sslcert:: {subject}
    :altnames:   {altnames}
