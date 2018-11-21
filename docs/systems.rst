@@ -27,6 +27,7 @@ administrator team.
    systems/svn
    systems/test
    systems/test2
+   systems/test3
    systems/testmgr
    systems/translations
    systems/web

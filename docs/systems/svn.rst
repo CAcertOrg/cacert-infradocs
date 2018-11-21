@@ -110,9 +110,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 9.6
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 9.6
 
 Applicable Documentation
 ------------------------
