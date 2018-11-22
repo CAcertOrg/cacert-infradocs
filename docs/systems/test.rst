@@ -63,9 +63,8 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.248`
 :IP Intranet: :ip:v4:`172.16.2.248`
 :IP Internal: :ip:v4:`10.0.0.248`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::248`
 :MAC address: :mac:`00:ff:91:10:5d:cd` (eth0)
-
-.. todo:: setup IPv6 for test
 
 .. seealso::
 
@@ -75,7 +74,7 @@ DNS
 ---
 
 .. index::
-   single: DNS records; test
+   single: DNS records; Test
 
 ====================== ======== ============================================
 Name                   Type     Content
@@ -86,6 +85,8 @@ test.cacert.org.       IN SSHFP 2 1 3414C17E5AE898B2F5DB7B3DDF9E34C2F5E816AC
 test.intra.cacert.org. IN A     172.16.2.248
 test.infra.cacert.org. IN A     10.0.0.248
 ====================== ======== ============================================
+
+.. todo:: add AAAA record for IPv6 address
 
 .. seealso::
 
@@ -225,7 +226,7 @@ Outbound network connections
 Security
 ========
 
-.. add the MD5 fingerprints of the SSH host keys
+.. todo:: add the SHA-256 fingerprints of the SSH host keys
 
 .. sshkeys::
    :RSA:   fd:19:a1:64:ae:ef:c2:50:a2:be:a4:c5:9f:f7:9d:98
