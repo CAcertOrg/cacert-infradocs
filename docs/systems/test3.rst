@@ -1,9 +1,5 @@
 .. index::
-<<<<<<< HEAD
    single: Systems; test3
-=======
-   single: Systems; test
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 =====
 Test3
@@ -12,30 +8,20 @@ Test3
 Purpose
 =======
 
-<<<<<<< HEAD
 This is a test system for testing a version of the CAcert application software
 revised to run with php-7.0 on Debian Stretch. When these tests are succesful,
 the other test servers and the production server running on www.cacert.org can
 be upgraded tot Debian Stretch. After that this server can probably be scrapped again.
-=======
-This is a test system for the software from cacertgit:`cacert-devel`'s
-*release* branch running on www.cacert.org.
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Application Links
 -----------------
 
-<<<<<<< HEAD
 Application via HTTP:
   http://test3.cacert.org:14980/
 
 Application via HTTPS:
   https://test3.cacert.org:14943/
 
-=======
-Application
-     https://test3.cacert.org:14943/
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Administration
 ==============
@@ -50,19 +36,11 @@ System Administration
 Application Administration
 --------------------------
 
-<<<<<<< HEAD
   +------------------------+---------------------------------------+
   | Application            | Administrator(s)                      |
   +========================+=======================================+
   | CAcert web application | :ref:`people_dirk`, :ref:`people_ted` |
   +------------------------+---------------------------------------+
-=======
-+------------------------+---------------------------------------+
-| Application            | Administrator(s)                      |
-+========================+=======================================+
-| CAcert web application | :ref:`people_dirk`, :ref:`people_ted` |
-+------------------------+---------------------------------------+
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Contact
 -------
@@ -89,26 +67,18 @@ Logical Location
 ----------------
 
 :IP Internet: :ip:v4:`213.154.225.248`
-<<<<<<< HEAD
-:IP Intranet: :ip:v4:`172.16.2.248`
+:IP Intranet: :ip:v4:`172.16.2.149`
 :IP Internal: :ip:v4:`10.0.0.149`
-:IPv6 Internet: :ip:v6:`2001:7b8:616:162:2::149`
+:IPv6         :ip:v6:`2001:7b8:616:162:2::149`
 :MAC address: :mac:`00:ff:ce:d1:22:1d` (eth0)
 
-Because this system is sharing its IPv4 internet and intranet addresses with test.cacert.org,
+Because this system is sharing its IPv4 internet address with test.cacert.org,
 there are some special mappings in the infra02 firewall to get access to this system:
 
 * test,cacert.org port 14922 maps to test3 port 22 (ssh)
 * test.cacert.org port 14980 maps to test3 port 80 (http)
 * test.cacert.org port 14943 maps to test3 port 443 (https)
 
-=======
-:IP Intranet: :ip:v4:`172.16.2.149`
-:IP Internal: :ip:v4:`10.0.0.149`
-:IPv6:        :ip:v6:`2001:7b8:616:162:2::149`
-:MAC address: :mac:`00:ff:ce:d1:22:1d` (eth0)
-
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 .. seealso::
 
    See :doc:`../network`
@@ -118,7 +88,7 @@ DNS
 
 .. index::
 <<<<<<< HEAD
-   single: DNS records; test
+   single: DNS records; Test3
 
 ======================== ======== ============================================
 Name                     Type     Content
@@ -134,30 +104,11 @@ test3.cacert.org.        IN SSHFP 3 1 e4d81b532dc90ebb6d087ae732ce016b87945ebd
 test3.cacert.org.        IN SSHFP 3 2 71b5aedcc999e6ffc0f90eeb9254c8771ddaa6a4981cf55e8e2228f6bdee64ce
 test3.cacert.org.        IN SSHFP 4 1 50b22453f5c8d845895bacccbc1fc325d033f65d
 test3.cacert.org.        IN SSHFP 4 1 a928b84465769480d70dfc5ecd3af2e4cdb192ee11d1cffc4f31ea1fbed09d41
-test3.intra.cacert.org.  IN A     172.16.2.248
 test.infra.cacert.org.   IN A     10.0.0.149
 ======================== ======== ============================================
-=======
-   single: DNS records; Test3
-
-======================= ======== ====================================================================
-Name                    Type     Content
-======================= ======== ====================================================================
-test3.cacert.org.       IN SSHFP 1 1 39FD3B77396529F83E095FF09C59994C47D9E0D3
-test3.cacert.org.       IN SSHFP 1 2 680FE134289E79678F7EAA5689FDCE3DB5EFED9F6EBEFD5BCFADCE04A96475C1
-test3.cacert.org.       IN SSHFP 2 1 70F5730C127BD701FC5C4BABA329E93346A975C1
-test3.cacert.org.       IN SSHFP 2 2 364252B906AEC15A00994620D5C90C0F692A41CBC8C6F3BFC229149511209328
-test3.cacert.org.       IN SSHFP 3 1 E4D81B532DC90EBB6D087AE732CE016B87945EBD
-test3.cacert.org.       IN SSHFP 3 2 71B5AEDCC999E6FFC0F90EEB9254C8771DDAA6A4981CF55E8E2228F6BDEE64CE
-test3.cacert.org.       IN SSHFP 4 1 50B22453F5C8D845895BACCCBC1FC325D033F65D
-test3.cacert.org.       IN SSHFP 4 2 A928B84465769480D70DFC5ECD3AF2E4CDB192EE11D1CFFC4F31EA1FBED09D41
-test3.cacert.org.       IN A     213.154.225.248
-test3.infra.cacert.org. IN A     10.0.0.149
-======================= ======== ====================================================================
 
 .. todo:: add AAAA record for IPv6 address
 .. todo:: add intra.cacert.org. A record
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 .. seealso::
 
@@ -175,7 +126,6 @@ Operating System
 Applicable Documentation
 ------------------------
 
-<<<<<<< HEAD
 Notes about installing the CAcert application on test3.cacert.org.
 
 * Starting point is a Debian Stretch LXC setup from Jan Dittberner
@@ -293,9 +243,6 @@ Notes about installing the CAcert application on test3.cacert.org.
 
     $ sudo update-rc.d apache2 remove
     $ sudo update-rc.d apache2-cacert defaults
-=======
-There is no additional documentation for this system.
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Services
 ========
@@ -303,7 +250,6 @@ Services
 Listening services
 ------------------
 
-<<<<<<< HEAD
 +----------+---------+---------+--------------------------------------------+
 | Port     | Service | Origin  | Purpose                                    |
 +==========+=========+=========+============================================+
@@ -317,30 +263,6 @@ Listening services
 +----------+---------+---------+--------------------------------------------+
 | 3306/tcp | mysql   | local   | MySQL database for ...                     |
 +----------+---------+---------+--------------------------------------------+
-=======
-+----------+---------+---------+-------------------------------------------+
-| Port     | Service | Origin  | Purpose                                   |
-+==========+=========+=========+===========================================+
-| 22/tcp   | ssh     | ANY     | admin console access                      |
-+----------+---------+---------+-------------------------------------------+
-| 25/tcp   | smtp    | local   | mail delivery to local MTA                |
-+----------+---------+---------+-------------------------------------------+
-| 80/tcp   | http    | ANY     | Apache httpd for http://test.cacert.org/  |
-+----------+---------+---------+-------------------------------------------+
-| 123/tcp  | ntp     | local   | network time protocol server              |
-| 123/udp  |         |         |                                           |
-+----------+---------+---------+-------------------------------------------+
-| 143/tcp  | imap    | testmgr | Dovecot IMAP server                       |
-+----------+---------+---------+-------------------------------------------+
-| 443/tcp  | https   | ANY     | Apache httpd for https://test.cacert.org/ |
-+----------+---------+---------+-------------------------------------------+
-| 993/tcp  | imaps   | testmgr | Dovecot IMAP server                       |
-+----------+---------+---------+-------------------------------------------+
-| 3306/tcp | mysql   | local   | MySQL database for ...                    |
-+----------+---------+---------+-------------------------------------------+
-| 5666/tcp | nrpe    | monitor | remote monitoring service                 |
-+----------+---------+---------+-------------------------------------------+
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Running services
 ----------------
@@ -349,68 +271,31 @@ Running services
    single: Apache
    single: MySQL
    single: Postfix
-<<<<<<< HEAD
    single: client.pl
    single: cron
    single: openssh
-=======
-   single: atop
-   single: client.pl
-   single: cron
-   single: dovecot
-   single: nrpe
-   single: ntpd
-   single: openssh
-   single: puppet agent
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
+   single: Puppet agent
    single: rsyslog
-   single: signer.pl
+   single: server.pl
    single: socat
 
 +----------------+--------------------------------+----------------------------------------+
 | Service        | Usage                          | Start mechanism                        |
 +================+================================+========================================+
 | Apache httpd   | Webserver for the CAcert       | init script                            |
-<<<<<<< HEAD
 |                | web application                | :file:`/etc/init.d/apache2-cacert`     |
 +----------------+--------------------------------+----------------------------------------+
 | MySQL          | MariaDB database server        | init script                            |
-=======
-|                | web application                | :file:`/etc/init.d/apache2`            |
-+----------------+--------------------------------+----------------------------------------+
-| MySQL          | MySQL database server          | init script                            |
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 |                | for the CAcert web application | :file:`/etc/init.d/mysql`              |
 +----------------+--------------------------------+----------------------------------------+
 | Postfix        | SMTP server for local mail     | init script                            |
 |                | submission                     | :file:`/etc/init.d/postfix`            |
 +----------------+--------------------------------+----------------------------------------+
-<<<<<<< HEAD
-=======
-| atop           | atop process accounting top    | init script                            |
-|                |                                | :file:`/etc/init.d/atop`               |
-+----------------+--------------------------------+----------------------------------------+
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 | client.pl      | CAcert signer client           | init script                            |
 |                |                                | :file:`/etc/init.d/commmodule`         |
 +----------------+--------------------------------+----------------------------------------+
 | cron           | job scheduler                  | init script                            |
 |                |                                | :file:`/etc/init.d/cron`               |
-+----------------+--------------------------------+----------------------------------------+
-<<<<<<< HEAD
-| openssh server | ssh daemon for remote          | init script :file:`/etc/init.d/ssh`    |
-|                | administration                 |                                        |
-+----------------+--------------------------------+----------------------------------------+
-=======
-| dovecot        | Dovecot IMAP server            | init script                            |
-|                |                                | :file:`/etc/init.d/dovecot`            |
-+----------------+--------------------------------+----------------------------------------+
-| Nagios NRPE    | remote monitoring              | init script                            |
-| server         | service queried by             | :file:`/etc/init.d/nagios-nrpe-server` |
-|                | :doc:`monitor`                 |                                        |
-+----------------+--------------------------------+----------------------------------------+
-| ntpd           | Network time protocol server   | init script                            |
-|                |                                | :file:`/etc/init.d/ntp`                |
 +----------------+--------------------------------+----------------------------------------+
 | openssh server | ssh daemon for remote          | init script :file:`/etc/init.d/ssh`    |
 |                | administration                 |                                        |
@@ -418,7 +303,6 @@ Running services
 | Puppet agent   | configuration                  | init script                            |
 |                | management agent               | :file:`/etc/init.d/puppet`             |
 +----------------+--------------------------------+----------------------------------------+
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 | rsyslog        | syslog daemon                  | init script                            |
 |                |                                | :file:`/etc/init.d/syslog`             |
 +----------------+--------------------------------+----------------------------------------+
@@ -443,45 +327,28 @@ Databases
 Connected Systems
 -----------------
 
-<<<<<<< HEAD
 * (future) :doc:`monitor`
 * (future) :doc:`testmgr` has access to imap and MySQL
-=======
-* :doc:`monitor`
-* :doc:`testmgr` has access to imap and MySQL
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Outbound network connections
 ----------------------------
 
 * :doc:`infra02` as resolving nameserver
-<<<<<<< HEAD
-* :doc:`proxyout` as HTTP proxy for APT and Github
-* crl.cacert.org (rsync) for getting CRLs
-* ocsp.cacert.org (HTTP and HTTPS) for OCSP queries
-* translations.cacert.org (HTTP and HTTPS) for obtaining fresh translations
-=======
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT and Github
 * crl.cacert.org (rsync) for getting CRLs
 * ocsp.cacert.org (HTTP and HTTPS) for OCSP queries
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
+* translations.cacert.org (HTTP and HTTPS) for obtaining fresh translations
 * arbitrary Internet SMTP servers for outgoing mail
 
 Security
 ========
 
-<<<<<<< HEAD
-.. add the MD5 fingerprints of the SSH host keys
-
-.. todo:: add RSA, DSA, ECDSA, ED25519 keys for test
-=======
 .. sshkeys::
    :RSA:     SHA256:aA/hNCieeWePfqpWif3OPbXv7Z9uvv1bz63OBKlkdcE MD5:ff:56:e4:71:17:f0:6c:27:d9:a8:bc:45:c6:f9:3e:57
    :DSA:     SHA256:NkJSuQauwVoAmUYg1ckMD2kqQcvIxvO/wikUlREgkyg MD5:d3:88:96:39:08:bd:71:97:37:99:7c:a7:99:30:4d:e4
    :ECDSA:   SHA256:cbWu3MmZ5v/A+Q7rklTIdx3apqSYHPVejiIo9r3uZM4 MD5:96:65:fe:5a:4d:e6:b0:31:01:b8:4a:40:62:4a:86:61
    :ED25519: SHA256:qSi4RGV2lIDXDfxezTry5M2xku4R0c/8TzHqH77QnUE MD5:20:10:47:d4:b8:04:e5:ed:2a:10:65:31:79:66:fc:c3
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Dedicated user roles
 --------------------
@@ -498,8 +365,7 @@ Dedicated user roles
 
 .. todo::
 
-<<<<<<< HEAD
-   clarify why the signer software on test is currently running as the root
+   clarify why the signer software on test3 is currently running as the root
    user
 
 The directory :file:`/home/cacert/` is owned by root. The signer is running
@@ -510,29 +376,12 @@ root. Currently no process uses the *cacertsigner* user.
 Non-distribution packages and modifications
 -------------------------------------------
 
-Apache httpd is running in a chroot :file:`/home/cacert/`, the configuration in
-:file:`/etc/apache2` as well as the system binaries are not used. The Apache
-httpd binary in the chroot environment is kept up to date with the system binary.
-
-The CAcert web application code as well as the CAcert signer client code come
-from the official CAcert tar ball.
-
-The signer in :file:`/home/signer/www/CommModule/server.pl` has some minor
-uncommitted manual modifications. 
-=======
-   clarify why the signer software on test3 is currently running as the root
-   user
-
-Non-distribution packages and modifications
--------------------------------------------
-
 The setup is similar to :doc:`test`.
 
 Risk assessments on critical packages
 -------------------------------------
 
 The operating system is up-to-date
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Critical Configuration items
 ============================
@@ -540,7 +389,6 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-<<<<<<< HEAD
 .. sslcert:: secure.test3.cacert.org
    :altnames:   DNS:secure.test3.cacert.org
    :certfile:   /home/cacert/etc/ssl/certs/secure_test3_cacert_org.crt
@@ -568,9 +416,6 @@ These test root certficates are copies from the ones on
 
    There are two directories :file:`/etc/root3/` and :file:`/etc/root4/` that
    are supported by the signer but do not contain actual keys and certificates.
-=======
-.. todo:: document certificates on test3
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 .. seealso::
 
@@ -602,14 +447,6 @@ Postfix configuration is stored in :file:`/etc/postfix`.
 Postfix is configured to accept mail for ``test3.cacert.org`` and ``localhost``
 all mail is delivered to the mailbox of the *cacertmail* user in
 :file:`/var/mail/cacertmail` via :file:`/etc/postfix/virtual.regexp`.
-=======
-.. todo:: document openssl configuration for the signer server on test3
-
-.. todo:: document Apache httpd configuration on test3
-
-.. todo:: document Postfix configuration on test3
-
-.. todo:: document Dovecot configuration
 
 Tasks
 =====
@@ -626,7 +463,6 @@ System Future
 -------------
 
 .. * No plans
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 
 Additional documentation
 ========================
@@ -643,11 +479,6 @@ Apache httpd documentation
   http://httpd.apache.org/docs/2.4/
 Apache Debian wiki page
   https://wiki.debian.org/Apache
-<<<<<<< HEAD
-=======
-Dovecot documentation
-  https://wiki2.dovecot.org/FrontPage
->>>>>>> e9bf1298af30076e32dc5bdd7cc87ca75f6eb09b
 openssl documentation
   https://www.openssl.org/docs/
 Postfix documentation
