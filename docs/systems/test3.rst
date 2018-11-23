@@ -69,7 +69,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.248`
 :IP Intranet: :ip:v4:`172.16.2.149`
 :IP Internal: :ip:v4:`10.0.0.149`
-:IPv6         :ip:v6:`2001:7b8:616:162:2::149`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::149`
 :MAC address: :mac:`00:ff:ce:d1:22:1d` (eth0)
 
 Because this system is sharing its IPv4 internet address with test.cacert.org,
@@ -420,7 +420,6 @@ These test root certficates are copies from the ones on
 
    * :wiki:`SystemAdministration/CertificateList`
 
-<<<<<<< HEAD
 openssl configuration for the signer server
 -------------------------------------------
 
