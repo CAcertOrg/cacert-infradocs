@@ -231,9 +231,9 @@ Keys and X.509 certificates
    :altnames:   DNS:funding.cacert.org
    :certfile:   /etc/ssl/certs/funding.cacert.org.crt
    :keyfile:    /etc/ssl/private/funding.cacert.org.key
-   :serial:     02A770
-   :expiration: Feb 16 12:07:35 2019 GMT
-   :sha1fp:     36:E0:A1:86:7A:FA:C6:F4:86:9F:CC:9C:61:4D:B9:A4:7C:0F:9F:C9
+   :serial:     02D059
+   :expiration: Jan 31 16:29:20 2021 GMT
+   :sha1fp:     FD:0D:2A:33:70:64:0E:2A:D6:F6:72:0F:D0:47:D9:C7:BD:E3:F4:DF
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: infradocs.cacert.org
@@ -249,9 +249,9 @@ Keys and X.509 certificates
    :altnames:   DNS:jenkins.cacert.org
    :certfile:   /etc/ssl/certs/jenkins.cacert.org.crt
    :keyfile:    /etc/ssl/private/jenkins.cacert.org.key
-   :serial:     02A76F
-   :expiration: Feb 16 12:07:29 2019 GMT
-   :sha1fp:     D1:E3:5B:73:63:28:C6:31:0F:35:4A:2F:0D:12:B5:6C:3F:72:08:3D
+   :serial:     02D058
+   :expiration: Jan 31 16:27:54 2021 GMT
+   :sha1fp:     00:5B:9C:4D:2E:D2:E4:69:2D:32:61:DC:25:98:F0:89:C9:E1:50:F1
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: web.cacert.org
