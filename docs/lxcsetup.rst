@@ -2,6 +2,11 @@
 Setup of a new CAcert LXC container with Puppet agent
 =====================================================
 
+.. todo::
+
+   Update the LXC setup documentation. lxc-setup might not work with LXC 3.0
+   that is used on :doc:`systems/infra02` since 2019-07-13.
+
 Preparation
 ===========
 
