@@ -58,7 +58,7 @@ The machine has been sponsored by `Thomas Krenn`_ and has the following hardware
 parameters:
 
 :Mainboard: Supermicro X9SCL/X9SCM Version 1.11A
-:CPU: Intel(R) Xeon(R) CPU E3-1240 V2 @ 3.40GHz
+:CPU: Intel(R) Xeon(R) CPU E3-1240 V2 @ 3.40GHz (4 Cores, 8 Threads)
 :RAM: 16 GiB ECC
 :Disks: 2 x 1TB WDC WD1003FBYX-01Y7B1
 :NIC:
@@ -66,7 +66,7 @@ parameters:
   * eth0 Intel Corporation 82579LM Gigabit Network Connection
   * eth1 Intel Corporation 82574L Gigabit Network Connection
 
-There is a 2 TB USB backup disk attached to the system.
+There is a 2 TB USB WDC WD20EARS-00MVWB0 backup disk attached to the system.
 
 .. seealso::
 
@@ -118,10 +118,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.11
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 7.11
+* Debian GNU/Linux 10.0
 
 Applicable Documentation
 ------------------------
@@ -230,15 +230,15 @@ Non-distribution packages and modifications
 Risk assessments and critical packages
 --------------------------------------
 
-The system is the basis for all other infrastructure systems. Access to this
-system has to be tightly controlled.
+The system is the host system for all other infrastructure systems. Access to
+this system has to be tightly controlled.
 
 Tasks
 =====
 
-.. todo:: find out why the system logs are messed up
-.. todo:: upgrade to Debian Stretch
-.. todo:: document whether it is safe to reboot this system
+The system can be rebooted safely since the Debian Buster installation on
+2019-07-13.
+
 .. todo:: document how to setup a new container
 .. todo:: document how to setup firewall rules/forwarding
 .. todo:: document how the backup system works
@@ -248,7 +248,7 @@ Tasks
 Planned
 -------
 
-* None
+* Replace ferm with nftables setup
 
 Changes
 =======
@@ -262,7 +262,7 @@ Critical Configuration items
 ============================
 
 .. index::
-   pair: Ferm; configuration
+   pair: dnsmasq; configuration
 
 Dnsmasq configuration
 ---------------------
@@ -270,6 +270,9 @@ Dnsmasq configuration
 Dnsmasq serves the local DNS zone infra.cacert.org to the `br0` interface. It
 is configured by :file:`/etc/dnsmasq.d/00infra` and uses :file:`/etc/hosts` as
 source for IP addresses.
+
+.. index::
+   pair: Ferm; configuration
 
 Ferm firewall configuration
 ---------------------------
