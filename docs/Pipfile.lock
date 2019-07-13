@@ -103,11 +103,11 @@
         },
         "jandd.sphinxext.ip": {
             "hashes": [
-                "sha256:9038c005331ef0473ffc37b6163dd5fba2ecca097da82feba46a39ac0206a910",
-                "sha256:dfac23f4d819505329c73efe12f5fab2890105b53797fcb3e6c27cf15ff3b994"
+                "sha256:11c4674034d3b874ddf1baa379ec92e2ca3cf7a274ca9d100f11c9eb429ab430",
+                "sha256:18ea4d526882e0be7368e16473da17ff1203041eb93e9d31998336a286088b02"
             ],
             "index": "pypi",
-            "version": "==0.2.4"
+            "version": "==0.3.0"
         },
         "jandd.sphinxext.mac": {
             "hashes": [
