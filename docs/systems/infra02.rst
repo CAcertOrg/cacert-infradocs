@@ -91,6 +91,61 @@ Logical Location
 
    See :doc:`../network`
 
+Remote Console
+--------------
+
+This system can be managed through a remote console,
+which may especially be important during system upgrades and/or reboots.
+The hardware of the system is equipped with a BMC Controller which supports the
+Intelligent Platform Management Interface (IMPI).
+Due the security design of the CAcert intranet, the network interface of this BMC
+is not connected to the publicly reachable part of the CAcert intranet,
+but rather to the management part,
+and is thus only reachable by members of the critical system administrator team.
+So the following instructions only apply to them.
+
+The BMC interface can be reached from your local admin machine through the
+CAcert hopper by setting up the following SSH port forwarding:
+
+.. code:: bash
+
+  IPMIHOST=infra02ilo.intra.cacert.org
+  LOCALPORT=8082
+  HTTPSPORT=443
+  IKVMPORT=5900
+  ssh -f -N -L ${LOCALPORT}:${IPMIHOST}:${HTTPSPORT} \
+                          -L ${IKVMPORT}:${IPMIHOST}:${IKVMPORT} hopper
+
+and then browsing to the web UI:
+
+.. code:: bash
+
+  firefox https://127.0.0.1:${LOCALPORT}/
+
+To use the remote console facility, first install Oracle Java JRE 8.0_211
+on your admin machine. Then download the launch.jnlp script offered by the
+web UI and save it in $HOME. Then use this script "console" to execute it:
+
+.. code:: bash
+
+  #! /bin/bash
+  # console - run remote console for CAcert infra02 with Oracle Java environment
+
+  export JAVADIR=/opt/java/jre1.8.0_211/bin
+  export JAVA=${JAVADIR}/java
+  export JAVAWS=${JAVADIR}/javaws
+
+  LAUNCH=${HOME}/launch.jnlp
+
+  if [ -f ${LAUNCH} ]
+  then
+        echo "Do not forget to use setupcon if the console keyboard mapping is lame" 1>&2
+        sed -i -e 's/443/8082/' ${LAUNCH}
+        exec ${JAVAWS} ${LAUNCH}
+  else
+        echo $0: cannot read ${LAUNCH} 1>&2
+  fi
+
 DNS
 ---
 
