@@ -311,7 +311,7 @@ The system can be rebooted safely since the Debian Buster installation on
 .. todo:: document how the backup system works
 .. todo:: add DNS setup for IPv6 address
 .. todo:: switch to Puppet management
-.. todo:: Replace nrpe with icinga2 agent
+.. todo:: replace nrpe with icinga2 agent
 
 Planned
 -------

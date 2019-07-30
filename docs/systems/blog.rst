@@ -61,9 +61,8 @@ Contact
 Additional People
 -----------------
 
-:ref:`Jan Dittberner <people_jandd>`, :ref:`Mario Lipinski <people_mario>` and
-:ref:`Dirk Astrath <people_dirk>` have :program:`sudo` access on that machine
-too.
+:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>`
+have :program:`sudo` access on that machine too.
 
 Basics
 ======
@@ -85,6 +84,11 @@ Logical Location
 .. seealso::
 
    See :doc:`../network`
+
+Monitoring
+----------
+
+:internal checks: :monitor:`blog.infra.cacert.org`
 
 DNS
 ---
@@ -116,9 +120,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.10
+   single: Debian GNU/Linux; 8.11
 
-* Debian GNU/Linux 8.10
+* Debian GNU/Linux 8.11
 
 Applicable Documentation
 ------------------------
@@ -225,10 +229,10 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:     MD5:ec:cb:b5:13:7c:17:c4:c3:23:3d:ee:01:58:75:b5:8d
-   :DSA:     MD5:c6:a7:52:f6:63:ce:73:95:41:35:90:45:9e:e0:06:a5
-   :ECDSA:   MD5:00:d7:4b:3c:da:1b:24:76:74:1c:dd:2c:64:50:5f:81
-   :ED25519: MD5:0c:fe:c7:a1:bd:e6:43:e6:70:5a:be:5a:15:4d:08:9d
+   :RSA:     SHA256:OvtFKsNpDPfNmjMygTv3sT29KIx6TvvZq53UtGSf8rY MD5:ec:cb:b5:13:7c:17:c4:c3:23:3d:ee:01:58:75:b5:8d
+   :DSA:     SHA256:TUOE69GQYSWuJtL6l2WWr5FLSzWH8iBKDgE2ijZA9oA MD5:c6:a7:52:f6:63:ce:73:95:41:35:90:45:9e:e0:06:a5
+   :ECDSA:   SHA256:htMwuQDbm/CovJ7DSxJqqCYf7J4CsSOrYcKu4LVq4Ec MD5:00:d7:4b:3c:da:1b:24:76:74:1c:dd:2c:64:50:5f:81
+   :ED25519: SHA256:8kt3DBbcuRr8lGHmLm/mOmPUE++keUdRwDntbVITEns MD5:0c:fe:c7:a1:bd:e6:43:e6:70:5a:be:5a:15:4d:08:9d
 
 Dedicated user roles
 --------------------
@@ -332,6 +336,10 @@ Wordpress configuration
 Tasks
 =====
 
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: update wordpress to 5.x
+
 Planned
 -------
 
@@ -346,7 +354,7 @@ Changes
 System Future
 -------------
 
-.. todo:: system should be upgraded to Debian 9
+.. todo:: system should be upgraded to Debian 9 or 10
 
 Additional documentation
 ========================
