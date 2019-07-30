@@ -91,17 +91,29 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Infra02
+
+Monitoring
+----------
+
+:internal checks: :monitor:`infra02.infra.cacert.org`
+:external checks: :monitor:`infra02.cacert.org`
+
 Remote Console
 --------------
 
-This system can be managed through a remote console,
-which may especially be important during system upgrades and/or reboots.
+This system can be managed through a remote console, which may especially be
+important during system upgrades and/or reboots.
+
 The hardware of the system is equipped with a BMC Controller which supports the
 Intelligent Platform Management Interface (IMPI).
+
 Due the security design of the CAcert intranet, the network interface of this BMC
 is not connected to the publicly reachable part of the CAcert intranet,
-but rather to the management part,
-and is thus only reachable by members of the critical system administrator team.
+but rather to the management part, and is thus only reachable by members of the
+critical system administrator team.
+
 So the following instructions only apply to them.
 
 The BMC interface can be reached from your local admin machine through the
@@ -109,42 +121,42 @@ CAcert hopper by setting up the following SSH port forwarding:
 
 .. code:: bash
 
-  IPMIHOST=infra02ilo.intra.cacert.org
-  LOCALPORT=8082
-  HTTPSPORT=443
-  IKVMPORT=5900
-  ssh -f -N -L ${LOCALPORT}:${IPMIHOST}:${HTTPSPORT} \
-                          -L ${IKVMPORT}:${IPMIHOST}:${IKVMPORT} hopper
+   IPMIHOST=infra02ilo.intra.cacert.org
+   LOCALPORT=8082
+   HTTPSPORT=443
+   IKVMPORT=5900
+   ssh -f -N -L ${LOCALPORT}:${IPMIHOST}:${HTTPSPORT} \
+                           -L ${IKVMPORT}:${IPMIHOST}:${IKVMPORT} hopper
 
 and then browsing to the web UI:
 
 .. code:: bash
 
-  firefox https://127.0.0.1:${LOCALPORT}/
+   firefox https://127.0.0.1:${LOCALPORT}/
 
-To use the remote console facility, first install Oracle Java JRE 8.0_211
-on your admin machine. Then download the launch.jnlp script offered by the
-web UI and save it in $HOME. Then use this script "console" to execute it:
+To use the remote console facility, first install Oracle Java JRE 8.0_211 on
+your admin machine. Then download the launch.jnlp script offered by the web UI
+and save it in $HOME. Then use this script "console" to execute it:
 
 .. code:: bash
 
-  #! /bin/bash
-  # console - run remote console for CAcert infra02 with Oracle Java environment
+   #! /bin/bash
+   # console - run remote console for CAcert infra02 with Oracle Java environment
 
-  export JAVADIR=/opt/java/jre1.8.0_211/bin
-  export JAVA=${JAVADIR}/java
-  export JAVAWS=${JAVADIR}/javaws
+   export JAVADIR=/opt/java/jre1.8.0_211/bin
+   export JAVA=${JAVADIR}/java
+   export JAVAWS=${JAVADIR}/javaws
 
-  LAUNCH=${HOME}/launch.jnlp
+   LAUNCH=${HOME}/launch.jnlp
 
-  if [ -f ${LAUNCH} ]
-  then
-        echo "Do not forget to use setupcon if the console keyboard mapping is lame" 1>&2
-        sed -i -e 's/443/8082/' ${LAUNCH}
-        exec ${JAVAWS} ${LAUNCH}
-  else
-        echo $0: cannot read ${LAUNCH} 1>&2
-  fi
+   if [ -f ${LAUNCH} ]
+   then
+         echo "Do not forget to use setupcon if the console keyboard mapping is lame" 1>&2
+         sed -i -e 's/443/8082/' ${LAUNCH}
+         exec ${JAVAWS} ${LAUNCH}
+   else
+         echo $0: cannot read ${LAUNCH} 1>&2
+   fi
 
 DNS
 ---
@@ -189,22 +201,22 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 53/tcp   | dns       | internal  | DNS resolver for infra.cacert.org       |
-| 53/udp   |           |           |                                         |
-+----------+-----------+-----------+-----------------------------------------+
-| 123/udp  | ntp       | ANY       | network time protocol for host,         |
-|          |           |           | listening on the Internet IPv6 and IPv4 |
-|          |           |           | addresses                               |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+----------+-----------------------------------------+
+| Port     | Service | Origin   | Purpose                                 |
++==========+=========+==========+=========================================+
+| 22/tcp   | ssh     | ANY      | admin console access                    |
++----------+---------+----------+-----------------------------------------+
+| 25/tcp   | smtp    | local    | mail delivery to local MTA              |
++----------+---------+----------+-----------------------------------------+
+| 53/tcp   | dns     | internal | DNS resolver for infra.cacert.org       |
+| 53/udp   |         |          |                                         |
++----------+---------+----------+-----------------------------------------+
+| 123/udp  | ntp     | ANY      | network time protocol for host,         |
+|          |         |          | listening on the Internet IPv6 and IPv4 |
+|          |         |          | addresses                               |
++----------+---------+----------+-----------------------------------------+
+| 5666/tcp | nrpe    | monitor  | remote monitoring service               |
++----------+---------+----------+-----------------------------------------+
 
 Running services
 ----------------
@@ -267,10 +279,10 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:     86:d5:f8:71:2e:ab:5e:50:5d:f6:37:6b:16:8f:d1:1c
-   :DSA:     b4:fb:c2:74:33:eb:cc:f0:3e:31:38:c9:a8:df:0a:f5
-   :ECDSA:   79:c4:b8:ff:ef:c9:df:9a:45:07:8d:ab:71:7c:e9:c0
-   :ED25519: 25:d1:c7:44:1c:38:9e:ad:89:32:c7:9c:43:8e:41:c4
+   :RSA:     SHA256:Y7DXSj8c5hhlpesEl+8FJDvEBn7Jg8aauOYvPLlAzII MD5:86:d5:f8:71:2e:ab:5e:50:5d:f6:37:6b:16:8f:d1:1c
+   :DSA:     SHA256:OgGI/EfR/dFNcKL7ePUXktBroR6uarFuc8t7uN1qDcg MD5:b4:fb:c2:74:33:eb:cc:f0:3e:31:38:c9:a8:df:0a:f5
+   :ECDSA:   SHA256:OufwA1whcpd+mb/jEseoKZZQ3qFql16hPuzo/aQmBio MD5:79:c4:b8:ff:ef:c9:df:9a:45:07:8d:ab:71:7c:e9:c0
+   :ED25519: SHA256:eXWoP7L/A25p/YW3vmj+4NFy2lEEVcRaLnNhcelBar8 MD5:25:d1:c7:44:1c:38:9e:ad:89:32:c7:9c:43:8e:41:c4
 
 Dedictated user roles
 ---------------------
@@ -299,6 +311,7 @@ The system can be rebooted safely since the Debian Buster installation on
 .. todo:: document how the backup system works
 .. todo:: add DNS setup for IPv6 address
 .. todo:: switch to Puppet management
+.. todo:: Replace nrpe with icinga2 agent
 
 Planned
 -------
