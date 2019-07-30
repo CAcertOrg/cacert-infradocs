@@ -70,6 +70,11 @@ Logical Location
 
    See :doc:`../network`
 
+Monitoring
+----------
+
+:internal checks: :monitor:`board.infra.cacert.org`
+
 DNS
 ---
 
@@ -197,9 +202,9 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:   c7:a0:3f:63:a5:cb:9a:8f:1f:eb:55:63:46:c3:8d:f1
-   :DSA:   f6:b7:e5:52:24:27:1e:ea:32:c8:f1:2e:45:f7:24:d3
-   :ECDSA: 0f:fc:76:f8:24:99:95:f7:d2:28:59:6e:f0:1e:39:ac
+   :RSA:   SHA256:j20Xl83ZK90nYXuIxOMJTcQH75rBcAWIfRnzoPs1qr4 MD5:c7:a0:3f:63:a5:cb:9a:8f:1f:eb:55:63:46:c3:8d:f1
+   :DSA:   SHA256:If2oWICT8sA7I+n0kyr+e6oTKa4oKaDFs/kSOQu3UwU MD5:f6:b7:e5:52:24:27:1e:ea:32:c8:f1:2e:45:f7:24:d3
+   :ECDSA: SHA256:bAsIi9uHC2lm5HSho3EtdltumBmNPUvHIcFJo0UXj7A MD5:0f:fc:76:f8:24:99:95:f7:d2:28:59:6e:f0:1e:39:ac
 
 .. todo:: setup ED25519 host key (needs update to Jessie)
 
@@ -341,14 +346,14 @@ that the XML-RPC service binds to.
 Tasks
 =====
 
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+
 Planned
 -------
 
 .. todo:: disable unneeded Apache modules
-
 .. todo:: setup IPv6
-
-.. todo:: consider using a centralized PostgreSQL instance
 
 Changes
 =======
@@ -356,7 +361,7 @@ Changes
 System Future
 -------------
 
-.. todo:: system should be updated to Debian 8/9
+.. todo:: system should be updated to Debian 8/9/10
 
 Additional documentation
 ========================
