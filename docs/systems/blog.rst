@@ -157,40 +157,39 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: MySQL
-   single: PHP FPM
-   single: Postfix
+   single: apache httpd
    single: cron
+   single: dbus
+   single: mysql
    single: nrpe
    single: openssh
+   single: postfix
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Apache httpd       | Webserver for blog | init script                            |
-|                    |                    | :file:`/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| MySQL              | MySQL database     | init script                            |
-|                    | server for blog    | :file:`/etc/init.d/mysql`              |
-+--------------------+--------------------+----------------------------------------+
-| PHP FPM            | PHP FPM executor   | init script                            |
-|                    | for blog           | :file:`/etc/init.d/php5-fpm`           |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
++--------------------+--------------------+-------------------------------------------------+
+| Service            | Usage              | Start mechanism                                 |
++====================+====================+=================================================+
+| Apache httpd       | Webserver for blog | systemd unit ``apache2.service``                |
++--------------------+--------------------+-------------------------------------------------+
+| cron               | job scheduler      | systemd unit ``cron.service``                   |
++--------------------+--------------------+-------------------------------------------------+
+| dbus-daemon        | System message bus | systemd unit ``dbus.service``                   |
+|                    | daemon             |                                                 |
++--------------------+--------------------+-------------------------------------------------+
+| MySQL              | MySQL database     | systemd unit ``mysql.service``                  |
+|                    | server for blog    |                                                 |
++--------------------+--------------------+-------------------------------------------------+
+| openssh server     | ssh daemon for     | systemd unit ``ssh.service``                    |
+|                    | remote             |                                                 |
+|                    | administration     |                                                 |
++--------------------+--------------------+-------------------------------------------------+
+| Postfix            | SMTP server for    | systemd unit ``postfix.service``                |
+|                    | local mail         |                                                 |
+|                    | submission         |                                                 |
++--------------------+--------------------+-------------------------------------------------+
+| Nagios NRPE server | remote monitoring  | systemd unit ``/etc/init.d/nagios-nrpe-server`` |
+|                    | service queried by |                                                 |
+|                    | :doc:`monitor`     |                                                 |
++--------------------+--------------------+-------------------------------------------------+
 
 Databases
 ---------
