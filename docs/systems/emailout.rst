@@ -50,6 +50,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Emailout
+
+Monitoring
+----------
+
+:internal checks: :monitor:`emailout.infra.cacert.org`
+
 DNS
 ---
 
@@ -78,17 +86,17 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 9.9
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 9.9
 
 Applicable Documentation
 ------------------------
 
 The following packages where installed after the container setup::
 
-   apt-get install vim-nox screen aptitude git etckeeper postfix \
-     postfix-pcre opendkim opendkim-tools man-db rsyslog logrotate \
+   apt-get install vim-nox screen git etckeeper postfix postfix-pcre opendkim \
+     opendkim-tools man-db rsyslog logrotate \
      heirloom-mailx netcat-openbsd swaks
 
 Services
@@ -111,43 +119,40 @@ Running services
 ----------------
 
 .. index::
-   single: OpenDKIM
-   single: Postfix
    single: cron
-   single: nrpe
+   single: dbus
+   single: icinga2
+   single: opendkim
    single: openssh
+   single: postfix
    single: puppet agent
    single: rsyslog
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| OpenDKIM           | DKIM signing       | init script                            |
-|                    | daemon             | :file:`/etc/init.d/opendkim`           |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission, and    |                                        |
-|                    | mail relay for     |                                        |
-|                    | infrastructure     |                                        |
-|                    | systems            |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | configuration      | init script :file:`/etc/init.d/puppet` |
-|                    | management agent   |                                        |
-+--------------------+--------------------+----------------------------------------+
++----------------+--------------------------+-----------------------------------+
+| Service        | Usage                    | Start mechanism                   |
++================+==========================+===================================+
+| cron           | job scheduler            | systemd unit ``cron.service``     |
++----------------+--------------------------+-----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``     |
+|                | daemon                   |                                   |
++----------------+--------------------------+-----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service``  |
++----------------+--------------------------+-----------------------------------+
+| OpenDKIM       | DKIM signing daemon      | systemd unit ``opendkim.service`` |
++----------------+--------------------------+-----------------------------------+
+| openssh server | ssh daemon for remote    | systemd unit ``ssh.service``      |
+|                | administration           |                                   |
++----------------+--------------------------+-----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service``  |
+|                | local mail submission,   |                                   |
+|                | and mail relay for       |                                   |
+|                | infrastructure systems   |                                   |
++----------------+--------------------------+-----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``   |
+|                | management agent         |                                   |
++----------------+--------------------------+-----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service``  |
++----------------+--------------------------+-----------------------------------+
 
 Connected Systems
 -----------------
@@ -306,13 +311,15 @@ Internal networks have been defined in :file:`/etc/dkim/internalhosts` as::
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
+.. todo:: upgrade to Debian 10 (when Puppet is available)
 .. todo:: setup IPv6
 
-Changes
-=======
 
 System Future
 -------------
