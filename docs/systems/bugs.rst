@@ -71,6 +71,11 @@ Logical Location
 
    See :doc:`../network`
 
+Monitoring
+----------
+
+:internal checks: :monitor:`bugs.infra.cacert.org`
+
 DNS
 ---
 
@@ -102,9 +107,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 9.9
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 9.9
 
 Applicable Documentation
 ------------------------
@@ -128,7 +133,7 @@ Listening services
 +----------+---------+---------+--------------------------------+
 | 443/tcp  | https   | ANY     | web server for bug tracker     |
 +----------+---------+---------+--------------------------------+
-| 5666/tcp | nrpe    | monitor | remote monitoring service      |
+| 5665/tcp | icinga2 | monitor | remote monitoring service      |
 +----------+---------+---------+--------------------------------+
 | 3306/tcp | mysql   | local   | MySQL database for bug tracker |
 +----------+---------+---------+--------------------------------+
@@ -139,43 +144,45 @@ Running services
 .. index::
    single: apache httpd
    single: cron
+   single: dbus
+   single: icinga2
    single: mariadb
-   single: nrpe
    single: openssh
    single: postfix
    single: puppet agent
    single: rsyslog
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| Apache httpd       | Webserver for bug  | init script                            |
-|                    | tracker            | :file:`/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| MariaDB            | MariaDB database   | init script                            |
-|                    | server for bug     | :file:`/etc/init.d/mysql`              |
-|                    | tracker            |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | configuration      | init script                            |
-|                    | management agent   | :file:`/etc/init.d/puppet`             |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| Apache httpd   | Webserver for bug        | systemd unit ``apache2.service`` |
+|                | tracker                  |                                  |
++----------------+--------------------------+----------------------------------+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
+|                | daemon                   |                                  |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| MariaDB        | MariaDB database         | systemd unit ``mariadb.service`` |
+|                | server for bug           |                                  |
+|                | tracker                  |                                  |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote                   |                                  |
+|                | administration           |                                  |
++----------------+--------------------------+----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
+|                | local mail               |                                  |
+|                | submission               |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
+|                |                          |                                  |
++----------------+--------------------------+----------------------------------+
 
 Databases
 ---------
@@ -346,6 +353,8 @@ add an additional logging socket in the Postfix chroot.
 
 Tasks
 =====
+
+.. todo:: upgrade to Debian 10 (when Puppet is available)
 
 Planned
 -------
