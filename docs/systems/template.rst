@@ -66,12 +66,16 @@ This system is located in an :term:`LXC` container on physical machine
 Physical Configuration
 ----------------------
 
+.. fill this section for physical machines, remove it for VMs/containers
+
 .. seealso::
 
    See :wiki:`SystemAdministration/EquipmentList`
 
 Logical Location
 ----------------
+
+.. add information about network settings of the system
 
 :IP Internet: :ip:v4:`<IP>`
 :IP Intranet: :ip:v4:`<IP>`
@@ -81,6 +85,17 @@ Logical Location
 .. seealso::
 
    See :doc:`../network`
+
+.. index::
+   single: Monitoring; <machine>
+
+Monitoring
+----------
+
+.. add links to monitoring checks
+
+:internal checks: :monitor:`template.infra.cacert.org`
+:external checks: :monitor:`template.cacert.org`
 
 DNS
 ---
@@ -121,86 +136,107 @@ Listening services
 
 .. use the values from this table or add new lines if applicable
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 80/tcp   | http      | ANY       | application                             |
-+----------+-----------+-----------+-----------------------------------------+
-| 443/tcp  | https     | ANY       | application                             |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
-| 3306/tcp | mysql     | local     | MySQL database for ...                  |
-+----------+-----------+-----------+-----------------------------------------+
-| 5432/tcp | pgsql     | local     | PostgreSQL database for ...             |
-+----------+-----------+-----------+-----------------------------------------+
-| 465/udp  | syslog    | local     | syslog port                             |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+---------+-----------------------------+
+| Port     | Service | Origin  | Purpose                     |
++==========+=========+=========+=============================+
+| 22/tcp   | ssh     | ANY     | admin console access        |
++----------+---------+---------+-----------------------------+
+| 25/tcp   | smtp    | local   | mail delivery to local MTA  |
++----------+---------+---------+-----------------------------+
+| 80/tcp   | http    | ANY     | application                 |
++----------+---------+---------+-----------------------------+
+| 443/tcp  | https   | ANY     | application                 |
++----------+---------+---------+-----------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service   |
++----------+---------+---------+-----------------------------+
+| 5666/tcp | nrpe    | monitor | remote monitoring service   |
++----------+---------+---------+-----------------------------+
+| 3306/tcp | mysql   | local   | MySQL database for ...      |
++----------+---------+---------+-----------------------------+
+| 5432/tcp | pgsql   | local   | PostgreSQL database for ... |
++----------+---------+---------+-----------------------------+
+| 465/udp  | syslog  | local   | syslog port                 |
++----------+---------+---------+-----------------------------+
 
 Running services
 ----------------
 
+..
+   document running services, keep the table in alphabetic order to allow
+   easier diffing, the Start mechanism column should point to an absolute path
+   to an init script or the name of a systemd unit
+
 .. index::
-   single: Apache
-   single: Icinga2
-   single: MySQL
-   single: OpenERP
-   single: Postfix
-   single: PostgreSQL
+   single: apache httpd
    single: cron
+   single: icinga2
+   single: mariadb
+   single: mysql
    single: nginx
    single: nrpe
+   single: openerp
    single: openssh
+   single: postfix
+   single: postgresql
+   single: puppet
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Apache httpd       | Webserver for ...  | init script                            |
-|                    |                    | :file:`/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for ...            |                                        |
-+--------------------+--------------------+----------------------------------------+
-| MySQL              | MySQL database     | init script                            |
-|                    | server for ...     | :file:`/etc/init.d/mysql`              |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission, ...    |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Exim               | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/exim4`              |
-|                    | submission, ...    |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
++--------------------+--------------------------+----------------------------------------+
+| Service            | Usage                    | Start mechanism                        |
++====================+==========================+========================================+
+| Apache httpd       | Webserver for ...        | init script                            |
+|                    |                          | :file:`/etc/init.d/apache2`            |
++--------------------+--------------------------+----------------------------------------+
+| cron               | job scheduler            | init script :file:`/etc/init.d/cron`   |
++--------------------+--------------------------+----------------------------------------+
+| dbus-daemon        | System message bus       | systemd unit ``dbus.service``          |
+|                    | daemon                   |                                        |
++--------------------+--------------------------+----------------------------------------+
+| Exim               | SMTP server for          | init script                            |
+|                    | local mail               | :file:`/etc/init.d/exim4`              |
+|                    | submission, ...          |                                        |
++--------------------+--------------------------+----------------------------------------+
+| icinga2            | Icinga2 monitoring agent | systemd unit ``icinga2.service``       |
++--------------------+--------------------------+----------------------------------------+
+| rsyslog            | syslog daemon            | init script                            |
+|                    |                          | :file:`/etc/init.d/syslog`             |
++--------------------+--------------------------+----------------------------------------+
+| MariaDB            | MariaDB database         | systemd unit ``mariadb.service``       |
+|                    | server for bug           |                                        |
+|                    | tracker                  |                                        |
++--------------------+--------------------------+----------------------------------------+
+| MySQL              | MySQL database           | init script                            |
+|                    | server for ...           | :file:`/etc/init.d/mysql`              |
++--------------------+--------------------------+----------------------------------------+
+| Nagios NRPE server | remote monitoring        | init script                            |
+|                    | service queried by       | :file:`/etc/init.d/nagios-nrpe-server` |
+|                    | :doc:`monitor`           |                                        |
++--------------------+--------------------------+----------------------------------------+
+| openssh server     | ssh daemon for           | init script :file:`/etc/init.d/ssh`    |
+|                    | remote                   |                                        |
+|                    | administration           |                                        |
++--------------------+--------------------------+----------------------------------------+
+| Postfix            | SMTP server for          | init script                            |
+|                    | local mail               | :file:`/etc/init.d/postfix`            |
+|                    | submission, ...          |                                        |
++--------------------+--------------------------+----------------------------------------+
+| PostgreSQL         | PostgreSQL               | init script                            |
+|                    | database server          | :file:`/etc/init.d/postgresql`         |
+|                    | for ...                  |                                        |
++--------------------+--------------------------+----------------------------------------+
+| Puppet agent       | configuration            | systemd unit ``puppet.service``        |
+|                    | management agent         |                                        |
++--------------------+--------------------------+----------------------------------------+
 
 Databases
 ---------
 
-+-------------+--------------+---------------------------+
-| RDBMS       | Name         | Used for                  |
-+=============+==============+===========================+
-| MySQL       | application1 | fictional application one |
-+-------------+--------------+---------------------------+
-| PostgreSQL  | application2 | fictional application two |
-+-------------+--------------+---------------------------+
++------------+--------------+---------------------------+
+| RDBMS      | Name         | Used for                  |
++============+==============+===========================+
+| MySQL      | application1 | fictional application one |
++------------+--------------+---------------------------+
+| PostgreSQL | application2 | fictional application two |
++------------+--------------+---------------------------+
 
 Running Guests
 --------------
@@ -227,7 +263,11 @@ Outbound network connections
 Security
 ========
 
-.. add the MD5 fingerprints of the SSH host keys
+..
+   add the SHA256 and MD5 fingerprints of the SSH host keys. You can just paste
+   the output of the ssh_host_keys.py script in the tools folder of the
+   cacert-infradocs git repository with the root filesystem of the host as
+   argument.
 
 .. sshkeys::
    :RSA:
@@ -268,8 +308,11 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-.. use the sslcert directive to have certificates added to the certificate list
-   automatically
+..
+   use the sslcert directive to have certificates added to the certificate list
+   automatically. There is a script sslcert.py in the tools directory of the
+   cacert-infradocs git repository that can generate these directives
+   automatically.
 
 .. sslcert:: template.cacert.org
    :altnames:
@@ -298,20 +341,26 @@ Keys and X.509 certificates
 <service_x> configuration
 -------------------------
 
-.. add a section for the configuration of each service where configuration
+..
+   add a section for the configuration of each service where configuration
    deviates from OS package defaults
 
 Tasks
 =====
+
+..
+   add a section for each system maintenance task that is special for this
+   system, i.e. adding/removing accounts, running some special maintenance
+   scripts or similar tasks
+
+Changes
+=======
 
 Planned
 -------
 
 .. add a paragraph or todo directive for each larger planned task. You may want
    to link to specific issues if you use some issue tracker.
-
-Changes
-=======
 
 System Future
 -------------
