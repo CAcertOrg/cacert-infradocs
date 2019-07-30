@@ -222,38 +222,68 @@ Running services
 ----------------
 
 .. index::
-   single: openssh
+   single: acpid
+   single: atop
+   single: atopacctd
    single: cron
+   single: dbus
    single: dnsmasq
-   single: rsyslog
-   single: ntpd
-   single: Postfix
+   single: lxc
+   single: mdadm
    single: nrpe
+   single: ntpd
+   single: openssh
+   single: postfix
+   single: radvd
+   single: rsyslog
+   single: smartd
 
-+--------------------+--------------------+-----------------------------------------+
-| Service            | Usage              | Start mechanism                         |
-+====================+====================+=========================================+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`     |
-|                    | remote             |                                         |
-|                    | administration     |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| dnsmasq            | DNS resolver       | init script :file:`/etc/init.d/dnsmasq` |
-+--------------------+--------------------+-----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`    |
-+--------------------+--------------------+-----------------------------------------+
-| rsyslog            | syslog daemon      | init script                             |
-|                    |                    | :file:`/etc/init.d/syslog`              |
-+--------------------+--------------------+-----------------------------------------+
-| ntpd               | time server        | init script :file:`/etc/init.d/ntp`     |
-+--------------------+--------------------+-----------------------------------------+
-| Postfix            | SMTP server for    | init script                             |
-|                    | local mail         | :file:`/etc/init.d/postfix`             |
-|                    | submission, ...    |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                             |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server`  |
-|                    | :doc:`monitor`     |                                         |
-+--------------------+--------------------+-----------------------------------------+
++--------------------+----------------------+-------------------------------------------+
+| Service            | Usage                | Start mechanism                           |
++====================+======================+===========================================+
+| acpid              | ACPI daemon          | systemd unit `acpid.service`              |
++--------------------+----------------------+-------------------------------------------+
+| atop               | Advanced system      | systemd unit `atop.service`               |
+|                    | and process monitor  |                                           |
++--------------------+----------------------+-------------------------------------------+
+| atopacctd          | Advanced system      | systemd unit `atopacct.service`           |
+|                    | and process monitor  |                                           |
+|                    | accounting daemon    |                                           |
++--------------------+----------------------+-------------------------------------------+
+| cron               | job scheduler        | systemd unit `cron.service`               |
++--------------------+----------------------+-------------------------------------------+
+| dbus-daemon        | System message bus   | systemd unit `dbus.service`               |
+|                    | daemon               |                                           |
++--------------------+----------------------+-------------------------------------------+
+| dnsmasq            | DNS resolver         | systemd unit `dnsmasq.service`            |
++--------------------+----------------------+-------------------------------------------+
+| LXC                | Service for LXC      | systemd unit `lxc.service`                |
+|                    | container management |                                           |
++--------------------+----------------------+-------------------------------------------+
+| mdadm              | RAID monitoring      | systemd unit `mdmonitor.service`          |
++--------------------+----------------------+-------------------------------------------+
+| Nagios NRPE server | remote monitoring    | systemd unit `nagios-nrpe-server.service` |
+|                    | service queried by   |                                           |
+|                    | :doc:`monitor`       |                                           |
++--------------------+----------------------+-------------------------------------------+
+| ntpd               | time server          | systemd unit `ntp.service`                |
++--------------------+----------------------+-------------------------------------------+
+| openssh server     | ssh daemon for       | systemd unit `ssh.service`                |
+|                    | remote               |                                           |
+|                    | administration       |                                           |
++--------------------+----------------------+-------------------------------------------+
+| postfix            | SMTP server for      | systemd unit `postfix.service`            |
+|                    | local mail           |                                           |
+|                    | submission, ...      |                                           |
++--------------------+----------------------+-------------------------------------------+
+| radvd              | IPv6 route           | systemd unit `radvd.service`              |
+|                    | advertisement        |                                           |
++--------------------+----------------------+-------------------------------------------+
+| rsyslog            | syslog daemon        | systemd unit `rsyslog.service`            |
++--------------------+----------------------+-------------------------------------------+
+| smartd             | S.M.A.R.T. HDD       | systemd unit `smartd.service`             |
+|                    | monitoring           |                                           |
++--------------------+----------------------+-------------------------------------------+
 
 .. Running Guests
    --------------
