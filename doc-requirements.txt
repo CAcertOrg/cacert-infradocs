@@ -1,11 +1,12 @@
 alabaster==0.7.12
+attrs==19.1.0
 Babel==2.7.0
 certifi==2019.6.16
 chardet==3.0.4
 dateutils==0.6.6
-docutils==0.14
+docutils==0.15.2
 gitdb2==2.0.5
-GitPython==2.1.11
+GitPython==2.1.13
 idna==2.8
 imagesize==1.1.0
 ipcalc==1.99.0
@@ -13,9 +14,9 @@ jandd.sphinxext.ip==0.3.0
 jandd.sphinxext.mac==0.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
-packaging==19.0
+packaging==19.1
 Pygments==2.4.2
-pyparsing==2.4.0
+pyparsing==2.4.2
 python-dateutil==2.8.0
 pytz==2019.1
 requests==2.22.0
