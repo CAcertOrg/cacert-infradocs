@@ -67,6 +67,11 @@ Logical Location
 
    See :doc:`../network`
 
+Monitoring
+----------
+
+:internal checks: :monitor:`cats.infra.cacert.org`
+
 DNS
 ---
 
@@ -130,12 +135,12 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: MySQL
-   single: Postfix
+   single: apache httpd
    single: cron
+   single: mysql
    single: nrpe
    single: openssh
+   single: postfix
 
 +--------------------+--------------------+----------------------------------------+
 | Service            | Usage              | Start mechanism                        |
@@ -196,9 +201,9 @@ Security
 ========
 
 .. sshkeys::
-   :RSA:   d4:1f:0a:c9:a6:18:7a:a4:72:6b:42:5d:8e:63:44:1f
-   :DSA:   0c:0a:94:fc:99:b2:49:a2:41:3a:59:3f:dd:3d:e4:33
-   :ECDSA: bc:28:fb:72:b9:e3:cb:0f:a0:ff:d2:38:8a:ac:6d:93
+   :RSA:   SHA256:YFr1fODx7PjurFxxkB8UNL9lwG/AeWuTLQ8Q8h3fZf4 MD5:d4:1f:0a:c9:a6:18:7a:a4:72:6b:42:5d:8e:63:44:1f
+   :DSA:   SHA256:CDUkGlsZBQl8MysXb67JLgXGkBaboSUYTz/iyWEtlxg MD5:0c:0a:94:fc:99:b2:49:a2:41:3a:59:3f:dd:3d:e4:33
+   :ECDSA: SHA256:H1SVPJbeDpPNGeZsolCF1nc87v08N2vi53waM3zNAI0 MD5:bc:28:fb:72:b9:e3:cb:0f:a0:ff:d2:38:8a:ac:6d:93
 
 .. todo:: setup ED25519 host key (needs update to Jessie)
 
@@ -352,10 +357,13 @@ MySQL configuration is stored in the :file:`/etc/mysql/` directory.
 Tasks
 =====
 
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+
 Planned
 -------
 
-.. todo:: update to Debian Jessie
+.. todo:: update to Debian 8/9/10
 .. todo:: setup IPv6
 .. todo:: setup CRL checks
 
