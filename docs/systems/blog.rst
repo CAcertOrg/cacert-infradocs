@@ -85,6 +85,9 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Blog
+
 Monitoring
 ----------
 
@@ -335,25 +338,28 @@ Wordpress configuration
 Tasks
 =====
 
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-.. todo:: update wordpress to 5.x
+.. todo:: add a section documenting wordpress and plugin updates
+.. todo:: add a section documenting wordpress user management
+
+Changes
+=======
 
 Planned
 -------
 
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: update wordpress to 5.x
+.. todo:: update to Debian 9/10
 .. todo:: setup IPv6
 
 .. todo::
    setup CRL checks (can be borrowed from :doc:`svn`) for client certificates
 
-Changes
-=======
-
 System Future
 -------------
 
-.. todo:: system should be upgraded to Debian 9 or 10
+* No plans
 
 Additional documentation
 ========================

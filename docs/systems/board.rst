@@ -70,6 +70,9 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Board
+
 Monitoring
 ----------
 
@@ -346,22 +349,24 @@ that the XML-RPC service binds to.
 Tasks
 =====
 
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-
-Planned
--------
-
-.. todo:: disable unneeded Apache modules
-.. todo:: setup IPv6
+.. todo:: add a section documenting how to add/remove openerp users
 
 Changes
 =======
 
+Planned
+-------
+
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: disable unneeded Apache modules
+.. todo:: setup IPv6
+.. todo:: update to Debian 8/9/10
+
 System Future
 -------------
 
-.. todo:: system should be updated to Debian 8/9/10
+* No plans
 
 Additional documentation
 ========================

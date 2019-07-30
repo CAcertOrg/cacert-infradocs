@@ -71,6 +71,9 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Bugs
+
 Monitoring
 ----------
 
@@ -354,13 +357,17 @@ add an additional logging socket in the Postfix chroot.
 Tasks
 =====
 
-.. todo:: upgrade to Debian 10 (when Puppet is available)
+.. todo:: add a section documenting how to manage mantis projects
+.. todo:: add a section documenting how to manage mantis users
+
+Changes
+=======
 
 Planned
 -------
 
-Changes
-=======
+.. todo:: upgrade to Debian 10 (when Puppet is available)
+
 
 System Future
 -------------

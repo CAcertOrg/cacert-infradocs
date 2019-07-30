@@ -68,6 +68,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Web
+
+Monitoring
+----------
+
+:internal checks: :monitor:`web.infra.cacert.org`
+
 DNS
 ---
 
@@ -310,13 +318,13 @@ Apache httpd configuration
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: manage the web system using Puppet
-
-Changes
-=======
 
 System Future
 -------------

@@ -54,6 +54,9 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Email
+
 Monitoring
 ----------
 
@@ -533,6 +536,15 @@ There are two types of aliases.
    cacertusers database. The reason for this implementation is to only allow
    the designated person to send email from this email address.
 
+Client certificate authentication
+---------------------------------
+
+There were plans for X.509 certificate authentication for mail services, but
+there is no progress so far.
+
+Changes
+=======
+
 Planned
 -------
 
@@ -547,12 +559,6 @@ Planned
 
 .. todo::
    consider to use LDAP to consolidate user, password and email information
-
-* there were plans for X.509 certificate authentication for mail services, but
-  there is no progress so far
-
-Changes
-=======
 
 System Future
 -------------

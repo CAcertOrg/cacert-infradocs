@@ -83,6 +83,14 @@ there are some special mappings in the infra02 firewall to get access to this sy
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Test3
+
+Monitoring
+----------
+
+.. :internal checks: :monitor:`test3.infra.cacert.org`
+
 DNS
 ---
 
@@ -449,13 +457,13 @@ all mail is delivered to the mailbox of the *cacertmail* user in
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: implement git workflows for updates maybe using :doc:`jenkins`
-
-Changes
-=======
 
 System Future
 -------------

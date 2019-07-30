@@ -70,6 +70,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Test
+
+Monitoring
+----------
+
+:internal checks: :monitor:`test.infra.cacert.org`
+
 DNS
 ---
 
@@ -434,6 +442,9 @@ and to use mbox style mailboxes in /var/mail/%u in the following files:
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
@@ -441,8 +452,6 @@ Planned
 
    Upgrade test to Debian Stretch when the software is ready.
 
-Changes
-=======
 
 System Future
 -------------

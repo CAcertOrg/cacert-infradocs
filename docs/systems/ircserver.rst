@@ -69,6 +69,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Ircserver
+
+Monitoring
+----------
+
+:internal checks: :monitor:`ircserver.infra.cacert.org`
+
 DNS
 ---
 

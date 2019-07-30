@@ -330,32 +330,6 @@ Risk assessments and critical packages
 The system is the host system for all other infrastructure systems. Access to
 this system has to be tightly controlled.
 
-Tasks
-=====
-
-The system can be rebooted safely since the Debian Buster installation on
-2019-07-13.
-
-.. todo:: document how to setup a new container
-.. todo:: document how to setup firewall rules/forwarding
-.. todo:: document how the backup system works
-.. todo:: add DNS setup for IPv6 address
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-
-Planned
--------
-
-* Replace ferm with nftables setup
-
-Changes
-=======
-
-System Future
--------------
-
-* No plans
-
 Critical Configuration items
 ============================
 
@@ -389,6 +363,50 @@ The container configuration is contained in files named
 
 The root filesystems of the containers are stored on :term:`LVM` volumes that
 are mounted in :file:`/var/lib/lxc/<container>/rootfs` for each container.
+
+Tasks
+=====
+
+.. todo:: document how to setup a new container
+.. todo:: document how to setup firewall rules/forwarding
+.. todo:: document how the backup system works
+
+Reboot
+------
+
+The system can be rebooted safely since the Debian Buster installation on
+2019-07-13:
+
+.. code-block:: bash
+
+   systemctl reboot
+
+Restarting the firewall
+-----------------------
+
+To restart the firewall setup perform a configuration syntax check and use
+systemctl to reload ferm's configuration.
+
+.. code-block:: bash
+
+   ferm -n /etc/ferm/ferm.conf
+   systemctl reload ferm.service
+
+Changes
+=======
+
+Planned
+-------
+
+.. todo:: add DNS setup for IPv6 address
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: replace ferm with nftables setup
+
+System Future
+-------------
+
+* No plans
 
 Additional documentation
 ========================

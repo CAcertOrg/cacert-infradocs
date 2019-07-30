@@ -68,6 +68,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Jenkins
+
+Monitoring
+----------
+
+:internal checks: :monitor:`jenkins.infra.cacert.org`
+
 DNS
 ---
 
@@ -234,10 +242,18 @@ management web interface with role based access control.
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 * build more of CAcert's software on the Jenkins instance
+
+System Future
+-------------
+
+* No plans
 
 Additional documentation
 ========================

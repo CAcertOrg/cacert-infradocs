@@ -329,13 +329,13 @@ The board voting system uses a SQLite database in
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: implement CRL checking
-
-Changes
-=======
 
 System Future
 -------------

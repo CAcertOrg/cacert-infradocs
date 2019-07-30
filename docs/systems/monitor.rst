@@ -83,6 +83,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Monitor
+
+Monitoring
+----------
+
+:internal checks: :monitor:`monitor.infra.cacert.org`
+
 DNS
 ---
 
@@ -311,13 +319,11 @@ configurations are defined in the :file:`objects/` subdirectory.
 Tasks
 =====
 
-Planned
--------
-
-.. todo:: switch to Icinga2 and Icingaweb2
-
 Changes
 =======
+
+Planned
+-------
 
 System Future
 -------------

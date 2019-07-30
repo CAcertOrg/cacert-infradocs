@@ -83,6 +83,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Svn
+
+Monitoring
+----------
+
+:internal checks: :monitor:`svn.infra.cacert.org`
+
 DNS
 ---
 
@@ -317,12 +325,6 @@ CRLs are updated by :file:`/etc/cron.daily/fetchcrls`.
 Tasks
 =====
 
-Planned
--------
-
-The configuration of this system will be migrated to a setup fully managed by
-Puppet.
-
 X.509 Auth for policy
 ---------------------
 
@@ -336,6 +338,13 @@ Mail notifications
 
 Changes
 =======
+
+Planned
+-------
+
+The configuration of this system will be migrated to a setup fully managed by
+Puppet.
+
 
 System Future
 -------------

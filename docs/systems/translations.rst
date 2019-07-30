@@ -71,6 +71,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Translations
+
+Monitoring
+----------
+
+:internal checks: :monitor:`translations.infra.cacert.org`
+
 DNS
 ---
 
@@ -394,6 +402,9 @@ Pootle version and have to be checked/updated.
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
@@ -413,8 +424,6 @@ Planned
    them with the :program:`sudo` system to allow members of the `pootle-update`
    group to run them in the context of the `pootle` system user
 
-Changes
-=======
 
 System Future
 -------------

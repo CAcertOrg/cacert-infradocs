@@ -73,6 +73,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Git
+
+Monitoring
+----------
+
+:internal checks: :monitor:`git.infra.cacert.org`
+
 DNS
 ---
 
@@ -326,13 +334,13 @@ The runit service handling is triggered through :file:`/etc/inittab`.
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: enable IPv6
-
-Changes
-=======
 
 System Future
 -------------

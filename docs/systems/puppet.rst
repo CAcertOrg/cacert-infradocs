@@ -72,6 +72,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Puppet
+
+Monitoring
+----------
+
+:internal checks: :monitor:`puppet.infra.cacert.org`
+
 DNS
 ---
 
@@ -254,7 +262,6 @@ trusted Puppet agents.
 The CA data is stored in :file:`/etc/puppetlabs/puppet/ssl` and managed by
 puppet itself.
 
-
 Eyaml private key
 -----------------
 
@@ -264,14 +271,12 @@ key in :file:`keys/public_key.pkcs7.pem` in the `CAcert puppet Git repository
 private key is stored in
 :file:`/etc/puppetlabs/code/environments/production/keys/private_key.pkcs7.pem`.
 
-
 hiera configuration
 -------------------
 
 Puppet uses Hiera for hierarchical information retrieval. The global hiera
 configuration is stored in :file:`/etc/puppetlabs/puppet/hiera.yaml` and
 defines the hierarchy lookup as well as the eyaml key locations.
-
 
 puppet configuration
 --------------------
@@ -288,21 +293,19 @@ pattern (see references below) and code/data separation via Hiera.
 Updates to the cacert-puppet repository trigger a web hook listening on tcp
 port 8000 that automatically updates the production environment directory.
 
-
 Tasks
 =====
+
+.. todo:: add a section to describe how to add a system for puppet management
+
+Changes
+=======
 
 Planned
 -------
 
 * migrate as many systems as possible to use Puppet for a more
   reproducible/auditable system setup
-* automate updates of the Puppet code from Git
-
-.. todo:: improve Webhook to run r10k after git pull
-
-Changes
-=======
 
 System Future
 -------------

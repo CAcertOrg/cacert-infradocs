@@ -375,15 +375,14 @@ Adding a list
 
 5. add subscribers/ other owners
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: upgrade the lists system OS to Debian 9 (Stretch)
-
 .. todo:: manage the lists system using Puppet
-
-Changes
-=======
 
 System Future
 -------------

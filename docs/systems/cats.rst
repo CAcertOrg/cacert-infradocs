@@ -357,23 +357,24 @@ MySQL configuration is stored in the :file:`/etc/mysql/` directory.
 Tasks
 =====
 
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-
-Planned
--------
-
-.. todo:: update to Debian 8/9/10
-.. todo:: setup IPv6
-.. todo:: setup CRL checks
+.. todo:: document how to update the CATS software
 
 Changes
 =======
 
+Planned
+-------
+
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: update to Debian 8/9/10
+.. todo:: setup IPv6
+.. todo:: setup CRL checks
+
 System Future
 -------------
 
-.. todo:: system should be updated to Debian 8/9
+* No plans
 
 Additional documentation
 ========================

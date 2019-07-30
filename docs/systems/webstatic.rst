@@ -77,6 +77,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Webstatic
+
+Monitoring
+----------
+
+:internal checks: :monitor:`webstatic.infra.cacert.org`
+
 DNS
 ---
 
@@ -274,13 +282,13 @@ The main configuration files for Apache httpd are:
 Tasks
 =====
 
+Changes
+=======
+
 Planned
 -------
 
 .. todo:: manage the webstatic system using Puppet
-
-Changes
-=======
 
 System Future
 -------------

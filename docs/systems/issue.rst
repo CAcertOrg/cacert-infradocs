@@ -74,6 +74,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Issue
+
+Monitoring
+----------
+
+:internal checks: :monitor:`issue.infra.cacert.org`
+
 DNS
 ---
 
@@ -303,6 +311,38 @@ Postfix configuration
 Tasks
 =====
 
+Creating new OTRS user accounts
+-------------------------------
+
+* Go to Admin -> Users -> Add
+* Fill out user details
+
+  * Use a securely random generated password (min. 12 chars, mixed of capital-
+    non-capital letters, numbers and special chars), send it to the user via
+    encrypted mail (also include URL of the issue tracking system, username and
+    some initial instructions or a link to documentation if available)
+  * Use CAcert email addresses only
+
+* Set the preferences for the user. Good standards are:
+
+  * Show tickets: 25
+  * New ticket notification: Yes (or No for high volume queues having agents regulary looking at
+  * Follow up notification: Yes
+  * Ticket lock timeout notification: Yes
+  * Move notification: Yes (or No if the queues for the user get many new tickets)
+  * Spelling Dictionary: English 
+
+* Submit
+* Do NOT set any groups for the user.
+* Go to Admin -> Users -> Roles <-> Users
+* Choose the newly created user
+* Set the roles the user has
+* Submit
+* Now you are done :) 
+
+Changes
+=======
+
 Planned
 -------
 
@@ -334,10 +374,6 @@ Ideas
 
 * Use centralised logging
 
-
-Changes
-=======
-
 System Future
 -------------
 
@@ -345,36 +381,6 @@ System Future
 
 Additional documentation
 ========================
-
-Creating new OTRS user accounts
--------------------------------
-
-* Go to Admin -> Users -> Add
-* Fill out user details
-
-  * Use a securely random generated password (min. 12 chars, mixed of capital-
-    non-capital letters, numbers and special chars), send it to the user via
-    encrypted mail (also include URL of the issue tracking system, username and
-    some initial instructions or a link to documentation if available)
-  * Use CAcert email addresses only
-
-* Set the preferences for the user. Good standards are:
-
-  * Show tickets: 25
-  * New ticket notification: Yes (or No for high volume queues having agents regulary looking at
-  * Follow up notification: Yes
-  * Ticket lock timeout notification: Yes
-  * Move notification: Yes (or No if the queues for the user get many new tickets)
-  * Spelling Dictionary: English 
-
-* Submit
-* Do NOT set any groups for the user.
-* Go to Admin -> Users -> Roles <-> Users
-* Choose the newly created user
-* Set the roles the user has
-* Submit
-* Now you are done :) 
-
 
 .. seealso::
 

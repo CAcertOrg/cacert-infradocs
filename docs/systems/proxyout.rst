@@ -70,6 +70,14 @@ Logical Location
 
    See :doc:`../network`
 
+.. index::
+   single: Monitoring; Proxyout
+
+Monitoring
+----------
+
+:internal checks: :monitor:`proxyout.infra.cacert.org`
+
 DNS
 ---
 
@@ -217,6 +225,11 @@ configuration items outside of the Puppet repository.
 Tasks
 =====
 
+.. todo:: add a section describing how to add ACLs to Squid
+
+Changes
+=======
+
 Planned
 -------
 
@@ -224,6 +237,11 @@ Planned
           avoid flaky firewall configurations on :doc:`infra02`.
 
 .. todo:: Add more APT repositories and ACLs if needed
+
+System Future
+-------------
+
+* No plans
 
 Additional documentation
 ========================
