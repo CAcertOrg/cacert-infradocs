@@ -54,6 +54,11 @@ Logical Location
 
    See :doc:`../network`
 
+Monitoring
+----------
+
+:internal checks: :monitor:`email.infra.cacert.org`
+
 DNS
 ---
 
@@ -153,13 +158,13 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
-   single: MySQL
-   single: Postfix
+   single: apache httpd
    single: cron
    single: dovecot
+   single: mysql
    single: nrpe
    single: openssh
+   single: postfix
    single: pysieved
    single: rsyslog
    single: xinetd
@@ -212,8 +217,6 @@ Databases
 
 .. todo:: check whether the empty postfixpolicyd database is required
 
-.. todo:: consider moving the databases to a new central MySQL service
-
 Connected Systems
 -----------------
 
@@ -235,8 +238,8 @@ Security
 ========
 
 .. sshkeys::
-   :RSA: a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23
-   :DSA: f4:eb:0a:36:40:1c:55:6b:75:a2:26:34:ea:18:7e:91
+   :RSA: SHA256:yLaPPrmoOQI5G3hoa0iFoxf6wPdLBJCnizLsu+6SHfE MD5:a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23
+   :DSA: SHA256:zY4YEmiCYrbDXK1FHum9Qw8cKAInnizrbODF8o2ofEU MD5:f4:eb:0a:36:40:1c:55:6b:75:a2:26:34:ea:18:7e:91
 
 .. warning::
 
@@ -533,8 +536,10 @@ There are two types of aliases.
 Planned
 -------
 
+.. todo:: switch to Puppet management
+.. todo:: replace nrpe with icinga2 agent
+.. todo:: update to Debian 6/7/8/9/10
 .. todo:: implement CRL checking
-
 .. todo:: setup IPv6
 
 .. todo::
