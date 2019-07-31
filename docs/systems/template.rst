@@ -77,9 +77,10 @@ Logical Location
 
 .. add information about network settings of the system
 
-:IP Internet: :ip:v4:`<IP>`
-:IP Intranet: :ip:v4:`<IP>`
-:IP Internal: :ip:v4:`<IP>`
+:IP Internet: :ip:v4:`213.154.225.<IP>`
+:IP Intranet: :ip:v4:`172.16.2.<IP>`
+:IP Internal: :ip:v4:`10.0.0.<IP>`
+:IPv6:        :ip:v6:`2001:7b8:616:162:x::<IP>`
 :MAC address: :mac:`<MAC>` (interfacename)
 
 .. seealso::
@@ -169,6 +170,8 @@ Running services
 .. index::
    single: apache httpd
    single: cron
+   single: dbus
+   single: exim4
    single: icinga2
    single: mariadb
    single: mysql
@@ -179,6 +182,7 @@ Running services
    single: postfix
    single: postgresql
    single: puppet
+   single: rsyslog
 
 +--------------------+--------------------------+----------------------------------------+
 | Service            | Usage                    | Start mechanism                        |
@@ -196,9 +200,6 @@ Running services
 |                    | submission, ...          |                                        |
 +--------------------+--------------------------+----------------------------------------+
 | icinga2            | Icinga2 monitoring agent | systemd unit ``icinga2.service``       |
-+--------------------+--------------------------+----------------------------------------+
-| rsyslog            | syslog daemon            | init script                            |
-|                    |                          | :file:`/etc/init.d/syslog`             |
 +--------------------+--------------------------+----------------------------------------+
 | MariaDB            | MariaDB database         | systemd unit ``mariadb.service``       |
 |                    | server for bug           |                                        |
@@ -226,17 +227,22 @@ Running services
 | Puppet agent       | configuration            | systemd unit ``puppet.service``        |
 |                    | management agent         |                                        |
 +--------------------+--------------------------+----------------------------------------+
+| rsyslog            | syslog daemon            | init script                            |
+|                    |                          | :file:`/etc/init.d/syslog`             |
++--------------------+--------------------------+----------------------------------------+
 
 Databases
 ---------
 
-+------------+--------------+---------------------------+
-| RDBMS      | Name         | Used for                  |
-+============+==============+===========================+
-| MySQL      | application1 | fictional application one |
-+------------+--------------+---------------------------+
-| PostgreSQL | application2 | fictional application two |
-+------------+--------------+---------------------------+
++------------+--------------+-----------------------------+
+| RDBMS      | Name         | Used for                    |
++============+==============+=============================+
+| MySQL      | application1 | fictional application one   |
++------------+--------------+-----------------------------+
+| PostgreSQL | application2 | fictional application two   |
++------------+--------------+-----------------------------+
+| SQLite     | application  | fictional application three |
++------------+--------------+-----------------------------+
 
 Running Guests
 --------------
@@ -256,7 +262,10 @@ Outbound network connections
 ----------------------------
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
+  .. or
+* DNS (53) resolver at 10.0.0.1 (:doc:`infra02`)
 * :doc:`emailout` as SMTP relay
+* :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
 
