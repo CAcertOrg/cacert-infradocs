@@ -219,7 +219,7 @@ Critical Configuration items
 ============================
 
 The system configuration is managed via Puppet profiles. There should be no
-configuration items outside of the Puppet repository.
+configuration items outside of the :cacertgit:`cacert-puppet`.
 
 .. todo:: move configuration of :doc:`web` to Puppet code
 

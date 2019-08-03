@@ -18,12 +18,14 @@ administrator team.
    systems/git
    systems/ircserver
    systems/issue
-   systems/lists
    systems/jenkins
+   systems/lists
    systems/monitor
-   systems/puppet
+   systems/motion
+   systems/pgpkeys
    systems/proxyin
    systems/proxyout
+   systems/puppet
    systems/svn
    systems/test
    systems/test2
@@ -33,6 +35,7 @@ administrator team.
    systems/web
    systems/webmail
    systems/webstatic
+   systems/wiki
 
 
 General

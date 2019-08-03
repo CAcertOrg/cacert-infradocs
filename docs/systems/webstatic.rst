@@ -24,6 +24,9 @@ Funding
 Infrastructure Documentation
    https://infradocs.cacert.org/
 
+CAcert internal Debian repository
+   https://webstatic.infra.cacert.org/
+
 Administration
 ==============
 
@@ -116,9 +119,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 9.9
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 9.9
 
 Applicable Documentation
 ------------------------
@@ -213,12 +216,14 @@ Dedicated user roles
 --------------------
 
 +-------------------+---------------------------------------------------+
-| Group             | Purpose                                           |
+| Role              | Purpose                                           |
 +===================+===================================================+
 | jenkins-infradocs | Used by :doc:`jenkins` to upload documentation to |
 |                   | :file:`/var/www/codedocs.cacert.org/html/` and    |
 |                   | :file:`/var/www/infradocs.cacert.org/html/`       |
 +-------------------+---------------------------------------------------+
+
+.. todo:: manage ``jenkins-infradocs`` user via Puppet
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -244,40 +249,31 @@ Critical Configuration items
 ============================
 
 The system configuration is managed via Puppet profiles. There should be no
-configuration items outside of the Puppet repository.
-
-.. todo:: move configuration of :doc:`webstatic` to Puppet code
+configuration items outside of the :cacertgit:`cacert-puppet`.
 
 Keys and X.509 certificates
 ---------------------------
 
-The host does not provide TLS services and therefore has no certificates.
-
-.. todo::
-   move the TLS configuration for the served VirtualHosts to :doc:`webstatic`
+The host does not provide own TLS services and therefore has no certificates.
 
 Apache httpd configuration
 --------------------------
 
-The main configuration files for Apache httpd are:
+Apache configuration is managed via the Puppet profile
+``profiles::static_websites``.
 
-* :file:`/etc/apache2/sites-available/000-default.conf`
+Debian repository configuration
+-------------------------------
 
-  Defines the default VirtualHost for requests reaching this host with no
-  specifically handled host name.
+The Debian repository is managed via the Puppet profile
+``profiles::debarchive``. Packages that are uploaded to
+:file:`/srv/upload/incoming` are automatically processed by
+:program:`inoticoming` and :program:`reprepro`. Only packages signed by a known
+PGP key (managed via Puppet) are accepted and provided at
+https://webstatic.infra.cacert.org/.
 
-* :file:`/etc/apache2/sites-available/codedocs.cacert.org.conf`
-
-  Defines the VirtualHost for https://codedocs.cacert.org/
-
-* :file:`/etc/apache2/sites-available/funding.cacert.org.conf`
-
-  Defines the VirtualHost for https://funding.cacert.org/
-
-* :file:`/etc/apache2/sites-available/infradocs.cacert.org.conf`
-
-  Defines the VirtualHost for https://infradocs.cacert.org/
-
+The repository signing key is stored in
+:file:`/srv/debarchive/.gnupg/private-keys-v1.d/223894064EE26851A245DE9208C5C0ABF772F7A7.key`.
 
 Tasks
 =====
@@ -288,7 +284,7 @@ Changes
 Planned
 -------
 
-.. todo:: manage the webstatic system using Puppet
+.. todo:: update to Debian 10 (when Puppet is available)
 
 System Future
 -------------
@@ -306,3 +302,5 @@ References
 ----------
 
 * http://httpd.apache.org/docs/2.4/
+* https://manpages.debian.org/buster/inoticoming/inoticoming.1.en.html
+* https://manpages.debian.org/buster/reprepro/reprepro.1.en.html
