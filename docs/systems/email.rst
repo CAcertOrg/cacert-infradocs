@@ -196,12 +196,8 @@ Databases
 +=======+================+==================================+
 | MySQL | cacertusers    | database for dovecot and postfix |
 +-------+----------------+----------------------------------+
-| MySQL | postfixpolicyd | empty database                   |
-+-------+----------------+----------------------------------+
 | MySQL | roundcubemail  | roundcube on :doc:`webmail`      |
 +-------+----------------+----------------------------------+
-
-.. todo:: check whether the empty postfixpolicyd database is required
 
 Connected Systems
 -----------------
