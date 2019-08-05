@@ -141,27 +141,13 @@ Listening services
 +----------+---------+----------------+----------------------------------------+
 | 3306/tcp | mysql   | local          | MySQL database server                  |
 +----------+---------+----------------+----------------------------------------+
-| 4433/tcp | http    | local          | Apache httpd with phpmyadmin           |
-+----------+---------+----------------+----------------------------------------+
 | 5666/tcp | nrpe    | monitor        | remote monitoring service              |
 +----------+---------+----------------+----------------------------------------+
-
-.. topic:: PHPMyAdmin access
-
-   Administrators can use ssh to forward the Apache httpd HTTPS port to their
-   own machine:
-
-   .. code-block:: bash
-
-      ssh -L 4433:localhost:4433 -l username email.cacert.org
-
-   and access PHPMyAdmin at https://localhost:4433/
 
 Running services
 ----------------
 
 .. index::
-   single: apache httpd
    single: cron
    single: dovecot
    single: mysql
@@ -175,9 +161,6 @@ Running services
 +--------------------+---------------------+----------------------------------------+
 | Service            | Usage               | Start mechanism                        |
 +====================+=====================+========================================+
-| Apache httpd       | Webserver for       | init script                            |
-|                    | phpmyadmin          | :file:`/etc/init.d/apache2`            |
-+--------------------+---------------------+----------------------------------------+
 | cron               | job scheduler       | init script :file:`/etc/init.d/cron`   |
 +--------------------+---------------------+----------------------------------------+
 | dovecot            | IMAP(s) and POP3(s) | init script                            |
@@ -277,7 +260,7 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-Server certificate for SMTP communication from the Internet and PHPMyAdmin.
+Server certificate for SMTP communication from the Internet.
 
 .. sslcert:: email.cacert.org
    :altnames:   DNS:email.cacert.org
@@ -314,36 +297,6 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
    * :wiki:`SystemAdministration/CertificateList`
 
 .. index::
-   pair: Apache httpd; configuration
-
-Apache httpd configuration
---------------------------
-
-:file:`/etc/apache2/sites-available/adminssl` configures a VirtualHost that
-allows dedicated users to access a PHPMyAdmin instance. The allowed users are
-authenticated by client certificates and are authorized by an entry in
-:file:`/etc/apache2/phpmyadmin.passwd`.
-
-.. note::
-
-   to authorize a user you need the subject distinguished name of the user's
-   client certificate which can be extracted with::
-
-      openssl x509 -noout -subject -in certificate.crt
-
-   A line with the subject distinguished name and the fake password
-   ``xxj31ZMTZzkVA`` separated by colon have to be added to
-   :file:`/etc/apache2/phpmyadmin.passwd`::
-
-      /CN=Example User/emailAddress=example@cacert.org:xxj31ZMTZzkVA
-
-.. seealso::
-
-   FakeBasicAuth option of the `SSLOptions
-   <https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#ssloptions>`_
-   directive in the mod_ssl reference documentation.
-
-.. index::
    pair: MySQL; configuration
 
 MySQL configuration
@@ -364,14 +317,6 @@ The libc name service switch is configured to use MySQL lookups for passwd,
 group and shadow via :file:`/etc/nsswitch.conf`. The queries are configured in
 :file:`/etc/libnss-mysql.cfg` and the root user for reading shadow information
 is configured in :file:`/etc/libnss-mysql-root.cfg`.
-
-.. index::
-   pair: PHPMyAdmin; configuration
-
-PHPMyAdmin configuration
-------------------------
-
-PHPMyAdmin configuration is stored in the :file:`/etc/phpmyadmin/` directory.
 
 .. index::
    pair: dovecot; configuration
