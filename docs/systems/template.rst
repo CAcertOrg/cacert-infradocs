@@ -311,8 +311,17 @@ Risk assessments on critical packages
 .. add a paragraph for each known risk. The risk has to be described.
    Mitigation or risk acceptance has to be documented.
 
+..
+   The Puppet agent package and a few dependencies are installed from the
+   official Puppet APT repository because the versions in Debian are too old to
+   use modern Puppet features.
+
 Critical Configuration items
 ============================
+
+..
+   The system configuration is managed via Puppet profiles. There should be no
+   configuration items outside of the :cacertgit:`cacert-puppet`.
 
 Keys and X.509 certificates
 ---------------------------
