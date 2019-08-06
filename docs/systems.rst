@@ -90,28 +90,23 @@ General
    That's it, now the package update status should be properly displayed in
    Icinga.
 
-.. todo:: think about replacing nrpe with Icinga2 satellites
-
 Checklist
 =========
 
 .. index::
    single: etckeeper
+   single: icinga2
    single: nrpe
+   single: puppet
 
 * All containers should be monitored by :doc:`systems/monitor` and should
-  therefore have :program:`nagios-nrpe-server` installed
+  therefore have :program:`icinga2` installed and managed via Puppet (older
+  systems without Puppet have :program:`nagios-nrpe-server` installed)
 * All containers should use :program:`etckeeper` to put their local setup into
   version control. All local setup should use :file:`/etc` to make sure it is
   handled by :program:`etckeeper`
 * All infrastructure systems must send their mail via :doc:`systems/emailout`
 * All infrastructure systems should have an system-admin@cacert.org alias to
   reach their admins
-* The installation of :index:`systemd-sysv` in containers can be blocked by
-  putting the following lines in :file:`/etc/apt/preferences.d/systemd-sysv`::
-
-    Package: systemd-sysv
-    Pin: release a=stable
-    Pin-Priority: -1
 
 .. todo:: document how to setup the system-admin alias on the email system

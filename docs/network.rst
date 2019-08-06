@@ -22,6 +22,8 @@ IPv6 connectivity is also available. The infrastructure IPv6 addresses are
 taken from the :ip:v6range:`2001:7b8:616:162:1::/80` and
 :ip:v6range:`2001:7b8:616:162:2::/80` ranges.
 
+External monitoring is provided from the ranges :ip:v4range:`116.203.192.12/32`
+and :ip:v6range:`2a01:4f8:c2c:a5b9::1/128`.
 
 Intranet
 --------

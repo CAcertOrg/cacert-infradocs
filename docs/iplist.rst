@@ -12,6 +12,10 @@ Internet IP addresses
 
 .. ip:v6range:: 2001:7b8:616:162:2::/80
 
+.. ip:v4range:: 116.203.192.12/32
+
+.. ip:v6range:: 2a01:4f8:c2c:a5b9::1/128
+
 
 Intranet IP addresses
 ---------------------
