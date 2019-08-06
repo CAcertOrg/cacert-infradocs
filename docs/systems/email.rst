@@ -47,7 +47,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.228`
 :IP Intranet: :ip:v4:`172.16.2.19`
 :IP Internal: :ip:v4:`10.0.0.19`
-:IPv6:        :ip:v6:`2001:7b8:616:162:2::19`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::228`
 :MAC address: :mac:`00:ff:8f:e0:4a:90` (eth0)
 
 .. seealso::
@@ -68,14 +68,29 @@ DNS
 .. index::
    single: DNS records; Email
 
-======================= ======== ============================================
-Name                    Type     Content
-======================= ======== ============================================
-email.cacert.org.       IN A     213.154.225.228
-email.cacert.org.       IN SSHFP 1 1 BF391FD72656A275524D1D25A624C6045B44AE90
-email.cacert.org.       IN SSHFP 2 1 73B0D8ACB492A7187016DD3C5FC1519B309A550F
-email.intra.cacert.org. IN A     172.16.2.19
-======================= ======== ============================================
++-------------------------+-----------+----------------------------------------------------------------------+
+| Name                    | Type      | Content                                                              |
++=========================+===========+======================================================================+
+| email.cacert.org.       | IN A      | 213.154.225.228                                                      |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  AAAA  | 2001:7b8:616:162:2::228                                              |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 1 1 bf391fd72656a275524d1d25a624c6045b44ae90                         |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 1 2 c8b68f3eb9a83902391b78686b4885a317fac0f74b0490a78b32ecbbee921df1 |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 3 1 5ffbc51c37cdff52db9c488c08b89af9ffee06a0                         |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 3 2 a114de78fc26bd0dc6fa2206d7c04519ec875023cf203e446d4bbbbc4e24da19 |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 4 1 18418515e94817f0624bf0a192331addf878ff66                         |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.cacert.org.       | IN  SSHFP | 4 2 d4fe3165206ba69baf4643253138561789918688375ed8ab89bcfc4411535221 |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.intra.cacert.org. | IN A      | 172.16.2.19                                                          |
++-------------------------+-----------+----------------------------------------------------------------------+
+| email.infra.cacert.org. | IN A      | 10.0.0.19                                                            |
++-------------------------+-----------+----------------------------------------------------------------------+
 
 A DKIM record for cacert.org ist setup but no DKIM signing is active currently.
 
@@ -92,10 +107,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Lenny
-   single: Debian GNU/Linux; 5.0.10
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.9
 
-* Debian GNU/Linux 5.0.10
+* Debian GNU/Linux 9.9
 
 Applicable Documentation
 ------------------------
@@ -108,85 +123,80 @@ Services
 Listening services
 ------------------
 
-+----------+---------+----------------+----------------------------------------+
-| Port     | Service | Origin         | Purpose                                |
-+==========+=========+================+========================================+
-| 22/tcp   | ssh     | ANY            | admin console access                   |
-+----------+---------+----------------+----------------------------------------+
-| 25/tcp   | smtp    | ANY            | mail receiver for cacert.org           |
-+----------+---------+----------------+----------------------------------------+
-| 110/tcp  | pop3    | ANY            | POP3 access for cacert.org mail        |
-|          |         |                | addresses                              |
-+----------+---------+----------------+----------------------------------------+
-| 143/tcp  | imap    | ANY            | IMAP access for cacert.org mail        |
-|          |         |                | addresses                              |
-+----------+---------+----------------+----------------------------------------+
-| 465/tcp  | smtps   | ANY            | SMTPS for cacert.org mail addresses    |
-+----------+---------+----------------+----------------------------------------+
-| 587/tcp  | smtp    | ANY            | mail submission for cacert.org mail    |
-|          |         |                | addresses                              |
-+----------+---------+----------------+----------------------------------------+
-| 993/tcp  | imaps   | ANY            | IMAPS access for cacert.org mail       |
-|          |         |                | addresses                              |
-+----------+---------+----------------+----------------------------------------+
-| 995/tcp  | pop3s   | ANY            | POP3S access for cacert.org mail       |
-|          |         |                | addresses                              |
-+----------+---------+----------------+----------------------------------------+
-| 2000/tcp | sieve   | ANY            | Manage sieve access for cacert.org     |
-|          |         |                | mail addresses                         |
-+----------+---------+----------------+----------------------------------------+
-| 2001/tcp | sieve   | :doc:`webmail` | Manage sieve access for cacert.org     |
-|          |         |                | mail addresses without TLS, accessible |
-|          |         |                | from ``172.16.2.20`` only              |
-+----------+---------+----------------+----------------------------------------+
-| 3306/tcp | mysql   | local          | MySQL database server                  |
-+----------+---------+----------------+----------------------------------------+
-| 5666/tcp | nrpe    | monitor        | remote monitoring service              |
-+----------+---------+----------------+----------------------------------------+
++----------+---------+---------+-------------------------------------+
+| Port     | Service | Origin  | Purpose                             |
++==========+=========+=========+=====================================+
+| 22/tcp   | ssh     | ANY     | admin console access                |
++----------+---------+---------+-------------------------------------+
+| 25/tcp   | smtp    | ANY     | mail receiver for cacert.org        |
++----------+---------+---------+-------------------------------------+
+| 110/tcp  | pop3    | ANY     | POP3 access for cacert.org mail     |
+|          |         |         | addresses                           |
++----------+---------+---------+-------------------------------------+
+| 143/tcp  | imap    | ANY     | IMAP access for cacert.org mail     |
+|          |         |         | addresses                           |
++----------+---------+---------+-------------------------------------+
+| 465/tcp  | smtps   | ANY     | SMTPS for cacert.org mail addresses |
++----------+---------+---------+-------------------------------------+
+| 587/tcp  | smtp    | ANY     | mail submission for cacert.org mail |
+|          |         |         | addresses                           |
++----------+---------+---------+-------------------------------------+
+| 993/tcp  | imaps   | ANY     | IMAPS access for cacert.org mail    |
+|          |         |         | addresses                           |
++----------+---------+---------+-------------------------------------+
+| 995/tcp  | pop3s   | ANY     | POP3S access for cacert.org mail    |
+|          |         |         | addresses                           |
++----------+---------+---------+-------------------------------------+
+| 4190/tcp | sieve   | ANY     | Manage sieve access for cacert.org  |
+|          |         |         | mail addresses                      |
++----------+---------+---------+-------------------------------------+
+| 3306/tcp | mysql   | local   | MariaDB database server             |
++----------+---------+---------+-------------------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service           |
++----------+---------+---------+-------------------------------------+
 
 Running services
 ----------------
 
 .. index::
    single: cron
+   single: dbus
    single: dovecot
-   single: mysql
-   single: nrpe
+   single: icinga2
+   single: mariadb
    single: openssh
    single: postfix
-   single: pysieved
+   single: puppet
    single: rsyslog
-   single: xinetd
 
-+--------------------+---------------------+----------------------------------------+
-| Service            | Usage               | Start mechanism                        |
-+====================+=====================+========================================+
-| cron               | job scheduler       | init script :file:`/etc/init.d/cron`   |
-+--------------------+---------------------+----------------------------------------+
-| dovecot            | IMAP(s) and POP3(s) | init script                            |
-|                    | daemon              | :file:`/etc/init.d/dovecot`            |
-+--------------------+---------------------+----------------------------------------+
-| MySQL              | MySQL database      | init script                            |
-|                    | server for email    | :file:`/etc/init.d/mysql`              |
-|                    | services            |                                        |
-+--------------------+---------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring   | init script                            |
-|                    | service queried by  | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`      |                                        |
-+--------------------+---------------------+----------------------------------------+
-| openssh server     | ssh daemon for      | init script :file:`/etc/init.d/ssh`    |
-|                    | remote              |                                        |
-|                    | administration      |                                        |
-+--------------------+---------------------+----------------------------------------+
-| Postfix            | SMTP server for     | init script                            |
-|                    | cacert.org          | :file:`/etc/init.d/postfix`            |
-+--------------------+---------------------+----------------------------------------+
-| rsyslog            | syslog daemon       | init script                            |
-|                    |                     | :file:`/etc/init.d/syslog`             |
-+--------------------+---------------------+----------------------------------------+
-| xinetd             | socket listener     | init script                            |
-|                    | for pysieved        | :file:`/etc/init.d/xinetd`             |
-+--------------------+---------------------+----------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
+|                | daemon                   |                                  |
++----------------+--------------------------+----------------------------------+
+| dovecot        | IMAP(s), POP3(s) and     | systemd unit ``dovecot.service`` |
+|                | sieve filter daemon      |                                  |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| MariaDB        | MariaDB database         | systemd unit ``mariadb.service`` |
+|                | server for email         |                                  |
+|                | services                 |                                  |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for remote    | systemd unit ``ssh.service``     |
+|                | administration           |                                  |
++----------------+--------------------------+----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
+|                | cacert.org               |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Databases
 ---------
@@ -210,48 +220,43 @@ Connected Systems
 Outbound network connections
 ----------------------------
 
-* DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
-* :doc:`proxyout` as HTTP proxy for APT
+* DNS (53) resolver at 10.0.0.1 (:doc:`infra02`)
 * :doc:`issue` for OTRS mail
 * :doc:`lists` for mailing lists
+* :doc:`proxyout` as HTTP proxy for APT
+* :doc:`puppet` (tcp/8140) as Puppet master
 * arbitrary Internet SMTP servers for outgoing mail
 
 Security
 ========
 
 .. sshkeys::
-   :RSA: SHA256:yLaPPrmoOQI5G3hoa0iFoxf6wPdLBJCnizLsu+6SHfE MD5:a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23
-   :DSA: SHA256:zY4YEmiCYrbDXK1FHum9Qw8cKAInnizrbODF8o2ofEU MD5:f4:eb:0a:36:40:1c:55:6b:75:a2:26:34:ea:18:7e:91
-
-.. warning::
-
-   The system is too old to support ECDSA or ED25519 keys.
+   :RSA:     SHA256:yLaPPrmoOQI5G3hoa0iFoxf6wPdLBJCnizLsu+6SHfE MD5:a1:d2:17:53:6b:0f:b6:a4:14:13:46:f7:04:ef:4a:23
+   :ECDSA:   SHA256:oRTeePwmvQ3G+iIG18BFGeyHUCPPID5EbUu7vE4k2hk MD5:16:95:af:c9:71:f4:d8:f7:91:7f:f7:2f:25:b3:f1:63
+   :ED25519: SHA256:1P4xZSBrppuvRkMlMThWF4mRhog3Xtiribz8RBFTUiE MD5:db:1e:68:3f:dd:b0:bb:68:c8:8b:cb:39:85:7d:f7:40
 
 Non-distribution packages and modifications
 -------------------------------------------
 
-Tlslite in :file:`/usr/local/lib/tlslite-0.3.8/` has been patched to handle
-GeneratorExit exceptions. The original tlslite 0.3.8 is stored in
-:file:`/usr/local/lib/tlslite-0.3.8-orig/`.
-
-Pysieved in :file:`/usr/local/lib/pysieved.neale/` seems to be a git clone from
-2009 originating from http://woozle.org/~neale/repos/pysieved at commit
-``d9b67036387a9a7aca954a17ff6fec44a8d309e0`` with no local modifications.
-
-:file:`/usr/local/lib/pysieved` is a symbolic link to
-:file:`/usr/local/lib/pysieved.neale/`.
-
-.. todo:: use pysieved, python-tlslite and dovecot-sieve from distribution
-   packages after OS upgrade
-
+* None
 
 Risk assessments on critical packages
 -------------------------------------
 
-The whole system is outdated, it needs to be replaced as soon as possible.
+Postfix and Dovecot have very good security reputation. The system is patched
+regularly.
+
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the :cacertgit:`cacert-puppet`.
+
+.. todo: move Postfix, Dovecot, ssh and MariaDB configuration to Puppet
 
 Keys and X.509 certificates
 ---------------------------
@@ -276,27 +281,20 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
    :serial:    1381F8
    :secondary:
 
-* :file:`/etc/postfix/dh_1024.pem` and :file:`/etc/postfix/dh_512.pem`
-  Diffie-Hellman parameter files for Postfix
-
 .. note::
 
    Postfix uses the email.cacert.org certificate for client authentication if
    requested by a target server.
-
-   .. todo::
-      check whether it makes sense to use a separate certificate for that
-      purpose
 
 .. seealso::
 
    * :wiki:`SystemAdministration/CertificateList`
 
 .. index::
-   pair: MySQL; configuration
+   pair: MariaDB; configuration
 
-MySQL configuration
--------------------
+MariaDB configuration
+---------------------
 
 MySQL configuration is stored in the :file:`/etc/mysql/` directory.
 
@@ -306,14 +304,6 @@ MySQL configuration is stored in the :file:`/etc/mysql/` directory.
 
 .. _nss:
 
-NSS configuration
------------------
-
-The libc name service switch is configured to use MySQL lookups for passwd,
-group and shadow via :file:`/etc/nsswitch.conf`. The queries are configured in
-:file:`/etc/libnss-mysql.cfg` and the root user for reading shadow information
-is configured in :file:`/etc/libnss-mysql-root.cfg`.
-
 .. index::
    pair: dovecot; configuration
 
@@ -322,22 +312,16 @@ Dovecot configuration
 
 Dovecot configuration is stored in the :file:`/etc/dovecot/` directory. The
 database settings are stored in
-:file:`dovecot-sql-masterpassword-webmail.conf`.
+:file:`dovecot-sql.conf.ext`.
 
 .. index::
    pair: dovecot; authentication
 
 .. topic:: Dovecot authentication
 
-   :file:`/etc/dovecot/dovecot.conf` refers to PAM mail. PAM mail is defined
-   :file:`/etc/pam.d/mail`. System users are defined by NSS which is a
-   combination of :file:`/etc/passwd` (for root and non-imap/pop users) and
-   :file:`/etc/libnss-mysql*` (see `nss`_).
-
    There is a special master password so that webmail can do the authentication
    for dovecot using certificates. This is defined in
-   :file:`/etc/dovecot/dovecot-sql-masterpassword-webmail.conf`. This special
-   password is restricted to the IP address of Community.
+   :file:`/etc/dovecot/dovecot-sql.conf.ext`.
 
 .. index::
    pair: Postfix; configuration
@@ -372,47 +356,10 @@ following files are special for this setup:
 
 .. todo:: consider to send all outgoing mail via :doc:`emailout`
 
-.. todo:: remove unused transports from :file:`master.cf`
-
-.. index::
-   pair: pysieved; configuration
-
-PySieved configuration
-----------------------
-
-:file:`/usr/local/etc/pysieved.ini` for regular manage sieve access and
-:file:`/usr/local/etc/pysieved-notls.ini` for use with Roundcube webmail.
-Pysieved uses dovecot for authentication.
-
-.. index::
-   pair: rsyslog; configuration
-
-Rsyslog configuration
----------------------
-
-Rsyslog is configured in :file:`/etc/rsyslog.conf` which includes files in
-:file:`/etc/rsyslog.d/`. Consumption of kernel log messages and network input
-is disabled. :file:`/etc/rsyslog.d/postfix.conf` configures a separate unix
-socket to receive log messages from postfix and
-:file:`/etc/rsyslog.d/remotelog.conf` contains commented settings for a
-non-existant remote syslog server.
-
-.. todo:: setup remote logging when a central logging container is available
-
-.. index::
-   pair: xinetd; configuration
-
-Xinetd configuration
---------------------
-
-Xinetd listens on tcp ports 2000 and 2001 and spawn pysieved. Configuration for
-these listeners is stored in :file:`/etc/xinetd.d/pysieved` and
-:file:`/etc/xinetd.d/pysieved-notls`.
-
 Email storage
 -------------
 
-Mail for :samp:`{user}` is stored in :samp:`/home/{user}/Maildir`.
+Mail for :samp:`{user}` is stored in :samp:`/home/mailboxes/{user}/Maildir`.
 
 .. todo::
    move mail storage to a separate data volume to allow easier backup and OS
@@ -489,11 +436,9 @@ Changes
 Planned
 -------
 
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-.. todo:: update to Debian 6/7/8/9/10
+.. todo:: update to Debian 10 (when Puppet is available)
+
 .. todo:: implement CRL checking
-.. todo:: setup IPv6
 
 .. todo::
    throttle brute force attack attempts using fail2ban or similar mechanism
@@ -504,9 +449,7 @@ Planned
 System Future
 -------------
 
-.. todo::
-   The system has to be replaced with a new system using a current operating
-   system version
+* No plans
 
 Additional documentation
 ========================
@@ -524,5 +467,5 @@ Postfix documentation
    http://www.postfix.org/documentation.html
 Postfix Debian wiki page
    https://wiki.debian.org/Postfix
-Dovecot 1.x wiki
-   http://wiki1.dovecot.org/FrontPage
+Dovecot 2.x wiki
+   http://wiki2.dovecot.org/FrontPage
