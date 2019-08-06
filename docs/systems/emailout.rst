@@ -44,6 +44,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.239`
 :IP Intranet: :ip:v4:`172.16.2.10` (outbound SNAT) and :ip:v4:`172.16.2.32`
 :IP Internal: :ip:v4:`10.0.0.32`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::239`
 :MAC address: :mac:`00:ff:12:01:65:02` (eth0)
 
 .. seealso::
@@ -64,18 +65,29 @@ DNS
 .. index::
    single: DNS records; Emailout
 
-========================== ======== ====================================================================
-Name                       Type     Content
-========================== ======== ====================================================================
-emailout.cacert.org.       IN A     213.154.225.239
-emailout.cacert.org.       IN SSHFP 1 1 1ba1ab632911e8a68a69521130120695086d858c
-emailout.cacert.org.       IN SSHFP 1 2 6e50d5b2034006b69eb7ba19d3f3fd2c48015bea2bb3d5e2a0f8cf25ff030055
-emailout.cacert.org.       IN SSHFP 2 1 0e8888352604dbd1cc4d201bc1e985d80b9cf752
-emailout.cacert.org.       IN SSHFP 2 2 a7402f014b47b805663c904dabbc9590db7d8d0f350cea6d9f63e12bc27bac0c
-emailout.cacert.org.       IN SSHFP 3 1 527004f2091d2cef2c28b5f8241fc0e76307b2ba
-emailout.cacert.org.       IN SSHFP 3 2 9094dcf8860523a83542ec4cc46fbcfed396f5525bc202cfecf42d1a7044136d
-emailout.intra.cacert.org. IN A     172.16.2.32
-========================== ======== ====================================================================
++----------------------------+----------+----------------------------------------------------------------------+
+| Name                       | Type     | Content                                                              |
++============================+==========+======================================================================+
+| emailout.cacert.org.       | IN A     | 213.154.225.239                                                      |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN AAAA  | 2001:7b8:616:162:2::239                                              |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 1 1 1ba1ab632911e8a68a69521130120695086d858c                         |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 1 2 6e50d5b2034006b69eb7ba19d3f3fd2c48015bea2bb3d5e2a0f8cf25ff030055 |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 3 1 527004f2091d2cef2c28b5f8241fc0e76307b2ba                         |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 3 2 9094dcf8860523a83542ec4cc46fbcfed396f5525bc202cfecf42d1a7044136d |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 4 1 63f40df8536052d33d2d515eceb111ccb7983619                         |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.cacert.org.       | IN SSHFP | 4 2 4ceb488ad17ea7c8db161fdf3357e273d2ea1fe5be183794aacd7c4bfdfaa8a5 |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.intra.cacert.org. | IN A     | 172.16.2.32                                                          |
++----------------------------+----------+----------------------------------------------------------------------+
+| emailout.infra.cacert.org. | IN A     | 10.0.0.32                                                            |
++----------------------------+----------+----------------------------------------------------------------------+
 
 .. seealso::
 
@@ -174,7 +186,6 @@ Security
 
 .. sshkeys::
    :RSA:     SHA256:blDVsgNABraet7oZ0/P9LEgBW+ors9XioPjPJf8DAFU MD5:56:09:89:92:af:3c:15:e4:a3:06:11:63:0e:be:b6:a2
-   :DSA:     SHA256:p0AvAUtHuAVmPJBNq7yVkNt9jQ81DOptn2PhK8J7rAw MD5:6c:8d:31:c4:92:de:f0:a8:95:eb:fe:20:83:91:ca:07
    :ECDSA:   SHA256:kJTc+IYFI6g1QuxMxG+8/tOW9VJbwgLP7PQtGnBEE20 MD5:cb:3c:69:c5:a1:90:c6:8e:55:40:83:6c:10:3f:09:b4
    :ED25519: SHA256:TOtIitF+p8jbFh/fM1fic9LqH+W+GDeUqs18S/36qKU MD5:04:ca:72:d0:21:0a:4a:8b:a5:f7:a2:2f:10:e5:3f:92
 
@@ -188,8 +199,15 @@ Risk assessments on critical packages
 
 Postfix has a very good security reputation. The system is patched regularly.
 
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
+
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the :cacertgit:`cacert-puppet`.
 
 Keys and X.509 certificates
 ---------------------------
@@ -318,8 +336,6 @@ Planned
 -------
 
 .. todo:: upgrade to Debian 10 (when Puppet is available)
-.. todo:: setup IPv6
-
 
 System Future
 -------------
