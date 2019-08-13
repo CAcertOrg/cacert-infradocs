@@ -108,10 +108,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Codename
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.0
 
 Services
 ========
@@ -209,7 +209,7 @@ Dedicated user roles
 Non-distribution packages and modifications
 -------------------------------------------
 
-* sniproxy has been installed from Debian buster because it was not available in Stretch.
+* None
 
 Risk assessments on critical packages
 -------------------------------------
@@ -262,7 +262,7 @@ Changes
 Planned
 -------
 
-.. todo:: update to Debian 10 (when Puppet is available)
+* None
 
 System Future
 -------------
