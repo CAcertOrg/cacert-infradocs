@@ -97,10 +97,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.0
 
 Applicable Documentation
 ------------------------
@@ -117,15 +117,15 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | intranet  | mail delivery from intranet MTAs        |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+----------+----------------------------------+
+| Port     | Service | Origin   | Purpose                          |
++==========+=========+==========+==================================+
+| 22/tcp   | ssh     | ANY      | admin console access             |
++----------+---------+----------+----------------------------------+
+| 25/tcp   | smtp    | intranet | mail delivery from intranet MTAs |
++----------+---------+----------+----------------------------------+
+| 5665/tcp | icinga2 | monitor  | remote monitoring service        |
++----------+---------+----------+----------------------------------+
 
 Running services
 ----------------
