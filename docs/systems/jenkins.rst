@@ -103,10 +103,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.0
 
 Services
 ========
@@ -125,7 +125,7 @@ Listening services
 +----------+---------+----------+----------------------------+
 | 2022/tcp | Jenkins | internal | Jenkins ssh port           |
 +----------+---------+----------+----------------------------+
-| 5666/tcp | nrpe    | monitor  | remote monitoring service  |
+| 5665/tcp | icinga2 | monitor  | remote monitoring service  |
 +----------+---------+----------+----------------------------+
 | 8080/tcp | Jenkins | internal | Jenkins web interface      |
 +----------+---------+----------+----------------------------+
@@ -135,38 +135,37 @@ Running services
 
 .. index::
    single: cron
+   single: dbus
    single: exim
+   single: icinga2
    single: jenkins
-   single: nrpe
    single: openssh
    single: puppet agent
    single: rsyslog
 
-+--------------------+--------------------+-----------------------------------------+
-| Service            | Usage              | Start mechanism                         |
-+====================+====================+=========================================+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`    |
-+--------------------+--------------------+-----------------------------------------+
-| Exim               | SMTP server for    | init script                             |
-|                    | local mail         | :file:`/etc/init.d/exim4`               |
-|                    | submission         |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| Jenkins            | Jenkins CI server  | init script :file:`/etc/init.d/jenkins` |
-+--------------------+--------------------+-----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                             |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server`  |
-|                    | :doc:`monitor`     |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`     |
-|                    | remote             |                                         |
-|                    | administration     |                                         |
-+--------------------+--------------------+-----------------------------------------+
-| Puppet agent       | configuration      | init script                             |
-|                    | management agent   | :file:`/etc/init.d/puppet`              |
-+--------------------+--------------------+-----------------------------------------+
-| rsyslog            | syslog daemon      | init script                             |
-|                    |                    | :file:`/etc/init.d/syslog`              |
-+--------------------+--------------------+-----------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| Exim           | SMTP server for local    | systemd unit ``exim4.service``   |
+|                | mail submission          |                                  |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
+|                | daemon                   |                                  |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| Jenkins        | Jenkins CI server        | systemd unit ``jenkins.service`` |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Connected Systems
 -----------------
