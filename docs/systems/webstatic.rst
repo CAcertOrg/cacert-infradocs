@@ -123,11 +123,6 @@ Operating System
 
 * Debian GNU/Linux 9.9
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 

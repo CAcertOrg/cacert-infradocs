@@ -101,11 +101,6 @@ Operating System
 
 * Debian GNU/Linux 10.0
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 

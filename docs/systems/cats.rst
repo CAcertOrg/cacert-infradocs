@@ -104,11 +104,6 @@ Operating System
 
 * Debian GNU/Linux 7.11
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 

@@ -109,11 +109,6 @@ Operating System
 
 * Debian GNU/Linux 8.11
 
-Applicable Documentation
-------------------------
-
-There is no additional documentation for this system.
-
 Services
 ========
 

@@ -112,11 +112,6 @@ Operating System
 
 .. todo:: upgrade to Debian Jessie
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 

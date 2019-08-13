@@ -124,11 +124,6 @@ Operating System
 
 * Debian GNU/Linux x.y
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 

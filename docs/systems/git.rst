@@ -115,11 +115,6 @@ Operating System
 
 * Debian GNU/Linux 9.4
 
-Applicable Documentation
-------------------------
-
-This is it :-)
-
 Services
 ========
 
