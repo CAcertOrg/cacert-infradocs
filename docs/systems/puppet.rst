@@ -96,10 +96,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.0
 
 Applicable Documentation
 ------------------------
