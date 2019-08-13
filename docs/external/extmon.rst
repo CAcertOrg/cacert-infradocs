@@ -90,10 +90,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.0
 
 Services
 ========
@@ -225,7 +225,7 @@ Changes
 Planned
 -------
 
-.. todo:: update to Debian 10 (when Puppet is available)
+* None
 
 System Future
 -------------
