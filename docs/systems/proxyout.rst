@@ -94,10 +94,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.0
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.0
 
 Applicable Documentation
 ------------------------
@@ -111,51 +111,56 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 3128/tcp | http      | internal  | squid http/https proxy                  |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+----------+----------------------------+
+| Port     | Service | Origin   | Purpose                    |
++==========+=========+==========+============================+
+| 22/tcp   | ssh     | ANY      | admin console access       |
++----------+---------+----------+----------------------------+
+| 25/tcp   | smtp    | local    | mail delivery to local MTA |
++----------+---------+----------+----------------------------+
+| 3128/tcp | http    | internal | squid http/https proxy     |
++----------+---------+----------+----------------------------+
+| 5665/tcp | icinga2 | monitor  | remote monitoring service  |
++----------+---------+----------+----------------------------+
 
 Running services
 ----------------
 
 .. index::
    single: cron
+   single: dbus
    single: exim
+   single: icinga2
    single: openssh
-   single: puppet agent
+   single: puppet
    single: rsyslog
    single: squid
 
-+----------------+--------------------+--------------------------------------+
-| Service        | Usage              | Start mechanism                      |
-+================+====================+======================================+
-| cron           | job scheduler      | init script :file:`/etc/init.d/cron` |
-+----------------+--------------------+--------------------------------------+
-| Exim           | SMTP server for    | init script                          |
-|                | local mail         | :file:`/etc/init.d/exim4`            |
-|                | submission         |                                      |
-+----------------+--------------------+--------------------------------------+
-| openssh server | ssh daemon for     | init script :file:`/etc/init.d/ssh`  |
-|                | remote             |                                      |
-|                | administration     |                                      |
-+----------------+--------------------+--------------------------------------+
-| Puppet agent   | local Puppet agent | init script                          |
-|                |                    | :file:`/etc/init.d/puppet`           |
-+----------------+--------------------+--------------------------------------+
-| rsyslog        | syslog daemon      | init script                          |
-|                |                    | :file:`/etc/init.d/syslog`           |
-+----------------+--------------------+--------------------------------------+
-| Squid          | Caching and        | init script                          |
-|                | filtering http/    | :file:`/etc/init.d/squid`            |
-|                | https proxy for    |                                      |
-|                | internal machines  |                                      |
-+----------------+--------------------+--------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
+|                | daemon                   |                                  |
++----------------+--------------------------+----------------------------------+
+| Exim           | SMTP server for          | systemd unit ``exim4.service``   |
+|                | local mail submission    |                                  |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration management | systemd unit ``puppet.service``  |
+|                | agent                    |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
+| Squid          | Caching and filtering    | systemd unit ``squid.service``   |
+|                | http/https proxy for     |                                  |
+|                | internal machines        |                                  |
++----------------+--------------------------+----------------------------------+
 
 Connected Systems
 -----------------
@@ -225,7 +230,11 @@ configuration items outside of the Puppet repository.
 Tasks
 =====
 
-.. todo:: add a section describing how to add ACLs to Squid
+Adding ACLs to Squid
+--------------------
+
+Add required lines to the ``profiles::squid::acls`` item in Hiera data for node
+proxyout.
 
 Changes
 =======
@@ -235,8 +244,6 @@ Planned
 
 .. todo:: Change all infrastructure hosts to use this machine as APT proxy to
           avoid flaky firewall configurations on :doc:`infra02`.
-
-.. todo:: Add more APT repositories and ACLs if needed
 
 System Future
 -------------
