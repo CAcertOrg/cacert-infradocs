@@ -15,8 +15,7 @@ CAcert service from the Internet. The system is sponsored by
 Application Links
 -----------------
 
-Service checks executed by extmon
-  https://monitor.cacert.org/monitoring/list/servicegroups#!/monitoring/list/services?servicegroup_name=external-checks
+`Service checks executed by extmon <https://monitor.cacert.org/monitoring/list/servicegroups#!/monitoring/list/services?servicegroup_name=external-checks>`_
 
 Administration
 ==============
