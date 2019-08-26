@@ -24,18 +24,18 @@ Keys and X.509 certificates
    :altnames:
    :certfile:   /usr/local/etc/ocspd/certs/class1.crt
    :keyfile:    /usr/local/etc/ocspd/private/class1.key
-   :serial:     1320EE
-   :expiration: Aug 25 09:45:00 2019 GMT
-   :sha1fp:     68:08:77:DD:F2:3A:8C:2F:A0:DC:EC:6B:BD:C6:71:80:DD:44:3A:C7
+   :serial:     144847
+   :expiration: Aug 24 14:12:48 2021 GMT
+   :sha1fp:     6A:F9:88:26:25:F2:58:D2:4F:0D:A9:FB:F2:27:DE:A1:49:0B:84:B2
    :issuer:     CAcert Class 1 Root
 
 .. sslcert:: ocsp.cacert.org class3 (issued with X509v3 Extended Key Usage: OCSP Signing)
    :altnames:
    :certfile:   /usr/local/etc/ocspd/certs/class3.crt
    :keyfile:    /usr/local/etc/ocspd/private/class1.key
-   :serial:     02B395
-   :expiration: Aug 25 09:44:51 2019 GMT
-   :sha1fp:     AA:F0:AE:3D:0A:11:47:6C:9F:1E:EB:23:15:15:38:40:CA:29:0D:45
+   :serial:     2d99d
+   :expiration: Aug 24 14:14:29 2021 GMT
+   :sha1fp:     3A:53:54:CF:57:83:5D:F5:DC:0F:53:D2:7E:30:22:AF:68:83:24:B8
    :issuer:     CAcert Class 3 Root
 
 Note: generating a CSR with OCSP Signing flag set can be done with an openssl config file like this:
