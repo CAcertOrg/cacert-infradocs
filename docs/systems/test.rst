@@ -308,27 +308,27 @@ Keys and X.509 certificates
    :altnames:   DNS:cats.test.cacert.org
    :certfile:   /home/cacert/etc/ssl/certs/cats_test_cacert_org.crt
    :keyfile:    /home/cacert/etc/ssl/private/cats_test_cacert_org.pem
-   :serial:     50D3
-   :expiration: Sep 28 13:47:31 2019 GMT
-   :sha1fp:     6C:03:0D:4F:91:56:EA:74:A4:E4:70:4A:91:B1:4C:A3:99:CC:9C:4B
+   :serial:     50DD
+   :expiration: Oct  4 07:07:08 2020 GMT
+   :sha1fp:     3C:93:F3:83:25:AA:99:7A:65:A0:69:EF:41:FE:DF:EB:01:F1:2F:6F
    :issuer:     CAcert Testserver Root
 
 .. sslcert:: mgr.test.cacert.org
    :altnames:   DNS:mgr.test.cacert.org
    :certfile:   /home/cacert/etc/ssl/certs/mgr_test_cacert_org.crt
    :keyfile:    /home/cacert/etc/ssl/private/mgr_test_cacert_org.pem
-   :serial:     50D2
-   :expiration: Sep 28 13:47:31 2019 GMT
-   :sha1fp:     C2:4B:F2:00:9B:A0:61:57:27:14:1C:08:47:50:6A:41:5B:D2:6F:05
+   :serial:     50DC
+   :expiration: Oct  4 07:07:08 2020 GMT
+   :sha1fp:     ED:44:E6:4C:C2:D3:E1:32:3D:2F:03:9F:19:DD:F3:B1:18:32:60:F6
    :issuer:     CAcert Testserver Root
 
 .. sslcert:: secure.test.cacert.org
    :altnames:   DNS:secure.test.cacert.org
    :certfile:   /home/cacert/etc/ssl/certs/secure_test_cacert_org.crt
    :keyfile:    /home/cacert/etc/ssl/private/secure_test_cacert_org.pem
-   :serial:     50D1
-   :expiration: Sep 28 13:47:30 2019 GMT
-   :sha1fp:     95:9A:3A:1B:C2:03:D6:90:F5:01:4A:F7:52:62:2D:B8:61:BD:B7:4B
+   :serial:     50DB
+   :expiration: Oct  4 07:07:08 2020 GMT
+   :sha1fp:     FB:83:D6:AF:6E:12:C7:94:D5:5A:2C:27:28:49:D3:65:6E:AE:90:FA
    :issuer:     CAcert Testserver Root
 
 .. sslcert:: test.cacert.org (dovecot)
@@ -343,9 +343,9 @@ Keys and X.509 certificates
    :altnames:   DNS:test.cacert.org
    :certfile:   /home/cacert/etc/ssl/certs/test_cacert_org.crt
    :keyfile:    /home/cacert/etc/ssl/private/cacert.pem
-   :serial:     50D0
-   :expiration: Sep 28 13:47:30 2019 GMT
-   :sha1fp:     94:FE:B0:94:F6:7C:F2:E2:57:75:49:05:17:86:99:5C:CE:40:24:AD
+   :serial:     50DA
+   :expiration: Oct  4 07:07:08 2020 GMT
+   :sha1fp:     86:A9:00:E3:31:96:B9:8A:FC:83:00:F0:AE:02:8A:20:57:2D:8F:A1
    :issuer:     CAcert Testserver Root
 
 **CA certificates on test**:
