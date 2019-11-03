@@ -14,6 +14,7 @@ Dirk Astrath
 
 :roles: :term:`Application Administrator` on :doc:`systems/bugs`,
         :term:`Infrastructure Administrator`
+        :term:`Critical System Administrator`
 
 .. _people_abahlo:
 
@@ -91,7 +92,7 @@ Marcus Mängel
 Mendel Mobach
 =============
 
-:roles: :term:`Critical System Administrator`
+:roles: :term:`Critical System Administrator until 01.11.2019`
 :contact: mendel@cacert.org
 
 .. _people_msimons:
@@ -99,7 +100,7 @@ Mendel Mobach
 Martin Simons
 =============
 
-:roles: :term:`Critical System Administrator`
+:roles: :term:`Critical System Administrator until 01.11.2019`
 :contact: msimons@cacert.org
 
 .. _people_neo:
@@ -155,5 +156,5 @@ Karl-Heinz Gödderz
 Wytze van der Raay
 ==================
 
-:roles: :term:`Critical System Administrator`
+:roles: :term:`Critical System Administrator until 01.11.2019`
 :contact: wytze@cacert.org
