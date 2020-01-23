@@ -261,9 +261,9 @@ Keys and X.509 certificates
    :altnames:   DNS:web.cacert.org
    :certfile:   /etc/ssl/certs/web.cacert.org.crt
    :keyfile:    /etc/ssl/private/web.cacert.org.key
-   :serial:     02BE3D
-   :expiration: Feb 19 11:44:47 2020 GMT
-   :sha1fp:     D5:20:E8:4D:C1:FC:6E:DF:7E:D3:5D:03:03:3D:1B:CB:27:4B:3D:85
+   :serial:     02DED2
+   :expiration: Jan 22 20:06:47 2022 GMT
+   :sha1fp:     30:C0:61:C5:F7:C6:5E:A3:06:DB:B5:2F:B1:2D:DD:DF:60:5F:D6:88
    :issuer:     CAcert Class 3 Root
 
 * :file:`/usr/share/ca-certificates/CAcert/class3.crt` CAcert.org Class 3
