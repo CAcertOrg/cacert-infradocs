@@ -268,9 +268,9 @@ Keys and X.509 certificates
    :altnames:   DNS:bugs.cacert.org
    :certfile:   /etc/ssl/public/bugs.c.o.crt
    :keyfile:    /etc/ssl/private/bugs.c.o.key
-   :serial:     02BEFD
-   :expiration: Mar 03 13:08:19 2020 GMT
-   :sha1fp:     DB:16:71:13:60:38:AD:21:A7:36:CA:5A:D2:65:75:4D:C5:3C:C8:15
+   :serial:     02DFC0
+   :expiration: Feb 07 10:41:43 2022 GMT
+   :sha1fp:     23:15:BF:76:0A:4A:28:E4:45:20:F6:6F:CD:48:2B:F7:5F:2B:75:0B
    :issuer:     CAcert Class 3 Root
 
 .. index::
