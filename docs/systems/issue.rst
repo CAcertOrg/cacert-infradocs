@@ -252,9 +252,9 @@ httpd and Postfix:
    :altnames:   DNS:issue.cacert.org
    :certfile:   /etc/ssl/certs/issue.cacert.org.pem
    :keyfile:    /etc/ssl/private/issue.cacert.org.key
-   :serial:     1381E9
-   :expiration: Mar 16 09:54:12 2020 GMT
-   :sha1fp:     90:67:C0:57:17:BD:98:66:B1:E2:62:A6:11:59:E4:C3:3E:E3:C0:E4
+   :serial:     147C64
+   :expiration: Feb 16 21:49:56 2022 GMT
+   :sha1fp:     17:B6:5C:F9:1A:67:71:F7:CA:77:03:E5:B6:DC:C3:18:10:A4:6C:81
    :issuer:     CA Cert Signing Authority
 
 .. seealso::
