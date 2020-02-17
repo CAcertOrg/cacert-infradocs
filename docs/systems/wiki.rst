@@ -193,9 +193,9 @@ Keys and X.509 certificates
    :altnames:   DNS:wiki.cacert.org
    :certfile:   /etc/ssl/public/wiki.cacert.org.crt
    :keyfile:    /etc/ssl/private/wiki.cacert.org.key
-   :serial:     138206
-   :expiration: Mar 16 12:04:29 2020 GMT
-   :sha1fp:     F8:2F:5A:31:5D:73:CD:62:F0:59:EE:6E:D6:F8:9E:95:EA:23:FE:A9
+   :serial:     147C63
+   :expiration: Feb 16 21:17:06 2022 GMT
+   :sha1fp:     BC:42:64:D7:DB:1C:CB:C6:5B:FB:3D:60:43:10:11:2F:89:98:2E:F1
    :issuer:     CA Cert Signing Authority
 
 :file:`/etc/ssl/certs/cacert.org.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
