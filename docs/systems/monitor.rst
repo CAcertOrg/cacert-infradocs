@@ -280,9 +280,9 @@ Keys and X.509 certificates
    :altnames:   DNS:monitor.cacert.org, DNS:monitor.intra.cacert.org
    :certfile:   /etc/ssl/certs/monitor.c.o.pem
    :keyfile:    /etc/ssl/private/monitor.c.o.priv
-   :serial:     1381FF
-   :expiration: Mar 16 11:41:06 2020 GMT
-   :sha1fp:     64:34:16:0D:2C:1B:38:5D:61:38:17:6E:D5:1B:90:B9:CF:DC:A9:75
+   :serial:     147C5F
+   :expiration: Feb 16 20:15:55 2022 GMT
+   :sha1fp:     68:A0:FA:C9:9A:52:AB:2C:F2:41:58:FC:D1:25:64:8B:4A:93:3C:E5
    :issuer:     CA Cert Signing Authority
 
 * :file:`/etc/ssl/certs/cacert.allcerts.pem` CAcert.org Class 1 and Class 3 CA
