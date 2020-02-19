@@ -212,7 +212,16 @@ configuration items outside of the :cacertgit:`cacert-puppet`.
 Keys and X.509 certificates
 ---------------------------
 
-.. todo:: setup a proper certificate for incoming STARTTLS
+Server certificate for STARTTLS connection encryption.
+
+.. sslcert:: emailout.cacert.org
+   :altnames:   DNS:emailout.cacert.org
+   :certfile:   /etc/ssl/certs/ssl-cert-emailout.cacert.org.pem
+   :keyfile:    /etc/ssl/private/ssl-cert-emailout.cacert.org.key
+   :serial:     02E023
+   :expiration: Feb 18 12:16:37 2022 GMT
+   :sha1fp:     26:C1:40:AF:AE:C0:E4:92:BD:15:A1:A5:61:26:7B:5C:60:A9:66:4D
+   :issuer:     CAcert Class 3 Root
 
 .. index::
    pair: DKIM; Private Key
