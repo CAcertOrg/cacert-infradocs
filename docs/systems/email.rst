@@ -262,9 +262,9 @@ Server certificate for SMTP communication from the Internet.
    :altnames:   DNS:email.cacert.org
    :certfile:   /etc/ssl/certs/ssl-cert-email-cacert.pem
    :keyfile:    /etc/ssl/private/ssl-cert-email-cacert.key
-   :serial:     1381FA
-   :expiration: Mar 16 11:23:55 2020 GMT
-   :sha1fp:     3A:EC:11:D0:78:6C:99:34:F2:45:A5:DF:08:90:94:1F:67:2C:6F:47
+   :serial:     147CB5
+   :expiration: Feb 18 12:09:04 2022 GMT
+   :sha1fp:     81:52:26:1E:92:82:17:17:26:AA:AB:4B:96:1A:DC:DC:A1:CE:3D:49
    :issuer:     CA Cert Signing Authority
 
 Server certificate for community email services (SMTPS, SMTP submission in
