@@ -247,14 +247,12 @@ Keys and X.509 certificates
 ---------------------------
 
 .. sslcert:: community.cacert.org
-   :altnames:   DNS:cert.community.cacert.org, DNS:cert.email.cacert.org,
-                DNS:community.cacert.org, DNS:email.cacert.org,
-                DNS:nocert.community.cacert.org, DNS:nocert.email.cacert.org
+   :altnames:   DNS:cert.community.cacert.org, DNS:cert.email.cacert.org, DNS:community.cacert.org, DNS:email.cacert.org, DNS:nocert.community.cacert.org, DNS:nocert.email.cacert.org
    :certfile:   /etc/ssl/certs/ssl-cert-community-cacert.crt
    :keyfile:    /etc/ssl/private/ssl-cert-community-cacert.key
-   :serial:     1381F8
-   :expiration: Mar 16 11:13:16 2020 GMT
-   :sha1fp:     74:67:9E:C7:48:E1:CC:4F:42:C5:4D:C9:13:B9:07:CA:9F:F9:77:C1
+   :serial:     147CB0
+   :expiration: Feb 18 11:39:53 2022 GMT
+   :sha1fp:     B2:90:DE:4D:8D:D9:3A:FE:22:3A:67:95:E2:CD:F7:30:55:4B:38:AC
    :issuer:     CA Cert Signing Authority
 
 * :file:`/usr/share/ca-certificates/cacert.org/` directory containing the

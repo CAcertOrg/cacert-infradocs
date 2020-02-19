@@ -273,7 +273,7 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 .. sslcert:: community.cacert.org
    :certfile:  /etc/ssl/certs/ssl-cert-community-cacert.pem
    :keyfile:   /etc/ssl/private/ssl-cert-community-cacert.key
-   :serial:    1381F8
+   :serial:    147CB0
    :secondary:
 
 .. note::
