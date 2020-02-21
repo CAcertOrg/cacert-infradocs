@@ -9,7 +9,8 @@ Purpose
 =======
 
 This system handles email for @cacert.org addresses. It also provides users of
-@cacert.org with IMAPs and POP3s access to their accounts.
+@cacert.org with IMAPs and POP3s access to their accounts. The system provides
+the API part of the CAcert community self service system.
 
 The database on this container is used by :doc:`webmail` too.
 
@@ -21,6 +22,15 @@ System Administration
 
 * Primary: :ref:`people_jselzer`
 * Secondary: :ref:`people_jandd`
+
+Application Administration
+--------------------------
+
++------------------+---------------------+
+| Application      | Administrator(s)    |
++==================+=====================+
+| self service API | :ref:`people_jandd` |
++------------------+---------------------+
 
 Contact
 -------
@@ -107,10 +117,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.3
 
 Services
 ========
@@ -118,42 +128,45 @@ Services
 Listening services
 ------------------
 
-+----------+---------+---------+-------------------------------------+
-| Port     | Service | Origin  | Purpose                             |
-+==========+=========+=========+=====================================+
-| 22/tcp   | ssh     | ANY     | admin console access                |
-+----------+---------+---------+-------------------------------------+
-| 25/tcp   | smtp    | ANY     | mail receiver for cacert.org        |
-+----------+---------+---------+-------------------------------------+
-| 110/tcp  | pop3    | ANY     | POP3 access for cacert.org mail     |
-|          |         |         | addresses                           |
-+----------+---------+---------+-------------------------------------+
-| 143/tcp  | imap    | ANY     | IMAP access for cacert.org mail     |
-|          |         |         | addresses                           |
-+----------+---------+---------+-------------------------------------+
-| 465/tcp  | smtps   | ANY     | SMTPS for cacert.org mail addresses |
-+----------+---------+---------+-------------------------------------+
-| 587/tcp  | smtp    | ANY     | mail submission for cacert.org mail |
-|          |         |         | addresses                           |
-+----------+---------+---------+-------------------------------------+
-| 993/tcp  | imaps   | ANY     | IMAPS access for cacert.org mail    |
-|          |         |         | addresses                           |
-+----------+---------+---------+-------------------------------------+
-| 995/tcp  | pop3s   | ANY     | POP3S access for cacert.org mail    |
-|          |         |         | addresses                           |
-+----------+---------+---------+-------------------------------------+
-| 4190/tcp | sieve   | ANY     | Manage sieve access for cacert.org  |
-|          |         |         | mail addresses                      |
-+----------+---------+---------+-------------------------------------+
-| 3306/tcp | mysql   | local   | MariaDB database server             |
-+----------+---------+---------+-------------------------------------+
-| 5665/tcp | icinga2 | monitor | remote monitoring service           |
-+----------+---------+---------+-------------------------------------+
++----------+---------+-----------+-------------------------------------+
+| Port     | Service | Origin    | Purpose                             |
++==========+=========+===========+=====================================+
+| 22/tcp   | ssh     | ANY       | admin console access                |
++----------+---------+-----------+-------------------------------------+
+| 25/tcp   | smtp    | ANY       | mail receiver for cacert.org        |
++----------+---------+-----------+-------------------------------------+
+| 110/tcp  | pop3    | ANY       | POP3 access for cacert.org mail     |
+|          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 143/tcp  | imap    | ANY       | IMAP access for cacert.org mail     |
+|          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 465/tcp  | smtps   | ANY       | SMTPS for cacert.org mail addresses |
++----------+---------+-----------+-------------------------------------+
+| 587/tcp  | smtp    | ANY       | mail submission for cacert.org mail |
+|          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 993/tcp  | imaps   | ANY       | IMAPS access for cacert.org mail    |
+|          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 995/tcp  | pop3s   | ANY       | POP3S access for cacert.org mail    |
+|          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 4190/tcp | sieve   | ANY       | Manage sieve access for cacert.org  |
+|          |         |           | mail addresses                      |
++----------+---------+-----------+-------------------------------------+
+| 3306/tcp | mysql   | local     | MariaDB database server             |
++----------+---------+-----------+-------------------------------------+
+| 5665/tcp | icinga2 | monitor   | remote monitoring service           |
++----------+---------+-----------+-------------------------------------+
+| 9443/tcp | https   | community | self service API                    |
++----------+---------+-----------+-------------------------------------+
 
 Running services
 ----------------
 
 .. index::
+   single: cacert-selfservice-api
    single: cron
    single: dbus
    single: dovecot
@@ -164,51 +177,47 @@ Running services
    single: puppet
    single: rsyslog
 
-+----------------+--------------------------+----------------------------------+
-| Service        | Usage                    | Start mechanism                  |
-+================+==========================+==================================+
-| cron           | job scheduler            | systemd unit ``cron.service``    |
-+----------------+--------------------------+----------------------------------+
-| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
-|                | daemon                   |                                  |
-+----------------+--------------------------+----------------------------------+
-| dovecot        | IMAP(s), POP3(s) and     | systemd unit ``dovecot.service`` |
-|                | sieve filter daemon      |                                  |
-+----------------+--------------------------+----------------------------------+
-| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
-+----------------+--------------------------+----------------------------------+
-| MariaDB        | MariaDB database         | systemd unit ``mariadb.service`` |
-|                | server for email         |                                  |
-|                | services                 |                                  |
-+----------------+--------------------------+----------------------------------+
-| openssh server | ssh daemon for remote    | systemd unit ``ssh.service``     |
-|                | administration           |                                  |
-+----------------+--------------------------+----------------------------------+
-| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
-|                | cacert.org               |                                  |
-+----------------+--------------------------+----------------------------------+
-| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
-|                | management agent         |                                  |
-+----------------+--------------------------+----------------------------------+
-| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
-+----------------+--------------------------+----------------------------------+
++------------------------+--------------------------------------------+--------------------------------------------------+
+| Service                | Usage                                      | Start mechanism                                  |
++========================+============================================+==================================================+
+| cacert-selfservice-api | CAcert community self service API          | systemd unit ``cacert-selffservice-api.service`` |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| cron                   | job scheduler                              | systemd unit ``cron.service``                    |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| dbus-daemon            | System message bus daemon                  | systemd unit ``dbus.service``                    |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| dovecot                | IMAP(s), POP3(s) and sieve filter daemon   | systemd unit ``dovecot.service``                 |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| icinga2                | Icinga2 monitoring agent                   | systemd unit ``icinga2.service``                 |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| MariaDB                | MariaDB database server for email services | systemd unit ``mariadb.service``                 |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| openssh server         | ssh daemon for remote administration       | systemd unit ``ssh.service``                     |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| Postfix                | SMTP server for cacert.org                 | systemd unit ``postfix.service``                 |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| Puppet agent           | configuration management agent             | systemd unit ``puppet.service``                  |
++------------------------+--------------------------------------------+--------------------------------------------------+
+| rsyslog                | syslog daemon                              | systemd unit ``rsyslog.service``                 |
++------------------------+--------------------------------------------+--------------------------------------------------+
 
 Databases
 ---------
 
-+-------+----------------+----------------------------------+
-| RDBMS | Name           | Used for                         |
-+=======+================+==================================+
-| MySQL | cacertusers    | database for dovecot and postfix |
-+-------+----------------+----------------------------------+
-| MySQL | roundcubemail  | roundcube on :doc:`webmail`      |
-+-------+----------------+----------------------------------+
++---------+---------------+----------------------------------+
+| RDBMS   | Name          | Used for                         |
++=========+===============+==================================+
+| MariaDB | cacertusers   | database for dovecot and postfix |
++---------+---------------+----------------------------------+
+| MariaDB | roundcubemail | roundcube on :doc:`webmail`      |
++---------+---------------+----------------------------------+
 
 Connected Systems
 -----------------
 
 * :doc:`monitor`
 * :doc:`webmail`
+* :doc:`community`
 * all @cacert.org address owners have access to POP3 (STARTTLS and POP3S), IMAP
   (STARTTLS and IMAPS), SMTPS, SMTP submission (STARTTLS) and manage sieve
 
@@ -233,7 +242,21 @@ Security
 Non-distribution packages and modifications
 -------------------------------------------
 
-* None
+* CAcert community self service system API
+
+  The system runs the CAcert community self service system API developed in the
+  :cacertgit:`cacert-selfservice-api`.
+
+  The software is installed from a Debian package that is hosted on :doc:`webstatic`.
+
+  The software is built on :doc:`jenkins` via the `cacert-selfservice-api Job`_
+  when there are changes in Git. The Debian package can be built using
+  :program:`gbp`.
+
+  The software is installed and configured via Puppet.
+
+  .. _cacert-selfservice-api Job: https://jenkins.cacert.org/job/cacert-selfservice-api/
+  .. todo:: describe build and deployment of Debian package for self-service-api
 
 Risk assessments on critical packages
 -------------------------------------
@@ -244,6 +267,15 @@ regularly.
 The Puppet agent package and a few dependencies are installed from the official
 Puppet APT repository because the versions in Debian are too old to use modern
 Puppet features.
+
+The CAcert community self service API software is developed using `Go
+<https://golang.org/>`_ which handles a lot of common programming errors at
+compile time and has a quite good security track record.
+
+The CAcert community self service API system is run as a separate user
+``cacert-selfservice-api`` and is built as a small self-contained static
+binary. Access is restricted via https and authenticated with eliptic curve
+public key cryptography.
 
 Critical Configuration items
 ============================
@@ -276,6 +308,21 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
    :serial:    147CB0
    :secondary:
 
+Server certificate for the CAcert community self service API
+
+.. sslcert:: email.infra.cacert.org
+   :altnames:   DNS:email.infra.cacert.org
+   :certfile:   /etc/cacert-selfservice-api/certs/server.crt.pem
+   :keyfile:    /etc/cacert-selfservice-api/private/server.key.pem
+   :serial:     02D954
+   :expiration: Aug 16 10:01:04 2021 GMT
+   :sha1fp:     C7:34:5A:CF:3F:82:8E:82:4D:2C:90:55:48:7D:BF:5A:17:53:F2:E7
+   :issuer:     CAcert Class 3 Root
+
+The certificate is rolled out by Puppet. All changes to the certificate need to
+be made to the file :file:`hieradata/nodes/email.yaml` in the
+:cacertgit:`cacert-puppet` repository.
+
 .. note::
 
    Postfix uses the email.cacert.org certificate for client authentication if
@@ -286,18 +333,14 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
    * :wiki:`SystemAdministration/CertificateList`
 
 .. index::
-   pair: MariaDB; configuration
+   pair: cacert-selfservice-api; configuration
 
-MariaDB configuration
----------------------
+cacert-selfservice-api configuration
+------------------------------------
 
-MySQL configuration is stored in the :file:`/etc/mysql/` directory.
-
-.. index::
-   pair: MySQL; NSS
-   single: libnss-mysql
-
-.. _nss:
+The service configuration is contained in
+`/etc/cacert-selfservice-api/config.yaml` and is managed by the Puppet manifest
+profiles::cacert_selfservice_api.
 
 .. index::
    pair: dovecot; configuration
@@ -317,6 +360,14 @@ database settings are stored in
    There is a special master password so that webmail can do the authentication
    for dovecot using certificates. This is defined in
    :file:`/etc/dovecot/dovecot-sql.conf.ext`.
+
+.. index::
+   pair: MariaDB; configuration
+
+MariaDB configuration
+---------------------
+
+MariaDB configuration is stored in the :file:`/etc/mysql/` directory.
 
 .. index::
    pair: Postfix; configuration
@@ -431,15 +482,10 @@ Changes
 Planned
 -------
 
-.. todo:: update to Debian 10 (when Puppet is available)
-
 .. todo:: implement CRL checking
 
 .. todo::
    throttle brute force attack attempts using fail2ban or similar mechanism
-
-.. todo::
-   consider to use LDAP to consolidate user, password and email information
 
 System Future
 -------------

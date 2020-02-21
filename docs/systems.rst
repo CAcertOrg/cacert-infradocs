@@ -13,6 +13,7 @@ administrator team.
    systems/board
    systems/bugs
    systems/cats
+   systems/community
    systems/email
    systems/emailout
    systems/git
