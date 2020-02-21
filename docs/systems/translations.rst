@@ -349,9 +349,9 @@ Keys and X.509 certificates
    :altnames:   DNS:l10n.cacert.org, DNS:translations.cacert.org
    :certfile:   /etc/ssl/public/translations.c.o.chain.crt
    :keyfile:    /etc/ssl/private/translations.c.o.key
-   :serial:     138202
-   :expiration: Mar 16 11:47:46 2020 GMT
-   :sha1fp:     09:D7:6C:BA:EC:60:45:4A:93:77:39:D0:0A:FA:9B:0A:3D:17:3C:CA
+   :serial:     147D17
+   :expiration: Feb 20 08:24:07 2022 GMT
+   :sha1fp:     86:3D:3C:3A:37:65:9A:8D:13:01:42:D3:E5:C9:BC:71:F4:71:AD:2E
    :issuer:     CA Cert Signing Authority
 
 .. seealso::
