@@ -318,9 +318,9 @@ Keys and X.509 certificates
    :altnames:   DNS:irc.cacert.org, DNS:ircserver.cacert.org
    :certfile:   /etc/ssl/public/irc.cacert.org.crt
    :keyfile:    /etc/ssl/private/irc.cacert.org.key
-   :serial:     1381E8
-   :expiration: Mar 16 09:35:36 2020 GMT
-   :sha1fp:     42:F6:7C:4E:0C:AC:8A:42:7D:9A:94:55:7E:73:7E:E9:40:5C:87:91
+   :serial:     147D16
+   :expiration: Feb 20 07:52:28 2022 GMT
+   :sha1fp:     9E:D2:07:24:38:5D:BA:EE:12:5B:A5:0C:43:AD:91:F5:AA:26:AA:47
    :issuer:     CA Cert Signing Authority
 
 .. index::
