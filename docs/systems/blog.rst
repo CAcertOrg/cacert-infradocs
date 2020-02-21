@@ -279,9 +279,9 @@ Keys and X.509 certificates
    :altnames:   DNS:blog.cacert.org
    :certfile:   /etc/ssl/public/blog.cacert.org.crt
    :keyfile:    /etc/ssl/private/blog.cacert.org.key
-   :serial:     1381E6
-   :expiration: Mar 16 09:17:48 2020 GMT
-   :sha1fp:     E9:92:97:26:01:C1:00:3C:D7:BC:A2:2D:F4:F7:24:1C:47:C0:01:51
+   :serial:     147D13
+   :expiration: Feb 20 07:30:37 2022 GMT
+   :sha1fp:     E1:5B:21:68:AD:77:A4:53:8E:B2:2E:6F:5F:46:CA:E8:4F:27:16:08
    :issuer:     CA Cert Signing Authority
 
 * :file:`/etc/ssl/certs/cacert.org/` directory containing CAcert.org Class 1
