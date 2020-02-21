@@ -246,9 +246,9 @@ Keys and X.509 certificates
    :altnames:   DNS:cert.svn.cacert.org, DNS:nocert.svn.cacert.org, DNS:svn.cacert.org
    :certfile:   /etc/apache2/ssl/svn.cacert.org.crt.pem
    :keyfile:    /etc/apache2/ssl/svn.cacert.org.key.pem
-   :serial:     02C023
-   :expiration: Mar 16 10:36:50 2020 GMT
-   :sha1fp:     54:5D:E2:B8:81:1A:A8:79:43:55:79:E9:5B:B8:FC:0F:A0:F5:C7:D3
+   :serial:     02E033
+   :expiration: Feb 20 08:16:44 2022 GMT
+   :sha1fp:     A1:FB:AB:7A:95:B3:4C:77:1D:DF:A1:D8:32:53:DE:3E:8E:6C:0A:EF
    :issuer:     CAcert Class 3 Root
 
 * `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
