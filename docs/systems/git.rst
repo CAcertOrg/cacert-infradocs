@@ -268,9 +268,9 @@ Keys and X.509 certificates
    :altnames:   DNS:git.cacert.org
    :certfile:   /etc/ssl/public/git.c.o.chain.crt
    :keyfile:    /etc/ssl/private/git.c.o.key
-   :serial:     1381E7
-   :expiration: Mar 16 09:28:01 2020 GMT
-   :sha1fp:     23:0D:DC:34:D5:4D:B0:96:9C:6B:A6:18:69:5C:5C:5F:80:62:DC:A6
+   :serial:     147D15
+   :expiration: Feb 20 07:47:58 2022 GMT
+   :sha1fp:     12:20:B2:5A:21:C7:15:0F:C9:57:3A:DB:ED:A4:2D:EF:C5:D5:B7:AE
    :issuer:     CA Cert Signing Authority
 
 The :file:`/etc/ssl/public/git.c.o.chain.crt` contains the CAcert.org Class 1
