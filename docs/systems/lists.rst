@@ -248,9 +248,9 @@ Server certificate for Apache httpd for Sympa and phpmyadmin and Postfix:
    :altnames:   DNS:cert.lists.cacert.org, DNS:lists.cacert.org, DNS:nocert.lists.cacert.org
    :certfile:   /etc/ssl/certs/ssl-cert-lists-cacert-multialtname.pem
    :keyfile:    /etc/ssl/private/ssl-cert-lists-cacert-multialtname.pem
-   :serial:     1381F2
-   :expiration: Mar 16 10:15:10 2020 GMT
-   :sha1fp:     53:D8:D7:96:AC:C6:87:B6:2F:D7:58:A7:F3:F4:33:32:A7:25:02:A9
+   :serial:     147CB7
+   :expiration: Feb 18 12:25:15 2022 GMT
+   :sha1fp:     55:FB:FA:2B:EA:DE:06:7E:2C:FD:2C:4E:B2:04:86:9B:1D:4D:D6:6D
    :issuer:     CA Cert Signing Authority
 
 * :file:`/usr/share/ca-certificates/cacert.org/cacert.org.crt`
