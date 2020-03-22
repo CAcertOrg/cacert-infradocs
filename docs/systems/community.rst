@@ -44,8 +44,8 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_mario` and :ref:`people_jselzer` have :program:`sudo` access on
-that machine too.
+:ref:`people_mario`, :ref:`people_dirk` and :ref:`people_jselzer` have
+:program:`sudo` access on that machine too.
 
 Basics
 ======
