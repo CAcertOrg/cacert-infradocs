@@ -15,7 +15,7 @@ CAcert infrastructure.
    single: Ferm
 
 Infra02 is the host system for all infrastructure :term:`containers
-<container>`. The containers are setup using the Linux kernel's :term:`LXC`
+<Container>`. The containers are setup using the Linux kernel's :term:`LXC`
 system. The firewall for infrastructure is maintained on this machine using
 Ferm_. The machine provides a DNS resolver based on dnsmasq_ and gives answers
 for the internal zone infra.cacert.org.
