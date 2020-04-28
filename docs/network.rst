@@ -8,6 +8,54 @@ Network
 
    :wiki:`SystemAdministration/IPList`
 
+.. nwdiag::
+   :caption: IPv4 network
+
+   nwdiag {
+     network internet {
+       extmon [address="116.203.192.12"]
+       router [address="213.154.225.224/27"]
+     }
+     network intranet {
+       address = "172.16.2.0/24"
+
+       router [address="172.17.2.3"]
+       infra02 [address="172.16.2.10"]
+     }
+     network br0 {
+       address = "10.0.0.0/24"
+
+       infra02 [address="10.0.0.1"]
+       container1;
+       container2;
+       containerX;
+     }
+   }
+
+.. nwdiag::
+   :caption: IPv6 network
+
+   nwdiag {
+     network internet {
+       extmon [address="2a01:4f8:c2c:a5b9::1"]
+       router;
+     }
+     network intranet {
+       address = "2001:7b8:616:162:1::/80"
+
+       router;
+       infra02 [address="...:1::10"]
+     }
+     network br0 {
+       address = "2001:7b8:616:162:2::/80"
+
+       infra02 [address="...:2::1"]
+       container1;
+       container2;
+       containerX;
+     }
+   }
+  
 
 Internet
 --------
@@ -24,6 +72,7 @@ taken from the :ip:v6range:`2001:7b8:616:162:1::/80` and
 
 External monitoring is provided from the ranges :ip:v4range:`116.203.192.12/32`
 and :ip:v6range:`2a01:4f8:c2c:a5b9::1/128`.
+
 
 Intranet
 --------
