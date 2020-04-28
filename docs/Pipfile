@@ -5,11 +5,13 @@ name = "pypi"
 
 [packages]
 sphinx = "*"
-gitpython = "*"
+GitPython = "*"
 "jandd.sphinxext.ip" = "*"
 "jandd.sphinxext.mac" = "*"
 dateutils = "*"
 validate-email = "*"
+sphinxcontrib-blockdiag = "*"
+sphinxcontrib-nwdiag = "*"
 
 [dev-packages]
 

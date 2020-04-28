@@ -38,6 +38,8 @@ extensions = [
     "sphinx.ext.extlinks",
     "jandd.sphinxext.ip",
     "jandd.sphinxext.mac",
+    "sphinxcontrib.blockdiag",
+    "sphinxcontrib.nwdiag",
     "sphinxext.cacert",
 ]
 
@@ -57,7 +59,7 @@ master_doc = "index"
 
 # General information about the project.
 project = u"CAcert infrastructure"
-copyright = u"2016, 2017, 2018 Jan Dittberner, CAcert"
+copyright = u"2016-2020 Jan Dittberner, CAcert"
 author = u"CAcert infrastructure team"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -383,6 +385,8 @@ epub_exclude_files = ["search.html"]
 
 # If false, no index is generated.
 # epub_use_index = True
+
+nwdiag_html_image_format = "svg"
 
 
 extlinks = {
