@@ -29,11 +29,11 @@ System Administration
 Application Administration
 --------------------------
 
-+---------------+---------------------+
-| Application   | Administrator(s)    |
-+===============+=====================+
-| icinga2 agent | :ref:`people_jandd` |
-+---------------+---------------------+
++----------------+---------------------+
+| Application    | Administrator(s)    |
++================+=====================+
+| Icinga 2 agent | :ref:`people_jandd` |
++----------------+---------------------+
 
 Contact
 -------
@@ -90,9 +90,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.0
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 10.0
+* Debian GNU/Linux 10.3
 
 Services
 ========
@@ -180,17 +180,15 @@ Dedicated user roles
 Non-distribution packages and modifications
 -------------------------------------------
 
-* None
+The Puppet agent package and a few dependencies are installed from the official
+Puppet APT repository because the versions in Debian are too old to use modern
+Puppet features.
 
 Risk assessments on critical packages
 -------------------------------------
 
 The system provides no public services besides an Icinga2 agent that executes
 commands sent from :doc:`../systems/monitor`.
-
-The Puppet agent package and a few dependencies are installed from the
-official Puppet APT repository because the versions in Debian are too old to
-use modern Puppet features.
 
 Critical Configuration items
 ============================

@@ -8,7 +8,7 @@ Monitor
 Purpose
 =======
 
-This system hosts an `Icinga`_ instance to centrally monitor the services in
+This system hosts an `Icinga2`_ instance to centrally monitor the services in
 the CAcert network (especially for security updates and certificate
 expiry).
 
@@ -29,7 +29,7 @@ expiry).
 Application Links
 -----------------
 
-The Icinga classic frontend
+The Icingaweb 2 frontend
    https://monitor.cacert.org/
 
 Administration
@@ -44,11 +44,11 @@ System Administration
 Application Administration
 --------------------------
 
-+-------------+-----------------------+
-| Application | Administrator(s)      |
-+=============+=======================+
-| Icinga      | :ref:`people_jandd`   |
-+-------------+-----------------------+
++-------------+---------------------+
+| Application | Administrator(s)    |
++=============+=====================+
+| Icinga 2    | :ref:`people_jandd` |
++-------------+---------------------+
 
 Contact
 -------
@@ -111,10 +111,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.3
 
 Applicable Documentation
 ------------------------
@@ -132,21 +132,23 @@ Services
 Listening services
 ------------------
 
-+----------+---------+---------+-----------------------------+
-| Port     | Service | Origin  | Purpose                     |
-+==========+=========+=========+=============================+
-| 22/tcp   | ssh     | ANY     | admin console access        |
-+----------+---------+---------+-----------------------------+
-| 25/tcp   | smtp    | local   | mail delivery to local MTA  |
-+----------+---------+---------+-----------------------------+
-| 80/tcp   | http    | ANY     | Icinga classic web frontend |
-+----------+---------+---------+-----------------------------+
-| 443/tcp  | https   | ANY     | Icinga classic web frontend |
-+----------+---------+---------+-----------------------------+
-| 5666/tcp | nrpe    | monitor | remote monitoring service   |
-+----------+---------+---------+-----------------------------+
-| 5432/tcp | pgsql   | local   | PostgreSQL database for IDO |
-+----------+---------+---------+-----------------------------+
++----------+----------+----------+---------------------------------+
+| Port     | Service  | Origin   | Purpose                         |
++==========+==========+==========+=================================+
+| 22/tcp   | ssh      | ANY      | admin console access            |
++----------+----------+----------+---------------------------------+
+| 25/tcp   | smtp     | local    | mail delivery to local MTA      |
++----------+----------+----------+---------------------------------+
+| 80/tcp   | http     | ANY      | Redirect to https               |
++----------+----------+----------+---------------------------------+
+| 443/tcp  | https    | ANY      | Icingaweb 2 frontend            |
++----------+----------+----------+---------------------------------+
+| 5665/tcp | icinga2  | monitor  | remote monitoring service       |
++----------+----------+----------+---------------------------------+
+| 5432/tcp | pgsql    | local    | PostgreSQL database for IDO     |
++----------+----------+----------+---------------------------------+
+| 8000/tcp | git-hook | internal | HTTP endpoint for git-pull-hook |
++----------+----------+----------+---------------------------------+
 
 .. note::
 
@@ -159,78 +161,82 @@ Running services
 .. index::
    single: apache httpd
    single: cron
-   single: icinga
-   single: ido2db
-   single: nrpe
+   single: dbus
+   single: git-pull-hook
+   single: icinga2
    single: openssh
    single: postfix
    single: postgresql
    single: puppet agent
    single: rsyslog
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| Apache httpd       | Webserver for      | init script                            |
-|                    | Icinga classic     | :file:`/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| Icinga             | Icinga monitoring  | init script                            |
-|                    | daemon             | :file:`/etc/init.d/icinga`             |
-+--------------------+--------------------+----------------------------------------+
-| IDO2DB             | IDO database       | init script                            |
-|                    | writer daemon      | :file:`/etc/init.d/ido2db`             |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service  by        | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | this system itself |                                        |
-+--------------------+--------------------+----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Postfix            | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/postfix`            |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for IDO            |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | configuration      | init script                            |
-|                    | management agent   | :file:`/etc/init.d/puppet`             |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
++----------------+-----------------------+------------------------------------------------+
+| Service        | Usage                 | Start mechanism                                |
++================+=======================+================================================+
+| Apache httpd   | Webserver for         | systemd unit ``apache2.service``               |
+|                | Icingaweb 2           |                                                |
++----------------+-----------------------+------------------------------------------------+
+| cron           | job scheduler         | systemd unit ``cron.service``                  |
++----------------+-----------------------+------------------------------------------------+
+| dbus-daemon    | System message bus    | systemd unit ``dbus.service``                  |
+|                | daemon                |                                                |
++----------------+-----------------------+------------------------------------------------+
+| git-pull-hook  | Custom Python3        | systemd unit ``icinga2-git-pull-hook.service`` |
+|                | hook to pull git      |                                                |
+|                | changes from the      |                                                |
+|                | cacert-icinga2-conf_d |                                                |
+|                | repository            |                                                |
++----------------+-----------------------+------------------------------------------------+
+| Icinga2        | Icinga2 monitoring    | systemd unit ``icinga2.service``               |
+|                | daemon                |                                                |
++----------------+-----------------------+------------------------------------------------+
+| openssh server | ssh daemon for        | systemd unit ``ssh.service``                   |
+|                | remote                |                                                |
+|                | administration        |                                                |
++----------------+-----------------------+------------------------------------------------+
+| Postfix        | SMTP server for       | systemd unit ``postfix.service``               |
+|                | local mail            |                                                |
+|                | submission            |                                                |
++----------------+-----------------------+------------------------------------------------+
+| PostgreSQL     | PostgreSQL            | systemd unit ``postgresql.service``            |
+|                | database server       |                                                |
++----------------+-----------------------+------------------------------------------------+
+| Puppet agent   | configuration         | systemd unit ``puppet.service``                |
+|                | management agent      |                                                |
++----------------+-----------------------+------------------------------------------------+
+| rsyslog        | syslog daemon         | systemd unit ``rsyslog.service``               |
++----------------+-----------------------+------------------------------------------------+
 
 Databases
 ---------
 
-+------------+--------+-----------------+
-| RDBMS      | Name   | Used for        |
-+============+========+=================+
-| PostgreSQL | icinga | Icinga IDO data |
-+------------+--------+-----------------+
++------------+------------+--------------------------------------------+
+| RDBMS      | Name       | Used for                                   |
++============+============+============================================+
+| PostgreSQL | icinga2    | Icinga 2 performance and alerting data     |
++------------+------------+--------------------------------------------+
+| PostgreSQL | icingaweb2 | Icingaweb 2 group and user preference data |
++------------+------------+--------------------------------------------+
 
 Connected Systems
 -----------------
 
-None
+* :doc:`../external/extmon`
+* :doc:`git` for triggering the git-pull-hook on newly pushed commits to the
+  cacert-icinga2-conf_d repository
 
 Outbound network connections
 ----------------------------
 
 * :doc:`infra02` as resolving nameserver
 * :doc:`emailout` as SMTP relay
+* :doc:`git` to fetch new commits from the cacert-icinga2-conf_d repository
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
 * crl.cacert.org (rsync) for getting CRLs
-* all :ip:v4range:`10.0.0.0/24` and :ip:v4range:`172.16.2.0/24` systems for
-  monitoring their services
+* all :ip:v4range:`10.0.0.0/24`, :ip:v4range:`172.16.2.0/24` and
+  :ip:v6range:`2001:7b8:616:162:2::/80` systems for monitoring their services
 
-.. todo:: add IPv6 ranges when they are monitored
 
 Security
 ========
@@ -252,13 +258,10 @@ Puppet features.
 Risk assessments on critical packages
 -------------------------------------
 
-Icinga and the classic frontend are a bit aged but have a good security track
-record.
+Icinga 2 and Icingaweb 2 are well maintained community projects with a good
+security track record.
 
 Apache httpd has a good reputation and is a low risk package.
-
-NRPE is flawed and should be replaced. The risk is somewhat mitigated by
-firewalling on :doc:`the infrastructure host <infra02>`.
 
 The system uses third party packages with a good security track record and
 regular updates. The attack surface is small due to the tightly restricted
@@ -271,7 +274,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move configuration of :doc:`monitor` to Puppet code
+.. todo:: move more configuration of :doc:`monitor` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -311,10 +314,11 @@ the HTTPS VirtualHost.
 Icinga configuration
 --------------------
 
-The Icinga configuration is stored in the :file:`/etc/icinga/` directory.
-Database configuration for IDO is stored in :file:`ido2db.cfg`. The Icinga
-classic frontend configuration is stored in :file:`cgi.cfg`. Host and service
-configurations are defined in the :file:`objects/` subdirectory.
+The Icinga 2 configuration is stored in the :file:`/etc/icinga2/` directory.
+The :file:`/etc/icinga2/conf.d/` directory is managed in
+:cacertgit:`cacert-icinga2-conf_d` repository which has a post-receive hook to
+trigger updates of the Icinga 2 configuration and performs a graceful reload
+when configuration has changed.
 
 Tasks
 =====
