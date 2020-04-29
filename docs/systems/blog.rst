@@ -122,10 +122,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Jessie
-   single: Debian GNU/Linux; 8.11
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 8.11
+* Debian GNU/Linux 10.3
 
 Applicable Documentation
 ------------------------
@@ -151,7 +151,7 @@ Listening services
 +----------+---------+---------+----------------------------+
 | 5666/tcp | nrpe    | monitor | remote monitoring service  |
 +----------+---------+---------+----------------------------+
-| 3306/tcp | mysql   | local   | MySQL database for blog    |
+| 3306/tcp | mariadb | local   | MariaDB database for blog  |
 +----------+---------+---------+----------------------------+
 | 9000/tcp | php-fpm | local   | PHP FPM executor           |
 +----------+---------+---------+----------------------------+
@@ -163,7 +163,7 @@ Running services
    single: apache httpd
    single: cron
    single: dbus
-   single: mysql
+   single: mariadb
    single: nrpe
    single: openssh
    single: postfix
@@ -178,7 +178,7 @@ Running services
 | dbus-daemon        | System message bus | systemd unit ``dbus.service``                   |
 |                    | daemon             |                                                 |
 +--------------------+--------------------+-------------------------------------------------+
-| MySQL              | MySQL database     | systemd unit ``mysql.service``                  |
+| MariaDB            | MariaDB database   | systemd unit ``mariadb.service``                |
 |                    | server for blog    |                                                 |
 +--------------------+--------------------+-------------------------------------------------+
 | openssh server     | ssh daemon for     | systemd unit ``ssh.service``                    |
@@ -197,13 +197,11 @@ Running services
 Databases
 ---------
 
-+-------+------------+------------------------------+
-| RDBMS | Name       | Used for                     |
-+=======+============+==============================+
-| MySQL | blog       | Wordpress blog               |
-+-------+------------+------------------------------+
-| MySQL | phpmyadmin | PHPMyAdmin settings database |
-+-------+------------+------------------------------+
++---------+------------+------------------------------+
+| RDBMS   | Name       | Used for                     |
++=========+============+==============================+
+| MariaDB | blog       | Wordpress blog               |
++---------+------------+------------------------------+
 
 Connected Systems
 -----------------
@@ -349,8 +347,6 @@ Planned
 
 .. todo:: switch to Puppet management
 .. todo:: replace nrpe with icinga2 agent
-.. todo:: update wordpress to 5.x
-.. todo:: update to Debian 9/10
 .. todo:: setup IPv6
 
 .. todo::
