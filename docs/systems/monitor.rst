@@ -8,8 +8,8 @@ Monitor
 Purpose
 =======
 
-This system hosts an `Icinga2`_ instance to centrally monitor the services in
-the CAcert network (especially for security updates and certificate
+This system hosts an `Icinga 2`_ instance to centrally monitor the
+services in the CAcert network (especially for security updates and certificate
 expiry).
 
 .. note::
@@ -24,7 +24,7 @@ expiry).
    acknowledgement, adding notes, rescheduling checks or setting downtimes for
    your service.
 
-.. _Icinga: https://www.icinga.org/
+.. _Icinga 2: https://www.icinga.org/
 
 Application Links
 -----------------
