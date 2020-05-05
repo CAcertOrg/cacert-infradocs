@@ -62,6 +62,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.242`
 :IP Intranet: :ip:v4:`172.16.2.26`
 :IP Internal: :ip:v4:`10.0.0.26`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::26`
 :MAC address: :mac:`00:ff:c7:e5:66:ae` (eth0)
 
 .. seealso::
@@ -82,18 +83,27 @@ DNS
 .. index::
    single: DNS records; Web
 
-===================== ======== ====================================================================
-Name                  Type     Content
-===================== ======== ====================================================================
-web.cacert.org.       IN A     213.154.225.242
-web.cacert.org.       IN SSHFP 1 1 85F5338D90930200CBBFCE1AAB56988B4C8F0F22
-web.cacert.org.       IN SSHFP 1 2 D39CBD51588F322F7B4384274CF0166F25B10F54A6CD153ED7251FF30B5B516E
-web.cacert.org.       IN SSHFP 2 1 906F0C17BB0E233B0F52CE33CFE64038D45AC4F2
-web.cacert.org.       IN SSHFP 2 2 DBF6221A8A403B4C9F537B676305FDAE07FF45A1C18D88B1141031402AF0250F
-web.cacert.org.       IN SSHFP 3 1 7B62D8D1E093C28CDA0F3D2444846128B41C10DE
-web.cacert.org.       IN SSHFP 3 2 0917DA677C9E6CAF1818C1151EC2A813623A2B2955A1A850F260D64EF041400B
-web.intra.cacert.org. IN A     172.16.2.26
-===================== ======== ====================================================================
++-----------------------+----------+----------------------------------------------------------------------+
+| Name                  | Type     | Content                                                              |
++=======================+==========+======================================================================+
+| web.cacert.org.       | IN A     | 213.154.225.242                                                      |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 1 1 85F5338D90930200CBBFCE1AAB56988B4C8F0F22                         |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 1 2 D39CBD51588F322F7B4384274CF0166F25B10F54A6CD153ED7251FF30B5B516E |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 2 1 906F0C17BB0E233B0F52CE33CFE64038D45AC4F2                         |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 2 2 DBF6221A8A403B4C9F537B676305FDAE07FF45A1C18D88B1141031402AF0250F |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 3 1 7B62D8D1E093C28CDA0F3D2444846128B41C10DE                         |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.cacert.org.       | IN SSHFP | 3 2 0917DA677C9E6CAF1818C1151EC2A813623A2B2955A1A850F260D64EF041400B |
++-----------------------+----------+----------------------------------------------------------------------+
+| web.intra.cacert.org. | IN A     | 172.16.2.26                                                          |
++-----------------------+----------+----------------------------------------------------------------------+
+
+.. todo:: add SSHFP for ED25519 key, remove SSHFP for DSA key, add AAAA record for IPv6
 
 .. seealso::
 
@@ -104,9 +114,11 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 9.12
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 9.12
+
+.. todo:: upgrade to Debian 10 Buster
 
 Services
 ========
@@ -114,19 +126,19 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 80/tcp   | http      | ANY       | redirects to https                      |
-+----------+-----------+-----------+-----------------------------------------+
-| 443/tcp  | https     | ANY       | https termination and reverse proxy     |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+---------+-------------------------------------+
+| Port     | Service | Origin  | Purpose                             |
++==========+=========+=========+=====================================+
+| 22/tcp   | ssh     | ANY     | admin console access                |
++----------+---------+---------+-------------------------------------+
+| 25/tcp   | smtp    | local   | mail delivery to local MTA          |
++----------+---------+---------+-------------------------------------+
+| 80/tcp   | http    | ANY     | redirects to https                  |
++----------+---------+---------+-------------------------------------+
+| 443/tcp  | https   | ANY     | https termination and reverse proxy |
++----------+---------+---------+-------------------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service           |
++----------+---------+---------+-------------------------------------+
 
 Running services
 ----------------
@@ -134,38 +146,38 @@ Running services
 .. index::
    single: apache httpd
    single: cron
-   single: nrpe
+   single: icinga2
    single: openssh
    single: postfix
    single: puppet agent
    single: rsyslog
 
-+--------------------+---------------------+----------------------------------------+
-| Service            | Usage               | Start mechanism                        |
-+====================+=====================+========================================+
-| Apache httpd       | http redirector,    | init script                            |
-|                    | https reverse proxy | :file:`/etc/init.d/apache2`            |
-+--------------------+---------------------+----------------------------------------+
-| cron               | job scheduler       | init script :file:`/etc/init.d/cron`   |
-+--------------------+---------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring   | init script                            |
-|                    | service queried by  | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`      |                                        |
-+--------------------+---------------------+----------------------------------------+
-| openssh server     | ssh daemon for      | init script :file:`/etc/init.d/ssh`    |
-|                    | remote              |                                        |
-|                    | administration      |                                        |
-+--------------------+---------------------+----------------------------------------+
-| Postfix            | SMTP server for     | init script                            |
-|                    | local mail          | :file:`/etc/init.d/postfix`            |
-|                    | submission          |                                        |
-+--------------------+---------------------+----------------------------------------+
-| Puppet agent       | configuration       | init script                            |
-|                    | management agent    | :file:`/etc/init.d/puppet`             |
-+--------------------+---------------------+----------------------------------------+
-| rsyslog            | syslog daemon       | init script                            |
-|                    |                     | :file:`/etc/init.d/syslog`             |
-+--------------------+---------------------+----------------------------------------+
++----------------+--------------------------+-----------------------------------------+
+| Service        | Usage                    | Start mechanism                         |
++================+==========================+=========================================+
+| Apache httpd   | http redirector,         | init script                             |
+|                | https reverse proxy      | :file:`/etc/init.d/apache2`             |
++----------------+--------------------------+-----------------------------------------+
+| cron           | job scheduler            | init script :file:`/etc/init.d/cron`    |
++----------------+--------------------------+-----------------------------------------+
+| icinga2        | Icinga2 monitoring agent | init script :file:`/etc/init.d/icinga2` |
++----------------+--------------------------+-----------------------------------------+
+| openssh server | ssh daemon for           | init script :file:`/etc/init.d/ssh`     |
+|                | remote                   |                                         |
+|                | administration           |                                         |
++----------------+--------------------------+-----------------------------------------+
+| Postfix        | SMTP server for          | init script                             |
+|                | local mail               | :file:`/etc/init.d/postfix`             |
+|                | submission               |                                         |
++----------------+--------------------------+-----------------------------------------+
+| Puppet agent   | configuration            | init script                             |
+|                | management agent         | :file:`/etc/init.d/puppet`              |
++----------------+--------------------------+-----------------------------------------+
+| rsyslog        | syslog daemon            | init script                             |
+|                |                          | :file:`/etc/init.d/syslog`              |
++----------------+--------------------------+-----------------------------------------+
+
+.. todo:: switch to systemd
 
 Connected Systems
 -----------------
@@ -188,7 +200,6 @@ Security
 
 .. sshkeys::
    :RSA:     SHA256:05y9UViPMi97Q4QnTPAWbyWxD1SmzRU+1yUf8wtbUW4 MD5:6d:e5:7e:1d:72:d5:5e:f8:43:80:94:a8:b1:0d:9b:81
-   :DSA:     SHA256:2/YiGopAO0yfU3tnYwX9rgf/RaHBjYixFBAxQCrwJQ8 MD5:00:27:11:fe:58:9d:d8:e5:c5:35:34:27:bb:79:86:16
    :ECDSA:   SHA256:CRfaZ3yebK8YGMEVHsKoE2I6KylVoahQ8mDWTvBBQAs MD5:7f:91:92:80:f2:b5:2f:5d:8e:11:3f:9b:62:48:e7:18
    :ED25519: SHA256:IHm9Gjf0u753ADO+WDYLFuHwPK3ReAe101xG/NeCwYk MD5:82:ab:13:33:ee:69:cf:09:18:20:d0:9c:b9:a0:0e:61
 
@@ -243,9 +254,9 @@ Keys and X.509 certificates
    :altnames:   DNS:infradocs.cacert.org
    :certfile:   /etc/ssl/certs/infradocs.cacert.org.crt
    :keyfile:    /etc/ssl/private/infradocs.cacert.org.key
-   :serial:     02C448
-   :expiration: May 18 08:21:31 2020 GMT
-   :sha1fp:     87:E7:21:19:24:61:D9:82:60:DB:65:41:7C:6C:0A:4E:63:0E:27:F7
+   :serial:     02E102
+   :expiration: May 04 18:37:30 2022 GMT
+   :sha1fp:     29:9C:00:5E:14:27:C8:4F:5C:BE:07:F8:96:5B:0B:1F:B5:97:9F:64
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: jenkins.cacert.org
