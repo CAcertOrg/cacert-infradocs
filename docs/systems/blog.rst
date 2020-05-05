@@ -26,8 +26,8 @@ Administration
 System Administration
 ---------------------
 
-* Primary: :ref:`people_dirk`
-* Secondary: None
+* Primary:   :ref:`people_dirk`
+* Secondary: :ref:`people_jandd`
 
 .. todo:: find an additional admin
 
@@ -61,8 +61,8 @@ Contact
 Additional People
 -----------------
 
-:ref:`Jan Dittberner <people_jandd>` and :ref:`Mario Lipinski <people_mario>`
-have :program:`sudo` access on that machine too.
+:ref:`Mario Lipinski <people_mario>` has :program:`sudo` access on that machine
+too.
 
 Basics
 ======
@@ -79,6 +79,7 @@ Logical Location
 :IP Internet: :ip:v4:`213.154.225.234`
 :IP Intranet: :ip:v4:`172.16.2.13`
 :IP Internal: :ip:v4:`10.0.0.13`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::13`
 :MAC address: :mac:`00:ff:fa:af:b2:9b` (eth0)
 
 .. seealso::
@@ -99,20 +100,27 @@ DNS
 .. index::
    single: DNS records; Blog
 
-====================== ======== ====================================================================
-Name                   Type     Content
-====================== ======== ====================================================================
-blog.cacert.org.       IN A     213.154.225.234
-blog.cacert.org.       IN SSHFP 1 1 32CA6E4BA3275AAB0D65F0F46969B11A4C4B36E8
-blog.cacert.org.       IN SSHFP 1 2 3afb452ac3690cf7cd9a3332813bf7b13dbd288c7a4efbd9ab9dd4b4649ff2b6
-blog.cacert.org.       IN SSHFP 2 1 AAFBA94EBE5C5C45CDF5EF10D0BC31BEA4D9ECEC
-blog.cacert.org.       IN SSHFP 2 2 4d4384ebd1906125ae26d2fa976596af914b4b3587f2204a0e01368a3640f680
-blog.cacert.org.       IN SSHFP 3 1 8fa85a31215f10ea78fd0126d1c705c9a3662c86
-blog.cacert.org.       IN SSHFP 3 2 86d330b900db9bf0a8bc9ec34b126aa8261fec9e02b123ab61c2aee0b56ae047
-blog.cacert.org.       IN SSHFP 4 1 90903e8f4b35457bf41235f070adf592d7f724dd
-blog.cacert.org.       IN SSHFP 4 2 f24b770c16dcb91afc9461e62e6fe63a63d413efa4794751c039ed6d5213127b
-blog.intra.cacert.org. IN A     172.16.2.13
-====================== ======== ====================================================================
++------------------------+----------+----------------------------------------------------------------------+
+| Name                   | Type     | Content                                                              |
++========================+==========+======================================================================+
+| blog.cacert.org.       | IN A     | 213.154.225.234                                                      |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN AAAA  | 2001:7b8:616:162:2::13                                               |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 1 1 32CA6E4BA3275AAB0D65F0F46969B11A4C4B36E8                         |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 1 2 3afb452ac3690cf7cd9a3332813bf7b13dbd288c7a4efbd9ab9dd4b4649ff2b6 |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 3 1 8fa85a31215f10ea78fd0126d1c705c9a3662c86                         |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 3 2 86d330b900db9bf0a8bc9ec34b126aa8261fec9e02b123ab61c2aee0b56ae047 |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 4 1 90903e8f4b35457bf41235f070adf592d7f724dd                         |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.cacert.org.       | IN SSHFP | 4 2 f24b770c16dcb91afc9461e62e6fe63a63d413efa4794751c039ed6d5213127b |
++------------------------+----------+----------------------------------------------------------------------+
+| blog.intra.cacert.org. | IN A     | 172.16.2.13                                                          |
++------------------------+----------+----------------------------------------------------------------------+
 
 .. seealso::
 
@@ -138,23 +146,21 @@ Services
 Listening services
 ------------------
 
-+----------+---------+---------+----------------------------+
-| Port     | Service | Origin  | Purpose                    |
-+==========+=========+=========+============================+
-| 22/tcp   | ssh     | ANY     | admin console access       |
-+----------+---------+---------+----------------------------+
-| 25/tcp   | smtp    | local   | mail delivery to local MTA |
-+----------+---------+---------+----------------------------+
-| 80/tcp   | http    | ANY     | application                |
-+----------+---------+---------+----------------------------+
-| 443/tcp  | https   | ANY     | application                |
-+----------+---------+---------+----------------------------+
-| 5666/tcp | nrpe    | monitor | remote monitoring service  |
-+----------+---------+---------+----------------------------+
-| 3306/tcp | mariadb | local   | MariaDB database for blog  |
-+----------+---------+---------+----------------------------+
-| 9000/tcp | php-fpm | local   | PHP FPM executor           |
-+----------+---------+---------+----------------------------+
++----------+---------+----------+----------------------------+
+| Port     | Service | Origin   | Purpose                    |
++==========+=========+==========+============================+
+| 22/tcp   | ssh     | ANY      | admin console access       |
++----------+---------+----------+----------------------------+
+| 25/tcp   | smtp    | local    | mail delivery to local MTA |
++----------+---------+----------+----------------------------+
+| 80/tcp   | http    | ANY      | application                |
++----------+---------+----------+----------------------------+
+| 443/tcp  | https   | ANY      | application                |
++----------+---------+----------+----------------------------+
+| 5665/tcp | icinga2 | monitor  | remote monitoring service  |
++----------+---------+----------+----------------------------+
+| 3306/tcp | mariadb | local    | MariaDB database for blog  |
++----------+---------+----------+----------------------------+
 
 Running services
 ----------------
@@ -163,45 +169,48 @@ Running services
    single: apache httpd
    single: cron
    single: dbus
+   single: icinga2
    single: mariadb
-   single: nrpe
    single: openssh
    single: postfix
+   single: puppet agent
+   single: rsyslog
 
-+--------------------+--------------------+-------------------------------------------------+
-| Service            | Usage              | Start mechanism                                 |
-+====================+====================+=================================================+
-| Apache httpd       | Webserver for blog | systemd unit ``apache2.service``                |
-+--------------------+--------------------+-------------------------------------------------+
-| cron               | job scheduler      | systemd unit ``cron.service``                   |
-+--------------------+--------------------+-------------------------------------------------+
-| dbus-daemon        | System message bus | systemd unit ``dbus.service``                   |
-|                    | daemon             |                                                 |
-+--------------------+--------------------+-------------------------------------------------+
-| MariaDB            | MariaDB database   | systemd unit ``mariadb.service``                |
-|                    | server for blog    |                                                 |
-+--------------------+--------------------+-------------------------------------------------+
-| openssh server     | ssh daemon for     | systemd unit ``ssh.service``                    |
-|                    | remote             |                                                 |
-|                    | administration     |                                                 |
-+--------------------+--------------------+-------------------------------------------------+
-| Postfix            | SMTP server for    | systemd unit ``postfix.service``                |
-|                    | local mail         |                                                 |
-|                    | submission         |                                                 |
-+--------------------+--------------------+-------------------------------------------------+
-| Nagios NRPE server | remote monitoring  | systemd unit ``/etc/init.d/nagios-nrpe-server`` |
-|                    | service queried by |                                                 |
-|                    | :doc:`monitor`     |                                                 |
-+--------------------+--------------------+-------------------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| Apache httpd   | Webserver for blog       | systemd unit ``apache2.service`` |
++----------------+--------------------------+----------------------------------+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| MariaDB        | MariaDB database         | systemd unit ``mariadb.service`` |
+|                | server for blog          |                                  |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
+|                | local mail               |                                  |
+|                | submission               |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Databases
 ---------
 
-+---------+------------+------------------------------+
-| RDBMS   | Name       | Used for                     |
-+=========+============+==============================+
-| MariaDB | blog       | Wordpress blog               |
-+---------+------------+------------------------------+
++---------+------+----------------+
+| RDBMS   | Name | Used for       |
++=========+======+================+
+| MariaDB | blog | Wordpress blog |
++---------+------+----------------+
 
 Connected Systems
 -----------------
@@ -217,6 +226,7 @@ Outbound network connections
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
 * :doc:`proxyout` as HTTP proxy for APT
+* :doc:`puppet` (tcp/8140) as Puppet master
 * crl.cacert.org (rsync) for getting CRLs
 
 .. _Ping-o-matic: http://rpc.pingomatic.com/
@@ -230,7 +240,6 @@ Security
 
 .. sshkeys::
    :RSA:     SHA256:OvtFKsNpDPfNmjMygTv3sT29KIx6TvvZq53UtGSf8rY MD5:ec:cb:b5:13:7c:17:c4:c3:23:3d:ee:01:58:75:b5:8d
-   :DSA:     SHA256:TUOE69GQYSWuJtL6l2WWr5FLSzWH8iBKDgE2ijZA9oA MD5:c6:a7:52:f6:63:ce:73:95:41:35:90:45:9e:e0:06:a5
    :ECDSA:   SHA256:htMwuQDbm/CovJ7DSxJqqCYf7J4CsSOrYcKu4LVq4Ec MD5:00:d7:4b:3c:da:1b:24:76:74:1c:dd:2c:64:50:5f:81
    :ED25519: SHA256:8kt3DBbcuRr8lGHmLm/mOmPUE++keUdRwDntbVITEns MD5:0c:fe:c7:a1:bd:e6:43:e6:70:5a:be:5a:15:4d:08:9d
 
@@ -269,6 +278,11 @@ Risk assessments on critical packages
 
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the :cacertgit:`cacert-puppet`.
+
+.. todo:: move configuration of :doc:`blog` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -345,9 +359,7 @@ Changes
 Planned
 -------
 
-.. todo:: switch to Puppet management
-.. todo:: replace nrpe with icinga2 agent
-.. todo:: setup IPv6
+.. todo:: manage the blog system using Puppet
 
 .. todo::
    setup CRL checks (can be borrowed from :doc:`svn`) for client certificates
@@ -367,5 +379,5 @@ Additional documentation
 References
 ----------
 
-Wordpress website
-   https://wordpress.org/
+* https://wordpress.org/
+* http://httpd.apache.org/docs/2.4/
