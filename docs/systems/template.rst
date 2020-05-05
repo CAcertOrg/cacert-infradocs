@@ -182,23 +182,20 @@ Running services
 +--------------------+--------------------------+----------------------------------------+
 | Service            | Usage                    | Start mechanism                        |
 +====================+==========================+========================================+
-| Apache httpd       | Webserver for ...        | init script                            |
-|                    |                          | :file:`/etc/init.d/apache2`            |
+| Apache httpd       | Webserver for ...        | systemd unit ``apache2.service``       |
 +--------------------+--------------------------+----------------------------------------+
-| cron               | job scheduler            | init script :file:`/etc/init.d/cron`   |
+| cron               | job scheduler            | systemd unit ``cron.service``          |
 +--------------------+--------------------------+----------------------------------------+
 | dbus-daemon        | System message bus       | systemd unit ``dbus.service``          |
-|                    | daemon                   |                                        |
 +--------------------+--------------------------+----------------------------------------+
-| Exim               | SMTP server for          | init script                            |
-|                    | local mail               | :file:`/etc/init.d/exim4`              |
+| Exim               | SMTP server for          | systemd unit ``exim4.service``         |
+|                    | local mail               |                                        |
 |                    | submission, ...          |                                        |
 +--------------------+--------------------------+----------------------------------------+
 | icinga2            | Icinga2 monitoring agent | systemd unit ``icinga2.service``       |
 +--------------------+--------------------------+----------------------------------------+
 | MariaDB            | MariaDB database         | systemd unit ``mariadb.service``       |
-|                    | server for bug           |                                        |
-|                    | tracker                  |                                        |
+|                    | server for ...           |                                        |
 +--------------------+--------------------------+----------------------------------------+
 | MySQL              | MySQL database           | init script                            |
 |                    | server for ...           | :file:`/etc/init.d/mysql`              |
@@ -207,23 +204,21 @@ Running services
 |                    | service queried by       | :file:`/etc/init.d/nagios-nrpe-server` |
 |                    | :doc:`monitor`           |                                        |
 +--------------------+--------------------------+----------------------------------------+
-| openssh server     | ssh daemon for           | init script :file:`/etc/init.d/ssh`    |
-|                    | remote                   |                                        |
-|                    | administration           |                                        |
+| openssh server     | ssh daemon for           | systemd unit ``ssh.service``           |
+|                    | remote administration    |                                        |
 +--------------------+--------------------------+----------------------------------------+
-| Postfix            | SMTP server for          | init script                            |
-|                    | local mail               | :file:`/etc/init.d/postfix`            |
+| Postfix            | SMTP server for          | systemd unit ``postfix.service``       |
+|                    | local mail               |                                        |
 |                    | submission, ...          |                                        |
 +--------------------+--------------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL               | init script                            |
-|                    | database server          | :file:`/etc/init.d/postgresql`         |
+| PostgreSQL         | PostgreSQL               | systemd unit ``postgresql.service``    |
+|                    | database server          |                                        |
 |                    | for ...                  |                                        |
 +--------------------+--------------------------+----------------------------------------+
 | Puppet agent       | configuration            | systemd unit ``puppet.service``        |
 |                    | management agent         |                                        |
 +--------------------+--------------------------+----------------------------------------+
-| rsyslog            | syslog daemon            | init script                            |
-|                    |                          | :file:`/etc/init.d/syslog`             |
+| rsyslog            | syslog daemon            | systemd unit ``rsyslog.service``       |
 +--------------------+--------------------------+----------------------------------------+
 
 Databases
