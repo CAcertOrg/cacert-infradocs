@@ -23,9 +23,7 @@ System Administration
 ---------------------
 
 * Primary: :ref:`people_dirk`
-* Secondary: None
-
-.. todo:: find an additional admin
+* Secondary: :ref:`people_jandd`
 
 Application Administration
 --------------------------
@@ -40,7 +38,7 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_jandd` and :ref:`people_mario` have :program:`sudo` access on that machine too.
+:ref:`people_mario` has :program:`sudo` access on that machine too.
 
 Basics
 ======
@@ -78,16 +76,31 @@ DNS
 .. index::
    single: DNS records; Wiki
 
-+------------------------+----------+----------------------------------------------+
-| Name                   | Type     | Content                                      |
-+========================+==========+==============================================+
-| wiki.cacert.org.       | IN SSHFP | 2 1 04F7AB767579F004CC3AB2CC42A4CCAA24E51154 |
-| wiki.cacert.org.       | IN SSHFP | 1 1 5C3E0D3265782405E0141C47BF0E16EC14B12E08 |
-| wiki.cacert.org.       | IN A     | 213.154.225.235                              |
-| wiki.intra.cacert.org. | IN A     | 172.16.2.12                                  |
-| wiki.infra.cacert.org. | IN AAAA  | 2001:7b8:616:162:2::12                       |
-| wiki.infra.cacert.org. | IN MX    | 1 emailout.infra.cacert.org.                 |
-+------------------------+----------+----------------------------------------------+
++------------------------+----------+----------------------------------------------------------------------+
+| Name                   | Type     | Content                                                              |
++========================+==========+======================================================================+
+| wiki.cacert.org.       | IN A     | 213.154.225.235                                                      |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN AAAA  | 2001:7b8:616:162:2::12                                               |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 1 1 5C3E0D3265782405E0141C47BF0E16EC14B12E08                         |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 1 2 69101872cb629e30a78ca4aac781720e1217c3733f6bb8d659034e9c23c890df |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 3 1 73113627b9e77be383e4da3a8c4b4a0ae07df5ba                         |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 3 2 88d73c828d56d3cccac530558bf0a1b2678c238f285c3ef6b61fa05ea782fd60 |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 4 1 c1d79ceb8986b02b6b477f8c9e50b2623a15cfe8                         |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.cacert.org.       | IN SSHFP | 4 2 6cfa531e0eebbb01b226444d33c238b83c96cc134d23662f95a36c095c4dfbdf |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.infra.cacert.org. | IN AAAA  | 2001:7b8:616:162:2::12                                               |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.infra.cacert.org. | IN MX    | 1 emailout.infra.cacert.org.                                         |
++------------------------+----------+----------------------------------------------------------------------+
+| wiki.intra.cacert.org. | IN A     | 172.16.2.12                                                          |
++------------------------+----------+----------------------------------------------------------------------+
 
 .. seealso::
 
@@ -97,10 +110,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.11
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 7.11
+* Debian GNU/Linux 10.3
 
 Services
 ========
@@ -108,19 +121,19 @@ Services
 Listening services
 ------------------
 
-+----------+---------+---------+----------------------------+
-| Port     | Service | Origin  | Purpose                    |
-+==========+=========+=========+============================+
-| 22/tcp   | ssh     | ANY     | admin console access       |
-+----------+---------+---------+----------------------------+
-| 25/tcp   | smtp    | local   | mail delivery to local MTA |
-+----------+---------+---------+----------------------------+
-| 80/tcp   | http    | ANY     | application                |
-+----------+---------+---------+----------------------------+
-| 443/tcp  | https   | ANY     | application                |
-+----------+---------+---------+----------------------------+
-| 5666/tcp | nrpe    | monitor | remote monitoring service  |
-+----------+---------+---------+----------------------------+
++----------+---------+----------+----------------------------+
+| Port     | Service | Origin   | Purpose                    |
++==========+=========+==========+============================+
+| 22/tcp   | ssh     | ANY      | admin console access       |
++----------+---------+----------+----------------------------+
+| 25/tcp   | smtp    | local    | mail delivery to local MTA |
++----------+---------+----------+----------------------------+
+| 80/tcp   | http    | ANY      | application                |
++----------+---------+----------+----------------------------+
+| 443/tcp  | https   | ANY      | application                |
++----------+---------+----------+----------------------------+
+| 5665/tcp | icinga2 | monitor  | remote monitoring service  |
++----------+---------+----------+----------------------------+
 
 Running services
 ----------------
@@ -128,28 +141,36 @@ Running services
 .. index::
    single: apache httpd
    single: cron
-   single: exim4
-   single: nginx
-   single: nrpe
+   single: dbus
+   single: icinga2
    single: openssh
    single: postfix
-   single: syslog-ng
+   single: puppet agent
+   single: rsyslog
 
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| Service            | Usage                                               | Start mechanism                                    |
-+====================+=====================================================+====================================================+
-| Apache httpd       | Webserver for the Wiki                              | init script :file:`/etc/init.d/apache2`            |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| cron               | job scheduler                                       | init script :file:`/etc/init.d/cron`               |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| Nagios NRPE server | remote monitoring service queried by :doc:`monitor` | init script :file:`/etc/init.d/nagios-nrpe-server` |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| openssh server     | ssh daemon for remote administration                | init script :file:`/etc/init.d/ssh`                |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| Postfix            | SMTP server for local mail submission               | init script :file:`/etc/init.d/postfix`            |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
-| syslog-ng          | syslog daemon                                       | init script :file:`/etc/init.d/syslog-ng`          |
-+--------------------+-----------------------------------------------------+----------------------------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| Apache httpd   | Webserver for the Wiki   | systemd unit ``apache2.service`` |
++----------------+--------------------------+----------------------------------+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
+|                | local mail               |                                  |
+|                | submission               |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Connected Systems
 -----------------
@@ -162,14 +183,15 @@ Outbound network connections
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
 * :doc:`emailout` as SMTP relay
 * :doc:`proxyout` as HTTP proxy for APT
+* :doc:`puppet` (tcp/8140) as Puppet master
 
 Security
 ========
 
 .. sshkeys::
    :RSA:   SHA256:aRAYcstinjCnjKSqx4FyDhIXw3M/a7jWWQNOnCPIkN8 MD5:f8:16:e5:40:91:42:10:a6:ba:aa:e3:f9:1a:71:d7:09
-   :DSA:   SHA256:cgJn47gOMu4RSqz9DUvWvnHh0v3pFNfD9hrBmOYQ9ZI MD5:d5:36:2d:0c:bb:73:da:43:0c:23:61:df:b6:b9:8c:c9
    :ECDSA: SHA256:iNc8go1W08zKxTBVi/ChsmeMI48oXD72th+gXqeC/WA MD5:09:ea:70:41:1b:bb:a4:6a:fa:fd:37:c2:29:05:35:0e
+   :ED25519: SHA256:bPpTHg7ruwGyJkRNM8I4uDyWzBNNI2YvlaNsCVxN+98 MD5:1e:4f:70:ff:65:c2:d5:8a:e2:24:09:04:77:94:9b:a0
 
 Non-distribution packages and modifications
 -------------------------------------------
@@ -181,10 +203,18 @@ MoinMoin in :file:`/srv/www/wiki/`.
 Risk assessments on critical packages
 -------------------------------------
 
-The whole system is outdated an end of life and must be updated.
+The MoinMoin 1.x wiki software is based on Python 2 which is EOL. The software
+should be replaced when MoinMoin 2.x comes out with support for Python 3.
+
+.. todo:: upgrade to MoinMoin 2.x when it is available
 
 Critical Configuration items
 ============================
+
+The system configuration is managed via Puppet profiles. There should be no
+configuration items outside of the :cacertgit:`cacert-puppet`.
+
+.. todo:: move configuration of :doc:`wiki` to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -215,12 +245,10 @@ Apache is configured using files in :file:`/etc/apache2` integrating the MoinMoi
 Changes
 =======
 
+.. todo:: manage the blog system using Puppet
+
 System Future
 -------------
-
-.. todo:: update the OS of :doc:`wiki`
-
-.. todo:: introduce Puppet management for :doc:`wiki`
 
 Additional documentation
 ========================
@@ -229,7 +257,11 @@ Additional documentation
 
    * :wiki:`PostfixConfiguration`
 
+* No plans
+
 References
 ----------
 
 * http://moinmo.in/
+* https://modwsgi.readthedocs.io/en/master/index.html
+* http://httpd.apache.org/docs/2.4/
