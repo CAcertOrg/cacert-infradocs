@@ -86,7 +86,11 @@ DNS
 .. index::
    single: DNS records; Puppet
 
-.. todo:: setup DNS records (in infra.cacert.org zone)
++--------------------------+------+------------+
+| Name                     | Type | Content    |
++==========================+======+============+
+| puppet.infra.cacert.org. | IN A | 10.0.0.200 |
++--------------------------+------+------------+
 
 .. seealso::
 
@@ -97,9 +101,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.0
+   single: Debian GNU/Linux; 10.3
 
-* Debian GNU/Linux 10.0
+* Debian GNU/Linux 10.3
 
 Services
 ========
@@ -107,89 +111,91 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+------------------------------------------+
-| Port     | Service   | Origin    | Purpose                                  |
-+==========+===========+===========+==========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                     |
-+----------+-----------+-----------+------------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA               |
-+----------+-----------+-----------+------------------------------------------+
-| 5432/tcp | pgsql     | local     | PostgreSQL database for PuppetDB         |
-+----------+-----------+-----------+------------------------------------------+
-| 8000/tcp | git-hook  | internal  | HTTP endpoint for git-pull-hook          |
-+----------+-----------+-----------+------------------------------------------+
-| 8140/tcp | puppet    | internal  | Puppet master                            |
-+----------+-----------+-----------+------------------------------------------+
-| 8080/tcp | puppetdb  | local     | HTTP endpoint for local PuppetDB queries |
-+----------+-----------+-----------+------------------------------------------+
-| 8081/tcp | puppetdb  | internal  | HTTPS endpoint for PuppetDB              |
-+----------+-----------+-----------+------------------------------------------+
++----------+----------+----------+------------------------------------------+
+| Port     | Service  | Origin   | Purpose                                  |
++==========+==========+==========+==========================================+
+| 22/tcp   | ssh      | ANY      | admin console access                     |
++----------+----------+----------+------------------------------------------+
+| 25/tcp   | smtp     | local    | mail delivery to local MTA               |
++----------+----------+----------+------------------------------------------+
+| 5432/tcp | pgsql    | local    | PostgreSQL database for PuppetDB         |
++----------+----------+----------+------------------------------------------+
+| 5665/tcp | icinga2  | monitor  | remote monitoring service                |
++----------+----------+----------+------------------------------------------+
+| 8000/tcp | git-hook | internal | HTTP endpoint for git-pull-hook          |
++----------+----------+----------+------------------------------------------+
+| 8080/tcp | puppetdb | local    | HTTP endpoint for local PuppetDB queries |
++----------+----------+----------+------------------------------------------+
+| 8081/tcp | puppetdb | internal | HTTPS endpoint for PuppetDB              |
++----------+----------+----------+------------------------------------------+
+| 8140/tcp | puppet   | internal | Puppet master                            |
++----------+----------+----------+------------------------------------------+
 
 Running services
 ----------------
 
 .. index::
    single: cron
+   single: dbus
    single: exim
    single: git-pull-hook
+   single: icinga2
    single: openssh
    single: postgresql
    single: puppet agent
-   single: puppet server
    single: puppetdb
+   single: puppetserver
    single: rsyslog
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| Exim               | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/exim4`              |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| git-pull-hook      | Custom Python3     | init script                            |
-|                    | hook to pull git   | :file:`/etc/init.d/git-pull-hook`      |
-|                    | changes from the   |                                        |
-|                    | cacert-puppet      |                                        |
-|                    | repository         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| PostgreSQL         | PostgreSQL         | init script                            |
-|                    | database server    | :file:`/etc/init.d/postgresql`         |
-|                    | for PuppetDB       |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet server      | Puppet master for  | init script                            |
-|                    | infrastructure     | :file:`/etc/init.d/puppetserver`       |
-|                    | systems            |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | local Puppet agent | init script                            |
-|                    |                    | :file:`/etc/init.d/puppet`             |
-+--------------------+--------------------+----------------------------------------+
-| PuppetDB           | PuppetDB for       | init script                            |
-|                    | querying Puppet    | :file:`/etc/init.d/puppetdb`           |
-|                    | facts and nodes    |                                        |
-|                    | and resources      |                                        |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
++----------------+--------------------------+----------------------------------------+
+| Service        | Usage                    | Start mechanism                        |
++================+==========================+========================================+
+| cron           | job scheduler            | systemd unit ``cron.service``          |
++----------------+--------------------------+----------------------------------------+
+| dbus           | system message bus       | systemd unit ``dbus.service``          |
++----------------+--------------------------+----------------------------------------+
+| Exim           | SMTP server for          | systemd unit ``exim4.service``         |
+|                | local mail submission    |                                        |
++----------------+--------------------------+----------------------------------------+
+| git-pull-hook  | Custom Python3 hook      | systemd unit ``git-pull-hook.service`` |
+|                | to pull git changes      |                                        |
+|                | from the cacert-puppet   |                                        |
+|                | repository               |                                        |
++----------------+--------------------------+----------------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service``       |
++----------------+--------------------------+----------------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``           |
+|                | remote administration    |                                        |
++----------------+--------------------------+----------------------------------------+
+| PostgreSQL     | PostgreSQL database      | systemd unit ``postgresql.service``    |
+|                | server for PuppetDB      |                                        |
++----------------+--------------------------+----------------------------------------+
+| Puppet agent   | local Puppet agent       | systemd unit ``puppet.service``        |
++----------------+--------------------------+----------------------------------------+
+| PuppetDB       | PuppetDB for querying    | systemd unit ``puppetdb.service``      |
+|                | Puppet facts, nodes      |                                        |
+|                | and resources            |                                        |
++----------------+--------------------------+----------------------------------------+
+| Puppet server  | Puppet master for        | systemd unit ``puppetserver.service``  |
+|                | infrastructure systems   |                                        |
++----------------+--------------------------+----------------------------------------+
+| rsyslog        | syslog daemon            | init script                            |
+|                |                          | :file:`/etc/init.d/syslog`             |
++----------------+--------------------------+----------------------------------------+
 
 Databases
 ---------
 
-+-------------+----------+-------------------+
-| RDBMS       | Name     | Used for          |
-+=============+==========+===================+
-| PostgreSQL  | puppetdb | PuppetDB database |
-+-------------+----------+-------------------+
++------------+----------+-------------------+
+| RDBMS      | Name     | Used for          |
++============+==========+===================+
+| PostgreSQL | puppetdb | PuppetDB database |
++------------+----------+-------------------+
 
 Connected Systems
 -----------------
 
+* :doc:`blog`
 * :doc:`bugs`
 * :doc:`emailout`
 * :doc:`ircserver`
@@ -203,6 +209,7 @@ Connected Systems
 * :doc:`translations`
 * :doc:`web`
 * :doc:`webstatic`
+* :doc:`wiki`
 * :doc:`git` for triggering the git-pull-hook on newly pushed commits to the
   cacert-puppet repository
 
