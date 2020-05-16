@@ -111,9 +111,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; 10.4
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.4
 
 Services
 ========
@@ -232,24 +232,7 @@ Dedicated user roles
 Non-distribution packages and modifications
 -------------------------------------------
 
-Gitweb has been modified to use https for `Gravatar`_ lookups:
-
-.. code-block:: diff
-
-   --- gitweb.cgi  2014-02-06 14:01:48.696730208 +0000
-   +++ /usr/share/gitweb/gitweb.cgi        2014-02-06 14:03:52.933721422 +0000
-   @@ -2064,7 +2064,7 @@
-           my $email = lc shift;
-           my $size = shift;
-           $avatar_cache{$email} ||=
-   -               "http://www.gravatar.com/avatar/" .
-   +               "https://secure.gravatar.com/avatar/" .
-                           Digest::MD5::md5_hex($email) . "?s=";
-           return $avatar_cache{$email} . $size;
-    }
-
-.. _Gravatar: http://www.gravatar.com/
-
+* None
 
 Risk assessments on critical packages
 -------------------------------------
