@@ -7,9 +7,9 @@ chardet==3.0.4
 dateutils==0.6.8
 docutils==0.16
 funcparserlib==0.3.6
-gitdb==4.0.4
+gitdb==4.0.5
 gitdb2==2.0.5
-GitPython==3.1.1
+GitPython==3.1.2
 idna==2.9
 imagesize==1.2.0
 ipcalc==1.99.0
@@ -18,7 +18,7 @@ jandd.sphinxext.mac==0.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 nwdiag==2.0.0
-packaging==20.3
+packaging==20.4
 Pillow==7.1.2
 pkg-resources==0.0.0
 Pygments==2.6.1
@@ -27,11 +27,11 @@ python-dateutil==2.8.1
 pytz==2020.1
 requests==2.23.0
 seqdiag==2.0.0
-six==1.14.0
-smmap==3.0.2
+six==1.15.0
+smmap==3.0.4
 smmap2==2.0.5
 snowballstemmer==2.0.0
-Sphinx==3.0.3
+Sphinx==3.0.4
 sphinxcontrib-applehelp==1.0.2
 sphinxcontrib-blockdiag==2.0.0
 sphinxcontrib-devhelp==1.0.2
