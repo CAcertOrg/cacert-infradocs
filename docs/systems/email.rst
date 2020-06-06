@@ -12,8 +12,6 @@ This system handles email for @cacert.org addresses. It also provides users of
 @cacert.org with IMAPs and POP3s access to their accounts. The system provides
 the API part of the CAcert community self service system.
 
-The database on this container is used by :doc:`webmail` too.
-
 Administration
 ==============
 
@@ -118,9 +116,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.3
+   single: Debian GNU/Linux; 10.4
 
-* Debian GNU/Linux 10.3
+* Debian GNU/Linux 10.4
 
 Services
 ========
@@ -135,11 +133,15 @@ Listening services
 +----------+---------+-----------+-------------------------------------+
 | 25/tcp   | smtp    | ANY       | mail receiver for cacert.org        |
 +----------+---------+-----------+-------------------------------------+
+| 80/tcp   | http    | ANY       | redirect to https                   |
++----------+---------+-----------+-------------------------------------+
 | 110/tcp  | pop3    | ANY       | POP3 access for cacert.org mail     |
 |          |         |           | addresses                           |
 +----------+---------+-----------+-------------------------------------+
 | 143/tcp  | imap    | ANY       | IMAP access for cacert.org mail     |
 |          |         |           | addresses                           |
++----------+---------+-----------+-------------------------------------+
+| 443/tcp  | https   | ANY       | Webserver for community.cacert.org  |
 +----------+---------+-----------+-------------------------------------+
 | 465/tcp  | smtps   | ANY       | SMTPS for cacert.org mail addresses |
 +----------+---------+-----------+-------------------------------------+
@@ -172,6 +174,7 @@ Running services
    single: dovecot
    single: icinga2
    single: mariadb
+   single: nginx
    single: openssh
    single: postfix
    single: puppet
@@ -192,6 +195,8 @@ Running services
 +------------------------+--------------------------------------------+--------------------------------------------------+
 | MariaDB                | MariaDB database server for email services | systemd unit ``mariadb.service``                 |
 +------------------------+--------------------------------------------+--------------------------------------------------+
+| nginx                  | Web server for community.cacert.org        | systemd unit ``nginx.service``                   |
++------------------------+--------------------------------------------+--------------------------------------------------+
 | openssh server         | ssh daemon for remote administration       | systemd unit ``ssh.service``                     |
 +------------------------+--------------------------------------------+--------------------------------------------------+
 | Postfix                | SMTP server for cacert.org                 | systemd unit ``postfix.service``                 |
@@ -209,14 +214,11 @@ Databases
 +=========+===============+==================================+
 | MariaDB | cacertusers   | database for dovecot and postfix |
 +---------+---------------+----------------------------------+
-| MariaDB | roundcubemail | roundcube on :doc:`webmail`      |
-+---------+---------------+----------------------------------+
 
 Connected Systems
 -----------------
 
 * :doc:`monitor`
-* :doc:`webmail`
 * :doc:`community`
 * all @cacert.org address owners have access to POP3 (STARTTLS and POP3S), IMAP
   (STARTTLS and IMAPS), SMTPS, SMTP submission (STARTTLS) and manage sieve
@@ -229,6 +231,8 @@ Outbound network connections
 * :doc:`lists` for mailing lists
 * :doc:`proxyout` as HTTP proxy for APT
 * :doc:`puppet` (tcp/8140) as Puppet master
+* :doc:`webstatic` as backend for the community.cacert.org web content
+
 * arbitrary Internet SMTP servers for outgoing mail
 
 Security
@@ -256,7 +260,28 @@ Non-distribution packages and modifications
   The software is installed and configured via Puppet.
 
   .. _cacert-selfservice-api Job: https://jenkins.cacert.org/job/cacert-selfservice-api/
-  .. todo:: describe build and deployment of Debian package for self-service-api
+
+Building the cacert-selfservice-api Debian package
+--------------------------------------------------
+
+The cacert-selfservice-api git repository contains a debian branch that can be
+used to build the package.
+
+The Debian package can be built using :program:`gbp`. For a clean build
+environment using sbuild/schroot is recommended.
+
+.. code-block:: bash
+
+  sudo sbuild-createchroot --arch=amd64 --chroot-prefix=buster-cacert \
+    --extra-repository="deb http://deb.debian.org/debian buster-backports main" \
+    buster /srv/chroot/buster-cacert-amd64 http://deb.debian.org/debian
+  gbp buildpackage --git-builder="sbuild --build-dep-resolver=aptitude \
+    -d buster-cacert
+
+Uploads can be done via sftp with the debarchive user on :doc:`webstatic`. You
+need an ssh public key in the user's :file:`~/.ssh/authorized_keys` file.
+Packages are only accepted if they are signed with a GPG key whose public key
+is stored in the keyring of the reprepro installation on :doc:`webstatic`.
 
 Risk assessments on critical packages
 -------------------------------------
@@ -303,12 +328,21 @@ Server certificate for community email services (SMTPS, SMTP submission in
 Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 
 .. sslcert:: community.cacert.org
-   :certfile:  /etc/ssl/certs/ssl-cert-community-cacert.pem
-   :keyfile:   /etc/ssl/private/ssl-cert-community-cacert.key
+   :altnames:   DNS:cert.community.cacert.org, DNS:cert.email.cacert.org, DNS:community.cacert.org, DNS:email.cacert.org, DNS:nocert.community.cacert.org, DNS:nocert.email.cacert.org
+   :certfile:   /etc/ssl/certs/ssl-cert-community-cacert.crt
+   :keyfile:    /etc/ssl/private/ssl-cert-community-cacert.key
+   :serial:     147CB0
+   :expiration: Feb 18 11:39:53 2022 GMT
+   :sha1fp:     B2:90:DE:4D:8D:D9:3A:FE:22:3A:67:95:E2:CD:F7:30:55:4B:38:AC
+   :issuer:     CA Cert Signing Authority
+
+.. sslcert:: community.cacert.org
+   :certfile:  /etc/ssl/public/community.cacert.org.crt.pem
+   :keyfile:   /etc/ssl/private/community.cacert.org.key.pem
    :serial:    147CB0
    :secondary:
 
-Server certificate for the CAcert community self service API
+The server certificate for the CAcert community self service API
 
 .. sslcert:: email.infra.cacert.org
    :altnames:   DNS:email.infra.cacert.org
@@ -420,34 +454,17 @@ Tasks
 Adding email users
 ------------------
 
-1. create user in the database table ``cacertusers.user``:
-
-   .. code-block:: bash
-
-      mysql -p cacertusers
-
-   .. code-block:: sql
-
-      INSERT INTO user (username, fullnamealias, realname, password)
-      VALUES ('user', 'user.name', 'User Name', '$1$salt$passwordhash')
-
-2. create the user's home directory and Maildir:
-
-   :samp:`install -o {user} -g {user} -m 0755 -d /home/{user}/Maildir`
+Email admins can create new email user accounts via
+https://selfservice.cacert.org/create-email-account. The contact email address
+entered in the web form will receive an email that contains a link to allow
+setting an initial password. Setting the initial password only works if the
+user authenticates with a valid client certificate for the contact email
+address.
 
 .. note::
 
-   * a valid password hash for the password ``secret`` is
-     ``$1$caea3837$gPafod/Do/8Jj5M9HehhM.``
    * users can reset their password via
-     https://community.cacert.org/password.php on :doc:`webmail`
-   * use the :download:`mail template
-     <../downloads/template_new_community_mailaddress.rfc822>` to send out to a
-     user's non-cacert.org mail account and make sure to encrypt the mail to a
-     known public key of that user
-
-.. todo::
-   implement tooling to automate password salt generation and user creation
+     https://selfservice.cacert.org/password-reset
 
 Setting up mail aliases
 -----------------------

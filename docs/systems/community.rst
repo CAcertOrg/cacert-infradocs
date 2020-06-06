@@ -8,14 +8,17 @@ Community
 Purpose
 =======
 
-This system provides the community self service system and will replace the
-:doc:`webmail` system in the future.
+This system provides the community self service system and the webmail
+interface for the community email service.
 
 Application Links
 -----------------
 
-   Community self service
-      https://selfservice.cacert.org/
+Community self service
+   https://selfservice.cacert.org/
+
+Webmail
+   https://webmail.cacert.org/
 
 
 Administration
@@ -99,9 +102,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.3
+   single: Debian GNU/Linux; 10.4
 
-* Debian GNU/Linux 10.3
+* Debian GNU/Linux 10.4
 
 Services
 ========
@@ -183,7 +186,9 @@ Outbound network connections
 ----------------------------
 
 * DNS (53) resolver at 10.0.0.1 (:doc:`infra02`)
-* :doc:`email` for self service API access
+* :doc:`email` for self service API access as well as IMAP (110/tcp), IMAPS
+  (993/tcp), Manage Sieve (2001/tcp), SMTPS (465/tcp) and SMTP Submission
+  (587/tcp) for the webmail system
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT and Puppet
@@ -212,13 +217,33 @@ Non-distribution packages and modifications
   The software is installed from a Debian package that is hosted on :doc:`webstatic`.
 
   The software is built on :doc:`jenkins` via the `cacert-selfservice Job`_
-  when there are changes in Git. The Debian package can be built using
-  :program:`gbp`.
+  when there are changes in Git.
 
   The software is installed and configured via Puppet.
 
   .. _cacert-selfservice Job: https://jenkins.cacert.org/job/cacert-selfservice/
-  .. todo:: describe build and deployment of Debian package for self-service
+
+Building the cacert-selfservice Debian package
+----------------------------------------------
+
+The cacert-selfservice git repository contains a debian branch that can be used
+to build the package.
+
+The Debian package can be built using :program:`gbp`. For a clean build
+environment using sbuild/schroot is recommended.
+
+.. code-block:: bash
+
+  sudo sbuild-createchroot --arch=amd64 --chroot-prefix=buster-cacert \
+    --extra-repository="deb http://deb.debian.org/debian buster-backports main" \
+    buster /srv/chroot/buster-cacert-amd64 http://deb.debian.org/debian
+  gbp buildpackage --git-builder="sbuild --build-dep-resolver=aptitude \
+    -d buster-cacert
+
+Uploads can be done via sftp with the debarchive user on :doc:`webstatic`. You
+need an ssh public key in the user's :file:`~/.ssh/authorized_keys` file.
+Packages are only accepted if they are signed with a GPG key whose public key
+is stored in the keyring of the reprepro installation on :doc:`webstatic`.
 
 Risk assessments on critical packages
 -------------------------------------
@@ -244,6 +269,15 @@ configuration items outside of the :cacertgit:`cacert-puppet`.
 Keys and X.509 certificates
 ---------------------------
 
+.. sslcert:: webmail.cacert.org
+   :altnames:   DNS:community.cacert.org, DNS:webmail.cacert.org
+   :certfile:   /etc/ssl/public/webmail.cacert.org.crt.pem
+   :keyfile:    /etc/ssl/private/webmail.cacert.org.key.pem
+   :serial:     02E37C
+   :expiration: Jun 06 11:10:41 2022 GMT
+   :sha1fp:     70:EF:DA:32:E7:F9:86:F4:0C:85:54:71:A7:90:E8:68:0A:9F:8D:FD
+   :issuer:     CAcert Class 3 Root
+
 .. sslcert:: selfservice.cacert.org
    :altnames:   DNS:selfservice.cacert.org
    :certfile:   /etc/cacert-selfservice/certs/server.crt.pem
@@ -258,6 +292,8 @@ Keys and X.509 certificates
 * :file:`/etc/cacert-selfservice/certs/client_cas.pem` contains the CAcert.org
   Class 1 and Class 3 CA certificates that are used to validate client
   certificates for the CAcert community self service system
+* :file:`/etc/ssl/public/webmail.cacert.org.chain.pem` contains the certificate
+  for ``webmail.cacert.org`` concatenated with the CA chain.
 
 The certificates are rolled out by Puppet. All changes to the certificates need
 to be made to the file :file:`hieradata/nodes/community.yaml` in the
@@ -266,6 +302,21 @@ to be made to the file :file:`hieradata/nodes/community.yaml` in the
 .. seealso::
 
    * :wiki:`SystemAdministration/CertificateList`
+
+:file:`/etc/hosts`
+------------------
+
+Defines an alias for :doc:`email` that is required by the Roundcube
+installation to reach the email system via its internal IP address with the
+correct hostname.
+
+.. index::
+   pair: Roundcube; configuration
+
+Roundcube configuration
+-----------------------
+
+Roundcube configuration is managed by Puppet.
 
 .. index::
    pair: cacert-selfservice; configuration
@@ -287,13 +338,8 @@ Changes
 Planned
 -------
 
-.. todo:: finish the roundcube setup on :doc:`community` to allow
-          decommisioning of :doc:`webmail`.
-
 System Future
 -------------
-
-* Become the replacement for :doc:`webmail`
 
 Additional documentation
 ========================

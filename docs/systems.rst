@@ -34,7 +34,6 @@ administrator team.
    systems/testmgr
    systems/translations
    systems/web
-   systems/webmail
    systems/webstatic
    systems/wiki
 

@@ -9,7 +9,7 @@ Purpose
 =======
 
 This system provides the CAcert board motion system. The system replaced the
-board voting system that had been provided on :doc:`webmail` at
+board voting system that had been provided on the old `webmail` system at
 https://community.cacert.org/board/.
 
 Application Links

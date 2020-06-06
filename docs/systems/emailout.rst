@@ -98,9 +98,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.0
+   single: Debian GNU/Linux; 10.4
 
-* Debian GNU/Linux 10.0
+* Debian GNU/Linux 10.4
 
 Applicable Documentation
 ------------------------
@@ -140,31 +140,26 @@ Running services
    single: puppet agent
    single: rsyslog
 
-+----------------+--------------------------+-----------------------------------+
-| Service        | Usage                    | Start mechanism                   |
-+================+==========================+===================================+
-| cron           | job scheduler            | systemd unit ``cron.service``     |
-+----------------+--------------------------+-----------------------------------+
-| dbus-daemon    | System message bus       | systemd unit ``dbus.service``     |
-|                | daemon                   |                                   |
-+----------------+--------------------------+-----------------------------------+
-| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service``  |
-+----------------+--------------------------+-----------------------------------+
-| OpenDKIM       | DKIM signing daemon      | systemd unit ``opendkim.service`` |
-+----------------+--------------------------+-----------------------------------+
-| openssh server | ssh daemon for remote    | systemd unit ``ssh.service``      |
-|                | administration           |                                   |
-+----------------+--------------------------+-----------------------------------+
-| Postfix        | SMTP server for          | systemd unit ``postfix.service``  |
-|                | local mail submission,   |                                   |
-|                | and mail relay for       |                                   |
-|                | infrastructure systems   |                                   |
-+----------------+--------------------------+-----------------------------------+
-| Puppet agent   | configuration            | systemd unit ``puppet.service``   |
-|                | management agent         |                                   |
-+----------------+--------------------------+-----------------------------------+
-| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service``  |
-+----------------+--------------------------+-----------------------------------+
++----------------+-------------------------------------------+-----------------------------------+
+| Service        | Usage                                     | Start mechanism                   |
++================+===========================================+===================================+
+| cron           | job scheduler                             | systemd unit ``cron.service``     |
++----------------+-------------------------------------------+-----------------------------------+
+| dbus-daemon    | System message bus daemon                 | systemd unit ``dbus.service``     |
++----------------+-------------------------------------------+-----------------------------------+
+| icinga2        | Icinga2 monitoring agent                  | systemd unit ``icinga2.service``  |
++----------------+-------------------------------------------+-----------------------------------+
+| OpenDKIM       | DKIM signing daemon                       | systemd unit ``opendkim.service`` |
++----------------+-------------------------------------------+-----------------------------------+
+| openssh server | ssh daemon for remote administration      | systemd unit ``ssh.service``      |
++----------------+-------------------------------------------+-----------------------------------+
+| Postfix        | SMTP server for local mail submission,    | systemd unit ``postfix.service``  |
+|                | and mail relay for infrastructure systems |                                   |
++----------------+-------------------------------------------+-----------------------------------+
+| Puppet agent   | configuration management agent            | systemd unit ``puppet.service``   |
++----------------+-------------------------------------------+-----------------------------------+
+| rsyslog        | syslog daemon                             | systemd unit ``rsyslog.service``  |
++----------------+-------------------------------------------+-----------------------------------+
 
 Connected Systems
 -----------------
@@ -176,7 +171,6 @@ Outbound network connections
 ----------------------------
 
 * DNS (53) resolving nameservers 172.16.2.2 and 172.16.2.3
-* :doc:`emailout` as SMTP relay
 * :doc:`proxyout` as HTTP proxy for APT
 * :doc:`puppet` (tcp/8140) as Puppet master
 * SMTP (25/tcp) to :doc:`email`, :doc:`issue` and :doc:`lists`
@@ -343,8 +337,6 @@ Changes
 
 Planned
 -------
-
-.. todo:: upgrade to Debian 10 (when Puppet is available)
 
 System Future
 -------------
