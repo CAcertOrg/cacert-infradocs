@@ -46,8 +46,6 @@ Application Administration
 +===============+=====================+
 | Apache httpd  | :ref:`people_jandd` |
 +---------------+---------------------+
-| Gitolite      | :ref:`people_jandd` |
-+---------------+---------------------+
 
 Contact
 -------
@@ -118,10 +116,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.4
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.4
 
 Services
 ========
@@ -129,17 +127,17 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+----------------------------+
-| Port     | Service   | Origin    | Purpose                    |
-+==========+===========+===========+============================+
-| 22/tcp   | ssh       | ANY       | admin console access       |
-+----------+-----------+-----------+----------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA |
-+----------+-----------+-----------+----------------------------+
-| 80/tcp   | http      | ANY       | application                |
-+----------+-----------+-----------+----------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service  |
-+----------+-----------+-----------+----------------------------+
++----------+---------+---------+----------------------------+
+| Port     | Service | Origin  | Purpose                    |
++==========+=========+=========+============================+
+| 22/tcp   | ssh     | ANY     | admin console access       |
++----------+---------+---------+----------------------------+
+| 25/tcp   | smtp    | local   | mail delivery to local MTA |
++----------+---------+---------+----------------------------+
+| 80/tcp   | http    | ANY     | application                |
++----------+---------+---------+----------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service  |
++----------+---------+---------+----------------------------+
 
 Running services
 ----------------
@@ -147,39 +145,32 @@ Running services
 .. index::
    single: apache httpd
    single: cron
+   single: dbus
    single: exim
-   single: nrpe
+   single: icinga2
    single: openssh
-   single: puppet agent
+   single: puppet
    single: rsyslog
 
-+--------------------+----------------------+----------------------------------------+
-| Service            | Usage                | Start mechanism                        |
-+====================+======================+========================================+
-| Apache httpd       | Webserver for static | init script                            |
-|                    | content              | :file:`/etc/init.d/apache2`            |
-+--------------------+----------------------+----------------------------------------+
-| cron               | job scheduler        | init script :file:`/etc/init.d/cron`   |
-+--------------------+----------------------+----------------------------------------+
-| Exim               | SMTP server for      | init script                            |
-|                    | local mail           | :file:`/etc/init.d/exim4`              |
-|                    | submission           |                                        |
-+--------------------+----------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring    | init script                            |
-|                    | service queried by   | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`       |                                        |
-+--------------------+----------------------+----------------------------------------+
-| openssh server     | ssh daemon for       | init script :file:`/etc/init.d/ssh`    |
-|                    | remote               |                                        |
-|                    | administration       |                                        |
-|                    | and git access       |                                        |
-+--------------------+----------------------+----------------------------------------+
-| Puppet agent       | configuration        | init script                            |
-|                    | management agent     | :file:`/etc/init.d/puppet`             |
-+--------------------+----------------------+----------------------------------------+
-| rsyslog            | syslog daemon        | init script                            |
-|                    |                      | :file:`/etc/init.d/syslog`             |
-+--------------------+----------------------+----------------------------------------+
++----------------+---------------------------------------+----------------------------------+
+| Service        | Usage                                 | Start mechanism                  |
++================+=======================================+==================================+
+| Apache httpd   | Webserver for static content          | systemd unit ``apache2.service`` |
++----------------+---------------------------------------+----------------------------------+
+| cron           | job scheduler                         | systemd unit ``cron.service``    |
++----------------+---------------------------------------+----------------------------------+
+| dbus-daemon    | System message bus daemon             | systemd unit ``dbus.service``    |
++----------------+---------------------------------------+----------------------------------+
+| Exim           | SMTP server for local mail submission | systemd unit ``exim4.service``   |
++----------------+---------------------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent              | systemd unit ``icinga2.service`` |
++----------------+---------------------------------------+----------------------------------+
+| openssh server | ssh daemon for remote administration  | systemd unit ``ssh.service``     |
++----------------+---------------------------------------+----------------------------------+
+| Puppet agent   | configuration management agent        | systemd unit ``puppet.service``  |
++----------------+---------------------------------------+----------------------------------+
+| rsyslog        | syslog daemon                         | systemd unit ``rsyslog.service`` |
++----------------+---------------------------------------+----------------------------------+
 
 Connected Systems
 -----------------
@@ -189,11 +180,12 @@ Connected Systems
 * :doc:`monitor`
 * :doc:`web` as reverse proxy for hostnames funding.cacert.org and
   infradocs.cacert.org
+* :doc:`email` as reverse proxy for the hostname community.cacert.org
 
 Outbound network connections
 ----------------------------
 
-* :doc:`infra02` as resolving nameserver
+* DNS (53) resolver at 10.0.0.1 (:doc:`infra02`)
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
@@ -278,8 +270,6 @@ Changes
 
 Planned
 -------
-
-.. todo:: update to Debian 10 (when Puppet is available)
 
 System Future
 -------------
