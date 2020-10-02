@@ -236,9 +236,9 @@ Keys and X.509 certificates
    :altnames:   DNS:codedocs.cacert.org
    :certfile:   /etc/ssl/certs/codedocs.cacert.org.crt
    :keyfile:    /etc/ssl/private/codedocs.cacert.org.key
-   :serial:     02CB3D
-   :expiration: Oct 25 22:35:23 2020 GMT
-   :sha1fp:     49:FA:0B:01:C0:9F:74:EF:12:15:8F:CA:8E:D3:2C:FA:0C:7E:3C:F7
+   :serial:     02E75E
+   :expiration: Oct 02 15:38:42 2022 GMT
+   :sha1fp:     E5:B7:3B:27:30:45:99:2B:04:8E:39:8F:12:E6:CC:CB:35:06:54:EC
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: funding.cacert.org
