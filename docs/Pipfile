@@ -14,6 +14,3 @@ sphinxcontrib-blockdiag = "*"
 sphinxcontrib-nwdiag = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.7"
