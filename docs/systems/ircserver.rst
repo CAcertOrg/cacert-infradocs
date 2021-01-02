@@ -108,10 +108,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.4
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.7
 
-* Debian GNU/Linux 9.4
+* Debian GNU/Linux 10.7
 
 Services
 ========
@@ -168,54 +168,43 @@ Running services
    single: atheme-services
    single: cron
    single: exim
+   single: icinga2
    single: inspircd
    single: kiwiirc
    single: nginx
-   single: nrpe
    single: openssh
    single: puppet agent
    single: rsyslog
    single: votebot
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| atheme-services    | IRC services       | init script                            |
-|                    |                    | :file:`/etc/init.d/atheme-services`    |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| Exim               | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/exim4`              |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| inspircd           | IRC daemon         | init script                            |
-|                    |                    | :file:`/etc/init.d/inspircd`           |
-+--------------------+--------------------+----------------------------------------+
-| kiwiirc            | IRC web client     | start script                           |
-|                    |                    | :file:`/home/kiwiirc/KiwiIRC/kiwi`     |
-|                    |                    | started by user kiwiirc                |
-+--------------------+--------------------+----------------------------------------+
-| nginx              | Reverse proxy for  | init script                            |
-|                    | kiwiirc            | :file:`/etc/init.d/nginx`              |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | configuration      | init script                            |
-|                    | management agent   | :file:`/etc/init.d/puppet`             |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
-| votebot            | CAcert vote bot    | init script (spring-boot)              |
-|                    |                    | :file:`/etc/init.d/cacert-votebot`     |
-+--------------------+--------------------+----------------------------------------+
++-----------------+---------------------------+------------------------------------------+
+| Service         | Usage                     | Start mechanism                          |
++=================+===========================+==========================================+
+| atheme-services | IRC services              | systemd unit ``atheme-services.service`` |
++-----------------+---------------------------+------------------------------------------+
+| cron            | job scheduler             | systemd unit ``cron.service``            |
++-----------------+---------------------------+------------------------------------------+
+| Exim            | SMTP server for           | systemd unit ``exim4.service``           |
+|                 | local mail submission     |                                          |
++-----------------+---------------------------+------------------------------------------+
+| icinga2         | Icinga2 monitoring agent  | systemd unit ``icinga2.service``         |
++-----------------+---------------------------+------------------------------------------+
+| inspircd        | IRC daemon                | systemd unit ``inspircd.service``        |
++-----------------+---------------------------+------------------------------------------+
+| kiwiirc         | IRC web client            | systemd unit ``kiwiirc.service``         |
++-----------------+---------------------------+------------------------------------------+
+| nginx           | Reverse proxy for kiwiirc | systemd unit ``nginx.service``           |
++-----------------+---------------------------+------------------------------------------+
+| openssh server  | ssh daemon for            | systemd unit ``ssh.service``             |
+|                 | remote administration     |                                          |
++-----------------+---------------------------+------------------------------------------+
+| Puppet agent    | configuration             | systemd unit ``puppet.service``          |
+|                 | management agent          |                                          |
++-----------------+---------------------------+------------------------------------------+
+| rsyslog         | syslog daemon             | systemd unit ``rsyslog.service``         |
++-----------------+---------------------------+------------------------------------------+
+| votebot         | CAcert vote bot           | systemd unit ``cacert-votebot.service``  |
++-----------------+---------------------------+------------------------------------------+
 
 Connected Systems
 -----------------
@@ -269,7 +258,7 @@ init.
 .. topic:: Votebot
 
    The vote bot is a Java based IRC bot developed at
-   https://git.cacert.org/gitweb/?p=cacert-votebot.git and built at
+   :cacertgit:`cacert-votebot` and built at
    https://jenkins.cacert.org/job/cacert-votebot/. The bot is started
    automatically via its init script.
 
@@ -283,8 +272,6 @@ https://kiwiirc.com/docs/installing/proxies. The software is running on the
 local loopback interface and Internet access is provided by an nginx reverse
 proxy that also provides https connectivity. NodeJS and npm have been installed
 from Debian packages.
-
-.. todo:: setup init script for kiwiirc
 
 Risk assessments on critical packages
 -------------------------------------
