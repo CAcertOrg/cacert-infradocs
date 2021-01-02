@@ -391,7 +391,7 @@ nwdiag_html_image_format = "svg"
 
 extlinks = {
     "wiki": ("https://wiki.cacert.org/%s", "Wiki "),
-    "cacertgit": ("https://git.cacert.org/gitweb/?p=%s.git", "CAcert Git repository "),
+    "cacertgit": ("https://git.cacert.org/%s.git", "CAcert Git repository "),
     "github": ("https://github.com/CAcertOrg/%s", "Github repository "),
     "monitor": (
         "https://monitor.cacert.org/monitoring/host/show?host=%s",
