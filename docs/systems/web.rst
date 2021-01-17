@@ -113,12 +113,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.12
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.7
 
-* Debian GNU/Linux 9.12
-
-.. todo:: upgrade to Debian 10 Buster
+* Debian GNU/Linux 10.7
 
 Services
 ========
@@ -152,32 +150,27 @@ Running services
    single: puppet agent
    single: rsyslog
 
-+----------------+--------------------------+-----------------------------------------+
-| Service        | Usage                    | Start mechanism                         |
-+================+==========================+=========================================+
-| Apache httpd   | http redirector,         | init script                             |
-|                | https reverse proxy      | :file:`/etc/init.d/apache2`             |
-+----------------+--------------------------+-----------------------------------------+
-| cron           | job scheduler            | init script :file:`/etc/init.d/cron`    |
-+----------------+--------------------------+-----------------------------------------+
-| icinga2        | Icinga2 monitoring agent | init script :file:`/etc/init.d/icinga2` |
-+----------------+--------------------------+-----------------------------------------+
-| openssh server | ssh daemon for           | init script :file:`/etc/init.d/ssh`     |
-|                | remote                   |                                         |
-|                | administration           |                                         |
-+----------------+--------------------------+-----------------------------------------+
-| Postfix        | SMTP server for          | init script                             |
-|                | local mail               | :file:`/etc/init.d/postfix`             |
-|                | submission               |                                         |
-+----------------+--------------------------+-----------------------------------------+
-| Puppet agent   | configuration            | init script                             |
-|                | management agent         | :file:`/etc/init.d/puppet`              |
-+----------------+--------------------------+-----------------------------------------+
-| rsyslog        | syslog daemon            | init script                             |
-|                |                          | :file:`/etc/init.d/syslog`              |
-+----------------+--------------------------+-----------------------------------------+
-
-.. todo:: switch to systemd
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| Apache httpd   | http redirector,         | systemd unit ``apache2.service`` |
+|                | https reverse proxy      |                                  |
++----------------+--------------------------+----------------------------------+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Postfix        | SMTP server for          | systemd unit ``postfix.service`` |
+|                | local mail submission    |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Connected Systems
 -----------------
@@ -227,10 +220,12 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the :cacertgit:`cacert-puppet`.
 
-.. todo:: move configuration of :doc:`web` to Puppet code
-
 Keys and X.509 certificates
 ---------------------------
+
+All keys and certificates are managed in the file
+https://git.cacert.org/cacert-puppet.git/plain/hieradata/nodes/web.yaml in the
+:cacertgit:`cacert-puppet`.
 
 .. sslcert:: codedocs.cacert.org
    :altnames:   DNS:codedocs.cacert.org
@@ -245,9 +240,9 @@ Keys and X.509 certificates
    :altnames:   DNS:funding.cacert.org
    :certfile:   /etc/ssl/certs/funding.cacert.org.crt
    :keyfile:    /etc/ssl/private/funding.cacert.org.key
-   :serial:     02D059
-   :expiration: Jan 31 16:29:20 2021 GMT
-   :sha1fp:     FD:0D:2A:33:70:64:0E:2A:D6:F6:72:0F:D0:47:D9:C7:BD:E3:F4:DF
+   :serial:     02EAF6
+   :expiration: Jan 17 18:53:51 2023 GMT
+   :sha1fp:     30:57:BC:90:4E:C7:A2:CD:D9:BF:AE:7D:5E:9E:FB:B8:3F:3E:0F:64
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: infradocs.cacert.org
@@ -263,9 +258,9 @@ Keys and X.509 certificates
    :altnames:   DNS:jenkins.cacert.org
    :certfile:   /etc/ssl/certs/jenkins.cacert.org.crt
    :keyfile:    /etc/ssl/private/jenkins.cacert.org.key
-   :serial:     02D058
-   :expiration: Jan 31 16:27:54 2021 GMT
-   :sha1fp:     00:5B:9C:4D:2E:D2:E4:69:2D:32:61:DC:25:98:F0:89:C9:E1:50:F1
+   :serial:     02EAF5
+   :expiration: Jan 17 18:52:48 2023 GMT
+   :sha1fp:     B9:88:8D:51:F4:FA:B1:56:64:8E:C8:23:C5:C4:FE:D8:42:B8:1B:72
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: web.cacert.org
@@ -277,9 +272,9 @@ Keys and X.509 certificates
    :sha1fp:     30:C0:61:C5:F7:C6:5E:A3:06:DB:B5:2F:B1:2D:DD:DF:60:5F:D6:88
    :issuer:     CAcert Class 3 Root
 
-* :file:`/usr/share/ca-certificates/CAcert/class3.crt` CAcert.org Class 3
-  certificate for server certificate chains. The Apache httpd configuration
-  files reference the symlinked version at :file:`/etc/ssl/certs/class3.pem`.
+* :file:`/usr/share/ca-certificates/CAcert/class3_X0E.crt` CAcert.org Class 3
+  certificate for server certificate chains. The file is installed from the
+  Debian package `ca-cacert`
 
 .. seealso::
 
@@ -288,38 +283,13 @@ Keys and X.509 certificates
 Apache httpd configuration
 --------------------------
 
-* :file:`/etc/apache2/sites-available/000-default.conf`
+Apache httpd configuration is fully managed by Puppet. The VirtualHosts are
+defined in
+https://git.cacert.org/cacert-puppet.git/plain/hieradata/nodes/web.yaml and
+the
+configuration is done via the `web_proxy`_ profile.
 
-  Defines the default VirtualHost for requests reaching this host with no
-  specifically handled host name.
-
-* :file:`/etc/apache2/sites-available/codedocs.cacert.org.conf`
-
-  Defines the VirtualHost http://codedocs.cacert.org/ that redirects to
-  https://codedocs.cacert.org/ and the VirtualHost
-  https://codedocs.cacert.org/ that provides reverse proxy functionality for
-  the same host name on :doc:`webstatic`.
-
-* :file:`/etc/apache2/sites-available/funding.cacert.org.conf`
-
-  Defines the VirtualHost http://funding.cacert.org/ that redirects to
-  https://funding.cacert.org/ and the VirtualHost https://funding.cacert.org/
-  that provides reverse proxy functionality for the same host name on
-  :doc:`webstatic`.
-
-* :file:`/etc/apache2/sites-available/infradocs.cacert.org.conf`
-
-  Defines the VirtualHost http://infradocs.cacert.org/ that redirects to
-  https://infradocs.cacert.org/ and the VirtualHost
-  https://infradocs.cacert.org/ that provides reverse proxy functionality for
-  the same host name on :doc:`webstatic`.
-
-* :file:`/etc/apache2/sites-available/jenkins.cacert.org.conf`
-
-  Defines the VirtualHost http://jenkins.cacert.org/ that redirects to
-  https://jenkins.cacert.org/ and the VirtualHost https://jenkins.cacert.org/
-  that provides reverse proxy functionality for the Jenkins instance on
-  :doc:`jenkins`.
+.. _web_proxy: https://git.cacert.org/cacert-puppet.git/tree/sitemodules/profiles/manifests/web_proxy.pp
 
 Tasks
 =====
@@ -329,8 +299,6 @@ Changes
 
 Planned
 -------
-
-.. todo:: manage the web system using Puppet
 
 System Future
 -------------
