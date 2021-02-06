@@ -8,10 +8,10 @@ Proxyin
 Purpose
 =======
 
-This system provides an incoming TLS proxy using `sniproxy`_ to share one
-public IPv4 address between multiple services.
+This system provides an incoming TLS proxy using `nginx`_ to share one public
+IPv4 address between multiple services.
 
-.. _sniproxy: https://github.com/dlundquist/sniproxy
+.. _nginx: https://nginx.org/
 
 Application Links
 -----------------
@@ -109,9 +109,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.0
+   single: Debian GNU/Linux; 10.8
 
-* Debian GNU/Linux 10.0
+* Debian GNU/Linux 10.8
 
 Services
 ========
@@ -126,13 +126,11 @@ Listening services
 +----------+---------+---------+----------------------------+
 | 25/tcp   | smtp    | local   | mail delivery to local MTA |
 +----------+---------+---------+----------------------------+
-| 80/tcp   | http    | ANY     | sniproxy                   |
+| 80/tcp   | http    | ANY     | nginx                      |
 +----------+---------+---------+----------------------------+
-| 443/tcp  | https   | ANY     | sniproxy                   |
+| 443/tcp  | https   | ANY     | nginx                      |
 +----------+---------+---------+----------------------------+
 | 5665/tcp | icinga2 | monitor | remote monitoring service  |
-+----------+---------+---------+----------------------------+
-| 8080/tcp | http    | local   | nginx                      |
 +----------+---------+---------+----------------------------+
 
 Running services
@@ -147,31 +145,31 @@ Running services
    single: openssh
    single: puppet
    single: rsyslog
-   single: sniproxy
 
-+----------------+--------------------------+-----------------------------------+
-| Service        | Usage                    | Start mechanism                   |
-+================+==========================+===================================+
-| cron           | job scheduler            | systemd unit ``cron.service``     |
-+----------------+--------------------------+-----------------------------------+
-| dbus-daemon    | System message bus       | systemd unit ``dbus.service``     |
-|                | daemon                   |                                   |
-+----------------+--------------------------+-----------------------------------+
-| Exim           | SMTP server for          | systemd unit ``exim4.service``    |
-|                | local mail submission    |                                   |
-+----------------+--------------------------+-----------------------------------+
-| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service``  |
-+----------------+--------------------------+-----------------------------------+
-| openssh server | ssh daemon for           | systemd unit ``ssh.service``      |
-|                | remote administration    |                                   |
-+----------------+--------------------------+-----------------------------------+
-| Puppet agent   | configuration            | systemd unit ``puppet.service``   |
-|                | management agent         |                                   |
-+----------------+--------------------------+-----------------------------------+
-| sniproxy       | TLS SNI proxy            | systemd unit ``sniproxy.service`` |
-+----------------+--------------------------+-----------------------------------+
-| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service``  |
-+----------------+--------------------------+-----------------------------------+
++----------------+--------------------------+----------------------------------+
+| Service        | Usage                    | Start mechanism                  |
++================+==========================+==================================+
+| cron           | job scheduler            | systemd unit ``cron.service``    |
++----------------+--------------------------+----------------------------------+
+| dbus-daemon    | System message bus       | systemd unit ``dbus.service``    |
+|                | daemon                   |                                  |
++----------------+--------------------------+----------------------------------+
+| Exim           | SMTP server for          | systemd unit ``exim4.service``   |
+|                | local mail submission    |                                  |
++----------------+--------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent | systemd unit ``icinga2.service`` |
++----------------+--------------------------+----------------------------------+
+| openssh server | ssh daemon for           | systemd unit ``ssh.service``     |
+|                | remote administration    |                                  |
++----------------+--------------------------+----------------------------------+
+| Puppet agent   | configuration            | systemd unit ``puppet.service``  |
+|                | management agent         |                                  |
++----------------+--------------------------+----------------------------------+
+| nginx          | TLS SNI proxy and        | systemd unit ``nginx.service``   |
+|                | http to https redirector |                                  |
++----------------+--------------------------+----------------------------------+
+| rsyslog        | syslog daemon            | systemd unit ``rsyslog.service`` |
++----------------+--------------------------+----------------------------------+
 
 Databases
 ---------
@@ -190,7 +188,10 @@ Outbound network connections
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 * :doc:`proxyout` as HTTP proxy for APT
-* :doc:`motion` (tcp/8443) as backend for https://motion.cacert.org/
+
+The mapping from host names to target backends is managed via Puppet and
+configured in the profiles::sniproxy::https_forwards map in
+https://git.cacert.org/cacert-puppet.git/tree/hieradata/nodes/proxyin.yaml.
 
 Security
 ========
@@ -218,9 +219,9 @@ The Puppet agent package and a few dependencies are installed from the official
 Puppet APT repository because the versions in Debian are too old to use modern
 Puppet features.
 
-The system is stripped down to the bare minimum. Both :program:`sniproxy` and
-:program:`nginx` are security supported. The :program:`nginx-light` package is
-used for `nginx` because no special features are required.
+The system is stripped down to the bare minimum. :program:`nginx` is security
+supported. The :program:`nginx-full` package is used for `nginx` to support
+streaming after SNI.
 
 Critical Configuration items
 ============================
@@ -239,11 +240,11 @@ nginx configuration
 :program:`nginx` is configured via Puppet profile ``profiles::sniproxy`` and
 just redirects all http traffic to https.
 
-sniproxy configuration
-----------------------
+nginx configuration
+-------------------
 
-:program:`sniproxy` is configured via Puppet profile ``profiles::sniproxy``,
-TCP traffic on port 80 is forwarded to the local nginx and https traffic is
+:program:`nginx` is configured via Puppet profile ``profiles::sniproxy``, TCP
+traffic on port 80 is redirected to the https port and https traffic is
 forwarded to the target hosts as configured in
 :file:`hieradata/nodes/proxyin.yaml`.
 
@@ -254,7 +255,9 @@ Adding a new forward entry
 --------------------------
 
 Add a line to the ``profiles::sniproxy::https_forwards`` item in Hiera data and
-adjust the firewall configuration on :doc:`infra02`.
+adjust the firewall configuration on :doc:`infra02`. You will need to request
+DNS changes from the critical team if you want to switch an existing service to
+use the SNI proxy service.
 
 Changes
 =======
@@ -279,4 +282,4 @@ Additional documentation
 References
 ----------
 
-* https://github.com/dlundquist/sniproxy
+* https://nginx.org/en/docs/
