@@ -102,9 +102,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.4
+   single: Debian GNU/Linux; 10.8
 
-* Debian GNU/Linux 10.4
+* Debian GNU/Linux 10.8
 
 Services
 ========
@@ -120,6 +120,8 @@ Listening services
 | 25/tcp   | smtp    | local   | mail delivery to local MTA              |
 +----------+---------+---------+-----------------------------------------+
 | 80/tcp   | http    | ANY     | Apache httpd                            |
++----------+---------+---------+-----------------------------------------+
+| 443/tcp  | http    | ANY     | Apache httpd                            |
 +----------+---------+---------+-----------------------------------------+
 | 3306/tcp | mariadb | local   | MariaDB database for roundcube settings |
 +----------+---------+---------+-----------------------------------------+
@@ -147,6 +149,7 @@ Running services
 | Service            | Usage                                 | Start mechanism                             |
 +====================+=======================================+=============================================+
 | Apache httpd       | Webserver for Roundcube webmailer     | systemd unit ``apache2.service``            |
+|                    | and redirect from http to https       |                                             |
 +--------------------+---------------------------------------+---------------------------------------------+
 | cacert-selfservice | Community self service application    | systemd unit ``cacert-selfservice.service`` |
 +--------------------+---------------------------------------+---------------------------------------------+
@@ -338,6 +341,11 @@ Changes
 Planned
 -------
 
+.. todo::
+
+   Switch ingest traffic for webmail to :doc:`proxyin` and drop http redirector
+   configuration from Apache httpd
+
 System Future
 -------------
 
@@ -351,4 +359,6 @@ Additional documentation
 References
 ----------
 
-.. could reference Apache httpd, PHP and roundcube documentation
+* https://httpd.apache.org/docs/2.4/
+* https://github.com/roundcube/roundcubemail/wiki
+* https://www.php.net/manual/en/
