@@ -109,10 +109,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.9
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.8
 
-* Debian GNU/Linux 9.9
+* Debian GNU/Linux 10.8
 
 Services
 ========
@@ -120,21 +120,21 @@ Services
 Listening services
 ------------------
 
-+----------+---------+---------+--------------------------------+
-| Port     | Service | Origin  | Purpose                        |
-+==========+=========+=========+================================+
-| 22/tcp   | ssh     | ANY     | admin console access           |
-+----------+---------+---------+--------------------------------+
-| 25/tcp   | smtp    | local   | mail delivery to local MTA     |
-+----------+---------+---------+--------------------------------+
-| 80/tcp   | http    | ANY     | web server for bug tracker     |
-+----------+---------+---------+--------------------------------+
-| 443/tcp  | https   | ANY     | web server for bug tracker     |
-+----------+---------+---------+--------------------------------+
-| 5665/tcp | icinga2 | monitor | remote monitoring service      |
-+----------+---------+---------+--------------------------------+
-| 3306/tcp | mysql   | local   | MySQL database for bug tracker |
-+----------+---------+---------+--------------------------------+
++----------+---------+---------+----------------------------------+
+| Port     | Service | Origin  | Purpose                          |
++==========+=========+=========+==================================+
+| 22/tcp   | ssh     | ANY     | admin console access             |
++----------+---------+---------+----------------------------------+
+| 25/tcp   | smtp    | local   | mail delivery to local MTA       |
++----------+---------+---------+----------------------------------+
+| 80/tcp   | http    | ANY     | web server for bug tracker       |
++----------+---------+---------+----------------------------------+
+| 443/tcp  | https   | ANY     | web server for bug tracker       |
++----------+---------+---------+----------------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service        |
++----------+---------+---------+----------------------------------+
+| 3306/tcp | mariadb | local   | MariaDB database for bug tracker |
++----------+---------+---------+----------------------------------+
 
 Running services
 ----------------
@@ -187,6 +187,7 @@ Databases
 
 .. index::
    pair: MySQL database; mantis
+   pair: MariaDB database; mantis
 
 +---------+--------+--------------------+
 | RDBMS   | Name   | Used for           |
@@ -329,25 +330,7 @@ MySQL configuration is stored in the :file:`/etc/mysql/` directory.
 Rsyslog configuration
 ---------------------
 
-Rsyslog has been configured to disable draining the kernel log:
-
-.. code-block:: diff
-
-   --- orig/etc/rsyslog.conf      2015-12-14 13:34:27.000000000 +0100
-   +++ bugs/etc/rsyslog.conf  2015-03-03 22:22:44.385835152 +0100
-   @@ -9,7 +9,7 @@
-    #################
-
-    $ModLoad imuxsock # provides support for local system logging
-   -$ModLoad imklog   # provides kernel logging support
-   +#$ModLoad imklog   # provides kernel logging support
-    #$ModLoad immark  # provides --MARK-- message capability
-
-    # provides UDP syslog reception
-
-The :program:`postfix` package installed :file:`/etc/rsyslog.d/postfix.conf` to
-add an additional logging socket in the Postfix chroot.
-
+Rsyslog is configured by Puppet.
 
 Tasks
 =====
@@ -361,8 +344,10 @@ Changes
 Planned
 -------
 
-.. todo:: upgrade to Debian 10 (when Puppet is available)
+.. todo::
 
+   Switch ingest traffic for webmail to :doc:`proxyin` and drop http redirector
+   configuration from Apache httpd
 
 System Future
 -------------
