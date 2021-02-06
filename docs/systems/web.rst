@@ -114,9 +114,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.7
+   single: Debian GNU/Linux; 10.8
 
-* Debian GNU/Linux 10.7
+* Debian GNU/Linux 10.8
 
 Services
 ========
