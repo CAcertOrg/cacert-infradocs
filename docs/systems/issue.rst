@@ -105,12 +105,12 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Wheezy
-   single: Debian GNU/Linux; 7.11
+   single: Debian GNU/Linux; Stretch
+   single: Debian GNU/Linux; 9.13
 
-* Debian GNU/Linux 7.11
+* Debian GNU/Linux 9.13
 
-.. todo:: upgrade to Debian Jessie
+.. todo:: upgrade to Debian Buster
 
 Services
 ========
