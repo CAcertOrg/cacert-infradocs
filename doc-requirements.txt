@@ -13,7 +13,7 @@ imagesize==1.2.0
 ipcalc==1.99.0
 jandd.sphinxext.ip==0.4.0
 jandd.sphinxext.mac==0.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 nwdiag==2.0.0
 packaging==20.8
