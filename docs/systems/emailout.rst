@@ -98,9 +98,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.8
+   single: Debian GNU/Linux; 10.9
 
-* Debian GNU/Linux 10.8
+* Debian GNU/Linux 10.9
 
 Applicable Documentation
 ------------------------
