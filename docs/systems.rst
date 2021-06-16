@@ -9,6 +9,7 @@ administrator team.
    :maxdepth: 1
 
    systems/infra02
+   systems/infra03
    systems/blog
    systems/board
    systems/bugs

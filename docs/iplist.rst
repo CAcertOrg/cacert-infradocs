@@ -27,3 +27,5 @@ Internal IP addresses
 ---------------------
 
 .. ip:v4range:: 10.0.0.0/24
+
+.. ip:v4range:: 10.0.3.0/24
