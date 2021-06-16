@@ -13,15 +13,16 @@ CAcert infrastructure.
 
 .. index::
    single: Ferm
+   single: LXC
 
-Infra02 is the host system for all infrastructure :term:`containers
-<Container>`. The containers are setup using the Linux kernel's :term:`LXC`
-system. The firewall for infrastructure is maintained on this machine using
-Ferm_. The machine provides a DNS resolver based on dnsmasq_ and gives answers
-for the internal zone infra.cacert.org.
+Infra02 is a host system for infrastructure :term:`containers <Container>`. The
+containers are setup using the Linux kernel's :term:`LXC` system. The firewall
+for infrastructure is maintained on this machine using Ferm_. The machine
+provides a DNS resolver based on dnsmasq_ and gives answers for the internal
+zone infra.cacert.org.
 
 .. _Ferm: http://ferm.foo-projects.org/
-.. _dnsmasq: http://www.thekelleys.org.uk/dnsmasq/doc.html
+.. _dnsmasq: https://www.thekelleys.org.uk/dnsmasq/doc.html
 
 Administration
 ==============
@@ -40,8 +41,7 @@ Contact
 Additional People
 -----------------
 
-:ref:`people_wytze` and :ref:`people_mendel` have :program:`sudo` access on that
-machine too.
+:ref:`people_dirk` has :program:`sudo` access on that machine too.
 
 Basics
 ======
@@ -59,12 +59,12 @@ parameters:
 
 :Mainboard: Supermicro X9SCL/X9SCM Version 1.11A
 :CPU: Intel(R) Xeon(R) CPU E3-1240 V2 @ 3.40GHz (4 Cores, 8 Threads)
-:RAM: 16 GiB ECC
+:RAM: 16 GiB (2x8 GB DDR-3 1600 unbuffered ECC)
 :Disks: 2 x 1TB WDC WD1003FBYX-01Y7B1
 :NIC:
 
-  * eth0 Intel Corporation 82579LM Gigabit Network Connection
-  * eth1 Intel Corporation 82574L Gigabit Network Connection
+  * eno1 Intel Corporation 82579LM Gigabit Network Connection
+  * enp2s0 Intel Corporation 82574L Gigabit Network Connection
 
 There is a 2 TB USB WDC WD20EARS-00MVWB0 backup disk attached to the system.
 
@@ -84,7 +84,7 @@ Logical Location
 :IPv6 on br0: :ip:v6:`2001:7b8:616:162:2::10`
 :MAC address:
 
-  * :mac:`00:25:90:a9:66:e9` (eth0)
+  * :mac:`00:25:90:a9:66:e9` (eno1)
   * :mac:`fe:0e:ee:75:a3:a5` (br0)
 
 .. seealso::
@@ -229,7 +229,6 @@ Running services
    single: ntpd
    single: openssh
    single: postfix
-   single: radvd
    single: rsyslog
    single: smartd
 
@@ -271,14 +270,13 @@ Running services
 |                    | local mail           |                                             |
 |                    | submission, ...      |                                             |
 +--------------------+----------------------+---------------------------------------------+
-| radvd              | IPv6 route           | systemd unit ``radvd.service``              |
-|                    | advertisement        |                                             |
-+--------------------+----------------------+---------------------------------------------+
 | rsyslog            | syslog daemon        | systemd unit ``rsyslog.service``            |
 +--------------------+----------------------+---------------------------------------------+
 | smartd             | S.M.A.R.T. HDD       | systemd unit ``smartd.service``             |
 |                    | monitoring           |                                             |
 +--------------------+----------------------+---------------------------------------------+
+
+.. todo:: switch monitoring to Icinga 2
 
 .. Running Guests
    --------------
@@ -305,7 +303,6 @@ Security
 
 .. sshkeys::
    :RSA:     SHA256:Y7DXSj8c5hhlpesEl+8FJDvEBn7Jg8aauOYvPLlAzII MD5:86:d5:f8:71:2e:ab:5e:50:5d:f6:37:6b:16:8f:d1:1c
-   :DSA:     SHA256:OgGI/EfR/dFNcKL7ePUXktBroR6uarFuc8t7uN1qDcg MD5:b4:fb:c2:74:33:eb:cc:f0:3e:31:38:c9:a8:df:0a:f5
    :ECDSA:   SHA256:OufwA1whcpd+mb/jEseoKZZQ3qFql16hPuzo/aQmBio MD5:79:c4:b8:ff:ef:c9:df:9a:45:07:8d:ab:71:7c:e9:c0
    :ED25519: SHA256:eXWoP7L/A25p/YW3vmj+4NFy2lEEVcRaLnNhcelBar8 MD5:25:d1:c7:44:1c:38:9e:ad:89:32:c7:9c:43:8e:41:c4
 
@@ -322,8 +319,8 @@ Non-distribution packages and modifications
 Risk assessments and critical packages
 --------------------------------------
 
-The system is the host system for all other infrastructure systems. Access to
-this system has to be tightly controlled.
+The system is the host system for other infrastructure systems. Access to this
+system has to be tightly controlled.
 
 Critical Configuration items
 ============================
