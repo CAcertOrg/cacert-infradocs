@@ -23,7 +23,6 @@ administrator team.
    systems/lists
    systems/monitor
    systems/motion
-   systems/pgpkeys
    systems/proxyin
    systems/proxyout
    systems/puppet
