@@ -1,22 +1,22 @@
 .. index::
-   single: Systems; test
+   single: Systems; test2
 
-====
-Test
-====
+=====
+Test2
+=====
 
 Purpose
 =======
 
-This is a public test system for the software from cacertgit:`cacert-devel`'s
-*release* branch running on www.cacert.org. It is used for testing new features
-and bug fixes by testers and software assessors.
+This is a test system that is as close to the real :doc:`../critical/webdb`
+system. It is used by the critical admin team to test patches before bringing
+them into production.
 
 Application Links
 -----------------
 
 Application
-     https://test.cacert.org/
+    https://test2.cacert.org/
 
 Administration
 ==============
@@ -25,28 +25,26 @@ System Administration
 ---------------------
 
 * Primary: :ref:`people_jandd`
-* Secondary: None
-
+* Secondary: :ref:`people_dirk`
 
 Application Administration
 --------------------------
 
-+------------------------+---------------------------------------+
-| Application            | Administrator(s)                      |
-+========================+=======================================+
-| CAcert web application | :ref:`people_dirk`, :ref:`people_ted` |
-+------------------------+---------------------------------------+
++------------------------+--------------------+
+| Application            | Administrator(s)   |
++========================+====================+
+| CAcert web application | :ref:`people_dirk` |
++------------------------+--------------------+
 
 Contact
 -------
 
-* test-admin@cacert.org
+* test2-admin@cacert.org
 
 Additional People
 -----------------
 
-:ref:`people_dirk`, :ref:`people_mario`, `people_alkas` and :ref:`people_ted`
-have :program:`sudo` access on that machine too.
+:ref:`people_mario` has :program:`sudo` access on that machine too.
 
 Basics
 ======
@@ -60,41 +58,49 @@ This system is located in an :term:`LXC` container on physical machine
 Logical Location
 ----------------
 
-:IP Internet: :ip:v4:`213.154.225.248`
-:IP Intranet: :ip:v4:`172.16.2.248`
-:IP Internal: :ip:v4:`10.0.0.248`
-:IPv6:        :ip:v6:`2001:7b8:616:162:2::248`
-:MAC address: :mac:`00:ff:91:10:5d:cd` (eth0)
+:IP Internet: :ip:v4:`213.154.225.249`
+:IP Intranet: :ip:v4:`172.16.2.249`
+:IP Internal: :ip:v4:`10.0.0.249`
+:IPv6:        :ip:v6:`2001:7b8:616:162:2::249`
+:MAC address: :mac:`00:ff:8a:60:d6:dd` (eth0)
 
 .. seealso::
 
    See :doc:`../network`
 
 .. index::
-   single: Monitoring; Test
+   single: Monitoring; Test2
 
 Monitoring
 ----------
 
-:internal checks: :monitor:`test.infra.cacert.org`
+.. todo:: setup monitoring for test2
 
 DNS
 ---
 
 .. index::
-   single: DNS records; Test
+   single: DNS records; Test2
 
-====================== ======== ============================================
-Name                   Type     Content
-====================== ======== ============================================
-test.cacert.org.       IN A     213.154.225.248
-test.cacert.org.       IN SSHFP 1 1 11BCB0AB4D1FD39547426D9527B88AFB8FF85209
-test.cacert.org.       IN SSHFP 2 1 3414C17E5AE898B2F5DB7B3DDF9E34C2F5E816AC
-test.intra.cacert.org. IN A     172.16.2.248
-test.infra.cacert.org. IN A     10.0.0.248
-====================== ======== ============================================
++-------------------+----------+--------------------------------------------------------------------------+
+| Name              | Type     | Content                                                                  |
++===================+==========+==========================================================================+
+| test2.cacert.org. | IN A     | ``213.154.225.249``                                                      |
++-------------------+----------+--------------------------------------------------------------------------+
+| test2.cacert.org. | IN SSHFP | ``1 1 6CF47397AFD468336DC07A27F7FC00797693FE12``                         |
++-------------------+----------+--------------------------------------------------------------------------+
+| test2.cacert.org. | IN SSHFP | ``1 2 C008E67B906AF92DF0C9CF30A1C5DF998D2B47CB518698FB2974193C07CE7F40`` |
++-------------------+----------+--------------------------------------------------------------------------+
+| test2.cacert.org. | IN SSHFP | ``2 1 666DF52C894AAFA85FB3A890077BC29046DF9B96``                         |
++-------------------+----------+--------------------------------------------------------------------------+
+| test2.cacert.org. | IN SSHFP | ``2 2 E5794CFF631FACB7C294CC6727A5335E15BD39041DF3E73E3440DB3A995EA43A`` |
++-------------------+----------+--------------------------------------------------------------------------+
 
 .. todo:: add AAAA record for IPv6 address
+
+.. todo:: add SSHFP records for ECDSA and ED25519 host keys
+
+.. todo:: remove SSHFP records for DSA host key
 
 .. seealso::
 
@@ -131,8 +137,6 @@ Listening services
 +----------+---------+---------+-------------------------------------------+
 | 443/tcp  | https   | ANY     | Apache httpd for https://test.cacert.org/ |
 +----------+---------+---------+-------------------------------------------+
-| 993/tcp  | imaps   | testmgr | Dovecot IMAP server                       |
-+----------+---------+---------+-------------------------------------------+
 | 3306/tcp | mysql   | local   | MySQL database for WebDB                  |
 +----------+---------+---------+-------------------------------------------+
 | 5666/tcp | nrpe    | monitor | remote monitoring service                 |
@@ -142,14 +146,13 @@ Running services
 ----------------
 
 .. index::
-   single: Apache
+   single: Apache httpd
    single: MySQL
+   single: acpid
    single: atop
    single: client.pl
    single: cron
-   single: dovecot
    single: nrpe
-   single: ntpd
    single: openssh
    single: postfix
    single: rsyslog
@@ -164,6 +167,8 @@ Running services
 +----------------+--------------------------------+----------------------------------------+
 | MySQL          | MySQL database server          | init script                            |
 |                | for the CAcert web application | :file:`/etc/init.d/mysql`              |
++----------------+--------------------------------+----------------------------------------+
+| acpid          | ACPI daemon                    | systemd unit ``acpid.service``         |
 +----------------+--------------------------------+----------------------------------------+
 | atop           | atop process accounting top    | init script                            |
 |                |                                | :file:`/etc/init.d/atop`               |
@@ -215,43 +220,38 @@ Connected Systems
 -----------------
 
 * :doc:`monitor`
-* :doc:`testmgr` has access to imap and MySQL
 
 Outbound network connections
 ----------------------------
 
 * :doc:`infra02` as resolving nameserver
 * :doc:`proxyout` as HTTP proxy for APT and Github
-* crl.cacert.org (rsync) for getting CRLs
-* ocsp.cacert.org (HTTP and HTTPS) for OCSP queries
-* arbitrary Internet SMTP servers for outgoing mail
 
 Security
 ========
 
 .. sshkeys::
-   :RSA:   SHA256:5wItpTiTpy2F8L/97EbbbBzAm9jGEtDbK7VkgYX2ciU MD5:fd:19:a1:64:ae:ef:c2:50:a2:be:a4:c5:9f:f7:9d:98
-   :DSA:   SHA256:K+QXsmvqJmUWqKtewyLVFejd/7jxvgZx0tKvBQMvwhg MD5:1c:8c:39:5e:9e:0b:db:8e:c3:66:89:e3:3d:94:5e:13
-   :ECDSA: SHA256:mI7AeT1zOeEhZpQ1Go3TgwAnzyqGEgy8ePFGiYJsyzk MD5:ac:fb:c8:88:d1:dd:e5:38:99:34:7b:29:54:e1:f2:f1
+   :RSA: SHA256:wAjme5Bq+S3wyc8wocXfmY0rR8tRhpj7KXQZPAfOf0A MD5:99:f4:e6:78:7a:57:d6:9d:a9:b8:ca:f3:ce:07:cc:57
+   :DSA: SHA256:5XlM/2MfrLfClMxnJ6UzXhW9OQQd8+c+NEDbOplepDo MD5:0f:56:a7:04:b5:f4:48:b9:fa:2c:1e:58:de:d3:e8:cb
 
-.. todo:: generate ED25519 key for test
+.. todo:: generate ECDSA and ED25519 host keys
 
 .. todo:: remove DSA host key
 
 Dedicated user roles
 --------------------
 
-+--------------+----------------------------+
-| User         | Purpose                    |
-+==============+============================+
-| cacertmail   | IMAP mailbox user          |
-+--------------+----------------------------+
-| cacertsigner | User for the CAcert signer |
-+--------------+----------------------------+
++------------+----------------------------+
+| User       | Purpose                    |
++============+============================+
+| cacertmail | IMAP mailbox user          |
++------------+----------------------------+
+| signer     | User for the CAcert signer |
++------------+----------------------------+
 
 .. todo::
 
-   clarify why the signer software on test is currently running as the root
+   clarify why the signer software on test2 is currently running as the root
    user
 
 The directory :file:`/home/cacert/` is owned by root. The signer is running
@@ -266,32 +266,20 @@ Apache httpd is running in a chroot :file:`/home/cacert/`, the configuration in
 :file:`/etc/apache2` as well as the system binaries are not used. The Apache
 httpd binary seems to be relatively up-to-date.
 
-The CAcert web application code as well as the CAcert signer client code come
-from :cacertgit:`cacert-devel`'s *release* branch.
+The CAcert WebDB application is stored in :file:`/home/cacert/www`.
 
-The signer in :file:`/home/signer/cacert-devel/CommModule/server.pl` has a few
-uncommitted manual modifications. And the whole working copy in
-`/home/signer/cacert-devel` is based on an old repository at
-git://git-cacert.it-sls.de/cacert-devel.git that is no longer available. The
-last commit in the working copy is::
-
-   commit 2262fe14e4bf1e0afb4ab7f9340e18a9f281ddfe
-   Merge: c33bbc5 a3d0b8a
-   Author: Michael Tänzer <neo@nhng.de>
-   Date:   Wed Apr 10 00:03:42 2013 +0200
-
-       Merge branch 'bug-1159' into signer
+The CAcert Signer code is stored in :file:`/home/signer/www/CommModule`.
 
 .. todo::
 
-   integrate or revert the changes to server.pl on test, use the current
-   *release* branch version from :cacertgit:`cacert-devel`
+   clarify the process how changes get into the WebDB and Signer directories
+   and clarify differences to Git and :doc:`test`
 
 Risk assessments on critical packages
 -------------------------------------
 
 The operating system on this container is no longer supported. The PHP version
-in the file:`/home/cacert/` chroot is 5.6.38 which is no longer supported
+in the file:`/home/cacert/` chroot is 5.6.40 which is no longer supported
 upstream.
 
 Critical Configuration items
@@ -300,49 +288,60 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
-.. sslcert:: cats.test.cacert.org
-   :altnames:   DNS:cats.test.cacert.org
-   :certfile:   /home/cacert/etc/ssl/certs/cats_test_cacert_org.crt
-   :keyfile:    /home/cacert/etc/ssl/private/cats_test_cacert_org.pem
-   :serial:     50DD
-   :expiration: Oct  4 07:07:08 2020 GMT
-   :sha1fp:     3C:93:F3:83:25:AA:99:7A:65:A0:69:EF:41:FE:DF:EB:01:F1:2F:6F
+.. sslcert:: cacert2.it-sls.de
+   :certfile:   /home/cacert/etc/ssl/certs/cacert2_it-sls_de.crt
+   :keyfile:    /home/cacert/etc/ssl/private/cacert2_it-sls_de.pem
+   :serial:     4F66
+   :expiration: Jun 20 15:24:50 2018 GMT
+   :sha1fp:     61:D0:CF:1B:D7:36:EA:0A:41:02:72:9F:60:F0:E2:24:A1:9D:E7:01
    :issuer:     CAcert Testserver Root
 
-.. sslcert:: mgr.test.cacert.org
-   :altnames:   DNS:mgr.test.cacert.org
-   :certfile:   /home/cacert/etc/ssl/certs/mgr_test_cacert_org.crt
-   :keyfile:    /home/cacert/etc/ssl/private/mgr_test_cacert_org.pem
-   :serial:     50DC
-   :expiration: Oct  4 07:07:08 2020 GMT
-   :sha1fp:     ED:44:E6:4C:C2:D3:E1:32:3D:2F:03:9F:19:DD:F3:B1:18:32:60:F6
+.. sslcert:: ca-mgr2.it-sls.de
+   :certfile:   /home/cacert/etc/ssl/certs/ca-mgr2_it-sls_de.crt
+   :keyfile:    /home/cacert/etc/ssl/private/ca-mgr2_it-sls_de.pem
+   :serial:     4F68
+   :expiration: Jun 20 15:24:51 2018 GMT
+   :sha1fp:     00:C6:36:22:DF:D7:3B:97:A2:B3:20:07:BC:B8:84:0F:61:42:20:11
    :issuer:     CAcert Testserver Root
 
-.. sslcert:: secure.test.cacert.org
-   :altnames:   DNS:secure.test.cacert.org
-   :certfile:   /home/cacert/etc/ssl/certs/secure_test_cacert_org.crt
-   :keyfile:    /home/cacert/etc/ssl/private/secure_test_cacert_org.pem
-   :serial:     50DB
-   :expiration: Oct  4 07:07:08 2020 GMT
-   :sha1fp:     FB:83:D6:AF:6E:12:C7:94:D5:5A:2C:27:28:49:D3:65:6E:AE:90:FA
+.. sslcert:: mgr.test2.cacert.org
+   :altnames:   DNS:mgr.test2.cacert.org
+   :certfile:   /home/cacert/etc/ssl/certs/mgr_test2_cacert_org.crt
+   :keyfile:    /home/cacert/etc/ssl/private/mgr_test2_cacert_org.pem
+   :serial:     4F7E
+   :expiration: Sep 11 06:47:03 2020 GMT
+   :sha1fp:     04:C9:9B:5E:BB:BF:18:9F:1D:78:4B:0F:92:67:F7:35:D7:0D:5A:05
    :issuer:     CAcert Testserver Root
 
-.. sslcert:: test.cacert.org (dovecot)
-   :certfile:   /etc/dovecot/dovecot.pem
-   :keyfile:    /etc/dovecot/private/dovecot.pem
-   :serial:     C362AEFE86DA5BFE
-   :expiration: Jun 26 12:38:31 2024 GMT
-   :sha1fp:     1E:60:68:36:53:BC:95:A8:35:AC:A0:38:09:69:29:74:10:52:04:1A
-   :issuer:     test.cacert.org
-
-.. sslcert:: test.cacert.org
-   :altnames:   DNS:test.cacert.org
-   :certfile:   /home/cacert/etc/ssl/certs/test_cacert_org.crt
-   :keyfile:    /home/cacert/etc/ssl/private/cacert.pem
-   :serial:     50DA
-   :expiration: Oct  4 07:07:08 2020 GMT
-   :sha1fp:     86:A9:00:E3:31:96:B9:8A:FC:83:00:F0:AE:02:8A:20:57:2D:8F:A1
+.. sslcert:: secure2.it-sls.de
+   :certfile:   /home/cacert/etc/ssl/certs/secure2_it-sls_de.crt
+   :keyfile:    /home/cacert/etc/ssl/private/secure2_it-sls_de.pem
+   :serial:     4F67
+   :expiration: Jun 20 15:24:50 2018 GMT
+   :sha1fp:     90:A5:52:72:7D:59:D7:16:99:5F:1A:FA:6F:49:40:1C:F0:82:95:C3
    :issuer:     CAcert Testserver Root
+
+.. sslcert:: secure.test2.cacert.org
+   :altnames:   DNS:secure.test2.cacert.org
+   :certfile:   /home/cacert/etc/ssl/certs/secure_test2_cacert_org.crt
+   :keyfile:    /home/cacert/etc/ssl/private/secure_test2_cacert_org.pem
+   :serial:     4F7D
+   :expiration: Sep 11 06:47:03 2020 GMT
+   :sha1fp:     EB:72:5A:37:B0:51:3C:46:77:7E:C4:1E:16:1E:87:F6:10:B1:A1:A5
+   :issuer:     CAcert Testserver Root
+
+.. sslcert:: test2.cacert.org
+   :altnames:   DNS:test2.cacert.org
+   :certfile:   /home/cacert/etc/ssl/certs/test2_cacert_org.crt
+   :keyfile:    /home/cacert/etc/ssl/private/test2_cacert_org.pem
+   :serial:     4F7C
+   :expiration: Sep 11 06:47:03 2020 GMT
+   :sha1fp:     7D:BE:55:1A:C4:37:C5:BC:D9:98:2F:F5:09:A1:B9:83:22:CF:2D:56
+   :issuer:     CAcert Testserver Root
+
+.. todo::
+
+   clarify whether old it-sls.de certificates can be decommissioned
 
 **CA certificates on test**:
 
@@ -350,40 +349,13 @@ Keys and X.509 certificates
    :certfile:   /etc/ssl/CA/cacert.crt
    :keyfile:    /etc/ssl/CA/cacert.pem
    :serial:     00
-   :expiration: Mar 26 20:45:20 2021 GMT
-   :sha1fp:     5B:26:E7:61:8C:C1:A1:EB:F3:E1:28:22:03:7A:D6:9B:55:53:C3:9B
-   :issuer:     CAcert Testserver Root
-
-.. sslcert:: CAcert Testserver Root
-   :certfile:   /etc/ssl/CA/root_256.crt
-   :keyfile:    /etc/ssl/CA/cacert.pem
-   :serial:     0F
-   :expiration: Mar 26 20:45:20 2021 GMT
-   :sha1fp:     5E:7E:EE:06:07:0A:F6:A1:49:F9:E1:B1:13:14:D8:C2:A3:3C:07:52
-   :issuer:     CAcert Testserver Root
+   :secondary:
 
 .. sslcert:: CAcert Testserver Class 3
-   :altnames:
-   :certfile:   /etc/ssl/class3/cacert.md5.crt
-   :keyfile:    /etc/ssl/class3/cacert.pem
-   :serial:     01
-   :expiration: Mar 26 22:06:10 2021 GMT
-   :sha1fp:     F5:72:FF:19:C8:B5:3C:7C:29:1A:8D:90:92:09:5F:DD:24:C6:F8:41
-   :issuer:     CAcert Testserver Root
-
-.. sslcert:: CAcert Testserver Class 3
-   :altnames:
    :certfile:   /etc/ssl/class3/cacert.crt
    :keyfile:    /etc/ssl/class3/cacert.pem
    :serial:     101B
-   :expiration: Apr 28 18:25:09 2021 GMT
-   :sha1fp:     52:F9:80:58:5F:55:A0:F6:51:F0:A2:BC:75:20:FE:2C:48:96:79:55
-   :issuer:     CAcert Testserver Root
-
-.. note::
-
-   There are two directories :file:`/etc/root3/` and :file:`/etc/root4/` that
-   are supported by the signer but do not contain actual keys and certificates.
+   :secondary:
 
 .. seealso::
 
@@ -397,7 +369,7 @@ signer that are stored in :file:`/etc/ssl/{caname}-{purpose}.cnf`.
 
 .. todo::
 
-   check whether the openssl configuration files on test are equal to those in
+   check whether the openssl configuration files on test2 are equal to those in
    http://svn.cacert.org/CAcert/SystemAdministration/signer/ssl/
 
 Apache httpd configuration
@@ -411,24 +383,24 @@ Postfix configuration
 
 Postfix configuration is stored in :file:`/etc/postfix`.
 
-Postfix is configured to accept mail for ``test.cacert.org`` and ``localhost``
-all mail is delivered to the mailbox of the *cacertmail* user in
-:file:`/var/mail/cacertmail` via :file:`/etc/postfix/virtual.regexp`.
+Postfix is configured to accept mail for ``cacert2.it-sls.de``,
+``localhost.it-sls.de`` and ``localhost`` all mail is delivered to the mailbox
+of the *cacertmail* user in :file:`/var/mail/cacertmail` via
+:file:`/etc/postfix/virtual.regexp`.
+
+.. todo::
+
+   reconfigure postfix on test2 to use the correct hostnames
 
 Dovecot configuration
 ---------------------
 
-Dovecot is configured to use pam for authentication and to support SSL and IMAP
-and to use mbox style mailboxes in /var/mail/%u in the following files:
+Dovecot is configured via configuration in :file:`/etc/dovecot`.
 
-- :file:`/etc/dovecot/conf.d/10-auth.conf`
-- :file:`/etc/dovecot/conf.d/10-mail.conf`
-- :file:`/etc/dovecot/conf.d/20-imap.conf`
-- :file:`/etc/dovecot/conf.d/auth-system.conf`
+.. todo::
 
-.. note::
-
-   dovecot uses an old self-signed certificate for test.cacert.org
+   check dovecot configuration on test2, compare with test and/or production
+   webdb system
 
 Tasks
 =====
@@ -441,8 +413,8 @@ Planned
 
 .. todo::
 
-   Upgrade test to Debian Stretch/Buster/Bullseye when the software is ready.
-
+   ensure that test2 is really similar to webdb, implement a proper deployment
+   process to support real staging
 
 System Future
 -------------
@@ -455,7 +427,6 @@ Additional documentation
 .. seealso::
 
    * :wiki:`PostfixConfiguration`
-   * https://codedocs.cacert.org/
 
 References
 ----------
