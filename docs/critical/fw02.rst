@@ -1,0 +1,14 @@
+.. index::
+   single: Systems; fw02
+
+====
+fw02
+====
+
+Basics
+======
+
+Logical Location
+----------------
+
+:IP Internet: :ip:v4:`213.154.225.229`, :ip:v4:`213.154.225.254`

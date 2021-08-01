@@ -1,0 +1,19 @@
+nwdiag {
+  inet [ shape = cloud ];
+
+  inet -- gw;
+
+  network ipv4public {
+    address = "213.154.225.224/27"
+
+    gw          [address = ".225"];
+    vrrp1       [address = ".226"];
+    vrrp2       [address = ".227"];
+
+    group firewall {
+      cacert-fw   [address = ".229"];
+      cacert-fw01 [address = ".253"];
+      cacert-fw02 [address = ".254"];
+    }
+  }
+}

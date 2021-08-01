@@ -1,9 +1,20 @@
-=====
+.. index::
+   single: Systems; Crl
+
+===
 Crl
-=====
+===
 
 .. copy content structure from critical/template.rst and adapt to the needs for
    this system
+
+Basics
+======
+
+Logical Location
+----------------
+
+:IP Internet: :ip:v4:`213.154.225.236`
 
 Critical Configuration items
 ============================
