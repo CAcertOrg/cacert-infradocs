@@ -58,7 +58,7 @@ This system is located in an :term:`LXC` container on physical machine
 Logical Location
 ----------------
 
-:IP Internet: :ip:v4:`213.154.225.249`
+:IP Internet: :ip:v4:`213.154.225.241`
 :IP Intranet: :ip:v4:`172.16.2.249`
 :IP Internal: :ip:v4:`10.0.0.249`
 :IPv6:        :ip:v6:`2001:7b8:616:162:2::249`
@@ -273,7 +273,7 @@ The CAcert Signer code is stored in :file:`/home/signer/www/CommModule`.
 .. todo::
 
    clarify the process how changes get into the WebDB and Signer directories
-   and clarify differences to Git and :doc:`test`
+   and clarify differences to Git and test
 
 Risk assessments on critical packages
 -------------------------------------

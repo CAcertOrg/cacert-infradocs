@@ -343,7 +343,7 @@ Planned
 
 .. todo::
 
-   Switch ingest traffic for webmail to :doc:`proxyin` and drop http redirector
+   Switch ingest traffic for webmail to proxyin and drop http redirector
    configuration from Apache httpd
 
 System Future

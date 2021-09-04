@@ -224,7 +224,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move configuration of :doc:`jenkins` to Puppet code
+.. todo:: move configuration of jenkins to Puppet code
 
 Jenkins configuration
 ---------------------

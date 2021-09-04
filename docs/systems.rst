@@ -18,12 +18,16 @@ administrator team.
    systems/email
    systems/emailout
    systems/git
+   systems/ingress03
    systems/ircserver
    systems/issue
    systems/jenkins
    systems/lists
+   systems/mariadb
    systems/monitor
    systems/motion
+   systems/nextcloud
+   systems/postgresql
    systems/proxyin
    systems/proxyout
    systems/puppet

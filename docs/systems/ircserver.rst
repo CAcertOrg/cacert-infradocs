@@ -296,7 +296,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move configuration of :doc:`ircserver` to Puppet code
+.. todo:: move configuration of ircserver to Puppet code
 
 Keys and X.509 certificates
 ---------------------------

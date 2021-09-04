@@ -274,7 +274,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move more configuration of :doc:`monitor` to Puppet code
+.. todo:: move more configuration of monitor to Puppet code
 
 Keys and X.509 certificates
 ---------------------------

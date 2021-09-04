@@ -18,15 +18,10 @@ CAcert infrastructure.
 Infra03 is a host system for infrustructure :term:`containers <Container>`. The
 containers are setup using the Linux kernel's :term:`LXC` system. The firewall
 for the running containers is maintained using nftables_. The machine provides
-a DNS resolver based on dnsmasq_ and gives answers for the internal zone
-infra.cacert.org.
+a DNS resolver based on dnsmasq_ and forwards DNS requests to :doc:`infra02`.
 
 .. _nftables: https://wiki.nftables.org/
 .. _dnsmasq: https://www.thekelleys.org.uk/dnsmasq/doc.html
-
-.. todo::
-   implement synchronization between :doc:`infra02`'s dnsmasq and this system's
-   dnsmasq
 
 Administration
 ==============
@@ -71,8 +66,8 @@ The machine has the following hardware parameters:
 Logical Location
 ----------------
 
-:IP Internet: None yet
-:IP Intranet: :ip:v4:`172.16.2.3`
+:IP Internet: :ip:v4:`213.154.225.249`
+:IP Intranet: :ip:v4:`172.16.2.9`
 :IP Internal: :ip:v4:`10.0.3.1`
 :IPv6:        :ip:v6:`2001:7b8:616:162:1::9`
 :MAC address:
@@ -99,12 +94,13 @@ DNS
 .. index::
    single: DNS records; Infra03
 
-.. ========================== ======== ==========================================
-.. Name                       Type     Content
-.. ========================== ======== ==========================================
-.. ========================== ======== ==========================================
-
-.. todo:: add DNS records for Infra03
++---------------------+---------+-----------------------+
+| Name                | Type    | Content               |
++=====================+=========+=======================+
+| infra03.cacert.org. | IN A    | 213.154.225.249       |
++---------------------+---------+-----------------------+
+| infra03.cacert.org. | IN AAAA | 2001:7b8:616:162:1::9 |
++---------------------+---------+-----------------------+
 
 .. seealso::
 
@@ -115,9 +111,9 @@ Operating System
 
 .. index::
    single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.9
+   single: Debian GNU/Linux; 10.10
 
-* Debian GNU/Linux 10.9
+* Debian GNU/Linux 10.10
 
 Services
 ========
@@ -125,20 +121,20 @@ Services
 Listening services
 ------------------
 
-+----------+---------+----------+-----------------------------------------+
-| Port     | Service | Origin   | Purpose                                 |
-+==========+=========+==========+=========================================+
-| 22/tcp   | ssh     | ANY      | admin console access                    |
-+----------+---------+----------+-----------------------------------------+
-| 25/tcp   | smtp    | local    | mail delivery to local MTA              |
-+----------+---------+----------+-----------------------------------------+
-| 53/tcp   | dns     | internal | DNS resolver for infra.cacert.org       |
-| 53/udp   |         |          |                                         |
-+----------+---------+----------+-----------------------------------------+
-| 123/udp  | ntp     | ANY      | network time protocol for host,         |
-|          |         |          | listening on the Internet IPv6 and IPv4 |
-|          |         |          | addresses                               |
-+----------+---------+----------+-----------------------------------------+
++---------+---------+----------+-----------------------------------------+
+| Port    | Service | Origin   | Purpose                                 |
++=========+=========+==========+=========================================+
+| 22/tcp  | ssh     | ANY      | admin console access                    |
++---------+---------+----------+-----------------------------------------+
+| 25/tcp  | smtp    | local    | mail delivery to local MTA              |
++---------+---------+----------+-----------------------------------------+
+| 53/tcp  | dns     | internal | DNS forwarded for infra.cacert.org      |
+| 53/udp  |         |          |                                         |
++---------+---------+----------+-----------------------------------------+
+| 123/udp | ntp     | ANY      | network time protocol for host,         |
+|         |         |          | listening on the Internet IPv6 and IPv4 |
+|         |         |          | addresses                               |
++---------+---------+----------+-----------------------------------------+
 
 Running services
 ----------------
@@ -155,28 +151,33 @@ Running services
    single: rsyslog
    single: smartd
 
-+----------------+---------------------------------------+----------------------------------+
-| Service        | Usage                                 | Start mechanism                  |
-+================+=======================================+==================================+
-| cron           | job scheduler                         | systemd unit ``cron.service``    |
-+----------------+---------------------------------------+----------------------------------+
-| dbus-daemon    | System message bus                    | systemd unit ``dbus.service``    |
-+----------------+---------------------------------------+----------------------------------+
-| Exim           | SMTP server for local mail submission | systemd unit ``exim4.service``   |
-+----------------+---------------------------------------+----------------------------------+
-| openssh server | ssh daemon for remote administration  | systemd unit ``ssh.service``     |
-+----------------+---------------------------------------+----------------------------------+
-| Puppet agent   | configuration management agent        | systemd unit ``puppet.service``  |
-+----------------+---------------------------------------+----------------------------------+
-| rsyslog        | syslog daemon                         | systemd unit ``rsyslog.service`` |
-+----------------+---------------------------------------+----------------------------------+
++----------------+---------------------------------------+------------------------------------+
+| Service        | Usage                                 | Start mechanism                    |
++================+=======================================+====================================+
+| cron           | job scheduler                         | systemd unit ``cron.service``      |
++----------------+---------------------------------------+------------------------------------+
+| dbus-daemon    | System message bus                    | systemd unit ``dbus.service``      |
++----------------+---------------------------------------+------------------------------------+
+| dm-event       | Device Mapper event daemon            | systemd unit ``dm-event.service``  |
++----------------+---------------------------------------+------------------------------------+
+| dnsmasq        | DNS forwarder                         | systemd unit ``dnsmasq.service``   |
++----------------+---------------------------------------+------------------------------------+
+| Exim           | SMTP server for local mail submission | systemd unit ``exim4.service``     |
++----------------+---------------------------------------+------------------------------------+
+| mdmonitor      | MD array monitor                      | systemd unit ``mdmonitor.service`` |
++----------------+---------------------------------------+------------------------------------+
+| ntpd           | time synchronization service          | systemd unit ``ntp.service``       |
++----------------+---------------------------------------+------------------------------------+
+| openssh server | ssh daemon for remote administration  | systemd unit ``ssh.service``       |
++----------------+---------------------------------------+------------------------------------+
+| Puppet agent   | configuration management agent        | systemd unit ``puppet.service``    |
++----------------+---------------------------------------+------------------------------------+
+| rsyslog        | syslog daemon                         | systemd unit ``rsyslog.service``   |
++----------------+---------------------------------------+------------------------------------+
+| smartd         | SMART daemon                          | systemd unit ``smart.service``     |
++----------------+---------------------------------------+------------------------------------+
 
 .. todo:: add Icinga 2 system monitoring
-
-.. Running Guests
-   --------------
-
-   .. some directive to list guests here
 
 Connected Systems
 -----------------
@@ -192,9 +193,6 @@ Outbound network connections
 * :doc:`emailout` as SMTP relay
 * :doc:`puppet` (tcp/8140) as Puppet master
 
-.. * :doc:`proxyout` as HTTP proxy for APT
-.. * crl.cacert.org (rsync) for getting CRLs
-
 .. todo:: use proxyout for outgoing http/https traffic
 
 Security
@@ -204,16 +202,6 @@ Security
    :RSA:     SHA256:zdFI2N/R/yT5n+KbeQh+qXJ3p/bjp+A8BOyTeN+Eh3g MD5:bb:00:36:35:8c:02:97:7d:1b:c4:25:77:60:e6:ec:19
    :ECDSA:   SHA256:In12bkuY6JktIOpsBw5By89ip6ovWhi4Er8GaQzsbrI MD5:1b:32:4d:f3:83:28:04:ac:cf:4f:a9:48:80:b2:2b:0b
    :ED25519: SHA256:m2CBwhLqO47H5iiEoS7YK7mAgoXLeIEjmEdhzNImTPQ MD5:e8:c5:9c:ce:f3:5f:52:98:78:c8:5e:88:b6:e2:3c:37
-
-Dedicated user roles
---------------------
-
-* None
-
-Non-distribution packages and modifications
--------------------------------------------
-
-* None
 
 Risk assessments on critical packages
 -------------------------------------
@@ -249,7 +237,7 @@ Planned
 -------
 
 * Setup Icinga2 monitoring
-* Setup containers for MariaDB, Nextcloud, Taiga.io and other services
+* Setup containers for Taiga.io, Gitea, Zulip and other services
 
 Additional documentation
 ========================

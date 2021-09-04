@@ -282,7 +282,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the :cacertgit:`cacert-puppet`.
 
-.. todo:: move configuration of :doc:`blog` to Puppet code
+.. todo:: move configuration of blog to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -362,7 +362,8 @@ Planned
 .. todo:: manage the blog system using Puppet
 
 .. todo::
-   setup CRL checks (can be borrowed from :doc:`svn`) for client certificates
+
+   setup CRL checks (can be borrowed from svn for client certificates
 
 System Future
 -------------

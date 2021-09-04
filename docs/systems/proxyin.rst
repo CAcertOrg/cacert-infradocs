@@ -33,7 +33,7 @@ Application Administration
 +-------------+---------------------+
 | Application | Administrator(s)    |
 +=============+=====================+
-| sniproxy    | :ref:`people_jandd` |
+| nginx       | :ref:`people_jandd` |
 +-------------+---------------------+
 
 Contact
@@ -254,10 +254,11 @@ Tasks
 Adding a new forward entry
 --------------------------
 
-Add a line to the ``profiles::sniproxy::https_forwards`` item in Hiera data and
-adjust the firewall configuration on :doc:`infra02`. You will need to request
-DNS changes from the critical team if you want to switch an existing service to
-use the SNI proxy service.
+Add an entry to the ``profiles::sniproxy::forwarded`` item in
+:file:`hieradata/nodes/proxyin.yaml` in :cacertgit:`cacert-puppet` and adjust
+the firewall configuration on :doc:`infra02`. You will need to request DNS
+changes from the critical team if you want to switch an existing service to use
+the SNI proxy service.
 
 Changes
 =======

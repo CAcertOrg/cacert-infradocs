@@ -66,7 +66,7 @@ This system is located in an :term:`LXC` container on physical machine
 Logical Location
 ----------------
 
-:IP Internet: :ip:v4:`213.154.225.248`
+:IP Internet: :ip:v4:`213.154.225.241`
 :IP Intranet: :ip:v4:`172.16.2.149`
 :IP Internal: :ip:v4:`10.0.0.149`
 :IPv6:        :ip:v6:`2001:7b8:616:162:2::149`
@@ -463,7 +463,7 @@ Changes
 Planned
 -------
 
-.. todo:: implement git workflows for updates maybe using :doc:`jenkins`
+.. todo:: implement git workflows for updates maybe using jenkins
 
 System Future
 -------------

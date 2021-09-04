@@ -242,8 +242,10 @@ Changes
 Planned
 -------
 
-.. todo:: Change all infrastructure hosts to use this machine as APT proxy to
-          avoid flaky firewall configurations on :doc:`infra02`.
+.. todo::
+
+   Change all infrastructure hosts to use this machine as APT proxy to avoid
+   flaky firewall configurations on infra02.
 
 System Future
 -------------

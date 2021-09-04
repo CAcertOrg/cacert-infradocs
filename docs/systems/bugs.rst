@@ -260,7 +260,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move configuration of :doc:`bugs` to Puppet code
+.. todo:: move configuration of bugs to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -346,7 +346,7 @@ Planned
 
 .. todo::
 
-   Switch ingest traffic for webmail to :doc:`proxyin` and drop http redirector
+   Switch ingest traffic for webmail to proxyin and drop http redirector
    configuration from Apache httpd
 
 System Future

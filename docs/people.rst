@@ -7,6 +7,13 @@ applications. The list of roles is known to not be complete.
 
 .. maybe this can be improved by some automation later
 
+.. _people_ted:
+
+Bernhard Fröhlich
+=================
+
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`
+
 .. _people_dirk:
 
 Dirk Astrath
@@ -16,21 +23,13 @@ Dirk Astrath
         :term:`Infrastructure Administrator`
         :term:`Critical System Administrator`
 
-.. _people_abahlo:
+.. _people_gero:
 
-Alexander Bahlo
-===============
+Gero Treuner
+============
 
-:roles: :term:`Application Administrator` on :doc:`systems/blog`
-:contact: alexander.bahlo@cacert.org
-
-.. _people_benbe:
-
-Benny Baumann
-=============
-
-:roles: :term:`Infrastructure Administrator`, :term:`Application Administrator`
-        on :doc:`systems/bugs`
+:roles: :term:`Application Administrator` on :doc:`systems/board`.
+:contact: gero.treuner@cacert.org
 
 .. _people_ian:
 
@@ -49,93 +48,6 @@ Jan Dittberner
 :wiki: :wiki:`JanDittberner`
 :irc: jandd
 
-.. _people_ted:
-
-Bernhard Fröhlich
-=================
-
-:roles: :term:`Application Administrator` on :doc:`systems/bugs`
-
-.. _people_martin:
-
-Martin Gummi
-============
-
-:roles: :term:`Infrastructure Administrator`
-:contact: martin.gummi@cacert.org
-
-.. _people_philipp:
-
-Philipp Gühring
-===============
-
-:roles: :term:`Application Administrator` on :doc:`systems/bugs`
-
-.. _people_mario:
-
-Mario Lipinski
-==============
-
-:roles: :term:`Infrastructure Administrator`, former Team Lead
-:contact: mario@cacert.org
-
-.. _people_marcus:
-
-Marcus Mängel
-=============
-
-:roles: :term:`Application Administrator` on :doc:`systems/blog`
-:contact: marcus.maengel@cacert.org
-
-.. _people_mendel:
-
-Mendel Mobach
-=============
-
-:roles: :term:`Critical System Administrator` until 01.11.2019
-:contact: mendel@cacert.org
-
-.. _people_msimons:
-
-Martin Simons
-=============
-
-:roles: :term:`Critical System Administrator` until 01.11.2019
-:contact: msimons@cacert.org
-
-.. _people_neo:
-
-Michael Tänzer
-==============
-
-:roles:   :term:`Infrastructure Administrator`
-:contact: michael.taenzer@cacert.org
-:wiki:    :wiki:`MichaelTänzer`
-
-
-.. _people_nick:
-
-Nicolas Bebout
-==============
-
-:contact: nick.bebout@cacert.org
-
-.. _people_gero:
-
-Gero Treuner
-============
-
-:roles: :term:`Infrastructure Administrator`
-:contact: gero.treuner@cacert.org
-
-.. _people_ulrich:
-
-Ulrich Schröter
-===============
-
-:roles: :term:`Infrastructure Administrator`
-:contact: ulrich@cacert.org
-
 .. _people_jselzer:
 
 Jochim Selzer
@@ -150,6 +62,53 @@ Karl-Heinz Gödderz
 ==================
 
 :contact: GuKKDevel@CAcert.org
+
+.. _people_mario:
+
+Mario Lipinski
+==============
+
+:roles: :term:`Infrastructure Administrator`, former Team Lead
+:contact: mario@cacert.org
+
+.. _people_mendel:
+
+Mendel Mobach
+=============
+
+:roles: :term:`Critical System Administrator` until 01.11.2019
+:contact: mendel@cacert.org
+
+.. _people_neo:
+
+Michael Tänzer
+==============
+
+:roles:   :term:`Infrastructure Administrator`
+:contact: michael.taenzer@cacert.org
+:wiki:    :wiki:`MichaelTänzer`
+
+.. _people_nick:
+
+Nicolas Bebout
+==============
+
+:contact: nick.bebout@cacert.org
+
+.. _people_philipp:
+
+Philipp Gühring
+===============
+
+:roles: :term:`Application Administrator` on :doc:`systems/bugs`
+
+.. _people_sat:
+
+Sascha Ternes
+=============
+
+:roles: :term:`Infrastructure Administrator`
+:contact: sascha.ternes@cacert.org
 
 .. _people_wytze:
 

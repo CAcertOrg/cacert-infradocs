@@ -222,7 +222,7 @@ Planned
 
 .. todo:: setup monitoring for testmgr
 
-.. todo:: make testmgr available on default ports via :doc:`proxyin`
+.. todo:: make testmgr available on default ports via proxyin
 
 .. todo:: setup proper DNS entries for testmgr
 

@@ -283,9 +283,9 @@ OpenDKIM configuration
 ----------------------
 
 .. todo::
+
    enable OpenDKIM in Postfix configuration when the DNS record is in place and
-   :doc:`email` is ready for DKIM too or is configured to send mail via
-   emailout.
+   email is ready for DKIM too or is configured to send mail via emailout.
 
 The OpenDKIM configuration is stored in :file:`/etc/opendkim.conf`. The
 following lines have been added:

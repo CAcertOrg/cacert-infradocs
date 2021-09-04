@@ -434,7 +434,7 @@ following files are special for this setup:
 |                | issue.cacert.org to :doc:`issue`                            |
 +----------------+-------------------------------------------------------------+
 
-.. todo:: consider to send all outgoing mail via :doc:`emailout`
+.. todo:: consider to send all outgoing mail via emailout
 
 Email storage
 -------------

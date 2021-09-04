@@ -214,7 +214,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the :cacertgit:`cacert-puppet`.
 
-.. todo:: move configuration of :doc:`wiki` to Puppet code
+.. todo:: move configuration of wiki to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
@@ -240,7 +240,7 @@ Apache configuration
 
 Apache is configured using files in :file:`/etc/apache2` integrating the MoinMoin wiki using `mod_wsgi`.
 
-.. todo:: more comprehensive Apache configuration documentation for :doc:`wiki`
+.. todo:: more comprehensive Apache configuration documentation for wiki
 
 Changes
 =======

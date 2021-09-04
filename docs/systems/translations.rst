@@ -261,8 +261,8 @@ packages.
 
 .. todo::
 
-   consider building the virtualenv on :doc:`jenkins` to avoid development tools
-   on this system
+   consider building the virtualenv on jenkins to avoid development tools on
+   this system
 
 The Puppet agent package and a few dependencies are installed from the official
 Puppet APT repository because the versions in Debian are too old to use modern
@@ -340,7 +340,7 @@ Critical Configuration items
 The system configuration is managed via Puppet profiles. There should be no
 configuration items outside of the Puppet repository.
 
-.. todo:: move configuration of :doc:`translations` to Puppet code
+.. todo:: move configuration of translations to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
