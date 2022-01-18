@@ -12,5 +12,7 @@ dateutils = "*"
 validate-email = "*"
 sphinxcontrib-blockdiag = "*"
 sphinxcontrib-nwdiag = "*"
+blockdiag = "<3"
+nwdiag = "<3"
 
 [dev-packages]
