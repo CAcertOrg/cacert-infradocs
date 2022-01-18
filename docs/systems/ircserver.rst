@@ -354,13 +354,12 @@ votebot configuration
 ---------------------
 
 Votebot is configured via spring-boot mechanisms. The current configuration file
-is :file:`/home/votebot/cacert-votebot-0.1.0-SNAPSHOT.conf` and configures
+is :file:`/home/votebot/cacert-votebot-0.3.0-SNAPSHOT.conf` and configures
 Votebot to connect to localhost as VoteBot. The bot uses the channels #agm and
 #vote. Channels could be changed in an :file:`application.properties` file in
-:file:`/home/votebot`. The available property names can be found in the `git
-repository`_.
-
-.. _git repository: https://git.cacert.org/gitweb/?p=cacert-votebot.git;a=blob;f=src/main/resources/application.properties
+:file:`/home/votebot`. The available property names can be found in the
+:cacertgit:`cacert-votebot` in
+:file:`src/main/resources/application.properties`.
 
 Tasks
 =====

@@ -99,12 +99,6 @@ Operating System
 
 * Debian GNU/Linux 10.9
 
-Applicable Documentation
-------------------------
-
-The system is managed by :doc:`puppet`. The puppet repository is browsable at
-https://git.cacert.org/gitweb/?p=cacert-puppet.git;a=summary.
-
 Services
 ========
 
@@ -225,7 +219,7 @@ Critical Configuration items
 ============================
 
 The system configuration is managed via Puppet profiles. There should be no
-configuration items outside of the Puppet repository.
+configuration items outside of the :cacertgit:`cacert-puppet`.
 
 Tasks
 =====

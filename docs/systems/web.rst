@@ -224,8 +224,7 @@ Keys and X.509 certificates
 ---------------------------
 
 All keys and certificates are managed in the file
-https://git.cacert.org/cacert-puppet.git/plain/hieradata/nodes/web.yaml in the
-:cacertgit:`cacert-puppet`.
+:file:`hieradata/nodes/web.yaml` in the :cacertgit:`cacert-puppet`.
 
 .. sslcert:: codedocs.cacert.org
    :altnames:   DNS:codedocs.cacert.org
@@ -284,12 +283,9 @@ Apache httpd configuration
 --------------------------
 
 Apache httpd configuration is fully managed by Puppet. The VirtualHosts are
-defined in
-https://git.cacert.org/cacert-puppet.git/plain/hieradata/nodes/web.yaml and
-the
-configuration is done via the `web_proxy`_ profile.
-
-.. _web_proxy: https://git.cacert.org/cacert-puppet.git/tree/sitemodules/profiles/manifests/web_proxy.pp
+defined in :file:`hieradata/nodes/web.yaml` and the configuration is done via
+the *web_proxy* profile in :file:`sitemodules/profiles/manifests/web_proxy.pp`
+of the :cacertgit:`cacert-puppet`.
 
 Tasks
 =====

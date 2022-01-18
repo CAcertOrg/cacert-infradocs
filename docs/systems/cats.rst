@@ -215,11 +215,10 @@ Non-distribution packages and modifications
 -------------------------------------------
 
 The CATS software is a custom PHP based system. The application is contained in
-:file:`/home/cats/public_html`. The current repository is at
-https://github.com/CAcertOrg/cats, historic versions are available at
-https://svn.cacert.org/CAcert/Education/CATS. `Instructions for CATS setup
-<https://github.com/CAcertOrg/cats/blob/release/INSTALL.txt>`_ can be found in
-the git repository.
+:file:`/home/cats/public_html`. The current repository is in :github:`cats`,
+historic versions are available at
+https://svn.cacert.org/CAcert/Education/CATS. :github:`Instructions for CATS
+setup <cats/blob/release/INSTALL.txt>` can be found in the git repository.
 
 CATS requires client certificate authentication setup in the Apache httpd
 server.
@@ -311,8 +310,8 @@ database dump from http://cats1.it-sls.de/dump.gz and store it in
 
 .. seealso::
 
-   Instructions for `CATS translation
-   <https://wiki.cacert.org/Brain/Study/EducationTraining/CATSTranslation>`_
+   Instructions for
+   :wiki:`CATS translation <Brain/Study/EducationTraining/CATSTranslation>`
 
 .. index::
    pair: Apache httpd; configuration

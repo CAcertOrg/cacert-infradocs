@@ -342,4 +342,4 @@ Additional documentation
 References
 ----------
 
-* https://git.cacert.org/gitweb/?p=cacert-boardvoting.git;a=blob_plain;f=README.md;hb=HEAD
+* :file:`README.md` in :cacertgit:`cacert-boardvoting`

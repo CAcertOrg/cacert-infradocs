@@ -58,7 +58,7 @@ Setup puppet-agent
 ------------------
 
 - define puppet configuration for the new container in Hiera / sitemodules in
-  the `cacert-puppet Repository`_ on :doc:`systems/git`
+  the :cacertgit:`cacert-puppet` on :doc:`systems/git`
 - see `Puppet agent installation`_ for agent setup (install the agent from
   official Puppet repositories)
 - make sure that DNS resolution is performed by :doc:`systems/infra02`. The
@@ -113,12 +113,10 @@ Setup puppet-agent
      root@system:  /etc/init.d/puppet start
 
 .. _Puppet agent installation: https://puppet.com/docs/puppet/5.4/install_linux.html
-.. _cacert-puppet Repository: https://git.cacert.org/gitweb/?p=cacert-puppet.git
 
 Post-Setup task
 ===============
 
 - Document the new container in a file of the :file:`docs/systems` directory of
-  the `Infrastructure documentation
-  <https://git.cacert.org/gitweb/?p=cacert-infradocs.git;a=tree;f=docs/systems>`_.
+  the :cacertgit:`Infrastructure documentation repository <cacert-infradocs>`
 - Setup machine-admin alias on :doc:`systems/email`.
