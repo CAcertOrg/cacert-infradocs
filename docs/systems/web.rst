@@ -266,9 +266,9 @@ All keys and certificates are managed in the file
    :altnames:   DNS:web.cacert.org
    :certfile:   /etc/ssl/certs/web.cacert.org.crt
    :keyfile:    /etc/ssl/private/web.cacert.org.key
-   :serial:     02DED2
-   :expiration: Jan 22 20:06:47 2022 GMT
-   :sha1fp:     30:C0:61:C5:F7:C6:5E:A3:06:DB:B5:2F:B1:2D:DD:DF:60:5F:D6:88
+   :serial:     02F5C9
+   :expiration: Dec 24 10:41:19 2023 GMT
+   :sha1fp:     7E:D5:23:DC:23:F3:83:38:CD:69:36:31:C5:A3:C3:32:B1:A8:85:32
    :issuer:     CAcert Class 3 Root
 
 * :file:`/usr/share/ca-certificates/CAcert/class3_X0E.crt` CAcert.org Class 3

@@ -245,16 +245,19 @@ Critical Configuration items
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/issue.yaml` in the :cacertgit:`cacert-puppet`.
+
 The following certificate and its corresponding private key is used by Apache
 httpd and Postfix:
 
 .. sslcert:: issue.cacert.org
    :altnames:   DNS:issue.cacert.org
-   :certfile:   /etc/ssl/certs/issue.cacert.org.pem
-   :keyfile:    /etc/ssl/private/issue.cacert.org.key
-   :serial:     147C64
-   :expiration: Feb 16 21:49:56 2022 GMT
-   :sha1fp:     17:B6:5C:F9:1A:67:71:F7:CA:77:03:E5:B6:DC:C3:18:10:A4:6C:81
+   :certfile:   /etc/ssl/public/issue.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/issue.cacert.org.key.pem
+   :serial:     151D71
+   :expiration: Jan 18 17:26:33 2024 GMT
+   :sha1fp:     1D:29:9D:16:17:56:94:EA:C4:63:76:3B:E5:35:68:84:53:42:2D:26
    :issuer:     CA Cert Signing Authority
 
 .. seealso::

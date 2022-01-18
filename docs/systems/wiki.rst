@@ -219,17 +219,20 @@ configuration items outside of the :cacertgit:`cacert-puppet`.
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/wiki.yaml` in the :cacertgit:`cacert-puppet`.
+
 .. sslcert:: wiki.cacert.org
    :altnames:   DNS:wiki.cacert.org
-   :certfile:   /etc/ssl/public/wiki.cacert.org.crt
-   :keyfile:    /etc/ssl/private/wiki.cacert.org.key
-   :serial:     147C63
-   :expiration: Feb 16 21:17:06 2022 GMT
-   :sha1fp:     BC:42:64:D7:DB:1C:CB:C6:5B:FB:3D:60:43:10:11:2F:89:98:2E:F1
+   :certfile:   /etc/ssl/public/wiki.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/wiki.cacert.org.key.pem
+   :serial:     151D31
+   :expiration: Jan 17 18:13:39 2024 GMT
+   :sha1fp:     0E:41:C1:1C:92:19:2B:2C:D2:DA:D3:55:17:95:AB:C5:F6:F5:E9:6B
    :issuer:     CA Cert Signing Authority
 
-:file:`/etc/ssl/certs/cacert.org.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
-:file:`/etc/ssl/certs/cacert.org/` CAcert.org Class 1 certificate (certificate chain for server certificate)
+:file:`/etc/ssl/public/wiki.cacert.org_client_cas.pem` CAcert.org Class 1 and
+Class 3 CA certificates (allowed CA certificates for client certificates)
 
 .. seealso::
 

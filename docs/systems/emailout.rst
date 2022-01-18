@@ -206,15 +206,18 @@ configuration items outside of the :cacertgit:`cacert-puppet`.
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/emailout.yaml` in the :cacertgit:`cacert-puppet`.
+
 Server certificate for STARTTLS connection encryption.
 
 .. sslcert:: emailout.cacert.org
    :altnames:   DNS:emailout.cacert.org
-   :certfile:   /etc/ssl/certs/ssl-cert-emailout.cacert.org.pem
-   :keyfile:    /etc/ssl/private/ssl-cert-emailout.cacert.org.key
-   :serial:     02E023
-   :expiration: Feb 18 12:16:37 2022 GMT
-   :sha1fp:     26:C1:40:AF:AE:C0:E4:92:BD:15:A1:A5:61:26:7B:5C:60:A9:66:4D
+   :certfile:   /etc/ssl/public/emailout.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/emailout.cacert.org.key.pem
+   :serial:     02F68E
+   :expiration: Jan 18 18:30:13 2024 GMT
+   :sha1fp:     F8:F0:B6:AD:E5:44:6C:B8:EE:63:63:70:6E:65:8F:A0:A9:B0:C0:A1
    :issuer:     CAcert Class 3 Root
 
 .. index::

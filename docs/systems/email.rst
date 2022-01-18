@@ -313,15 +313,18 @@ configuration items outside of the :cacertgit:`cacert-puppet`.
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/email.yaml` in the :cacertgit:`cacert-puppet`.
+
 Server certificate for SMTP communication from the Internet.
 
 .. sslcert:: email.cacert.org
    :altnames:   DNS:email.cacert.org
-   :certfile:   /etc/ssl/certs/ssl-cert-email-cacert.pem
-   :keyfile:    /etc/ssl/private/ssl-cert-email-cacert.key
-   :serial:     147CB5
-   :expiration: Feb 18 12:09:04 2022 GMT
-   :sha1fp:     81:52:26:1E:92:82:17:17:26:AA:AB:4B:96:1A:DC:DC:A1:CE:3D:49
+   :certfile:   /etc/ssl/public/email.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/email.cacert.org.key.pem
+   :serial:     151D77
+   :expiration: Jan 18 18:10:42 2024 GMT
+   :sha1fp:     5E:2C:82:A6:63:53:5F:7B:CF:2F:19:B3:1F:DC:8C:B7:32:A7:17:48
    :issuer:     CA Cert Signing Authority
 
 Server certificate for community email services (SMTPS, SMTP submission in
@@ -329,18 +332,12 @@ Postfix and IMAP with STARTTLS, IMAPS, POP3 with STARTTLS, POP3S and pysieved)
 
 .. sslcert:: community.cacert.org
    :altnames:   DNS:cert.community.cacert.org, DNS:cert.email.cacert.org, DNS:community.cacert.org, DNS:email.cacert.org, DNS:nocert.community.cacert.org, DNS:nocert.email.cacert.org
-   :certfile:   /etc/ssl/certs/ssl-cert-community-cacert.crt
-   :keyfile:    /etc/ssl/private/ssl-cert-community-cacert.key
-   :serial:     147CB0
-   :expiration: Feb 18 11:39:53 2022 GMT
-   :sha1fp:     B2:90:DE:4D:8D:D9:3A:FE:22:3A:67:95:E2:CD:F7:30:55:4B:38:AC
+   :certfile:   /etc/ssl/public/community.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/community.cacert.org.key.pem
+   :serial:     151D75
+   :expiration: Jan 18 17:49:54 2024 GMT
+   :sha1fp:     80:5E:7E:12:40:8C:8D:1F:6C:A2:8A:AA:A8:31:C3:D5:CB:E8:BF:22
    :issuer:     CA Cert Signing Authority
-
-.. sslcert:: community.cacert.org
-   :certfile:  /etc/ssl/public/community.cacert.org.crt.pem
-   :keyfile:   /etc/ssl/private/community.cacert.org.key.pem
-   :serial:    147CB0
-   :secondary:
 
 The server certificate for the CAcert community self service API
 
@@ -352,10 +349,6 @@ The server certificate for the CAcert community self service API
    :expiration: Aug 16 10:01:04 2021 GMT
    :sha1fp:     C7:34:5A:CF:3F:82:8E:82:4D:2C:90:55:48:7D:BF:5A:17:53:F2:E7
    :issuer:     CAcert Class 3 Root
-
-The certificate is rolled out by Puppet. All changes to the certificate need to
-be made to the file :file:`hieradata/nodes/email.yaml` in the
-:cacertgit:`cacert-puppet` repository.
 
 .. note::
 

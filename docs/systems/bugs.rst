@@ -258,21 +258,27 @@ Critical Configuration items
 ============================
 
 The system configuration is managed via Puppet profiles. There should be no
-configuration items outside of the Puppet repository.
+configuration items outside of the :cacertgit:`cacert-puppet`.
 
-.. todo:: move configuration of bugs to Puppet code
+.. todo:: move all configuration of bugs to Puppet code
 
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/bugs.yaml` in the :cacertgit:`cacert-puppet`.
+
 .. sslcert:: bugs.cacert.org
    :altnames:   DNS:bugs.cacert.org
-   :certfile:   /etc/ssl/public/bugs.c.o.crt
-   :keyfile:    /etc/ssl/private/bugs.c.o.key
-   :serial:     02DFC0
-   :expiration: Feb 07 10:41:43 2022 GMT
-   :sha1fp:     23:15:BF:76:0A:4A:28:E4:45:20:F6:6F:CD:48:2B:F7:5F:2B:75:0B
+   :certfile:   /etc/ssl/public/bugs.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/bugs.cacert.org.key.pem
+   :serial:     02F624
+   :expiration: Jan 8 12:10:46 2024 GMT
+   :sha1fp:     7E:24:94:73:A5:A1:01:B5:D7:D2:73:C1:E2:F6:52:6F:43:A8:86:FA
    :issuer:     CAcert Class 3 Root
+
+* :file:`/etc/ssl/public/bugs.cacert.org_client_cas.pem` CAcert.org Class 1 and
+  Class 3 CA certificates (allowed CA certificates for client certificates)
 
 .. index::
    pair: Mantis; configuration

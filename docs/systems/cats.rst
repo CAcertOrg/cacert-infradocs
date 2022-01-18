@@ -244,9 +244,9 @@ The server certificate for the CATS web application.
    :altnames:   DNS:cats.cacert.org
    :certfile:   /home/cats/ssl/certs/cats_cert.pem
    :keyfile:    /home/cats/ssl/private/cats_privatekey.pem
-   :serial:     147C65
-   :expiration: Feb 16 21:58:48 2022 GMT
-   :sha1fp:     67:69:C2:82:21:72:BD:DD:D8:AB:9D:B1:C8:CD:C2:09:72:10:2C:37
+   :serial:     151D72
+   :expiration: Jan 18 17:35:25 2024 GMT
+   :sha1fp:     AF:70:6D:37:7C:42:04:86:EE:1A:41:66:26:1F:E5:8F:5A:31:B2:00
    :issuer:     CA Cert Signing Authority
 
 .. _cats_client_cert:

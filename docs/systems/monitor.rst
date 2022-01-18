@@ -279,18 +279,20 @@ configuration items outside of the Puppet repository.
 Keys and X.509 certificates
 ---------------------------
 
+All keys and certificates are managed in the file
+:file:`hieradata/nodes/monitor.yaml` in the :cacertgit:`cacert-puppet`.
+
 .. sslcert:: monitor.cacert.org
    :altnames:   DNS:monitor.cacert.org, DNS:monitor.intra.cacert.org
-   :certfile:   /etc/ssl/certs/monitor.c.o.pem
-   :keyfile:    /etc/ssl/private/monitor.c.o.priv
-   :serial:     147C5F
-   :expiration: Feb 16 20:15:55 2022 GMT
-   :sha1fp:     68:A0:FA:C9:9A:52:AB:2C:F2:41:58:FC:D1:25:64:8B:4A:93:3C:E5
+   :certfile:   /etc/ssl/public/monitor.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/monitor.cacert.org.key.pem
+   :serial:     151D6D
+   :expiration: Jan 18 17:01:02 2024 GMT
+   :sha1fp:     C9:85:E2:A2:7B:CB:FB:9A:49:E7:1E:D7:5F:3B:5F:35:2A:60:E2:34
    :issuer:     CA Cert Signing Authority
 
-* :file:`/etc/ssl/certs/cacert.allcerts.pem` CAcert.org Class 1 and Class 3 CA
-  certificates (allowed CA certificates for client certificates and the
-  certificate chain for the server certificate)
+* :file:`/etc/ssl/public/monitor.cacert.org_client_cas.pem` CAcert.org Class 1
+  and Class 3 CA certificates (allowed CA certificates for client certificates)
 * :file:`/var/local/ssl/crls/`
 
 .. seealso::
