@@ -303,11 +303,11 @@ Keys and X.509 certificates
 
 .. sslcert:: irc.cacert.org
    :altnames:   DNS:irc.cacert.org, DNS:ircserver.cacert.org
-   :certfile:   /etc/ssl/public/irc.cacert.org.crt
-   :keyfile:    /etc/ssl/private/irc.cacert.org.key
-   :serial:     147D16
-   :expiration: Feb 20 07:52:28 2022 GMT
-   :sha1fp:     9E:D2:07:24:38:5D:BA:EE:12:5B:A5:0C:43:AD:91:F5:AA:26:AA:47
+   :certfile:   /etc/ssl/public/irc.cacert.org.crt.pem
+   :keyfile:    /etc/ssl/private/irc.cacert.org.key.pem
+   :serial:     151DB1
+   :expiration: Jan 20 16:46:44 2024 GMT
+   :sha1fp:     1B:D5:DC:A2:C7:0B:13:F7:0F:EA:91:95:CA:DB:DB:5E:1A:36:50:CA
    :issuer:     CA Cert Signing Authority
 
 .. index::
