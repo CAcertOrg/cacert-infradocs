@@ -289,11 +289,11 @@ Keys and X.509 certificates
 
 .. sslcert:: blog.cacert.org
    :altnames:   DNS:blog.cacert.org
-   :certfile:   /etc/ssl/public/blog.cacert.org.crt
-   :keyfile:    /etc/ssl/private/blog.cacert.org.key
-   :serial:     147D13
-   :expiration: Feb 20 07:30:37 2022 GMT
-   :sha1fp:     E1:5B:21:68:AD:77:A4:53:8E:B2:2E:6F:5F:46:CA:E8:4F:27:16:08
+   :certfile:   /etc/ssl/public/blog.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/blog.cacert.org.key.pem
+   :serial:     151DAE
+   :expiration: Jan 20 16:21:19 2024 GMT
+   :sha1fp:     91:E2:B4:4E:68:65:01:D5:4A:41:17:DC:41:6A:14:EE:CF:D1:63:EC
    :issuer:     CA Cert Signing Authority
 
 * :file:`/etc/ssl/certs/cacert.org/` directory containing CAcert.org Class 1
