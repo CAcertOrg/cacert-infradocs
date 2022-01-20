@@ -347,11 +347,11 @@ Keys and X.509 certificates
 
 .. sslcert:: translations.cacert.org
    :altnames:   DNS:l10n.cacert.org, DNS:translations.cacert.org
-   :certfile:   /etc/ssl/public/translations.c.o.chain.crt
-   :keyfile:    /etc/ssl/private/translations.c.o.key
-   :serial:     147D17
-   :expiration: Feb 20 08:24:07 2022 GMT
-   :sha1fp:     86:3D:3C:3A:37:65:9A:8D:13:01:42:D3:E5:C9:BC:71:F4:71:AD:2E
+   :certfile:   /etc/ssl/public/translations.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/translations.cacert.org.key.pem
+   :serial:     151DB4
+   :expiration: Jan 20 17:17:19 2024 GMT
+   :sha1fp:     A6:BD:A8:F4:1B:78:0C:70:FD:B9:CF:09:C4:4A:8E:10:62:57:6B:B3
    :issuer:     CA Cert Signing Authority
 
 .. seealso::
