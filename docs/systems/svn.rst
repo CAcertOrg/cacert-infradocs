@@ -244,15 +244,15 @@ Keys and X.509 certificates
 
 .. sslcert:: svn.cacert.org
    :altnames:   DNS:cert.svn.cacert.org, DNS:nocert.svn.cacert.org, DNS:svn.cacert.org
-   :certfile:   /etc/apache2/ssl/svn.cacert.org.crt.pem
-   :keyfile:    /etc/apache2/ssl/svn.cacert.org.key.pem
-   :serial:     02E033
-   :expiration: Feb 20 08:16:44 2022 GMT
-   :sha1fp:     A1:FB:AB:7A:95:B3:4C:77:1D:DF:A1:D8:32:53:DE:3E:8E:6C:0A:EF
+   :certfile:   /etc/ssl/public/svn.cacert.org.chain.pem
+   :keyfile:    /etc/ssl/private/svn.cacert.org.key.pem
+   :serial:     02F696
+   :expiration: Jan 20 16:19:56 2024 GMT
+   :sha1fp:     7C:D8:36:14:2E:A1:E6:89:A5:F2:7B:56:1E:A8:F7:03:2F:5A:BE:85
    :issuer:     CAcert Class 3 Root
 
-* `/etc/apache2/ssl/cacert-certs.pem` CAcert.org Class 1 and Class 3 CA certificates (allowed CA certificates for client certificates)
-* `/etc/apache2/ssl/cacert-chain.pem` CAcert.org Class 1 certificate (certificate chain for server certificate)
+* `/etc/ssl/public/svn.cacert.org_client_cas.pem` CAcert.org Class 1 and Class
+  3 CA certificates (allowed CA certificates for client certificates)
 
 .. seealso::
 
@@ -264,47 +264,9 @@ Keys and X.509 certificates
 Apache httpd configuration
 --------------------------
 
-The main configuration files for Apache httpd are:
-
-* :file:`/etc/apache2/sites-available/cert.svn.cacert.org`
-
-  Defines the https VirtualHost for IPv4 and IPv6 on port 443 using client
-  certificate authentication. The SNI server names svn.cacert.org and
-  cert.svn.cacert.org are handled by the VirtualHost configuration in this
-  file.
-
-* :file:`/etc/apache2/sites-available/nocert.svn.cacert.org`
-
-  Defines the https VirtualHost for IPv4 and IPv6 on port 443 using
-  username/password authentication. The SNI server name nocert.svn.cacert.org
-  is handled by the VirtualHost configuration in this file.
-
-* :file:`/etc/apache2/sites-available/000-default`
-
-  Defines the http read-only VirtualHost for IPv4 and IPv6 on port 80.
-
-These files include the following files to configure Subversion and
-authentication/authorization:
-
-* :file:`/etc/apache2/sites-available/ssl_config.include`
-
-  contains VirtualHost specific TLS configuration
-
-* :file:`/etc/apache2/sites-available/svn_anonymous_config.include`
-
-  configure anonymous SVN access without defining a password file and thus
-  restricting SVN paths that require authentication
-
-* :file:`/etc/apache2/sites-available/svn_pwauth_config.include`
-
-  configure username/password authenticated access to SVN using the password
-  file :file:`/srv/dav_svn.passwd`.
-
-* :file:`/etc/apache2/sites-available/svn_certauth_config.include`
-
-  configure TLS client certificate authenticated access to SVN using the first
-  email address in the client certificate's Subject Distinguished name as user
-  name
+Apache httpd configuration is fully managed by the Puppet profile
+:file:`sitemodules/profiles/manifests/subversion_server.pp` in
+cacertgit:`cacert-puppet`.
 
 Subversion configuration
 ------------------------
