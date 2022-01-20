@@ -287,9 +287,9 @@ Keys and X.509 certificates
    :altnames:   DNS:board.cacert.org
    :certfile:   /etc/ssl/certs/board.crt
    :keyfile:    /etc/ssl/private/board.key
-   :serial:     147D14
-   :expiration: Feb 20 07:36:27 2022 GMT
-   :sha1fp:     73:5A:BD:98:9F:3F:1C:CB:8B:A2:B1:A4:97:6E:4C:80:1C:F9:8D:A1
+   :serial:     151DB0
+   :expiration: Jan 20 16:40:51 2024 GMT
+   :sha1fp:     4B:78:45:B1:36:F7:85:33:1D:C1:80:FE:89:F7:B2:29:D0:85:7A:5D
    :issuer:     CA Cert Signing Authority
 
 * :file:`/etc/ssl/certs/cacert.org.pem` CAcert.org Class 1 and Class 3 CA
