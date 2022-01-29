@@ -110,10 +110,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Buster
-   single: Debian GNU/Linux; 10.10
+   single: Debian GNU/Linux; Bullseye
+   single: Debian GNU/Linux; 11.2
 
-* Debian GNU/Linux 10.10
+* Debian GNU/Linux 11.2
 
 Services
 ========
