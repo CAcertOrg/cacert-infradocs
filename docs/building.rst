@@ -76,3 +76,11 @@ Content-Security-Policy settings).
 If the documentation build is successful the result is pushed to a webserver
 document root on :doc:`systems/webstatic` and is publicly available at
 https://infradocs.cacert.org/.
+
+Tipps
+-----
+
+The ``.sshkeys`` Sphinx directive for a system can be generated using this
+shell snippet::
+
+  echo '.. sshkeys::' ; for k in /etc/ssh/ssh_host_*pub; do echo -n '   ' ; (a=$(echo :${${$(basename $k)##ssh_host_}/_key.pub/}: | tr '[:lower:]' '[:upper:]'); echo $a; ssh-keygen -E SHA256 -l -f $k|cut -d ' ' -f 2; ssh-keygen -E MD5 -l -f $k|cut -d ' ' -f 2) | tr '\n' ' ' ; echo; done
