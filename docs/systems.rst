@@ -27,7 +27,7 @@ administrator team.
    systems/monitor
    systems/motion
    systems/nextcloud
-   systems/postgresql
+   systems/pgsql
    systems/proxyin
    systems/proxyout
    systems/puppet
