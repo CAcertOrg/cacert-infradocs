@@ -48,7 +48,7 @@ Logical Location
 
 :IP Internal: :ip:v4:`10.0.3.11`
 :IPv6:        :ip:v6:`2001:7b8:616:162:3::11`
-:MAC address: :mac:`00:ff:8f:bc:23:47` (eth0@if12)
+:MAC address: :mac:`00:ff:8f:bc:23:47` (eth0)
 
 .. seealso::
 
@@ -160,14 +160,16 @@ Security
 ========
 
 .. sshkeys::
-   :RSA: SHA256:BAoKSGc5ri54/upuMwCAIZbSaOqAGTnLPAavMcNOoRA MD5:36:fc:66:82:dc:94:3b:e3:50:97:83:fc:5a:5e:36:61
-   :ECDSA: SHA256:q2d/j0gU2/akCdqYz6o1dS5gP1gh6JMI5msIbeR8k3Q MD5:ea:64:f2:2e:6d:39:a0:61:6d:b2:07:ba:db:17:5c:81
+   :RSA:     SHA256:BAoKSGc5ri54/upuMwCAIZbSaOqAGTnLPAavMcNOoRA MD5:36:fc:66:82:dc:94:3b:e3:50:97:83:fc:5a:5e:36:61
+   :ECDSA:   SHA256:q2d/j0gU2/akCdqYz6o1dS5gP1gh6JMI5msIbeR8k3Q MD5:ea:64:f2:2e:6d:39:a0:61:6d:b2:07:ba:db:17:5c:81
    :ED25519: SHA256:6jpSzqsnKON8WrgimzmRBeMhOj23WfTHdB9Nh9FCr5I MD5:04:1a:a8:a9:29:c4:67:8b:68:3d:40:55:fc:0d:7b:39
 
 Non-distribution packages and modifications
 -------------------------------------------
 
-None
+The Puppet agent packages and a few dependencies are installed from the
+official Puppet APT repository because the versions in Debian are too old to
+use modern Puppet features.
 
 Risk assessments on critical packages
 -------------------------------------
@@ -203,3 +205,4 @@ Additional documentation
 .. seealso::
 
    * :wiki:`Exim4Configuration`
+   * https://mariadb.com/kb/en/documentation/
