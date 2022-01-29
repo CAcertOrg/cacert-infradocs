@@ -97,17 +97,21 @@ DNS
 .. index::
    single: DNS records; Svn
 
-========================== ======== ============================================
-Name                       Type     Content
-========================== ======== ============================================
-svn.cacert.org.            IN SSHFP 1 1 1128972FB54F927477A781718E2F9C114E9CA383
-svn.cacert.org.            IN SSHFP 2 1 3A36E5DF06304C481F01FC723FD88A086E82D986
-svn.cacert.org.            IN A     213.154.225.238
-cert.svn.cacert.org.       IN CNAME svn.cacert.org.
-nocert.svn.cacert.org      IN CNAME svn.cacert.org
-========================== ======== ============================================
-
-.. todo:: add AAAA record for IPv6 address
++-----------------------+----------+----------------------------------------------+
+| Name                  | Type     | Content                                      |
++=======================+==========+==============================================+
+| svn.cacert.org.       | IN SSHFP | 1 1 1128972FB54F927477A781718E2F9C114E9CA383 |
++-----------------------+----------+----------------------------------------------+
+| svn.cacert.org.       | IN SSHFP | 2 1 3A36E5DF06304C481F01FC723FD88A086E82D986 |
++-----------------------+----------+----------------------------------------------+
+| svn.cacert.org.       | IN A     | 213.154.225.238                              |
++-----------------------+----------+----------------------------------------------+
+| svn.cacert.org.       | IN AAAA  | 2001:7b8:616:162:2::15                       |
++-----------------------+----------+----------------------------------------------+
+| cert.svn.cacert.org.  | IN CNAME | svn.cacert.org.                              |
++-----------------------+----------+----------------------------------------------+
+| nocert.svn.cacert.org | IN CNAME | svn.cacert.org.                              |
++-----------------------+----------+----------------------------------------------+
 
 .. seealso::
 
@@ -117,10 +121,10 @@ Operating System
 ----------------
 
 .. index::
-   single: Debian GNU/Linux; Stretch
-   single: Debian GNU/Linux; 9.13
+   single: Debian GNU/Linux; Buster
+   single: Debian GNU/Linux; 10.11
 
-* Debian GNU/Linux 9.13
+* Debian GNU/Linux 10.11
 
 Applicable Documentation
 ------------------------
@@ -134,19 +138,19 @@ Services
 Listening services
 ------------------
 
-+----------+-----------+-----------+-----------------------------------------+
-| Port     | Service   | Origin    | Purpose                                 |
-+==========+===========+===========+=========================================+
-| 22/tcp   | ssh       | ANY       | admin console access                    |
-+----------+-----------+-----------+-----------------------------------------+
-| 25/tcp   | smtp      | local     | mail delivery to local MTA              |
-+----------+-----------+-----------+-----------------------------------------+
-| 80/tcp   | http      | ANY       | application                             |
-+----------+-----------+-----------+-----------------------------------------+
-| 443/tcp  | https     | ANY       | application                             |
-+----------+-----------+-----------+-----------------------------------------+
-| 5666/tcp | nrpe      | monitor   | remote monitoring service               |
-+----------+-----------+-----------+-----------------------------------------+
++----------+---------+---------+----------------------------+
+| Port     | Service | Origin  | Purpose                    |
++==========+=========+=========+============================+
+| 22/tcp   | ssh     | ANY     | admin console access       |
++----------+---------+---------+----------------------------+
+| 25/tcp   | smtp    | local   | mail delivery to local MTA |
++----------+---------+---------+----------------------------+
+| 80/tcp   | http    | ANY     | application                |
++----------+---------+---------+----------------------------+
+| 443/tcp  | https   | ANY     | application                |
++----------+---------+---------+----------------------------+
+| 5665/tcp | icinga2 | monitor | remote monitoring service  |
++----------+---------+---------+----------------------------+
 
 Running services
 ----------------
@@ -154,42 +158,37 @@ Running services
 .. index::
    single: apache httpd
    single: cron
+   single: dbus
    single: exim
-   single: nrpe
+   single: icinga2
    single: openssh
    single: puppet agent
    single: rsyslog
 
-+--------------------+--------------------+----------------------------------------+
-| Service            | Usage              | Start mechanism                        |
-+====================+====================+========================================+
-| Apache httpd       | Webserver for      | init script                            |
-|                    | Subversion         | :file:`/etc/init.d/apache2`            |
-+--------------------+--------------------+----------------------------------------+
-| cron               | job scheduler      | init script :file:`/etc/init.d/cron`   |
-+--------------------+--------------------+----------------------------------------+
-| Exim               | SMTP server for    | init script                            |
-|                    | local mail         | :file:`/etc/init.d/exim4`              |
-|                    | submission         |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Nagios NRPE server | remote monitoring  | init script                            |
-|                    | service queried by | :file:`/etc/init.d/nagios-nrpe-server` |
-|                    | :doc:`monitor`     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| openssh server     | ssh daemon for     | init script :file:`/etc/init.d/ssh`    |
-|                    | remote             |                                        |
-|                    | administration     |                                        |
-+--------------------+--------------------+----------------------------------------+
-| Puppet agent       | configuration      | init script                            |
-|                    | management agent   | :file:`/etc/init.d/puppet`             |
-+--------------------+--------------------+----------------------------------------+
-| rsyslog            | syslog daemon      | init script                            |
-|                    |                    | :file:`/etc/init.d/syslog`             |
-+--------------------+--------------------+----------------------------------------+
++----------------+---------------------------------------+----------------------------------+
+| Service        | Usage                                 | Start mechanism                  |
++================+=======================================+==================================+
+| Apache httpd   | Webserver for Subversion              | systemd unit ``apache2.service`` |
++----------------+---------------------------------------+----------------------------------+
+| cron           | job scheduler                         | systemd unit ``cron.service``    |
++----------------+---------------------------------------+----------------------------------+
+| dbus-daemon    | System message bus                    | systemd unit ``dbus.service``    |
++----------------+---------------------------------------+----------------------------------+
+| Exim           | SMTP server for local mail submission | systemd unit ``exim4.service``   |
++----------------+---------------------------------------+----------------------------------+
+| icinga2        | Icinga2 monitoring agent              | systemd unit ``icinga2.service`` |
++----------------+---------------------------------------+----------------------------------+
+| openssh server | ssh daemon for remote administration  | systemd unit ``ssh.service``     |
++----------------+---------------------------------------+----------------------------------+
+| Puppet agent   | configuration management agent        | systemd unit ``puppet.service``  |
++----------------+---------------------------------------+----------------------------------+
+| rsyslog        | syslog daemon                         | systemd unit ``rsyslog.service`` |
++----------------+---------------------------------------+----------------------------------+
 
 Connected Systems
 -----------------
 
+* :doc:`monitor`
 * Connection from :doc:`blog` because blog uses some resources served from svn
 * Connection from https://www.cacert.org/ because blog posts are embedded there
 * :doc:`monitor`
