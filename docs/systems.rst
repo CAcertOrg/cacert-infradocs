@@ -14,6 +14,7 @@ administrator team.
    systems/board
    systems/bugs
    systems/cats
+   systems/code
    systems/community
    systems/email
    systems/emailout
