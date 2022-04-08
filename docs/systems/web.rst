@@ -248,9 +248,9 @@ All keys and certificates are managed in the file
    :altnames:   DNS:infradocs.cacert.org
    :certfile:   /etc/ssl/certs/infradocs.cacert.org.crt
    :keyfile:    /etc/ssl/private/infradocs.cacert.org.key
-   :serial:     02E102
-   :expiration: May 04 18:37:30 2022 GMT
-   :sha1fp:     29:9C:00:5E:14:27:C8:4F:5C:BE:07:F8:96:5B:0B:1F:B5:97:9F:64
+   :serial:     02F868
+   :expiration: Apr 7 15:16:45 2024 GMT
+   :sha1fp:     9E:21:CE:64:23:75:DF:27:41:8B:CE:A2:C1:BB:51:73:74:5F:8C:B3
    :issuer:     CAcert Class 3 Root
 
 .. sslcert:: jenkins.cacert.org
